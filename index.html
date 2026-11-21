@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
+    <!-- Google Fonts: Distinctive Card Font (Space Grotesk & JetBrains Mono) + Bangla/UI Font -->
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700;800&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
     <script>
@@ -41,39 +41,30 @@
             background: radial-gradient(circle at 50% 0%, #172042 0%, #090d1a 55%, #04060c 100%);
         }
 
-        /* New Premium ATM Card Design */
-        .modern-atm-card {
+        /* ATM Card Styling */
+        .atm-card {
             aspect-ratio: 1.62 / 1;
+            max-height: 230px;
             width: 100%;
-            position: relative;
-            border-radius: 1.25rem;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.22);
-            box-shadow:
-                0 20px 38px -14px rgba(0, 0, 0, 0.85),
-                inset 0 1px 1px rgba(255, 255, 255, 0.28);
             background:
-                radial-gradient(circle at 88% 14%, rgba(16, 185, 129, 0.28) 0%, transparent 45%),
-                radial-gradient(circle at 12% 88%, rgba(56, 189, 248, 0.26) 0%, transparent 48%),
-                linear-gradient(135deg, #0b162c 0%, #102542 48%, #091326 100%);
+                radial-gradient(circle at 88% 15%, rgba(56, 189, 248, 0.22) 0%, transparent 45%),
+                radial-gradient(circle at 12% 85%, rgba(16, 185, 129, 0.16) 0%, transparent 45%),
+                linear-gradient(135deg, #101936 0%, #0b1124 52%, #131c3b 100%);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow:
+                0 16px 32px -12px rgba(0, 0, 0, 0.75),
+                inset 0 1px 1px rgba(255, 255, 255, 0.22);
             font-family: 'Space Grotesk', 'Noto Sans Bengali', sans-serif;
         }
 
-        /* Subtle geometric light sheen on the new ATM card */
-        .modern-atm-card::before {
+        .atm-card::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(125deg, rgba(255, 255, 255, 0.08) 0%, transparent 42%, rgba(56, 189, 248, 0.06) 75%, transparent 100%);
+            background: linear-gradient(120deg, transparent 20%, rgba(255, 255, 255, 0.05) 45%, transparent 70%);
             pointer-events: none;
         }
 
-        /* Text drop shadow so numbers remain crisp */
-        .text-crisp {
-            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.65);
-        }
-
-        /* Compact glass card for the 4 hub apps */
         .neo-glass-card {
             background: linear-gradient(145deg, rgba(255, 255, 255, 0.055) 0%, rgba(255, 255, 255, 0.018) 100%);
             backdrop-filter: blur(18px);
@@ -88,7 +79,6 @@
             background: linear-gradient(145deg, rgba(255, 255, 255, 0.085) 0%, rgba(255, 255, 255, 0.025) 100%);
         }
 
-        /* Floating glass dock */
         .glass-dock {
             background: rgba(15, 23, 42, 0.65);
             backdrop-filter: blur(24px);
@@ -108,7 +98,6 @@
             transform: scale(1.06);
         }
 
-        /* Shimmer loading effect for balances */
         @keyframes pulseGlow {
             0%, 100% { opacity: 0.45; }
             50% { opacity: 0.9; }
@@ -120,41 +109,30 @@
 </head>
 <body class="text-slate-100 h-[100dvh] w-screen flex justify-center items-center selection:bg-indigo-500 selection:text-white overflow-hidden p-0 sm:p-4">
 
-    <!-- Mobile App Container -->
     <div class="w-full max-w-md ambient-bg h-[100dvh] sm:h-[820px] sm:max-h-[92dvh] sm:rounded-[40px] sm:border-[6px] sm:border-slate-800/90 sm:shadow-2xl flex flex-col relative overflow-hidden">
 
-        <!-- Decorative Ambient Glows -->
         <div class="absolute -top-16 -left-16 w-48 h-48 bg-indigo-600/20 rounded-full blur-3xl pointer-events-none"></div>
         <div class="absolute top-1/2 -right-16 w-48 h-48 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
-        <!-- FIRST TOP ROW: Left Side Small Logo + Somiti Name -->
-        <header id="main-header" class="z-30 px-4 pt-3.5 pb-2 shrink-0 flex items-center justify-between border-b border-white/[0.07]">
+        <!-- TOP ROW -->
+        <header id="main-header" class="z-30 px-4 pt-3.5 pb-1.5 shrink-0 flex items-center justify-between">
             <div onclick="switchView('home')" class="cursor-pointer flex items-center gap-2.5 group min-w-0">
-                <!-- Left Side Small Logo -->
                 <div class="w-9 h-9 rounded-full p-0.5 bg-gradient-to-tr from-emerald-400 via-sky-400 to-indigo-400 shadow-md shrink-0 group-hover:scale-105 transition-transform">
                     <img id="header-logo-img"
                          src="https://lh3.googleusercontent.com/d/1PXMzZMIOZbElnjIuOK2ew-FNMhuScYGx"
                          alt="ASWA Logo"
-                         class="w-full h-full object-cover rounded-full bg-white"
+                         class="w-full h-full object-cover rounded-full bg-slate-950"
                          onerror="handleLogoFallback(this)">
                 </div>
-                <!-- Somiti Name -->
-                <div class="min-w-0">
-                    <h1 class="text-xs sm:text-sm font-extrabold text-white tracking-wide truncate leading-tight">
-                        AS-SUFFAH WELFARE ASSOCIATION
-                    </h1>
-                    <p class="text-[10px] text-emerald-300/85 font-medium truncate">
-                        আস-সুফফাহ কল্যাণ সমিতি
-                    </p>
-                </div>
+                <span class="text-xs sm:text-sm font-bold text-slate-100 tracking-wide truncate">
+                    AS-SUFFAH WELFARE ASSOCIATION
+                </span>
             </div>
 
-            <!-- Subtle refresh balance button -->
             <button id="refresh-balance-btn"
-                    type="button"
                     onclick="fetchBalances(true)"
                     title="ব্যালেন্স রিফ্রেশ করুন"
-                    class="w-7 h-7 rounded-full bg-white/[0.07] hover:bg-white/[0.15] border border-white/10 flex items-center justify-center text-slate-300 hover:text-white transition active:scale-90 shrink-0">
+                    class="w-7 h-7 rounded-full bg-white/[0.06] hover:bg-white/[0.14] border border-white/10 flex items-center justify-center text-slate-300 hover:text-white transition active:scale-90 shrink-0">
                 <i id="refresh-icon" class="fa-solid fa-rotate-right text-[11px]"></i>
             </button>
         </header>
@@ -162,110 +140,84 @@
         <!-- MAIN CONTENT AREA -->
         <main id="main-container" class="flex-1 min-h-0 w-full flex flex-col justify-between px-4 pt-2 pb-20 z-20">
 
-            <!-- ================= HOME / DASHBOARD VIEW ================= -->
+            <!-- HOME / DASHBOARD VIEW -->
             <section id="view-home" class="w-full h-full flex flex-col justify-between gap-2.5">
 
-                <!-- SECOND ROW: NEW DESIGN ATM CARD WITH EYE TOGGLE DIRECTLY ABOVE A/C : -->
-                <div class="mt-1 shrink-0 w-full">
-                    <div class="modern-atm-card select-none">
+                <!-- ATM CARD SECTION -->
+                <div class="mt-2.5 shrink-0">
+                    <div class="atm-card rounded-2xl p-3.5 sm:p-4 relative overflow-hidden flex flex-col justify-between">
 
-                        <!-- Decorative Subtle Background Circles -->
-                        <div class="absolute -right-10 -top-10 w-36 h-36 rounded-full border border-emerald-400/15 pointer-events-none"></div>
-                        <div class="absolute -left-12 -bottom-12 w-40 h-40 rounded-full border border-sky-400/15 pointer-events-none"></div>
-
-                        <!-- Card Content Layer -->
-                        <div class="relative z-10 w-full h-full p-3.5 sm:p-4 flex flex-col justify-between">
-
-                            <!-- Card Top Header: Left Logo + Card Title + Contactless Icon -->
-                            <div class="flex items-center justify-between gap-2">
-                                <div class="flex items-center gap-2.5 min-w-0">
-                                    <div class="w-8 h-8 rounded-full p-0.5 bg-gradient-to-tr from-emerald-400 via-sky-400 to-indigo-400 shadow-md shrink-0">
-                                        <img src="https://lh3.googleusercontent.com/d/1PXMzZMIOZbElnjIuOK2ew-FNMhuScYGx"
-                                             alt="ASWA Card Logo"
-                                             class="w-full h-full object-cover rounded-full bg-white"
-                                             onerror="handleLogoFallback(this)">
-                                    </div>
-                                    <div class="min-w-0">
-                                        <span class="block text-[11px] sm:text-xs font-extrabold uppercase tracking-wider text-white text-crisp truncate">
-                                            AS-SUFFAH ACCOUNTING CARD
-                                        </span>
-                                        <span class="block text-[9px] font-medium tracking-widest uppercase text-sky-300/85">
-                                            ASWA Digital Account
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="flex items-center gap-1.5 shrink-0 text-emerald-300/90">
-                                    <i class="fa-solid fa-wifi rotate-90 text-xs"></i>
-                                </div>
+                        <div class="relative z-10 flex items-start justify-between gap-2">
+                            <div class="pt-0.5 min-w-0">
+                                <p class="text-[17px] sm:text-[13px] font-bold text-white tracking-wide leading-tight truncate">
+                                    As-Suffah Welfare Association
+                                </p>
                             </div>
 
-                            <!-- Card Center: Eye Icon Above "A/C :" + Account No (31••••••30 -> 3126311230 for 20s) -->
-                            <div class="flex flex-col items-center justify-center my-auto py-1">
-                                <!-- Eye Icon positioned directly above A/C : -->
+                            <div class="flex items-center gap-1.5 shrink-0">
                                 <button id="toggle-eye-btn"
                                         type="button"
-                                        onclick="toggleSensitiveInfo()"
-                                        aria-label="অ্যাকাউন্ট নম্বর ও ব্যালেন্স দেখুন বা লুকান"
-                                        title="Click to Show for 20s / Hide"
-                                        class="mb-1.5 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/25 flex items-center gap-1.5 text-amber-300 hover:text-white shadow-md transition active:scale-90 cursor-pointer">
-                                    <i id="eye-icon" class="fa-solid fa-eye text-xs"></i>
-                                    <span id="eye-label" class="text-[9px] font-semibold tracking-wider uppercase text-slate-100">
-                                        Show
-                                    </span>
+                                        onclick="toggleBalanceVisibility()"
+                                        aria-label="ব্যালেন্স দেখুন বা লুকান"
+                                        title="Balance Show/Hide"
+                                        class="w-6 h-6 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 flex items-center justify-center text-slate-200 hover:text-white transition active:scale-90">
+                                    <i id="eye-icon" class="fa-solid fa-eye text-[10px]"></i>
                                 </button>
 
-                                <!-- A/C : Label + Number Side by Side -->
-                                <div class="flex items-center justify-center gap-2 px-4 py-1.5 rounded-xl bg-slate-950/45 backdrop-blur-sm border border-white/15 shadow-inner">
-                                    <span class="text-xs sm:text-sm font-bold text-sky-200 tracking-wider text-crisp">
-                                        A/C :
-                                    </span>
-                                    <span id="account-number-display"
-                                          class="text-lg sm:text-xl font-extrabold tracking-[0.16em] text-white font-monoNum text-crisp">
-                                        31••••••30
-                                    </span>
+                                <div class="w-6 h-6 rounded-full p-[1px] bg-gradient-to-tr from-emerald-400 to-sky-400 shadow">
+                                    <img src="https://lh3.googleusercontent.com/d/1PXMzZMIOZbElnjIuOK2ew-FNMhuScYGx"
+                                         alt="Card Logo"
+                                         class="w-full h-full object-cover rounded-full bg-slate-950"
+                                         onerror="handleLogoFallback(this)">
                                 </div>
                             </div>
-
-                            <!-- Card Bottom: Current Balance (Left) & Total Balance (Right) -->
-                            <div class="pt-1.5 border-t border-white/15 grid grid-cols-2 gap-2 items-end">
-                                <!-- Left: Current Balance (Dashboard!H26) -->
-                                <div class="text-left min-w-0">
-                                    <span class="block text-[9px] sm:text-[10px] font-semibold tracking-wide text-emerald-300 text-crisp">
-                                        Current Balance
-                                    </span>
-                                    <p id="current-balance-display"
-                                       class="text-xs sm:text-sm font-bold text-white font-monoNum truncate mt-0.5 text-crisp">
-                                        BDT: ••••••••
-                                    </p>
-                                </div>
-
-                                <!-- Right: Total Balance (Dashboard!A26) -->
-                                <div class="text-right min-w-0">
-                                    <span class="block text-[9px] sm:text-[10px] font-semibold tracking-wide text-sky-300 text-crisp">
-                                        Total Balance
-                                    </span>
-                                    <p id="total-balance-display"
-                                       class="text-xs sm:text-sm font-bold text-amber-300 font-monoNum truncate mt-0.5 text-crisp">
-                                        BDT: ••••••••
-                                    </p>
-                                </div>
-                            </div>
-
                         </div>
+
+                        <div class="relative z-10 mt-3 mb-1 flex items-center justify-center">
+                            <div>
+                                <span class="block text-[30px] uppercase tracking-widest text-slate-400 font-semibold">
+                                    Account No
+                                </span>
+                                <p class="text-[27px] font-bold tracking-[0.200em] text-sky-200 font-monoNum leading-snug">
+                                    3126311230
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="relative z-10 pt-1.5 border-t border-white/10 grid grid-cols-2 gap-3 items-end">
+                            <div class="text-left min-w-0">
+                                <span class="block text-[10px] font-semibold tracking-wide text-emerald-300/90">
+                                    Current Balance
+                                </span>
+                                <p id="current-balance-display"
+                                   class="text-xs sm:text-sm font-bold text-white font-monoNum truncate mt-0.5">
+                                    BDT: ••••••••
+                                </p>
+                            </div>
+
+                            <div class="text-right min-w-0">
+                                <span class="block text-[10px] font-semibold tracking-wide text-sky-300/90">
+                                    Total Balance
+                                </span>
+                                <p id="total-balance-display"
+                                   class="text-xs sm:text-sm font-bold text-amber-300 font-monoNum truncate mt-0.5">
+                                    BDT: ••••••••
+                                </p>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
-                <!-- COMPACT 4-CARD APP GRID -->
+                <!-- 4 APP CARDS -->
                 <div class="grid grid-cols-2 gap-2.5 my-auto">
 
-                    <!-- Card 1: Member Search -->
                     <div onclick="switchView('app1')" class="neo-glass-card rounded-2xl p-2.5 cursor-pointer relative overflow-hidden group flex flex-col justify-between min-h-[82px] max-h-[96px] active:scale-95">
                         <div class="flex items-center justify-between gap-1.5">
                             <div class="w-7 h-7 rounded-xl bg-gradient-to-br from-blue-500/25 to-cyan-500/10 border border-blue-400/30 flex items-center justify-center text-blue-400 shrink-0">
                                 <i class="fa-solid fa-magnifying-glass text-xs"></i>
                             </div>
-                            <button type="button"
-                                    onclick="openExternal('https://script.google.com/macros/s/AKfycbyQdAwwXVpCNemd4I4wPbQhiApb3QZ635ViR6cwbBDmLZMzjqCP2dUOuLGlV3tYc4HTig/exec', event)"
+                            <button onclick="openExternal('https://script.google.com/macros/s/AKfycbyQdAwwXVpCNemd4I4wPbQhiApb3QZ635ViR6cwbBDmLZMzjqCP2dUOuLGlV3tYc4HTig/exec', event)"
                                     title="নতুন ট্যাবে খুলুন"
                                     class="w-6 h-6 rounded-full bg-white/5 hover:bg-white/15 flex items-center justify-center text-slate-400 hover:text-white border border-white/10 transition shrink-0">
                                 <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
@@ -281,14 +233,12 @@
                         </div>
                     </div>
 
-                    <!-- Card 2: New Member Entry -->
                     <div onclick="switchView('app2')" class="neo-glass-card rounded-2xl p-2.5 cursor-pointer relative overflow-hidden group flex flex-col justify-between min-h-[82px] max-h-[96px] active:scale-95">
                         <div class="flex items-center justify-between gap-1.5">
                             <div class="w-7 h-7 rounded-xl bg-gradient-to-br from-emerald-500/25 to-teal-500/10 border border-emerald-400/30 flex items-center justify-center text-emerald-400 shrink-0">
                                 <i class="fa-solid fa-user-plus text-xs"></i>
                             </div>
-                            <button type="button"
-                                    onclick="openExternal('https://script.google.com/macros/s/AKfycbx9BWnj4XmUi3xJcNx3InSgXgZRP9nWQCJtlAQG0RJO6-HGo5HOXNLKitXTzqsjaw929w/exec', event)"
+                            <button onclick="openExternal('https://script.google.com/macros/s/AKfycbx9BWnj4XmUi3xJcNx3InSgXgZRP9nWQCJtlAQG0RJO6-HGo5HOXNLKitXTzqsjaw929w/exec', event)"
                                     title="নতুন ট্যাবে খুলুন"
                                     class="w-6 h-6 rounded-full bg-white/5 hover:bg-white/15 flex items-center justify-center text-slate-400 hover:text-white border border-white/10 transition shrink-0">
                                 <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
@@ -304,14 +254,12 @@
                         </div>
                     </div>
 
-                    <!-- Card 3: As Suffah Form -->
                     <div onclick="switchView('app3')" class="neo-glass-card rounded-2xl p-2.5 cursor-pointer relative overflow-hidden group flex flex-col justify-between min-h-[82px] max-h-[96px] active:scale-95">
                         <div class="flex items-center justify-between gap-1.5">
                             <div class="w-7 h-7 rounded-xl bg-gradient-to-br from-purple-500/25 to-fuchsia-500/10 border border-purple-400/30 flex items-center justify-center text-purple-400 shrink-0">
                                 <i class="fa-solid fa-file-signature text-xs"></i>
                             </div>
-                            <button type="button"
-                                    onclick="openExternal('https://docs.google.com/forms/d/e/1FAIpQLScimaLEp4pSTNxQ-X7nI8CogFdbDLLB1a9qjcvngvAl4lJb8g/viewform?pli=1', event)"
+                            <button onclick="openExternal('https://docs.google.com/forms/d/e/1FAIpQLScimaLEp4pSTNxQ-X7nI8CogFdbDLLB1a9qjcvngvAl4lJb8g/viewform?pli=1', event)"
                                     title="নতুন ট্যাবে খুলুন"
                                     class="w-6 h-6 rounded-full bg-white/5 hover:bg-white/15 flex items-center justify-center text-slate-400 hover:text-white border border-white/10 transition shrink-0">
                                 <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
@@ -327,14 +275,12 @@
                         </div>
                     </div>
 
-                    <!-- Card 4: Profit Calculator -->
                     <div onclick="switchView('app4')" class="neo-glass-card rounded-2xl p-2.5 cursor-pointer relative overflow-hidden group flex flex-col justify-between min-h-[82px] max-h-[96px] active:scale-95">
                         <div class="flex items-center justify-between gap-1.5">
                             <div class="w-7 h-7 rounded-xl bg-gradient-to-br from-amber-500/25 to-orange-500/10 border border-amber-400/30 flex items-center justify-center text-amber-400 shrink-0">
                                 <i class="fa-solid fa-calculator text-xs"></i>
                             </div>
-                            <button type="button"
-                                    onclick="openExternal('https://script.google.com/macros/s/AKfycbzRX0q4LUXo0158xR8EVKiuUXNLW1Vb0O-feSsT281kUwB1uvLhdphy7zQcja1pHOK1/exec', event)"
+                            <button onclick="openExternal('https://script.google.com/macros/s/AKfycbzRX0q4LUXo0158xR8EVKiuUXNLW1Vb0O-feSsT281kUwB1uvLhdphy7zQcja1pHOK1/exec', event)"
                                     title="নতুন ট্যাবে খুলুন"
                                     class="w-6 h-6 rounded-full bg-white/5 hover:bg-white/15 flex items-center justify-center text-slate-400 hover:text-white border border-white/10 transition shrink-0">
                                 <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
@@ -363,7 +309,7 @@
 
             </section>
 
-            <!-- ================= FULL-SCREEN APP VIEWS ================= -->
+            <!-- EMBEDDED VIEWS -->
             <section id="view-app1" class="hidden w-full h-full flex-1">
                 <iframe id="iframe-app1" src="https://script.google.com/macros/s/AKfycbyQdAwwXVpCNemd4I4wPbQhiApb3QZ635ViR6cwbBDmLZMzjqCP2dUOuLGlV3tYc4HTig/exec" class="w-full h-full border-none block"></iframe>
             </section>
@@ -382,172 +328,71 @@
 
         </main>
 
-        <!-- Floating Bottom Navigation Dock -->
+        <!-- Bottom Dock -->
         <nav class="absolute bottom-3 left-4 right-4 rounded-full glass-dock z-50 px-3 py-2 flex justify-around items-center">
-            <button type="button" onclick="switchView('home')" id="mnav-home" class="w-10 h-10 rounded-full dock-btn flex items-center justify-center text-slate-300 active:scale-90 transition-all duration-200">
+            <button onclick="switchView('home')" id="mnav-home" class="w-10 h-10 rounded-full dock-btn flex items-center justify-center text-slate-300 active:scale-90 transition-all duration-200">
                 <i class="fa-solid fa-house text-sm"></i>
             </button>
-            <button type="button" onclick="switchView('app1')" id="mnav-app1" class="w-10 h-10 rounded-full dock-btn flex items-center justify-center text-slate-300 active:scale-90 transition-all duration-200">
+            <button onclick="switchView('app1')" id="mnav-app1" class="w-10 h-10 rounded-full dock-btn flex items-center justify-center text-slate-300 active:scale-90 transition-all duration-200">
                 <i class="fa-solid fa-magnifying-glass text-sm"></i>
             </button>
-            <button type="button" onclick="switchView('app2')" id="mnav-app2" class="w-10 h-10 rounded-full dock-btn flex items-center justify-center text-slate-300 active:scale-90 transition-all duration-200">
+            <button onclick="switchView('app2')" id="mnav-app2" class="w-10 h-10 rounded-full dock-btn flex items-center justify-center text-slate-300 active:scale-90 transition-all duration-200">
                 <i class="fa-solid fa-user-plus text-sm"></i>
             </button>
-            <button type="button" onclick="switchView('app3')" id="mnav-app3" class="w-10 h-10 rounded-full dock-btn flex items-center justify-center text-slate-300 active:scale-90 transition-all duration-200">
+            <button onclick="switchView('app3')" id="mnav-app3" class="w-10 h-10 rounded-full dock-btn flex items-center justify-center text-slate-300 active:scale-90 transition-all duration-200">
                 <i class="fa-solid fa-file-pen text-sm"></i>
             </button>
-            <button type="button" onclick="switchView('app4')" id="mnav-app4" class="w-10 h-10 rounded-full dock-btn flex items-center justify-center text-slate-300 active:scale-90 transition-all duration-200">
+            <button onclick="switchView('app4')" id="mnav-app4" class="w-10 h-10 rounded-full dock-btn flex items-center justify-center text-slate-300 active:scale-90 transition-all duration-200">
                 <i class="fa-solid fa-calculator text-sm"></i>
             </button>
         </nav>
 
     </div>
 
-    <!-- JavaScript Logic -->
     <script>
-        // Full Account Number & Visibility State (Hidden by default)
-        const FULL_ACCOUNT_NO = '3126311230';
-        const AUTO_HIDE_SECONDS = 20;
-        let isSensitiveVisible = false;
-        let autoHideTimer = null;
-        let countdownInterval = null;
-        let remainingSeconds = 0;
+        const APPS_SCRIPT_EXEC_URL = 'https://script.google.com/macros/s/AKfycby_p4p6_G40RA9suLZ5xCkCoPY4TVDx8NA54aKFcgHeBRm2SlsHR9CMy-xeyqDr2niv2Q/exec';
 
+        let isBalanceVisible = false;
         let balanceData = {
             totalBalance: '0.00',
             currentBalance: '0.00',
             loaded: false
         };
 
-        /**
-         * Returns masked account number (first 2 & last 2 digits: 31••••••30) when hidden,
-         * or the full 10-digit account number (3126311230) when visible.
-         */
-        function getFormattedAccountNo(showFull) {
-            if (showFull) {
-                return FULL_ACCOUNT_NO;
-            }
-            const firstTwo = FULL_ACCOUNT_NO.slice(0, 2);
-            const lastTwo = FULL_ACCOUNT_NO.slice(-2);
-            const maskedMiddle = '•'.repeat(Math.max(0, FULL_ACCOUNT_NO.length - 4));
-            return firstTwo + maskedMiddle + lastTwo;
-        }
-
-        /**
-         * Fallback handler for header logo image if loading fails.
-         */
         function handleLogoFallback(imgEl) {
             try {
                 if (!imgEl || imgEl.dataset.fallbackApplied) return;
                 imgEl.dataset.fallbackApplied = 'true';
                 imgEl.src = 'https://placehold.co/100x100/0f172a/38bdf8?text=ASWA';
-            } catch (e) {
-                // Ignore fallback errors
-            }
+            } catch (e) {}
         }
 
-        /**
-         * Clears active 20-second auto-hide timers safely.
-         */
-        function clearAutoHideTimers() {
-            if (autoHideTimer) {
-                clearTimeout(autoHideTimer);
-                autoHideTimer = null;
-            }
-            if (countdownInterval) {
-                clearInterval(countdownInterval);
-                countdownInterval = null;
-            }
-        }
-
-        /**
-         * Hides account number and balances immediately and resets eye button UI.
-         */
-        function hideSensitiveInfo() {
+        function toggleBalanceVisibility() {
             try {
-                clearAutoHideTimers();
-                isSensitiveVisible = false;
-                remainingSeconds = 0;
-
+                isBalanceVisible = !isBalanceVisible;
                 const eyeIcon = document.getElementById('eye-icon');
-                const eyeLabel = document.getElementById('eye-label');
-
                 if (eyeIcon) {
-                    eyeIcon.classList.remove('fa-eye-slash');
-                    eyeIcon.classList.add('fa-eye');
-                }
-                if (eyeLabel) {
-                    eyeLabel.textContent = 'Show';
-                }
-
-                renderSensitiveInfo();
-            } catch (err) {
-                console.error('Error hiding sensitive info:', err);
-            }
-        }
-
-        /**
-         * Toggles both Account Number (first 2 & last 2 vs full) and Balances (hidden vs visible)
-         * when clicking the Eye icon above "A/C :". Auto-hides after 20 seconds when shown.
-         */
-        function toggleSensitiveInfo() {
-            try {
-                if (isSensitiveVisible) {
-                    hideSensitiveInfo();
-                    return;
-                }
-
-                clearAutoHideTimers();
-                isSensitiveVisible = true;
-                remainingSeconds = AUTO_HIDE_SECONDS;
-
-                const eyeIcon = document.getElementById('eye-icon');
-                const eyeLabel = document.getElementById('eye-label');
-
-                if (eyeIcon) {
-                    eyeIcon.classList.remove('fa-eye');
-                    eyeIcon.classList.add('fa-eye-slash');
-                }
-
-                if (eyeLabel) {
-                    eyeLabel.textContent = 'Hide (' + remainingSeconds + 's)';
-                }
-
-                renderSensitiveInfo();
-
-                // Update countdown every second so user sees remaining visibility time
-                countdownInterval = setInterval(function() {
-                    remainingSeconds -= 1;
-                    if (remainingSeconds > 0 && eyeLabel) {
-                        eyeLabel.textContent = 'Hide (' + remainingSeconds + 's)';
+                    if (isBalanceVisible) {
+                        eyeIcon.classList.remove('fa-eye');
+                        eyeIcon.classList.add('fa-eye-slash');
+                    } else {
+                        eyeIcon.classList.remove('fa-eye-slash');
+                        eyeIcon.classList.add('fa-eye');
                     }
-                }, 1000);
-
-                // Automatically hide after 20 seconds
-                autoHideTimer = setTimeout(function() {
-                    hideSensitiveInfo();
-                }, AUTO_HIDE_SECONDS * 1000);
+                }
+                renderBalances();
             } catch (err) {
-                console.error('Error toggling sensitive info:', err);
+                console.error('Error toggling balance visibility:', err);
             }
         }
 
-        /**
-         * Renders Account Number, Current Balance, and Total Balance according to visibility state.
-         */
-        function renderSensitiveInfo() {
+        function renderBalances() {
             try {
-                const accountEl = document.getElementById('account-number-display');
                 const totalEl = document.getElementById('total-balance-display');
                 const currentEl = document.getElementById('current-balance-display');
-
-                if (accountEl) {
-                    accountEl.textContent = getFormattedAccountNo(isSensitiveVisible);
-                }
-
                 if (!totalEl || !currentEl) return;
 
-                if (!isSensitiveVisible) {
+                if (!isBalanceVisible) {
                     totalEl.textContent = 'BDT: ••••••••';
                     currentEl.textContent = 'BDT: ••••••••';
                 } else {
@@ -555,24 +400,20 @@
                     currentEl.textContent = 'BDT: ' + balanceData.currentBalance;
                 }
             } catch (err) {
-                console.error('Error rendering sensitive info:', err);
+                console.error('Error rendering balances:', err);
             }
         }
 
-        /**
-         * Fetches A26 (Total Balance) and H26 (Current Balance) from Dashboard sheet via Apps Script.
-         */
-        function fetchBalances(showSpin = false) {
-            try {
-                const refreshIcon = document.getElementById('refresh-icon');
-                const totalEl = document.getElementById('total-balance-display');
-                const currentEl = document.getElementById('current-balance-display');
+        async function fetchBalances(showSpin = false) {
+            const refreshIcon = document.getElementById('refresh-icon');
+            const totalEl = document.getElementById('total-balance-display');
+            const currentEl = document.getElementById('current-balance-display');
 
+            try {
                 if (showSpin && refreshIcon) {
                     refreshIcon.classList.add('fa-spin');
                 }
-
-                if (isSensitiveVisible && totalEl && currentEl) {
+                if (isBalanceVisible && totalEl && currentEl) {
                     totalEl.classList.add('balance-loading');
                     currentEl.classList.add('balance-loading');
                 }
@@ -580,48 +421,56 @@
                 if (typeof google !== 'undefined' && google.script && google.script.run) {
                     google.script.run
                         .withSuccessHandler(function(res) {
-                            if (refreshIcon) refreshIcon.classList.remove('fa-spin');
-                            if (totalEl) totalEl.classList.remove('balance-loading');
-                            if (currentEl) currentEl.classList.remove('balance-loading');
-
                             if (res && res.ok) {
                                 balanceData.totalBalance = res.totalBalance || '0.00';
                                 balanceData.currentBalance = res.currentBalance || '0.00';
                                 balanceData.loaded = true;
-                            } else {
-                                balanceData.totalBalance = '0.00';
-                                balanceData.currentBalance = '0.00';
                             }
-                            renderSensitiveInfo();
+                            renderBalances();
+                            stopBalanceLoading(refreshIcon, totalEl, currentEl);
                         })
                         .withFailureHandler(function(err) {
-                            console.error('Failed to fetch balances:', err);
-                            if (refreshIcon) refreshIcon.classList.remove('fa-spin');
-                            if (totalEl) totalEl.classList.remove('balance-loading');
-                            if (currentEl) currentEl.classList.remove('balance-loading');
-                            renderSensitiveInfo();
+                            console.error('Apps Script error:', err);
+                            renderBalances();
+                            stopBalanceLoading(refreshIcon, totalEl, currentEl);
                         })
                         .getDashboardBalances();
-                } else {
-                    // Local preview fallback when not running inside Google Apps Script iframe
-                    setTimeout(function() {
-                        if (refreshIcon) refreshIcon.classList.remove('fa-spin');
-                        if (totalEl) totalEl.classList.remove('balance-loading');
-                        if (currentEl) currentEl.classList.remove('balance-loading');
-                        balanceData.totalBalance = '0.00';
-                        balanceData.currentBalance = '0.00';
-                        balanceData.loaded = true;
-                        renderSensitiveInfo();
-                    }, 300);
+                    return;
                 }
+
+                const response = await fetch(APPS_SCRIPT_EXEC_URL, {
+                    method: 'GET',
+                    redirect: 'follow'
+                });
+
+                if (!response.ok) {
+                    throw new Error('HTTP status ' + response.status);
+                }
+
+                const res = await response.json();
+                if (res && res.ok) {
+                    balanceData.totalBalance = res.totalBalance || '0.00';
+                    balanceData.currentBalance = res.currentBalance || '0.00';
+                    balanceData.loaded = true;
+                } else {
+                    console.error('Balance fetch failed:', res && res.error);
+                }
+
+                renderBalances();
             } catch (err) {
-                console.error('Error initiating balance fetch:', err);
+                console.error('Error fetching balances:', err);
+                renderBalances();
+            } finally {
+                stopBalanceLoading(refreshIcon, totalEl, currentEl);
             }
         }
 
-        /**
-         * Switches between Home view and embedded app views.
-         */
+        function stopBalanceLoading(refreshIcon, totalEl, currentEl) {
+            if (refreshIcon) refreshIcon.classList.remove('fa-spin');
+            if (totalEl) totalEl.classList.remove('balance-loading');
+            if (currentEl) currentEl.classList.remove('balance-loading');
+        }
+
         function switchView(viewName) {
             try {
                 const views = ['home', 'app1', 'app2', 'app3', 'app4'];
@@ -666,9 +515,6 @@
             }
         }
 
-        /**
-         * Opens external link in a new tab.
-         */
         function openExternal(url, event) {
             try {
                 if (event) event.stopPropagation();
@@ -680,7 +526,7 @@
 
         document.addEventListener('DOMContentLoaded', function() {
             switchView('home');
-            renderSensitiveInfo();
+            renderBalances();
             fetchBalances(false);
         });
     </script>
