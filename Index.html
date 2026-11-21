@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="bn" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>As-Suffah Central Hub</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700;800&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Noto Sans Bengali', 'Plus Jakarta Sans', 'sans-serif'],
+                        card: ['Space Grotesk', 'Noto Sans Bengali', 'sans-serif'],
+                        monoNum: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html, body {
+            font-family: 'Noto Sans Bengali', 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #05070e;
+        }
+
+        /* Ambient background */
+        .ambient-bg {
+            background: radial-gradient(circle at 50% 0%, #172042 0%, #090d1a 55%, #04060c 100%);
+        }
+
+        /* New Premium ATM Card Design */
+        .modern-atm-card {
+            aspect-ratio: 1.62 / 1;
+            width: 100%;
+            position: relative;
+            border-radius: 1.25rem;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            box-shadow:
+                0 20px 38px -14px rgba(0, 0, 0, 0.85),
+                inset 0 1px 1px rgba(255, 255, 255, 0.28);
+            background:
+                radial-gradient(circle at 88% 14%, rgba(16, 185, 129, 0.28) 0%, transparent 45%),
+                radial-gradient(circle at 12% 88%, rgba(56, 189, 248, 0.26) 0%, transparent 48%),
+                linear-gradient(135deg, #0b162c 0%, #102542 48%, #091326 100%);
+            font-family: 'Space Grotesk', 'Noto Sans Bengali', sans-serif;
+        }
+
+        /* Subtle geometric light sheen on the new ATM card */
+        .modern-atm-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(125deg, rgba(255, 255, 255, 0.08) 0%, transparent 42%, rgba(56, 189, 248, 0.06) 75%, transparent 100%);
+            pointer-events: none;
+        }
+
+        /* Text drop shadow so numbers remain crisp */
+        .text-crisp {
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.65);
+        }
+
+        /* Compact glass card for the 4 hub apps */
+        .neo-glass-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.055) 0%, rgba(255, 255, 255, 0.018) 100%);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 20px -10px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .neo-glass-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.22);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.085) 0%, rgba(255, 255, 255, 0.025) 100%);
+        }
+
+        /* Floating glass dock */
+        .glass-dock {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.65), inset 0 1px 1px rgba(255, 255, 255, 0.22);
+        }
+        .dock-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        .dock-btn-active {
+            background: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%);
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            box-shadow: 0 4px 18px rgba(99, 102, 241, 0.55);
+            color: #ffffff !important;
+            transform: scale(1.06);
+        }
+
+        /* Shimmer loading effect for balances */
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.45; }
+            50% { opacity: 0.9; }
+        }
+        .balance-loading {
+            animation: pulseGlow 1.3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="text-slate-100 h-[100dvh] w-screen flex justify-center items-center selection:bg-indigo-500 selection:text-white overflow-hidden p-0 sm:p-4">
+
+    <!-- Mobile App Container -->
+    <div class="w-full max-w-md ambient-bg h-[100dvh] sm:h-[820px] sm:max-h-[92dvh] sm:rounded-[40px] sm:border-[6px] sm:border-slate-800/90 sm:shadow-2xl flex flex-col relative overflow-hidden">
+
+        <!-- Decorative Ambient Glows -->
+        <div class="absolute -top-16 -left-16 w-48 h-48 bg-indigo-600/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute top-1/2 -right-16 w-48 h-48 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <!-- FIRST TOP ROW: Left Side Small Logo + Somiti Name -->
+        <header id="main-header" class="z-30 px-4 pt-3.5 pb-2 shrink-0 flex items-center justify-between border-b border-white/[0.07]">
+            <div onclick="switchView('home')" class="cursor-pointer flex items-center gap-2.5 group min-w-0">
+                <!-- Left Side Small Logo -->
+                <div class="w-9 h-9 rounded-full p-0.5 bg-gradient-to-tr from-emerald-400 via-sky-400 to-indigo-400 shadow-md shrink-0 group-hover:scale-105 transition-transform">
+                    <img id="header-logo-img"
+                         src="https://lh3.googleusercontent.com/d/1PXMzZMIOZbElnjIuOK2ew-FNMhuScYGx"
+                         alt="ASWA Logo"
+                         class="w-full h-full object-cover rounded-full bg-white"
+                         onerror="handleLogoFallback(this)">
+                </div>
+                <!-- Somiti Name -->
+                <div class="min-w-0">
+                    <h1 class="text-xs sm:text-sm font-extrabold text-white tracking-wide truncate leading-tight">
+                        AS-SUFFAH WELFARE ASSOCIATION
+                    </h1>
+                    <p class="text-[10px] text-emerald-300/85 font-medium truncate">
+                        আস-সুফফাহ কল্যাণ সমিতি
+                    </p>
+                </div>
+            </div>
+
+            <!-- Subtle refresh balance button -->
+            <button id="refresh-balance-btn"
+                    type="button"
+                    onclick="fetchBalances(true)"
+                    title="ব্যালেন্স রিফ্রেশ করুন"
+                    class="w-7 h-7 rounded-full bg-white/[0.07] hover:bg-white/[0.15] border border-white/10 flex items-center justify-center text-slate-300 hover:text-white transition active:scale-90 shrink-0">
+                <i id="refresh-icon" class="fa-solid fa-rotate-right text-[11px]"></i>
+            </button>
+        </header>
+
+        <!-- MAIN CONTENT AREA -->
+        <main id="main-container" class="flex-1 min-h-0 w-full flex flex-col justify-between px-4 pt-2 pb-20 z-20">
+
+            <!-- ================= HOME / DASHBOARD VIEW ================= -->
+            <section id="view-home" class="w-full h-full flex flex-col justify-between gap-2.5">
+
+                <!-- SECOND ROW: NEW DESIGN ATM CARD WITH EYE TOGGLE DIRECTLY ABOVE A/C : -->
+                <div class="mt-1 shrink-0 w-full">
+                    <div class="modern-atm-card select-none">
+
+                        <!-- Decorative Subtle Background Circles -->
+                        <div class="absolute -right-10 -top-10 w-36 h-36 rounded-full border border-emerald-400/15 pointer-events-none"></div>
+                        <div class="absolute -left-12 -bottom-12 w-40 h-40 rounded-full border border-sky-400/15 pointer-events-none"></div>
+
+                        <!-- Card Content Layer -->
+                        <div class="relative z-10 w-full h-full p-3.5 sm:p-4 flex flex-col justify-between">
+
+                            <!-- Card Top Header: Left Logo + Card Title + Contactless Icon -->
+                            <div class="flex items-center justify-between gap-2">
+                                <div class="flex items-center gap-2.5 min-w-0">
+                                    <div class="w-8 h-8 rounded-full p-0.5 bg-gradient-to-tr from-emerald-400 via-sky-400 to-indigo-400 shadow-md shrink-0">
+                                        <img src="https://lh3.googleusercontent.com/d/1PXMzZMIOZbElnjIuOK2ew-FNMhuScYGx"
+                                             alt="ASWA Card Logo"
+                                             class="w-full h-full object-cover rounded-full bg-white"
+                                             onerror="handleLogoFallback(this)">
+                                    </div>
+                                    <div class="min-w-0">
+                                        <span class="block text-[11px] sm:text-xs font-extrabold uppercase tracking-wider text-white text-crisp truncate">
+                                            AS-SUFFAH ACCOUNTING CARD
+                                        </span>
+                                        <span class="block text-[9px] font-medium tracking-widest uppercase text-sky-300/85">
+                                            ASWA Digital Account
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-1.5 shrink-0 text-emerald-300/90">
+                                    <i class="fa-solid fa-wifi rotate-90 text-xs"></i>
+                                </div>
+                            </div>
+
+                            <!-- Card Center: Eye Icon Above "A/C :" + Account No (31••••••30 -> 3126311230 for 20s) -->
+                            <div class="flex flex-col items-center justify-center my-auto py-1">
+                                <!-- Eye Icon positioned directly above A/C : -->
+                                <button id="toggle-eye-btn"
+                                        type="button"
+                                        onclick="toggleSensitiveInfo()"
+                                        aria-label="অ্যাকাউন্ট নম্বর ও ব্যালেন্স দেখুন বা লুকান"
+                                        title="Click to Show for 20s / Hide"
+                                        class="mb-1.5 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/25 flex items-center gap-1.5 text-amber-300 hover:text-white shadow-md transition active:scale-90 cursor-pointer">
+                                    <i id="eye-icon" class="fa-solid fa-eye text-xs"></i>
+                                    <span id="eye-label" class="text-[9px] font-semibold tracking-wider uppercase text-slate-100">
+                                        Show
+                                    </span>
+                                </button>
+
+                                <!-- A/C : Label + Number Side by Side -->
+                                <div class="flex items-center justify-center gap-2 px-4 py-1.5 rounded-xl bg-slate-950/45 backdrop-blur-sm border border-white/15 shadow-inner">
+                                    <span class="text-xs sm:text-sm font-bold text-sky-200 tracking-wider text-crisp">
+                                        A/C :
+                                    </span>
+                                    <span id="account-number-display"
+                                          class="text-lg sm:text-xl font-extrabold tracking-[0.16em] text-white font-monoNum text-crisp">
+                                        31••••••30
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Card Bottom: Current Balance (Left) & Total Balance (Right) -->
+                            <div class="pt-1.5 border-t border-white/15 grid grid-cols-2 gap-2 items-end">
+                                <!-- Left: Current Balance (Dashboard!H26) -->
+                                <div class="text-left min-w-0">
+                                    <span class="block text-[9px] sm:text-[10px] font-semibold tracking-wide text-emerald-300 text-crisp">
+                                        Current Balance
+                                    </span>
+                                    <p id="current-balance-display"
+                                       class="text-xs sm:text-sm font-bold text-white font-monoNum truncate mt-0.5 text-crisp">
+                                        BDT: ••••••••
+                                    </p>
+                                </div>
+
+                                <!-- Right: Total Balance (Dashboard!A26) -->
+                                <div class="text-right min-w-0">
+                                    <span class="block text-[9px] sm:text-[10px] font-semibold tracking-wide text-sky-300 text-crisp">
+                                        Total Balance
+                                    </span>
+                                    <p id="total-balance-display"
+                                       class="text-xs sm:text-sm font-bold text-amber-300 font-monoNum truncate mt-0.5 text-crisp">
+                                        BDT: ••••••••
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COMPACT 4-CARD APP GRID -->
+                <div class="grid grid-cols-2 gap-2.5 my-auto">
+
+                    <!-- Card 1: Member Search -->
+                    <div onclick="switchView('app1')" class="neo-glass-card rounded-2xl p-2.5 cursor-pointer relative overflow-hidden group flex flex-col justify-between min-h-[82px] max-h-[96px] active:scale-95">
+                        <div class="flex items-center justify-between gap-1.5">
+                            <div class="w-7 h-7 rounded-xl bg-gradient-to-br from-blue-500/25 to-cyan-500/10 border border-blue-400/30 flex items-center justify-center text-blue-400 shrink-0">
+                                <i class="fa-solid fa-magnifying-glass text-xs"></i>
+                            </div>
+                            <button type="button"
+                                    onclick="openExternal('https://script.google.com/macros/s/AKfycbyQdAwwXVpCNemd4I4wPbQhiApb3QZ635ViR6cwbBDmLZMzjqCP2dUOuLGlV3tYc4HTig/exec', event)"
+                                    title="নতুন ট্যাবে খুলুন"
+                                    class="w-6 h-6 rounded-full bg-white/5 hover:bg-white/15 flex items-center justify-center text-slate-400 hover:text-white border border-white/10 transition shrink-0">
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+                            </button>
+                        </div>
+                        <div class="mt-1.5">
+                            <h3 class="text-xs font-bold text-white group-hover:text-blue-300 transition-colors leading-tight truncate">
+                                Member Search
+                            </h3>
+                            <p class="text-slate-400 text-[9px] truncate">
+                                মেম্বার তথ্য অনুসন্ধান
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: New Member Entry -->
+                    <div onclick="switchView('app2')" class="neo-glass-card rounded-2xl p-2.5 cursor-pointer relative overflow-hidden group flex flex-col justify-between min-h-[82px] max-h-[96px] active:scale-95">
+                        <div class="flex items-center justify-between gap-1.5">
+                            <div class="w-7 h-7 rounded-xl bg-gradient-to-br from-emerald-500/25 to-teal-500/10 border border-emerald-400/30 flex items-center justify-center text-emerald-400 shrink-0">
+                                <i class="fa-solid fa-user-plus text-xs"></i>
+                            </div>
+                            <button type="button"
+                                    onclick="openExternal('https://script.google.com/macros/s/AKfycbx9BWnj4XmUi3xJcNx3InSgXgZRP9nWQCJtlAQG0RJO6-HGo5HOXNLKitXTzqsjaw929w/exec', event)"
+                                    title="নতুন ট্যাবে খুলুন"
+                                    class="w-6 h-6 rounded-full bg-white/5 hover:bg-white/15 flex items-center justify-center text-slate-400 hover:text-white border border-white/10 transition shrink-0">
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+                            </button>
+                        </div>
+                        <div class="mt-1.5">
+                            <h3 class="text-xs font-bold text-white group-hover:text-emerald-300 transition-colors leading-tight truncate">
+                                New Member
+                            </h3>
+                            <p class="text-slate-400 text-[9px] truncate">
+                                নতুন মেম্বার নিবন্ধন
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: As Suffah Form -->
+                    <div onclick="switchView('app3')" class="neo-glass-card rounded-2xl p-2.5 cursor-pointer relative overflow-hidden group flex flex-col justify-between min-h-[82px] max-h-[96px] active:scale-95">
+                        <div class="flex items-center justify-between gap-1.5">
+                            <div class="w-7 h-7 rounded-xl bg-gradient-to-br from-purple-500/25 to-fuchsia-500/10 border border-purple-400/30 flex items-center justify-center text-purple-400 shrink-0">
+                                <i class="fa-solid fa-file-signature text-xs"></i>
+                            </div>
+                            <button type="button"
+                                    onclick="openExternal('https://docs.google.com/forms/d/e/1FAIpQLScimaLEp4pSTNxQ-X7nI8CogFdbDLLB1a9qjcvngvAl4lJb8g/viewform?pli=1', event)"
+                                    title="নতুন ট্যাবে খুলুন"
+                                    class="w-6 h-6 rounded-full bg-white/5 hover:bg-white/15 flex items-center justify-center text-slate-400 hover:text-white border border-white/10 transition shrink-0">
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+                            </button>
+                        </div>
+                        <div class="mt-1.5">
+                            <h3 class="text-xs font-bold text-white group-hover:text-purple-300 transition-colors leading-tight truncate">
+                                As Suffah Form
+                            </h3>
+                            <p class="text-slate-400 text-[9px] truncate">
+                                অফিসিয়াল আবেদন ফরম
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Profit Calculator -->
+                    <div onclick="switchView('app4')" class="neo-glass-card rounded-2xl p-2.5 cursor-pointer relative overflow-hidden group flex flex-col justify-between min-h-[82px] max-h-[96px] active:scale-95">
+                        <div class="flex items-center justify-between gap-1.5">
+                            <div class="w-7 h-7 rounded-xl bg-gradient-to-br from-amber-500/25 to-orange-500/10 border border-amber-400/30 flex items-center justify-center text-amber-400 shrink-0">
+                                <i class="fa-solid fa-calculator text-xs"></i>
+                            </div>
+                            <button type="button"
+                                    onclick="openExternal('https://script.google.com/macros/s/AKfycbzRX0q4LUXo0158xR8EVKiuUXNLW1Vb0O-feSsT281kUwB1uvLhdphy7zQcja1pHOK1/exec', event)"
+                                    title="নতুন ট্যাবে খুলুন"
+                                    class="w-6 h-6 rounded-full bg-white/5 hover:bg-white/15 flex items-center justify-center text-slate-400 hover:text-white border border-white/10 transition shrink-0">
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+                            </button>
+                        </div>
+                        <div class="mt-1.5">
+                            <h3 class="text-xs font-bold text-white group-hover:text-amber-300 transition-colors leading-tight truncate">
+                                Profit Calculator
+                            </h3>
+                            <p class="text-slate-400 text-[9px] truncate">
+                                প্রফিট ও কিস্তি হিসাব
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Footer Credit -->
+                <div class="text-center pb-0.5 shrink-0">
+                    <div class="inline-block px-3 py-0.5 rounded-full bg-white/[0.04] border border-white/10">
+                        <p class="text-[10px] font-medium text-slate-400">
+                            Created by <span class="text-amber-400 font-bold tracking-wide">M Maksud Rs Ksa</span>
+                        </p>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- ================= FULL-SCREEN APP VIEWS ================= -->
+            <section id="view-app1" class="hidden w-full h-full flex-1">
+                <iframe id="iframe-app1" src="https://script.google.com/macros/s/AKfycbyQdAwwXVpCNemd4I4wPbQhiApb3QZ635ViR6cwbBDmLZMzjqCP2dUOuLGlV3tYc4HTig/exec" class="w-full h-full border-none block"></iframe>
+            </section>
+
+            <section id="view-app2" class="hidden w-full h-full flex-1">
+                <iframe id="iframe-app2" src="https://script.google.com/macros/s/AKfycbx9BWnj4XmUi3xJcNx3InSgXgZRP9nWQCJtlAQG0RJO6-HGo5HOXNLKitXTzqsjaw929w/exec" class="w-full h-full border-none block"></iframe>
+            </section>
+
+            <section id="view-app3" class="hidden w-full h-full flex-1">
+                <iframe id="iframe-app3" src="https://docs.google.com/forms/d/e/1FAIpQLScimaLEp4pSTNxQ-X7nI8CogFdbDLLB1a9qjcvngvAl4lJb8g/viewform?embedded=true" class="w-full h-full border-none block"></iframe>
+            </section>
+
+            <section id="view-app4" class="hidden w-full h-full flex-1">
+                <iframe id="iframe-app4" src="https://script.google.com/macros/s/AKfycbzRX0q4LUXo0158xR8EVKiuUXNLW1Vb0O-feSsT281kUwB1uvLhdphy7zQcja1pHOK1/exec" class="w-full h-full border-none block"></iframe>
+            </section>
+
+        </main>
+
+        <!-- Floating Bottom Navigation Dock -->
+        <nav class="absolute bottom-3 left-4 right-4 rounded-full glass-dock z-50 px-3 py-2 flex justify-around items-center">
+            <button type="button" onclick="switchView('home')" id="mnav-home" class="w-10 h-10 rounded-full dock-btn flex items-center justify-center text-slate-300 active:scale-90 transition-all duration-200">
+                <i class="fa-solid fa-house text-sm"></i>
+            </button>
+            <button type="button" onclick="switchView('app1')" id="mnav-app1" class="w-10 h-10 rounded-full dock-btn flex items-center justify-center text-slate-300 active:scale-90 transition-all duration-200">
+                <i class="fa-solid fa-magnifying-glass text-sm"></i>
+            </button>
+            <button type="button" onclick="switchView('app2')" id="mnav-app2" class="w-10 h-10 rounded-full dock-btn flex items-center justify-center text-slate-300 active:scale-90 transition-all duration-200">
+                <i class="fa-solid fa-user-plus text-sm"></i>
+            </button>
+            <button type="button" onclick="switchView('app3')" id="mnav-app3" class="w-10 h-10 rounded-full dock-btn flex items-center justify-center text-slate-300 active:scale-90 transition-all duration-200">
+                <i class="fa-solid fa-file-pen text-sm"></i>
+            </button>
+            <button type="button" onclick="switchView('app4')" id="mnav-app4" class="w-10 h-10 rounded-full dock-btn flex items-center justify-center text-slate-300 active:scale-90 transition-all duration-200">
+                <i class="fa-solid fa-calculator text-sm"></i>
+            </button>
+        </nav>
+
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Full Account Number & Visibility State (Hidden by default)
+        const FULL_ACCOUNT_NO = '3126311230';
+        const AUTO_HIDE_SECONDS = 20;
+        let isSensitiveVisible = false;
+        let autoHideTimer = null;
+        let countdownInterval = null;
+        let remainingSeconds = 0;
+
+        let balanceData = {
+            totalBalance: '0.00',
+            currentBalance: '0.00',
+            loaded: false
+        };
+
+        /**
+         * Returns masked account number (first 2 & last 2 digits: 31••••••30) when hidden,
+         * or the full 10-digit account number (3126311230) when visible.
+         */
+        function getFormattedAccountNo(showFull) {
+            if (showFull) {
+                return FULL_ACCOUNT_NO;
+            }
+            const firstTwo = FULL_ACCOUNT_NO.slice(0, 2);
+            const lastTwo = FULL_ACCOUNT_NO.slice(-2);
+            const maskedMiddle = '•'.repeat(Math.max(0, FULL_ACCOUNT_NO.length - 4));
+            return firstTwo + maskedMiddle + lastTwo;
+        }
+
+        /**
+         * Fallback handler for header logo image if loading fails.
+         */
+        function handleLogoFallback(imgEl) {
+            try {
+                if (!imgEl || imgEl.dataset.fallbackApplied) return;
+                imgEl.dataset.fallbackApplied = 'true';
+                imgEl.src = 'https://placehold.co/100x100/0f172a/38bdf8?text=ASWA';
+            } catch (e) {
+                // Ignore fallback errors
+            }
+        }
+
+        /**
+         * Clears active 20-second auto-hide timers safely.
+         */
+        function clearAutoHideTimers() {
+            if (autoHideTimer) {
+                clearTimeout(autoHideTimer);
+                autoHideTimer = null;
+            }
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+                countdownInterval = null;
+            }
+        }
+
+        /**
+         * Hides account number and balances immediately and resets eye button UI.
+         */
+        function hideSensitiveInfo() {
+            try {
+                clearAutoHideTimers();
+                isSensitiveVisible = false;
+                remainingSeconds = 0;
+
+                const eyeIcon = document.getElementById('eye-icon');
+                const eyeLabel = document.getElementById('eye-label');
+
+                if (eyeIcon) {
+                    eyeIcon.classList.remove('fa-eye-slash');
+                    eyeIcon.classList.add('fa-eye');
+                }
+                if (eyeLabel) {
+                    eyeLabel.textContent = 'Show';
+                }
+
+                renderSensitiveInfo();
+            } catch (err) {
+                console.error('Error hiding sensitive info:', err);
+            }
+        }
+
+        /**
+         * Toggles both Account Number (first 2 & last 2 vs full) and Balances (hidden vs visible)
+         * when clicking the Eye icon above "A/C :". Auto-hides after 20 seconds when shown.
+         */
+        function toggleSensitiveInfo() {
+            try {
+                if (isSensitiveVisible) {
+                    hideSensitiveInfo();
+                    return;
+                }
+
+                clearAutoHideTimers();
+                isSensitiveVisible = true;
+                remainingSeconds = AUTO_HIDE_SECONDS;
+
+                const eyeIcon = document.getElementById('eye-icon');
+                const eyeLabel = document.getElementById('eye-label');
+
+                if (eyeIcon) {
+                    eyeIcon.classList.remove('fa-eye');
+                    eyeIcon.classList.add('fa-eye-slash');
+                }
+
+                if (eyeLabel) {
+                    eyeLabel.textContent = 'Hide (' + remainingSeconds + 's)';
+                }
+
+                renderSensitiveInfo();
+
+                // Update countdown every second so user sees remaining visibility time
+                countdownInterval = setInterval(function() {
+                    remainingSeconds -= 1;
+                    if (remainingSeconds > 0 && eyeLabel) {
+                        eyeLabel.textContent = 'Hide (' + remainingSeconds + 's)';
+                    }
+                }, 1000);
+
+                // Automatically hide after 20 seconds
+                autoHideTimer = setTimeout(function() {
+                    hideSensitiveInfo();
+                }, AUTO_HIDE_SECONDS * 1000);
+            } catch (err) {
+                console.error('Error toggling sensitive info:', err);
+            }
+        }
+
+        /**
+         * Renders Account Number, Current Balance, and Total Balance according to visibility state.
+         */
+        function renderSensitiveInfo() {
+            try {
+                const accountEl = document.getElementById('account-number-display');
+                const totalEl = document.getElementById('total-balance-display');
+                const currentEl = document.getElementById('current-balance-display');
+
+                if (accountEl) {
+                    accountEl.textContent = getFormattedAccountNo(isSensitiveVisible);
+                }
+
+                if (!totalEl || !currentEl) return;
+
+                if (!isSensitiveVisible) {
+                    totalEl.textContent = 'BDT: ••••••••';
+                    currentEl.textContent = 'BDT: ••••••••';
+                } else {
+                    totalEl.textContent = 'BDT: ' + balanceData.totalBalance;
+                    currentEl.textContent = 'BDT: ' + balanceData.currentBalance;
+                }
+            } catch (err) {
+                console.error('Error rendering sensitive info:', err);
+            }
+        }
+
+        /**
+         * Fetches A26 (Total Balance) and H26 (Current Balance) from Dashboard sheet via Apps Script.
+         */
+        function fetchBalances(showSpin = false) {
+            try {
+                const refreshIcon = document.getElementById('refresh-icon');
+                const totalEl = document.getElementById('total-balance-display');
+                const currentEl = document.getElementById('current-balance-display');
+
+                if (showSpin && refreshIcon) {
+                    refreshIcon.classList.add('fa-spin');
+                }
+
+                if (isSensitiveVisible && totalEl && currentEl) {
+                    totalEl.classList.add('balance-loading');
+                    currentEl.classList.add('balance-loading');
+                }
+
+                if (typeof google !== 'undefined' && google.script && google.script.run) {
+                    google.script.run
+                        .withSuccessHandler(function(res) {
+                            if (refreshIcon) refreshIcon.classList.remove('fa-spin');
+                            if (totalEl) totalEl.classList.remove('balance-loading');
+                            if (currentEl) currentEl.classList.remove('balance-loading');
+
+                            if (res && res.ok) {
+                                balanceData.totalBalance = res.totalBalance || '0.00';
+                                balanceData.currentBalance = res.currentBalance || '0.00';
+                                balanceData.loaded = true;
+                            } else {
+                                balanceData.totalBalance = '0.00';
+                                balanceData.currentBalance = '0.00';
+                            }
+                            renderSensitiveInfo();
+                        })
+                        .withFailureHandler(function(err) {
+                            console.error('Failed to fetch balances:', err);
+                            if (refreshIcon) refreshIcon.classList.remove('fa-spin');
+                            if (totalEl) totalEl.classList.remove('balance-loading');
+                            if (currentEl) currentEl.classList.remove('balance-loading');
+                            renderSensitiveInfo();
+                        })
+                        .getDashboardBalances();
+                } else {
+                    // Local preview fallback when not running inside Google Apps Script iframe
+                    setTimeout(function() {
+                        if (refreshIcon) refreshIcon.classList.remove('fa-spin');
+                        if (totalEl) totalEl.classList.remove('balance-loading');
+                        if (currentEl) currentEl.classList.remove('balance-loading');
+                        balanceData.totalBalance = '0.00';
+                        balanceData.currentBalance = '0.00';
+                        balanceData.loaded = true;
+                        renderSensitiveInfo();
+                    }, 300);
+                }
+            } catch (err) {
+                console.error('Error initiating balance fetch:', err);
+            }
+        }
+
+        /**
+         * Switches between Home view and embedded app views.
+         */
+        function switchView(viewName) {
+            try {
+                const views = ['home', 'app1', 'app2', 'app3', 'app4'];
+                const header = document.getElementById('main-header');
+                const mainContainer = document.getElementById('main-container');
+
+                views.forEach(function(v) {
+                    const el = document.getElementById('view-' + v);
+                    if (el) el.classList.add('hidden');
+
+                    const mnav = document.getElementById('mnav-' + v);
+                    if (mnav) {
+                        mnav.classList.remove('dock-btn-active');
+                        mnav.classList.add('dock-btn', 'text-slate-300');
+                    }
+                });
+
+                const activeView = document.getElementById('view-' + viewName);
+                if (activeView) activeView.classList.remove('hidden');
+
+                const activeMnav = document.getElementById('mnav-' + viewName);
+                if (activeMnav) {
+                    activeMnav.classList.remove('dock-btn', 'text-slate-300');
+                    activeMnav.classList.add('dock-btn-active');
+                }
+
+                if (viewName === 'home') {
+                    if (header) header.classList.remove('hidden');
+                    if (mainContainer) {
+                        mainContainer.classList.add('px-4', 'pt-2', 'pb-20');
+                        mainContainer.classList.remove('p-0', 'pb-16');
+                    }
+                } else {
+                    if (header) header.classList.add('hidden');
+                    if (mainContainer) {
+                        mainContainer.classList.remove('px-4', 'pt-2', 'pb-20');
+                        mainContainer.classList.add('p-0', 'pb-16');
+                    }
+                }
+            } catch (err) {
+                console.error('Error switching view:', err);
+            }
+        }
+
+        /**
+         * Opens external link in a new tab.
+         */
+        function openExternal(url, event) {
+            try {
+                if (event) event.stopPropagation();
+                window.open(url, '_blank', 'noopener,noreferrer');
+            } catch (err) {
+                console.error('Error opening external URL:', err);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            switchView('home');
+            renderSensitiveInfo();
+            fetchBalances(false);
+        });
+    </script>
+</body>
+</html>
