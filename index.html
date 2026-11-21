@@ -27,7 +27,7 @@
 
     <style>
         html, body {
-            font-family: 'Noto Sans Bengali', 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Noto Sans Bengali', 'Plus Jakarta Sans', 'sans-serif';
             -webkit-tap-highlight-color: transparent;
             height: 100%;
             margin: 0;
@@ -144,7 +144,7 @@
                         AS-SUFFAH WELFARE ASSOCIATION
                     </h1>
                     <p class="text-[10px] text-emerald-300/85 font-medium truncate">
-                        আস-সুফফাহ ওয়েলফেয়ার অ্যাসোসিয়েশন
+                        আস-সুফফাহ কল্যাণ সমিতি
                     </p>
                 </div>
             </div>
@@ -206,7 +206,7 @@
                                         type="button"
                                         onclick="toggleSensitiveInfo()"
                                         aria-label="অ্যাকাউন্ট নম্বর ও ব্যালেন্স দেখুন বা লুকান"
-                                        title="Click to Show for 20s / Hide"
+                                        title="Click to Show & Refresh for 20s / Hide"
                                         class="mb-1.5 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/25 flex items-center gap-1.5 text-amber-300 hover:text-white shadow-md transition active:scale-90 cursor-pointer">
                                     <i id="eye-icon" class="fa-solid fa-eye text-xs"></i>
                                     <span id="eye-label" class="text-[9px] font-semibold tracking-wider uppercase text-slate-100">
@@ -491,7 +491,7 @@
 
         /**
          * Toggles both Account Number and Balances when clicking the Eye icon above "A/C :".
-         * Auto-hides after 20 seconds when shown.
+         * Auto-refreshes balances every time Show is clicked, and auto-hides after 20 seconds.
          */
         function toggleSensitiveInfo() {
             try {
@@ -517,6 +517,9 @@
                 }
 
                 renderSensitiveInfo();
+
+                // Auto-refresh balance whenever Show is clicked
+                fetchBalances(true);
 
                 countdownInterval = setInterval(function() {
                     remainingSeconds -= 1;
