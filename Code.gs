@@ -1,34 +1,39 @@
 /**
- * Serves the main HTML web application for As-Suffah Welfare Association.
- * Note: Ensure the HTML file in the Apps Script project is named "Index" (Index.html).
+ * Serves JSON balance data when requested via HTTP GET (e.g., from GitHub Pages fetch()).
  */
-function doGet() {
+function doGet(e) {
   try {
-    return HtmlService.createHtmlOutputFromFile('Index')
-      .setTitle('As-Suffah Welfare Association')
-      .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL)
-      .addMetaTag('viewport', 'width=device-width, initial-scale=1');
+    const data = getDashboardBalances();
+    return ContentService
+      .createTextOutput(JSON.stringify(data))
+      .setMimeType(ContentService.MimeType.JSON);
   } catch (err) {
-    return HtmlService.createHtmlOutput(
-      '<div style="font-family:sans-serif;padding:20px;color:#b91c1c;">' +
-      '<h3>Application Load Error</h3><p>' + err.message + '</p></div>'
-    );
+    const errorPayload = {
+      ok: false,
+      error: err && err.message ? err.message : 'Unexpected server error.',
+      totalBalance: '0.00',
+      currentBalance: '0.00'
+    };
+    return ContentService
+      .createTextOutput(JSON.stringify(errorPayload))
+      .setMimeType(ContentService.MimeType.JSON);
   }
 }
 
 /**
  * Fetches Total Balance (Dashboard!A26) and Current Balance (Dashboard!H26)
- * from the configured Google Spreadsheet.
+ * from the configured Google Spreadsheet using Script Properties.
  *
  * @return {Object} Balance values and formatted strings.
  */
 function getDashboardBalances() {
-  const SPREADSHEET_ID = '1VMWxM8b5gqfLz_FqENQfZ7BUFBLZmZQcwAwsrIgvDC0';
+  const scriptProps = PropertiesService.getScriptProperties();
+  const SPREADSHEET_ID = scriptProps.getProperty('SPREADSHEET_ID');
   const SHEET_NAME = 'Dashboard';
 
   try {
     if (!SPREADSHEET_ID) {
-      throw new Error('Spreadsheet ID is missing.');
+      throw new Error('SPREADSHEET_ID is not configured in Script Properties.');
     }
 
     const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
@@ -38,7 +43,6 @@ function getDashboardBalances() {
       throw new Error('Sheet "' + SHEET_NAME + '" was not found in the spreadsheet.');
     }
 
-    // Read A26 (Total Balance) and H26 (Current Balance)
     const rawTotal = sheet.getRange('A26').getDisplayValue();
     const rawCurrent = sheet.getRange('H26').getDisplayValue();
 
@@ -85,7 +89,6 @@ function parseBalanceValue(displayValue, rawCellValue) {
       return { formatted: '0.00' };
     }
 
-    // Strip currency labels like BDT, ৳, or commas to check if pure number
     const numericCandidate = cleanedStr.replace(/BDT|৳|,|\s/gi, '');
     const numericVal = Number(numericCandidate);
 
@@ -97,7 +100,6 @@ function parseBalanceValue(displayValue, rawCellValue) {
       return { formatted: formattedNum };
     }
 
-    // Return original display text if already formatted as custom string
     return { formatted: cleanedStr };
   } catch (e) {
     return { formatted: String(displayValue || '0.00') };
