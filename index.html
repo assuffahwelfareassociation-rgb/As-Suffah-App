@@ -192,6 +192,18 @@
             transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
+        /* Custom Thin Scrollbar inside Drawer */
+        .drawer-scroll::-webkit-scrollbar {
+            width: 3px;
+        }
+        .drawer-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .drawer-scroll::-webkit-scrollbar-thumb {
+            background: rgba(56, 189, 248, 0.3);
+            border-radius: 9999px;
+        }
+
         /* Floating Blue Glass Dock */
         .glass-dock {
             background: rgba(10, 20, 48, 0.82);
@@ -238,13 +250,13 @@
 
         <aside id="side-drawer-panel"
                aria-hidden="true"
-               class="drawer-panel -translate-x-full absolute top-0 bottom-0 left-0 w-[76%] max-w-[285px] bg-slate-950/95 backdrop-blur-xl border-r border-blue-400/20 z-[70] flex flex-col justify-between p-4 shadow-2xl">
-            <div>
+               class="drawer-panel -translate-x-full absolute top-0 bottom-0 left-0 w-[82%] max-w-[310px] bg-slate-950/95 backdrop-blur-xl border-r border-blue-400/20 z-[70] flex flex-col justify-between p-4 shadow-2xl">
+            <div class="flex flex-col min-h-0 flex-1">
                 <!-- Drawer Camera Safe Top Space -->
-                <div class="w-full h-5" aria-hidden="true"></div>
+                <div class="w-full h-5 shrink-0" aria-hidden="true"></div>
 
                 <!-- Drawer Header -->
-                <div class="flex items-center justify-between pb-3.5 border-b border-blue-400/15 pt-2">
+                <div class="flex items-center justify-between pb-3 border-b border-blue-400/15 pt-1.5 shrink-0">
                     <div class="flex items-center gap-2.5 min-w-0">
                         <div class="w-9 h-9 rounded-full p-0.5 bg-gradient-to-tr from-blue-500 via-sky-400 to-cyan-300 shrink-0">
                             <img src="https://lh3.googleusercontent.com/d/1PXMzZMIOZbElnjIuOK2ew-FNMhuScYGx"
@@ -260,42 +272,182 @@
                     <button type="button"
                             onclick="closeLeftDrawer()"
                             aria-label="Close Menu"
-                            class="w-8 h-8 rounded-full bg-blue-500/15 hover:bg-blue-500/30 border border-blue-400/25 flex items-center justify-center text-sky-200 hover:text-white transition active:scale-90">
+                            class="w-8 h-8 rounded-full bg-blue-500/15 hover:bg-blue-500/30 border border-blue-400/25 flex items-center justify-center text-sky-200 hover:text-white transition active:scale-90 shrink-0">
                         <i class="fa-solid fa-xmark text-xs"></i>
                     </button>
                 </div>
 
-                <!-- Drawer Quick Navigation & Future Options Placeholder -->
-                <div class="mt-4 space-y-2">
-                    <p class="px-2 text-[10px] font-bold uppercase tracking-wider text-sky-300/75 mb-2">
-                        Quick Menu
-                    </p>
+                <!-- Scrollable Drawer Menu Items -->
+                <div class="mt-3.5 space-y-3 overflow-y-auto drawer-scroll pr-1 flex-1">
 
-                    <button type="button" onclick="switchView('home'); closeLeftDrawer();" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-2xl bg-blue-500/10 hover:bg-blue-500/25 border border-blue-400/20 text-left text-xs font-semibold text-slate-100 transition">
-                        <span class="w-7 h-7 rounded-full bg-blue-500/25 text-sky-300 flex items-center justify-center shrink-0">
-                            <i class="fa-solid fa-house text-[11px]"></i>
-                        </span>
-                        <span>Home Dashboard</span>
-                    </button>
+                    <!-- Quick Menu Section -->
+                    <div>
+                        <p class="px-1.5 text-[10px] font-bold uppercase tracking-wider text-sky-300/75 mb-1.5">
+                            Quick Menu
+                        </p>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button type="button" onclick="switchView('home'); closeLeftDrawer();" class="flex items-center gap-2 px-2.5 py-2 rounded-xl bg-blue-500/10 hover:bg-blue-500/25 border border-blue-400/20 text-left text-[11px] font-semibold text-slate-100 transition active:scale-95">
+                                <span class="w-6 h-6 rounded-full bg-blue-500/25 text-sky-300 flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-house text-[10px]"></i>
+                                </span>
+                                <span class="truncate">Home</span>
+                            </button>
 
-                    <button type="button" onclick="refreshFullSystem(); closeLeftDrawer();" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-2xl bg-sky-500/10 hover:bg-sky-500/25 border border-sky-400/20 text-left text-xs font-semibold text-slate-100 transition">
-                        <span class="w-7 h-7 rounded-full bg-sky-500/25 text-cyan-300 flex items-center justify-center shrink-0">
-                            <i class="fa-solid fa-arrows-rotate text-[11px]"></i>
-                        </span>
-                        <span>System Refresh</span>
-                    </button>
+                            <button type="button" onclick="refreshFullSystem(); closeLeftDrawer();" class="flex items-center gap-2 px-2.5 py-2 rounded-xl bg-sky-500/10 hover:bg-sky-500/25 border border-sky-400/20 text-left text-[11px] font-semibold text-slate-100 transition active:scale-95">
+                                <span class="w-6 h-6 rounded-full bg-sky-500/25 text-cyan-300 flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-arrows-rotate text-[10px]"></i>
+                                </span>
+                                <span class="truncate">Refresh</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 1. Contact Us Section (Phone 1 & 2 with bKash/Nagad + Email) -->
+                    <div>
+                        <div class="flex items-center justify-between px-1.5 mb-1.5">
+                            <p class="text-[10px] font-bold uppercase tracking-wider text-sky-300/90">
+                                Contact Us
+                            </p>
+                            <span class="text-[9px] text-sky-400/80 font-medium">যোগাযোগ ও পেমেন্ট</span>
+                        </div>
+
+                        <div class="p-2.5 rounded-2xl bg-gradient-to-b from-blue-950/60 to-slate-900/80 border border-blue-400/25 space-y-2 shadow-inner">
+
+                            <!-- Phone No 1 (bKash / Nagad) -->
+                            <div class="p-2 rounded-xl bg-slate-950/65 hover:bg-blue-900/35 border border-blue-400/15 transition">
+                                <div class="flex items-center justify-between gap-2">
+                                    <a href="tel:01881132158" class="flex items-center gap-2.5 min-w-0 flex-1">
+                                        <span class="w-7 h-7 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 flex items-center justify-center shrink-0">
+                                            <i class="fa-solid fa-phone text-[11px]"></i>
+                                        </span>
+                                        <div class="min-w-0">
+                                            <span class="block text-[9px] text-slate-400 font-semibold uppercase tracking-wider">M Maksud RS KSa</span>
+                                            <span class="block text-xs font-bold text-white tracking-wide truncate">01881132158</span>
+                                        </div>
+                                    </a>
+                                    <button type="button"
+                                            onclick="copyContactText('01881132158', this)"
+                                            title="Copy Phone Number"
+                                            class="w-7 h-7 rounded-lg bg-blue-500/15 hover:bg-blue-500/30 text-sky-300 flex items-center justify-center shrink-0 transition active:scale-90">
+                                        <i class="fa-regular fa-copy text-[11px]"></i>
+                                    </button>
+                                </div>
+                                <!-- bKash & Nagad Badges -->
+                                <div class="mt-1.5 pl-9 flex items-center gap-1.5 flex-wrap">
+                                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-pink-500/15 border border-pink-400/35 text-pink-300 text-[9px] font-bold">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-pink-400"></span>
+                                        bKash
+                                    </span>
+                                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-orange-500/15 border border-orange-400/35 text-orange-300 text-[9px] font-bold">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                        Nagad
+                                    </span>
+                                    <span class="text-[8.5px] text-slate-400">Personal</span>
+                                </div>
+                            </div>
+
+                            <!-- Phone No 2 (bKash / Nagad) -->
+                            <div class="p-2 rounded-xl bg-slate-950/65 hover:bg-blue-900/35 border border-blue-400/15 transition">
+                                <div class="flex items-center justify-between gap-2">
+                                    <a href="tel:01628998162" class="flex items-center gap-2.5 min-w-0 flex-1">
+                                        <span class="w-7 h-7 rounded-full bg-teal-500/20 border border-teal-400/30 text-teal-300 flex items-center justify-center shrink-0">
+                                            <i class="fa-solid fa-phone-volume text-[11px]"></i>
+                                        </span>
+                                        <div class="min-w-0">
+                                            <span class="block text-[9px] text-slate-400 font-semibold uppercase tracking-wider">m Misbah Uddin</span>
+                                            <span class="block text-xs font-bold text-white tracking-wide truncate">01628998162</span>
+                                        </div>
+                                    </a>
+                                    <button type="button"
+                                            onclick="copyContactText('01628998162', this)"
+                                            title="Copy Phone Number"
+                                            class="w-7 h-7 rounded-lg bg-blue-500/15 hover:bg-blue-500/30 text-sky-300 flex items-center justify-center shrink-0 transition active:scale-90">
+                                        <i class="fa-regular fa-copy text-[11px]"></i>
+                                    </button>
+                                </div>
+                                <!-- bKash & Nagad Badges -->
+                                <div class="mt-1.5 pl-9 flex items-center gap-1.5 flex-wrap">
+                                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-pink-500/15 border border-pink-400/35 text-pink-300 text-[9px] font-bold">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-pink-400"></span>
+                                        bKash
+                                    </span>
+                                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-orange-500/15 border border-orange-400/35 text-orange-300 text-[9px] font-bold">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                        Nagad
+                                    </span>
+                                    <span class="text-[8.5px] text-slate-400">Personal</span>
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="flex items-center justify-between gap-2 p-2 rounded-xl bg-slate-950/65 hover:bg-blue-900/35 border border-blue-400/15 transition">
+                                <a href="mailto:assuffahwelfareassociation@gmail.com" class="flex items-center gap-2.5 min-w-0 flex-1">
+                                    <span class="w-7 h-7 rounded-full bg-amber-500/20 border border-amber-400/30 text-amber-300 flex items-center justify-center shrink-0">
+                                        <i class="fa-solid fa-envelope text-[11px]"></i>
+                                    </span>
+                                    <div class="min-w-0">
+                                        <span class="block text-[9px] text-slate-400 font-semibold uppercase tracking-wider">Email</span>
+                                        <span class="block text-[10.5px] font-bold text-white truncate" title="assuffahwelfareassociation@gmail.com">
+                                            assuffahwelfareassociation@gmail.com
+                                        </span>
+                                    </div>
+                                </a>
+                                <button type="button"
+                                        onclick="copyContactText('assuffahwelfareassociation@gmail.com', this)"
+                                        title="Copy Email"
+                                        class="w-7 h-7 rounded-lg bg-blue-500/15 hover:bg-blue-500/30 text-sky-300 flex items-center justify-center shrink-0 transition active:scale-90">
+                                    <i class="fa-regular fa-copy text-[11px]"></i>
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- 2. Separate Messenger Group Section -->
+                    <div>
+                        <div class="flex items-center justify-between px-1.5 mb-1.5">
+                            <p class="text-[10px] font-bold uppercase tracking-wider text-sky-300/90">
+                                Messenger Group
+                            </p>
+                            <span class="text-[9px] text-sky-400/80 font-medium">অফিসিয়াল গ্রুপ</span>
+                        </div>
+
+                        <div class="p-2.5 rounded-2xl bg-gradient-to-br from-blue-900/45 via-indigo-950/65 to-purple-950/45 border border-sky-400/30 shadow-inner">
+                            <a href="https://m.me/j/AbY8i9NxJNZEBWrF/?send_source=gc%3Acopy_invite_link_c"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="flex items-center justify-between gap-2.5 p-2 rounded-xl bg-slate-950/55 hover:bg-blue-900/45 border border-sky-400/25 transition active:scale-98">
+                                <div class="flex items-center gap-2.5 min-w-0">
+                                    <span class="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-500 via-indigo-500 to-pink-500 text-white flex items-center justify-center shrink-0 shadow-md">
+                                        <i class="fa-brands fa-facebook-messenger text-sm"></i>
+                                    </span>
+                                    <div class="min-w-0">
+                                        <span class="block text-[11px] font-extrabold text-white truncate">
+                                            As-Suffah Messenger Group
+                                        </span>
+                                        <span class="block text-[9.5px] text-sky-300 truncate">
+                                            গ্রুপে যুক্ত হতে এখানে ক্লিক করুন
+                                        </span>
+                                    </div>
+                                </div>
+                                <span class="w-7 h-7 rounded-full bg-sky-500/20 border border-sky-400/30 text-sky-300 flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
 
                     <!-- Future Options Slot -->
-                    <div class="mt-4 p-3.5 rounded-2xl bg-blue-950/40 border border-dashed border-blue-400/25 text-center">
-                        <i class="fa-solid fa-sliders text-sky-400 text-sm mb-1"></i>
-                        <p class="text-[11px] font-semibold text-slate-200">More Options Coming Soon</p>
-                        <p class="text-[9.5px] text-sky-300/75 mt-0.5">পরবর্তীতে এখানে আরও নতুন অপশন যুক্ত করা হবে</p>
+                    <div class="p-3 rounded-2xl bg-blue-950/35 border border-dashed border-blue-400/25 text-center">
+                        <i class="fa-solid fa-sliders text-sky-400 text-xs mb-1"></i>
+                        <p class="text-[10.5px] font-semibold text-slate-200">More Options Coming Soon</p>
+                        <p class="text-[9px] text-sky-300/75 mt-0.5">পরবর্তীতে এখানে আরও নতুন অপশন যুক্ত করা হবে</p>
                     </div>
                 </div>
             </div>
 
             <!-- Drawer Footer -->
-            <div class="pt-3 border-t border-blue-400/15 text-center">
+            <div class="pt-2.5 mt-2 border-t border-blue-400/15 text-center shrink-0">
                 <p class="text-[10px] text-slate-400">
                     Developed by <span class="text-sky-400 font-bold">M Maksud Rs Ksa</span>
                 </p>
@@ -650,6 +802,28 @@
             } catch (e) {}
         }
 
+        /* ================= COPY CONTACT INFO HELPER ================= */
+        function copyContactText(text, btnEl) {
+            try {
+                const tempInput = document.createElement('input');
+                tempInput.value = text;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand('copy');
+                document.body.removeChild(tempInput);
+
+                if (btnEl) {
+                    const originalHTML = btnEl.innerHTML;
+                    btnEl.innerHTML = '<i class="fa-solid fa-check text-[11px] text-emerald-400"></i>';
+                    setTimeout(() => {
+                        btnEl.innerHTML = originalHTML;
+                    }, 1500);
+                }
+            } catch (err) {
+                console.error('Copy failed:', err);
+            }
+        }
+
         /* ================= LEFT SLIDE DRAWER CONTROLS ================= */
         function openLeftDrawer() {
             try {
@@ -694,7 +868,6 @@
                     icon.classList.add('fa-spin');
                 }
 
-                // Refresh balances & reload all embedded iframes for a complete system refresh
                 fetchBalances(true);
 
                 ['app1', 'app2', 'app3', 'app4', 'app5'].forEach((id) => {
@@ -704,7 +877,6 @@
                     }
                 });
 
-                // Reload page smoothly after brief visual feedback
                 setTimeout(() => {
                     window.location.reload();
                 }, 550);
@@ -725,7 +897,6 @@
                     backIcon.classList.add('fa-arrows-rotate', 'fa-spin');
                 }
 
-                // শুধুমাত্র যে কার্ড/অ্যাপ থেকে ব্যাক করা হচ্ছে সেটিই রিফ্রেশ হবে
                 if (appToRefresh && appToRefresh !== 'home') {
                     const targetIframe = document.getElementById('iframe-' + appToRefresh);
                     if (targetIframe && targetIframe.src) {
@@ -733,7 +904,6 @@
                     }
                 }
 
-                // ব্যালেন্স আপডেট করে হোম ভিউতে ফিরে যাবে (পুরো পেজ রিলোড হবে না)
                 fetchBalances(true);
 
                 setTimeout(() => {
