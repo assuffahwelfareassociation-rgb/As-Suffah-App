@@ -305,9 +305,9 @@
         <!-- ================= TOP BACK BAR (Shown when any App is opened) ================= -->
         <div id="app-back-bar" class="hidden z-40 px-3.5 pt-8 pb-2.5 shrink-0 flex items-center justify-between bg-slate-950/95 backdrop-blur-md border-b border-blue-400/20">
             <button type="button"
-                    onclick="switchView('home')"
+                    onclick="handleBackAndRefresh()"
                     class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-600/25 hover:bg-blue-600/40 border border-blue-400/40 text-sky-200 hover:text-white text-xs font-bold transition active:scale-95 shadow-sm">
-                <i class="fa-solid fa-arrow-left text-xs"></i>
+                <i id="back-btn-icon" class="fa-solid fa-arrow-left text-xs"></i>
                 <span>Back</span>
             </button>
 
@@ -398,7 +398,7 @@
                                             AS-SUFFAH
                                         </span>
                                         <span class="block text-[8px] font-bold tracking-[0.2em] uppercase text-sky-200/90">
-                                           Accounting Vault
+                                            Accounting Vault
                                         </span>
                                     </div>
                                 </div>
@@ -413,7 +413,7 @@
                             <div class="my-auto py-1">
                                 <div class="flex items-center justify-between px-1 mb-1">
                                     <span class="text-[8.5px] font-bold uppercase tracking-[0.22em] text-sky-100/85">
-                                        Account Number
+                                        Account No
                                     </span>
                                     <button id="toggle-eye-btn"
                                             type="button"
@@ -428,9 +428,9 @@
                                     </button>
                                 </div>
 
-                                <div class="w-full py-1 px-2.5 rounded-xl bg-blue-950/35 border border-sky-300/20 flex items-center justify-center shadow-inner">
+                                <div class="w-full py-2 px-2.5 rounded-xl bg-blue-950/35 border border-sky-300/20 flex items-center justify-center shadow-inner">
                                     <span id="account-number-display"
-                                          class="font-cardNum embossed-card-number text-[18px] sm:text-[21px] font-bold tracking-[0.14em] whitespace-nowrap">
+                                          class="font-cardNum embossed-card-number text-[28px] sm:text-[21px] font-bold tracking-[0.14em] whitespace-nowrap">
                                         27•• •••• ••630
                                     </span>
                                 </div>
@@ -710,6 +710,22 @@
                 }, 550);
             } catch (err) {
                 console.error('Error refreshing system:', err);
+                window.location.reload();
+            }
+        }
+
+        /* ================= BACK BUTTON WITH AUTO REFRESH ================= */
+        function handleBackAndRefresh() {
+            try {
+                const backIcon = document.getElementById('back-btn-icon');
+                if (backIcon) {
+                    backIcon.classList.remove('fa-arrow-left');
+                    backIcon.classList.add('fa-arrows-rotate', 'fa-spin');
+                }
+                switchView('home');
+                refreshFullSystem();
+            } catch (err) {
+                console.error('Error on back and refresh:', err);
                 window.location.reload();
             }
         }
