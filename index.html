@@ -371,7 +371,7 @@
                                 type="button"
                                 onclick="refreshFullSystem()"
                                 aria-label="Refresh Entire System"
-                                title="Refresh"
+                                title="System Refresh"
                                 class="w-9 h-9 rounded-full bg-blue-500/20 hover:bg-blue-500/35 border border-blue-400/35 flex items-center justify-center text-sky-300 hover:text-white transition active:scale-90 shrink-0 shadow-sm">
                             <i id="system-refresh-icon" class="fa-solid fa-arrows-rotate text-xs"></i>
                         </button>
@@ -413,7 +413,7 @@
                             <div class="my-auto py-1">
                                 <div class="flex items-center justify-between px-1 mb-1">
                                     <span class="text-[8.5px] font-bold uppercase tracking-[0.22em] text-sky-100/85">
-                                        Account No
+                                        Account Number
                                     </span>
                                     <button id="toggle-eye-btn"
                                             type="button"
@@ -428,7 +428,7 @@
                                     </button>
                                 </div>
 
-                                <div class="w-full py-2 px-2.5 rounded-xl bg-blue-950/35 border border-sky-300/20 flex items-center justify-center shadow-inner">
+                                <div class="w-full py-1 px-2.5 rounded-xl bg-blue-950/35 border border-sky-300/20 flex items-center justify-center shadow-inner">
                                     <span id="account-number-display"
                                           class="font-cardNum embossed-card-number text-[24px] sm:text-[21px] font-bold tracking-[0.14em] whitespace-nowrap">
                                         27•• •••• ••630
@@ -717,16 +717,35 @@
         /* ================= BACK BUTTON WITH AUTO REFRESH ================= */
         function handleBackAndRefresh() {
             try {
+                const appToRefresh = currentActiveView;
                 const backIcon = document.getElementById('back-btn-icon');
+
                 if (backIcon) {
                     backIcon.classList.remove('fa-arrow-left');
                     backIcon.classList.add('fa-arrows-rotate', 'fa-spin');
                 }
-                switchView('home');
-                refreshFullSystem();
+
+                // শুধুমাত্র যে কার্ড/অ্যাপ থেকে ব্যাক করা হচ্ছে সেটিই রিফ্রেশ হবে
+                if (appToRefresh && appToRefresh !== 'home') {
+                    const targetIframe = document.getElementById('iframe-' + appToRefresh);
+                    if (targetIframe && targetIframe.src) {
+                        targetIframe.src = targetIframe.src;
+                    }
+                }
+
+                // ব্যালেন্স আপডেট করে হোম ভিউতে ফিরে যাবে (পুরো পেজ রিলোড হবে না)
+                fetchBalances(true);
+
+                setTimeout(() => {
+                    switchView('home');
+                    if (backIcon) {
+                        backIcon.classList.remove('fa-arrows-rotate', 'fa-spin');
+                        backIcon.classList.add('fa-arrow-left');
+                    }
+                }, 250);
             } catch (err) {
                 console.error('Error on back and refresh:', err);
-                window.location.reload();
+                switchView('home');
             }
         }
 
