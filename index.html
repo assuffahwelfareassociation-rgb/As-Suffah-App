@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>As-Suffah Central Hub</title>
+    <title>As-Suffah Aurora Dusk 3D Hub</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Cinzel:wght@700;800;900&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
 
     <script>
         tailwind.config = {
@@ -17,8 +17,7 @@
                 extend: {
                     fontFamily: {
                         sans: ['Noto Sans Bengali', 'Plus Jakarta Sans', 'sans-serif'],
-                        cardTitle: ['Cinzel', 'serif'],
-                        cardBody: ['Outfit', 'Noto Sans Bengali', 'sans-serif'],
+                        display: ['Outfit', 'Noto Sans Bengali', 'sans-serif'],
                         cardNum: ['Space Mono', 'monospace'],
                         balNum: ['Chakra Petch', 'sans-serif'],
                     }
@@ -28,731 +27,739 @@
     </script>
 
     <style>
+        /* Base Reset & Aurora Dusk Deep Cosmic Canvas */
         html, body {
-            font-family: 'Noto Sans Bengali', 'Plus Jakarta Sans', 'sans-serif';
+            font-family: 'Noto Sans Bengali', 'Plus Jakarta Sans', sans-serif;
             -webkit-tap-highlight-color: transparent;
             height: 100%;
             margin: 0;
             padding: 0;
             overflow: hidden;
-            background-color: #030712;
+            background-color: #040712;
         }
 
-        /* Deep Sapphire & Cobalt Ambient Background */
-        .ambient-bg {
-            background: radial-gradient(circle at 50% 0%, #172554 0%, #09132e 55%, #020617 100%);
-        }
-
-        /* Top Rounded Enclosure Shape (Top Camera Row to Below ATM Card) */
-        .top-enclosure-shape {
-            background: linear-gradient(170deg, rgba(29, 78, 216, 0.32) 0%, rgba(15, 23, 42, 0.92) 60%, rgba(9, 15, 34, 0.98) 100%);
-            backdrop-filter: blur(22px);
-            -webkit-backdrop-filter: blur(22px);
-            border: 1px solid rgba(96, 165, 250, 0.24);
-            border-top: none;
-            border-bottom-left-radius: 2.35rem;
-            border-bottom-right-radius: 2.35rem;
-            box-shadow:
-                0 24px 48px -15px rgba(2, 6, 23, 0.92),
-                inset 0 -1px 1px rgba(147, 197, 253, 0.22);
-        }
-
-        /* New Architectural Royal Blue & Sapphire Mesh ATM Card */
-        .new-atm-card {
-            aspect-ratio: 1.64 / 1;
-            width: 100%;
-            position: relative;
-            border-radius: 1.5rem;
-            overflow: hidden;
-            border: 1.5px solid rgba(96, 165, 250, 0.55);
-            box-shadow:
-                0 24px 44px -12px rgba(2, 6, 23, 0.96),
-                0 0 32px -6px rgba(37, 99, 235, 0.52),
-                inset 0 1px 2px rgba(191, 219, 254, 0.55);
+        /* Logo-Matched Deep Twilight Blue & Sapphire Ambient Canvas (Zero Red, Rose, Gold, or Green) */
+        .aurora-dusk-canvas {
             background:
-                radial-gradient(circle at 92% 12%, rgba(56, 189, 248, 0.45) 0%, transparent 45%),
-                radial-gradient(circle at 8% 92%, rgba(37, 99, 235, 0.65) 0%, transparent 52%),
-                linear-gradient(135deg, #071947 0%, #10348c 46%, #1d4ed8 80%, #091e54 100%);
-            font-family: 'Outfit', 'Noto Sans Bengali', sans-serif;
+                radial-gradient(circle at 86% 10%, rgba(56, 189, 248, 0.26) 0%, transparent 48%),
+                radial-gradient(circle at 14% 26%, rgba(37, 99, 235, 0.34) 0%, transparent 52%),
+                radial-gradient(circle at 80% 84%, rgba(14, 165, 233, 0.25) 0%, transparent 48%),
+                radial-gradient(circle at 18% 88%, rgba(79, 70, 229, 0.28) 0%, transparent 48%),
+                #050a1a;
+            position: relative;
         }
 
-        /* Subtle Geometric Tech Grid Overlay on Card */
-        .card-tech-grid {
+        /* Floating Animated Sapphire Aurora Orbs */
+        @keyframes auroraFloat {
+            0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+            50% { transform: translate3d(14px, -16px, 0) scale(1.08); }
+        }
+        .aurora-orb-1 {
+            position: absolute;
+            top: -45px;
+            right: -35px;
+            width: 225px;
+            height: 225px;
+            border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.36), rgba(56, 189, 248, 0.24));
+            filter: blur(36px);
+            pointer-events: none;
+            animation: auroraFloat 9s ease-in-out infinite;
+        }
+        .aurora-orb-2 {
+            position: absolute;
+            bottom: 35px;
+            left: -50px;
+            width: 235px;
+            height: 235px;
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.34), rgba(14, 165, 233, 0.24));
+            filter: blur(38px);
+            pointer-events: none;
+            animation: auroraFloat 11s ease-in-out infinite reverse;
+        }
+
+        /* ================= 3D PERSPECTIVE TILT ATM CARD (SLIGHTLY TALLER, NO FLIP) ================= */
+        .card-3d-scene {
+            perspective: 1200px;
+            width: 100%;
+        }
+
+        .aurora-3d-card {
+            position: relative;
+            width: 100%;
+            min-height: 248px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-radius: 1.75rem;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+            background:
+                radial-gradient(circle at 92% 10%, rgba(56, 189, 248, 0.42) 0%, transparent 48%),
+                radial-gradient(circle at 12% 18%, rgba(37, 99, 235, 0.56) 0%, transparent 52%),
+                radial-gradient(circle at 80% 92%, rgba(99, 102, 241, 0.45) 0%, transparent 52%),
+                linear-gradient(135deg, #09132e 0%, #122659 48%, #081838 100%);
+            border: 1px solid rgba(125, 211, 252, 0.32);
+            box-shadow:
+                0 24px 46px -14px rgba(3, 8, 24, 0.92),
+                0 0 30px -8px rgba(37, 99, 235, 0.40),
+                inset 0 1px 1.5px rgba(255, 255, 255, 0.40);
+        }
+
+        /* Holographic Glare Reflection Layer */
+        .card-holo-glare {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(
+                circle at var(--glare-x, 50%) var(--glare-y, 30%),
+                rgba(255, 255, 255, 0.22) 0%,
+                rgba(125, 211, 252, 0.09) 35%,
+                transparent 70%
+            );
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+
+        /* Subtle 3D Geometric Contour Grid inside Card */
+        .aurora-contour-lines {
             position: absolute;
             inset: 0;
             background-image:
-                linear-gradient(to right, rgba(147, 197, 253, 0.07) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(147, 197, 253, 0.07) 1px, transparent 1px);
-            background-size: 22px 22px;
+                radial-gradient(circle at 100% 100%, transparent 58%, rgba(125, 211, 252, 0.08) 59%, transparent 60%),
+                radial-gradient(circle at 100% 100%, transparent 44%, rgba(56, 189, 248, 0.08) 45%, transparent 46%),
+                radial-gradient(circle at 100% 100%, transparent 30%, rgba(129, 140, 248, 0.08) 31%, transparent 32%);
             pointer-events: none;
         }
 
-        /* Curved Abstract Sapphire Ribbons */
-        .card-wave-1 {
-            position: absolute;
-            width: 135%;
-            height: 135%;
-            top: -58%;
-            right: -35%;
-            border-radius: 44%;
-            background: linear-gradient(215deg, rgba(96, 165, 250, 0.22) 0%, transparent 65%);
-            border: 1px solid rgba(191, 219, 254, 0.22);
-            transform: rotate(16deg);
-            pointer-events: none;
-        }
-
-        .card-wave-2 {
-            position: absolute;
-            width: 125%;
-            height: 125%;
-            bottom: -68%;
-            left: -28%;
-            border-radius: 48%;
-            background: linear-gradient(35deg, rgba(14, 165, 233, 0.26) 0%, transparent 65%);
-            border: 1px solid rgba(125, 211, 252, 0.22);
-            transform: rotate(-15deg);
-            pointer-events: none;
-        }
-
-        /* Diagonal Luxury Glass Sheen */
-        .new-atm-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(118deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.03) 36%, transparent 54%);
-            pointer-events: none;
-        }
-
-        /* Bold Arctic-Blue & White Embossed Account Number */
-        .embossed-card-number {
-            background: linear-gradient(180deg, #ffffff 0%, #e0f2fe 52%, #7dd3fc 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 2px 6px rgba(2, 6, 23, 0.95));
-        }
-
-        .text-crisp {
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
-        }
-
-        /* Engraved Metallic Silver-Blue EMV Chip */
-        .emv-chip {
+        /* Iridescent Platinum-Ice Blue 3D EMV Chip */
+        .aurora-3d-chip {
             width: 38px;
             height: 26px;
-            border-radius: 6px;
-            background: linear-gradient(135deg, #f8fafc 0%, #bae6fd 45%, #38bdf8 85%, #0284c7 100%);
-            border: 1px solid rgba(255, 255, 255, 0.88);
+            border-radius: 8px;
+            background: linear-gradient(135deg, #f8fafc 0%, #bae6fd 45%, #94a3b8 100%);
+            border: 1px solid rgba(255, 255, 255, 0.9);
             position: relative;
             overflow: hidden;
-            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.95), 0 4px 10px rgba(2, 6, 23, 0.55);
+            box-shadow:
+                0 6px 14px rgba(5, 16, 42, 0.55),
+                inset 0 1px 1px #ffffff;
         }
-        .emv-chip::before {
+        .aurora-3d-chip::before {
             content: '';
             position: absolute;
             top: 50%;
             left: 0;
             right: 0;
             height: 1px;
-            background: rgba(3, 105, 161, 0.5);
+            background: rgba(15, 23, 42, 0.42);
         }
-        .emv-chip::after {
+        .aurora-3d-chip::after {
             content: '';
             position: absolute;
-            inset: 4px 9px;
-            border: 1px solid rgba(3, 105, 161, 0.55);
-            border-radius: 3px;
+            inset: 4px 8px;
+            border: 1px solid rgba(15, 23, 42, 0.42);
+            border-radius: 4px;
         }
 
-        /* Round App-Style Icon Button */
-        .app-round-icon {
-            width: 62px;
-            height: 62px;
-            border-radius: 9999px;
+        /* 3D Extruded Sapphire Rounded Squircle App Tiles (Not Circular) */
+        .aurora-app-tile {
+            border-radius: 1.5rem;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.075) 0%, rgba(255, 255, 255, 0.025) 100%);
+            border: 1px solid rgba(125, 211, 252, 0.16);
+            border-top-color: rgba(255, 255, 255, 0.26);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            box-shadow:
+                0 10px 22px -8px rgba(3, 8, 22, 0.85),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .aurora-app-tile:hover {
+            transform: translateY(-3px) scale(1.015);
+            background: linear-gradient(145deg, rgba(37, 99, 235, 0.24) 0%, rgba(56, 189, 248, 0.14) 100%);
+            border-color: rgba(56, 189, 248, 0.48);
+            box-shadow:
+                0 16px 30px -10px rgba(14, 116, 144, 0.55),
+                inset 0 1px 0 rgba(255, 255, 255, 0.30);
+        }
+        .aurora-app-tile:active {
+            transform: scale(0.95);
+        }
+
+        /* 3D Glossy Squircle Icon Container (Rounded Corners, Not Circle) */
+        .squircle-3d-icon {
+            border-radius: 1.15rem;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
-            transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
             box-shadow:
-                0 12px 24px -6px rgba(2, 6, 23, 0.85),
-                inset 0 1px 2px rgba(255, 255, 255, 0.4);
+                0 10px 20px -5px rgba(4, 12, 32, 0.78),
+                inset 0 1.5px 1.5px rgba(255, 255, 255, 0.55),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.35);
+            transition: transform 0.25s ease;
         }
-        .app-item-wrapper:hover .app-round-icon {
-            transform: translateY(-3px) scale(1.06);
+        .aurora-app-tile:hover .squircle-3d-icon {
+            transform: rotate(-4deg) scale(1.06);
         }
-        .app-item-wrapper:active .app-round-icon {
+
+        /* Rounded Pill & Squircle UI Buttons (No Circles) */
+        .rounded-ui-btn {
+            border-radius: 1rem;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(125, 211, 252, 0.18);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .rounded-ui-btn:hover {
+            background: rgba(37, 99, 235, 0.24);
+            border-color: rgba(56, 189, 248, 0.48);
+        }
+        .rounded-ui-btn:active {
             transform: scale(0.92);
         }
 
-        /* Left Slide Drawer Transition */
-        .drawer-backdrop {
-            transition: opacity 0.28s ease;
+        /* Drawer & Modal Animations */
+        .drawer-backdrop { transition: opacity 0.28s ease; }
+        .drawer-panel { transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1); }
+
+        @keyframes popModal {
+            0% { opacity: 0; transform: scale(0.92) translateY(10px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
         }
-        .drawer-panel {
-            transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+        .modal-pop {
+            animation: popModal 0.24s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
 
-        /* Custom Thin Scrollbar inside Drawer */
-        .drawer-scroll::-webkit-scrollbar {
-            width: 3px;
-        }
-        .drawer-scroll::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        .drawer-scroll::-webkit-scrollbar-thumb {
-            background: rgba(56, 189, 248, 0.3);
-            border-radius: 9999px;
-        }
-
-        /* Floating Blue Glass Dock */
-        .glass-dock {
-            background: rgba(10, 20, 48, 0.82);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(96, 165, 250, 0.24);
-            box-shadow: 0 10px 35px rgba(2, 6, 23, 0.78), inset 0 1px 1px rgba(191, 219, 254, 0.22);
-        }
-        .dock-btn {
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(147, 197, 253, 0.14);
-        }
-        .dock-btn-active {
-            background: linear-gradient(135deg, #2563eb 0%, #0ea5e9 100%);
-            border: 1px solid rgba(255, 255, 255, 0.55);
-            box-shadow: 0 4px 18px rgba(37, 99, 235, 0.6);
-            color: #ffffff !important;
-            transform: scale(1.07);
-        }
-
-        @keyframes pulseGlow {
+        @keyframes pulseText {
             0%, 100% { opacity: 0.45; }
-            50% { opacity: 0.95; }
+            50% { opacity: 1; }
         }
         .balance-loading {
-            animation: pulseGlow 1.3s ease-in-out infinite;
+            animation: pulseText 1.2s ease-in-out infinite;
         }
     </style>
 </head>
-<body class="text-slate-100 h-[100dvh] w-screen flex justify-center items-center selection:bg-blue-500 selection:text-white overflow-hidden p-0 sm:p-4">
+<body class="text-slate-100 h-[100dvh] w-screen flex justify-center items-center selection:bg-sky-500 selection:text-white overflow-hidden p-0 sm:p-4">
 
-    <!-- Mobile App Frame -->
-    <div id="app-shell" class="w-full max-w-md ambient-bg h-[100dvh] sm:h-[820px] sm:max-h-[92dvh] sm:rounded-[40px] sm:border-[6px] sm:border-slate-800/90 sm:shadow-2xl flex flex-col relative overflow-hidden">
+    <!-- Mobile App Shell -->
+    <div id="app-shell" class="w-full max-w-md aurora-dusk-canvas h-[100dvh] sm:h-[835px] sm:max-h-[92dvh] sm:rounded-[44px] sm:border-[6px] sm:border-slate-900/90 sm:shadow-[0_30px_70px_rgba(0,0,0,0.95)] flex flex-col relative overflow-hidden">
 
-        <!-- Decorative Blue Ambient Glows -->
-        <div class="absolute top-1/2 -left-16 w-48 h-48 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute bottom-16 -right-16 w-48 h-48 bg-sky-500/15 rounded-full blur-3xl pointer-events-none"></div>
+        <!-- Ambient Floating Aurora Orbs -->
+        <div class="aurora-orb-1"></div>
+        <div class="aurora-orb-2"></div>
 
-        <!-- ================= LEFT SLIDE DRAWER (Triggered by 3-Dot Button) ================= -->
+        <!-- Smart Toast Notification (Rounded Pill) -->
+        <div id="app-toast" class="hidden fixed bottom-10 left-1/2 -translate-x-1/2 z-[120] px-4 py-2 rounded-2xl bg-[#091530]/95 border border-sky-400/45 shadow-2xl backdrop-blur-xl flex items-center gap-2">
+            <span class="w-5 h-5 rounded-lg bg-gradient-to-tr from-blue-600 to-sky-400 flex items-center justify-center text-white">
+                <i class="fa-solid fa-check text-[10px]"></i>
+            </span>
+            <span id="app-toast-text" class="text-[11px] font-bold text-white whitespace-nowrap">Copied!</span>
+        </div>
+
+        <!-- ================= LEFT SLIDE DRAWER ================= -->
         <div id="side-drawer-backdrop"
              onclick="closeLeftDrawer()"
-             class="hidden drawer-backdrop opacity-0 absolute inset-0 bg-slate-950/75 backdrop-blur-xs z-[60]">
+             class="hidden drawer-backdrop opacity-0 absolute inset-0 bg-[#030712]/80 backdrop-blur-xs z-[60]">
         </div>
 
         <aside id="side-drawer-panel"
                aria-hidden="true"
-               class="drawer-panel -translate-x-full absolute top-0 bottom-0 left-0 w-[82%] max-w-[310px] bg-slate-950/95 backdrop-blur-xl border-r border-blue-400/20 z-[70] flex flex-col justify-between p-4 shadow-2xl">
+               class="drawer-panel -translate-x-full absolute top-0 bottom-0 left-0 w-[83%] max-w-[315px] bg-[#081026]/95 backdrop-blur-2xl border-r border-sky-400/20 z-[70] flex flex-col justify-between p-4 shadow-2xl rounded-r-[32px]">
             <div class="flex flex-col min-h-0 flex-1">
-                <!-- Drawer Camera Safe Top Space -->
-                <div class="w-full h-5 shrink-0" aria-hidden="true"></div>
+                <div class="w-full h-5 shrink-0"></div>
 
                 <!-- Drawer Header -->
-                <div class="flex items-center justify-between pb-3 border-b border-blue-400/15 pt-1.5 shrink-0">
+                <div class="flex items-center justify-between pb-3.5 border-b border-sky-300/15 pt-1 shrink-0">
                     <div class="flex items-center gap-2.5 min-w-0">
-                        <div class="w-9 h-9 rounded-full p-0.5 bg-gradient-to-tr from-blue-500 via-sky-400 to-cyan-300 shrink-0">
+                        <div class="w-10 h-10 rounded-2xl p-0.5 bg-gradient-to-tr from-blue-600 via-indigo-500 to-sky-400 shrink-0 shadow-lg">
                             <img src="https://lh3.googleusercontent.com/d/1PXMzZMIOZbElnjIuOK2ew-FNMhuScYGx"
                                  alt="ASWA Logo"
-                                 class="w-full h-full object-cover rounded-full bg-white"
+                                 class="w-full h-full object-cover rounded-[14px] bg-[#050b1c]"
                                  onerror="handleLogoFallback(this)">
                         </div>
                         <div class="min-w-0">
-                            <h2 class="text-xs font-extrabold text-white truncate">AS-SUFFAH HUB</h2>
-                            <p class="text-[10px] text-sky-400 truncate">Manu</p>
+                            <h2 class="font-display text-xs font-extrabold text-white tracking-wide truncate">AS-SUFFAH PLATFROM</h2>
+                            <p class="text-[10px] text-sky-300 font-semibold truncate">Manu</p>
                         </div>
                     </div>
                     <button type="button"
                             onclick="closeLeftDrawer()"
-                            aria-label="Close Menu"
-                            class="w-8 h-8 rounded-full bg-blue-500/15 hover:bg-blue-500/30 border border-blue-400/25 flex items-center justify-center text-sky-200 hover:text-white transition active:scale-90 shrink-0">
+                            class="w-8 h-8 rounded-xl bg-white/5 hover:bg-white/15 border border-sky-300/20 flex items-center justify-center text-slate-300 hover:text-white transition active:scale-90 shrink-0">
                         <i class="fa-solid fa-xmark text-xs"></i>
                     </button>
                 </div>
 
-                <!-- Scrollable Drawer Menu Items -->
-                <div class="mt-3.5 space-y-3 overflow-y-auto drawer-scroll pr-1 flex-1">
-
-                    <!-- Quick Menu Section -->
+                <!-- Drawer Options -->
+                <div class="mt-4 space-y-4 overflow-y-auto pr-1 flex-1">
                     <div>
-                        <p class="px-1.5 text-[10px] font-bold uppercase tracking-wider text-sky-300/75 mb-1.5">
-                            Quick Menu
+                        <p class="px-1 text-[10px] font-bold uppercase tracking-widest text-sky-300/75 mb-2.5">
+                            Navigation & Support
                         </p>
-                        <div class="grid grid-cols-2 gap-2">
-                            <button type="button" onclick="switchView('home'); closeLeftDrawer();" class="flex items-center gap-2 px-2.5 py-2 rounded-xl bg-blue-500/10 hover:bg-blue-500/25 border border-blue-400/20 text-left text-[11px] font-semibold text-slate-100 transition active:scale-95">
-                                <span class="w-6 h-6 rounded-full bg-blue-500/25 text-sky-300 flex items-center justify-center shrink-0">
-                                    <i class="fa-solid fa-house text-[10px]"></i>
+                        <div class="grid grid-cols-2 gap-2.5">
+                            <button type="button" onclick="switchView('home'); closeLeftDrawer();" class="flex items-center gap-2.5 p-2.5 rounded-2xl bg-white/[0.05] hover:bg-blue-500/20 border border-sky-300/15 text-left text-[11px] font-bold text-slate-100 transition active:scale-95">
+                                <span class="w-7 h-7 rounded-xl bg-blue-500/25 text-blue-300 flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-house text-[11px]"></i>
                                 </span>
                                 <span class="truncate">Home</span>
                             </button>
 
-                            <button type="button" onclick="refreshFullSystem(); closeLeftDrawer();" class="flex items-center gap-2 px-2.5 py-2 rounded-xl bg-sky-500/10 hover:bg-sky-500/25 border border-sky-400/20 text-left text-[11px] font-semibold text-slate-100 transition active:scale-95">
-                                <span class="w-6 h-6 rounded-full bg-sky-500/25 text-cyan-300 flex items-center justify-center shrink-0">
-                                    <i class="fa-solid fa-arrows-rotate text-[10px]"></i>
+                            <button type="button" onclick="refreshFullSystem(); closeLeftDrawer();" class="flex items-center gap-2.5 p-2.5 rounded-2xl bg-white/[0.05] hover:bg-blue-500/20 border border-sky-300/15 text-left text-[11px] font-bold text-slate-100 transition active:scale-95">
+                                <span class="w-7 h-7 rounded-xl bg-sky-500/25 text-sky-300 flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-arrows-rotate text-[11px]"></i>
                                 </span>
-                                <span class="truncate">Refresh</span>
+                                <span class="truncate">Sync All</span>
+                            </button>
+
+                            <button type="button" onclick="openInfoModal('contact')" class="flex items-center gap-2.5 p-2.5 rounded-2xl bg-white/[0.05] hover:bg-blue-500/20 border border-sky-300/15 text-left text-[11px] font-bold text-slate-100 transition active:scale-95">
+                                <span class="w-7 h-7 rounded-xl bg-indigo-500/25 text-indigo-300 flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-headset text-[11px]"></i>
+                                </span>
+                                <span class="truncate">Contact</span>
+                            </button>
+
+                            <button type="button" onclick="openInfoModal('messenger')" class="flex items-center gap-2.5 p-2.5 rounded-2xl bg-white/[0.05] hover:bg-blue-500/20 border border-sky-300/15 text-left text-[11px] font-bold text-slate-100 transition active:scale-95">
+                                <span class="w-7 h-7 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-500 to-sky-400 text-white flex items-center justify-center shrink-0">
+                                    <i class="fa-brands fa-facebook-messenger text-[11px]"></i>
+                                </span>
+                                <span class="truncate">Group</span>
+                            </button>
+
+                            <button type="button" onclick="switchView('app5'); closeLeftDrawer();" class="col-span-2 flex items-center gap-2.5 p-2.5 rounded-2xl bg-white/[0.05] hover:bg-blue-500/20 border border-sky-300/15 text-left text-[11px] font-bold text-slate-100 transition active:scale-95">
+                                <span class="w-7 h-7 rounded-xl bg-gradient-to-br from-blue-600 via-sky-500 to-cyan-400 text-white flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-user-plus text-[11px]"></i>
+                                </span>
+                                <span class="truncate">Member Add</span>
                             </button>
                         </div>
                     </div>
 
-                    <!-- 1. Contact Us Section (Phone 1 & 2 with bKash/Nagad + Email) -->
-                    <div>
-                        <div class="flex items-center justify-between px-1.5 mb-1.5">
-                            <p class="text-[10px] font-bold uppercase tracking-wider text-sky-300/90">
-                                Contact Us
-                            </p>
-                            <span class="text-[9px] text-sky-400/80 font-medium">যোগাযোগ ও পেমেন্ট</span>
-                        </div>
-
-                        <div class="p-2.5 rounded-2xl bg-gradient-to-b from-blue-950/60 to-slate-900/80 border border-blue-400/25 space-y-2 shadow-inner">
-
-                            <!-- Phone No 1 (bKash / Nagad) -->
-                            <div class="p-2 rounded-xl bg-slate-950/65 hover:bg-blue-900/35 border border-blue-400/15 transition">
-                                <div class="flex items-center justify-between gap-2">
-                                    <a href="tel:01881132158" class="flex items-center gap-2.5 min-w-0 flex-1">
-                                        <span class="w-7 h-7 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 flex items-center justify-center shrink-0">
-                                            <i class="fa-solid fa-phone text-[11px]"></i>
-                                        </span>
-                                        <div class="min-w-0">
-                                            <span class="block text-[9px] text-slate-400 font-semibold uppercase tracking-wider">M Maksud RS KSa</span>
-                                            <span class="block text-xs font-bold text-white tracking-wide truncate">01881132158</span>
-                                        </div>
-                                    </a>
-                                    <button type="button"
-                                            onclick="copyContactText('01881132158', this)"
-                                            title="Copy Phone Number"
-                                            class="w-7 h-7 rounded-lg bg-blue-500/15 hover:bg-blue-500/30 text-sky-300 flex items-center justify-center shrink-0 transition active:scale-90">
-                                        <i class="fa-regular fa-copy text-[11px]"></i>
-                                    </button>
-                                </div>
-                                <!-- bKash & Nagad Badges -->
-                                <div class="mt-1.5 pl-9 flex items-center gap-1.5 flex-wrap">
-                                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-pink-500/15 border border-pink-400/35 text-pink-300 text-[9px] font-bold">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-pink-400"></span>
-                                        bKash
-                                    </span>
-                                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-orange-500/15 border border-orange-400/35 text-orange-300 text-[9px] font-bold">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
-                                        Nagad
-                                    </span>
-                                    <span class="text-[8.5px] text-slate-400">Personal</span>
-                                </div>
-                            </div>
-
-                            <!-- Phone No 2 (bKash / Nagad) -->
-                            <div class="p-2 rounded-xl bg-slate-950/65 hover:bg-blue-900/35 border border-blue-400/15 transition">
-                                <div class="flex items-center justify-between gap-2">
-                                    <a href="tel:01628998162" class="flex items-center gap-2.5 min-w-0 flex-1">
-                                        <span class="w-7 h-7 rounded-full bg-teal-500/20 border border-teal-400/30 text-teal-300 flex items-center justify-center shrink-0">
-                                            <i class="fa-solid fa-phone-volume text-[11px]"></i>
-                                        </span>
-                                        <div class="min-w-0">
-                                            <span class="block text-[9px] text-slate-400 font-semibold uppercase tracking-wider">m Misbah Uddin</span>
-                                            <span class="block text-xs font-bold text-white tracking-wide truncate">01628998162</span>
-                                        </div>
-                                    </a>
-                                    <button type="button"
-                                            onclick="copyContactText('01628998162', this)"
-                                            title="Copy Phone Number"
-                                            class="w-7 h-7 rounded-lg bg-blue-500/15 hover:bg-blue-500/30 text-sky-300 flex items-center justify-center shrink-0 transition active:scale-90">
-                                        <i class="fa-regular fa-copy text-[11px]"></i>
-                                    </button>
-                                </div>
-                                <!-- bKash & Nagad Badges -->
-                                <div class="mt-1.5 pl-9 flex items-center gap-1.5 flex-wrap">
-                                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-pink-500/15 border border-pink-400/35 text-pink-300 text-[9px] font-bold">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-pink-400"></span>
-                                        bKash
-                                    </span>
-                                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-orange-500/15 border border-orange-400/35 text-orange-300 text-[9px] font-bold">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
-                                        Nagad
-                                    </span>
-                                    <span class="text-[8.5px] text-slate-400">Personal</span>
-                                </div>
-                            </div>
-
-                            <!-- Email -->
-                            <div class="flex items-center justify-between gap-2 p-2 rounded-xl bg-slate-950/65 hover:bg-blue-900/35 border border-blue-400/15 transition">
-                                <a href="mailto:assuffahwelfareassociation@gmail.com" class="flex items-center gap-2.5 min-w-0 flex-1">
-                                    <span class="w-7 h-7 rounded-full bg-amber-500/20 border border-amber-400/30 text-amber-300 flex items-center justify-center shrink-0">
-                                        <i class="fa-solid fa-envelope text-[11px]"></i>
-                                    </span>
-                                    <div class="min-w-0">
-                                        <span class="block text-[9px] text-slate-400 font-semibold uppercase tracking-wider">Email</span>
-                                        <span class="block text-[10.5px] font-bold text-white truncate" title="assuffahwelfareassociation@gmail.com">
-                                            assuffahwelfareassociation@gmail.com
-                                        </span>
-                                    </div>
-                                </a>
-                                <button type="button"
-                                        onclick="copyContactText('assuffahwelfareassociation@gmail.com', this)"
-                                        title="Copy Email"
-                                        class="w-7 h-7 rounded-lg bg-blue-500/15 hover:bg-blue-500/30 text-sky-300 flex items-center justify-center shrink-0 transition active:scale-90">
-                                    <i class="fa-regular fa-copy text-[11px]"></i>
-                                </button>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <!-- 2. Separate Messenger Group Section -->
-                    <div>
-                        <div class="flex items-center justify-between px-1.5 mb-1.5">
-                            <p class="text-[10px] font-bold uppercase tracking-wider text-sky-300/90">
-                                Messenger Group
-                            </p>
-                            <span class="text-[9px] text-sky-400/80 font-medium">অফিসিয়াল গ্রুপ</span>
-                        </div>
-
-                        <div class="p-2.5 rounded-2xl bg-gradient-to-br from-blue-900/45 via-indigo-950/65 to-purple-950/45 border border-sky-400/30 shadow-inner">
-                            <a href="https://m.me/j/AbY8i9NxJNZEBWrF/?send_source=gc%3Acopy_invite_link_c"
-                               target="_blank"
-                               rel="noopener noreferrer"
-                               class="flex items-center justify-between gap-2.5 p-2 rounded-xl bg-slate-950/55 hover:bg-blue-900/45 border border-sky-400/25 transition active:scale-98">
-                                <div class="flex items-center gap-2.5 min-w-0">
-                                    <span class="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-500 via-indigo-500 to-pink-500 text-white flex items-center justify-center shrink-0 shadow-md">
-                                        <i class="fa-brands fa-facebook-messenger text-sm"></i>
-                                    </span>
-                                    <div class="min-w-0">
-                                        <span class="block text-[11px] font-extrabold text-white truncate">
-                                            As-Suffah Messenger Group
-                                        </span>
-                                        <span class="block text-[9.5px] text-sky-300 truncate">
-                                            গ্রুপে যুক্ত হতে এখানে ক্লিক করুন
-                                        </span>
-                                    </div>
-                                </div>
-                                <span class="w-7 h-7 rounded-full bg-sky-500/20 border border-sky-400/30 text-sky-300 flex items-center justify-center shrink-0">
-                                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                                </span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Future Options Slot -->
-                    <div class="p-3 rounded-2xl bg-blue-950/35 border border-dashed border-blue-400/25 text-center">
-                        <i class="fa-solid fa-sliders text-sky-400 text-xs mb-1"></i>
-                        <p class="text-[10.5px] font-semibold text-slate-200">More Options Coming Soon</p>
-                        <p class="text-[9px] text-sky-300/75 mt-0.5">পরবর্তীতে এখানে আরও নতুন অপশন যুক্ত করা হবে</p>
+                    <!-- Quick Vault Shortcut -->
+                    <div class="p-3 rounded-2xl bg-white/[0.04] border border-sky-300/15 space-y-2">
+                        <span class="block text-[10px] font-bold uppercase tracking-wider text-sky-300">Vault Shortcut</span>
+                        <button type="button" onclick="copyAccountNumber(); closeLeftDrawer();" class="w-full py-2 px-3 rounded-xl bg-white/[0.06] hover:bg-blue-500/20 border border-sky-300/15 flex items-center justify-between text-[11px] font-semibold text-slate-200 transition">
+                            <span>Copy A/C: 2778 3324 32630</span>
+                            <i class="fa-regular fa-copy text-sky-300"></i>
+                        </button>
                     </div>
                 </div>
             </div>
 
-            <!-- Drawer Footer -->
-            <div class="pt-2.5 mt-2 border-t border-blue-400/15 text-center shrink-0">
+            <div class="pt-3 mt-2 border-t border-sky-300/15 text-center shrink-0">
                 <p class="text-[10px] text-slate-400">
-                    Developed by <span class="text-sky-400 font-bold">M Maksud Rs Ksa</span>
+                    Developed by <span class="text-sky-300 font-bold">M Maksud Rs Ksa</span>
                 </p>
             </div>
         </aside>
 
-        <!-- ================= TOP BACK BAR (Shown when any App is opened) ================= -->
-        <div id="app-back-bar" class="hidden z-40 px-3.5 pt-8 pb-2.5 shrink-0 flex items-center justify-between bg-slate-950/95 backdrop-blur-md border-b border-blue-400/20">
+        <!-- ================= POPUP MODAL FOR CONTACT & MESSENGER ================= -->
+        <div id="info-popup-modal"
+             onclick="closeInfoModal()"
+             class="hidden absolute inset-0 bg-[#030712]/85 backdrop-blur-md z-[90] flex items-center justify-center p-4">
+
+            <div onclick="event.stopPropagation()"
+                 class="modal-pop w-full max-w-[350px] rounded-[28px] bg-[#0b1530]/95 border border-sky-400/25 shadow-2xl p-4 relative overflow-hidden">
+
+                <!-- 1. CONTACT US POPUP -->
+                <div id="modal-content-contact" class="hidden">
+                    <div class="flex items-center justify-between pb-2.5 mb-3 border-b border-sky-300/15">
+                        <div class="flex items-center gap-2.5">
+                            <span class="w-9 h-9 rounded-2xl bg-gradient-to-br from-blue-600 to-sky-500 text-white flex items-center justify-center shadow-md">
+                                <i class="fa-solid fa-headset text-xs"></i>
+                            </span>
+                            <div>
+                                <h3 class="text-xs font-extrabold uppercase tracking-wider text-white">Contact & Payment</h3>
+                                <p class="text-[9.5px] text-sky-300">যোগাযোগ ও পেমেন্ট নম্বর</p>
+                            </div>
+                        </div>
+                        <button type="button"
+                                onclick="closeInfoModal()"
+                                class="w-8 h-8 rounded-xl bg-white/5 hover:bg-white/15 border border-sky-300/20 flex items-center justify-center text-slate-300 hover:text-white transition">
+                            <i class="fa-solid fa-xmark text-xs"></i>
+                        </button>
+                    </div>
+
+                    <div class="space-y-2.5">
+                        <!-- Phone 1 -->
+                        <div class="p-2.5 rounded-2xl bg-black/45 border border-sky-300/15">
+                            <div class="flex items-center justify-between gap-2">
+                                <a href="tel:01881132158" class="flex items-center gap-2.5 min-w-0 flex-1">
+                                    <span class="w-8 h-8 rounded-xl bg-blue-500/25 border border-blue-400/35 text-blue-300 flex items-center justify-center shrink-0">
+                                        <i class="fa-solid fa-phone text-xs"></i>
+                                    </span>
+                                    <div class="min-w-0">
+                                        <span class="block text-[9.5px] text-slate-400 font-semibold uppercase">M Maksud RS KSa</span>
+                                        <span class="block text-xs font-bold text-white tracking-wide truncate">01881132158</span>
+                                    </div>
+                                </a>
+                                <button type="button"
+                                        onclick="copyContactText('01881132158')"
+                                        class="w-8 h-8 rounded-xl bg-sky-500/20 hover:bg-sky-500/35 text-sky-300 flex items-center justify-center shrink-0 transition">
+                                    <i class="fa-regular fa-copy text-xs"></i>
+                                </button>
+                            </div>
+                            <div class="mt-1.5 pl-10 flex items-center gap-1.5 flex-wrap">
+                                <span class="px-2 py-0.5 rounded-lg bg-blue-500/20 border border-blue-400/35 text-blue-200 text-[9px] font-bold">bKash</span>
+                                <span class="px-2 py-0.5 rounded-lg bg-sky-500/20 border border-sky-400/35 text-sky-200 text-[9px] font-bold">Nagad</span>
+                                <span class="text-[8.5px] text-slate-400">Personal</span>
+                            </div>
+                        </div>
+
+                        <!-- Phone 2 -->
+                        <div class="p-2.5 rounded-2xl bg-black/45 border border-sky-300/15">
+                            <div class="flex items-center justify-between gap-2">
+                                <a href="tel:01628998162" class="flex items-center gap-2.5 min-w-0 flex-1">
+                                    <span class="w-8 h-8 rounded-xl bg-sky-500/25 border border-sky-400/35 text-sky-300 flex items-center justify-center shrink-0">
+                                        <i class="fa-solid fa-phone-volume text-xs"></i>
+                                    </span>
+                                    <div class="min-w-0">
+                                        <span class="block text-[9.5px] text-slate-400 font-semibold uppercase">M Misbah Uddin</span>
+                                        <span class="block text-xs font-bold text-white tracking-wide truncate">01628998162</span>
+                                    </div>
+                                </a>
+                                <button type="button"
+                                        onclick="copyContactText('01628998162')"
+                                        class="w-8 h-8 rounded-xl bg-sky-500/20 hover:bg-sky-500/35 text-sky-300 flex items-center justify-center shrink-0 transition">
+                                    <i class="fa-regular fa-copy text-xs"></i>
+                                </button>
+                            </div>
+                            <div class="mt-1.5 pl-10 flex items-center gap-1.5 flex-wrap">
+                                <span class="px-2 py-0.5 rounded-lg bg-blue-500/20 border border-blue-400/35 text-blue-200 text-[9px] font-bold">bKash</span>
+                                <span class="px-2 py-0.5 rounded-lg bg-sky-500/20 border border-sky-400/35 text-sky-200 text-[9px] font-bold">Nagad</span>
+                                <span class="text-[8.5px] text-slate-400">Personal</span>
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="flex items-center justify-between gap-2 p-2.5 rounded-2xl bg-black/45 border border-sky-300/15">
+                            <a href="mailto:assuffahwelfareassociation@gmail.com" class="flex items-center gap-2.5 min-w-0 flex-1">
+                                <span class="w-8 h-8 rounded-xl bg-indigo-500/25 border border-indigo-400/35 text-indigo-300 flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-envelope text-xs"></i>
+                                </span>
+                                <div class="min-w-0">
+                                    <span class="block text-[9px] text-slate-400 font-semibold uppercase">Official Email</span>
+                                    <span class="block text-[10.5px] font-bold text-white truncate">
+                                        assuffahwelfareassociation@gmail.com
+                                    </span>
+                                </div>
+                            </a>
+                            <button type="button"
+                                    onclick="copyContactText('assuffahwelfareassociation@gmail.com')"
+                                    class="w-8 h-8 rounded-xl bg-sky-500/20 hover:bg-sky-500/35 text-sky-300 flex items-center justify-center shrink-0 transition">
+                                <i class="fa-regular fa-copy text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. MESSENGER GROUP POPUP -->
+                <div id="modal-content-messenger" class="hidden">
+                    <div class="flex items-center justify-between pb-2.5 mb-3 border-b border-sky-300/15">
+                        <div class="flex items-center gap-2.5">
+                            <span class="w-9 h-9 rounded-2xl bg-gradient-to-tr from-blue-600 via-indigo-500 to-sky-400 text-white flex items-center justify-center shadow-md">
+                                <i class="fa-brands fa-facebook-messenger text-xs"></i>
+                            </span>
+                            <div>
+                                <h3 class="text-xs font-extrabold uppercase tracking-wider text-white">Messenger Group</h3>
+                                <p class="text-[9.5px] text-sky-300">অফিসিয়াল গ্রুপ লিংক</p>
+                            </div>
+                        </div>
+                        <button type="button"
+                                onclick="closeInfoModal()"
+                                class="w-8 h-8 rounded-xl bg-white/5 hover:bg-white/15 border border-sky-300/20 flex items-center justify-center text-slate-300 hover:text-white transition">
+                            <i class="fa-solid fa-xmark text-xs"></i>
+                        </button>
+                    </div>
+
+                    <a href="https://m.me/j/AbY8i9NxJNZEBWrF/?send_source=gc%3Acopy_invite_link_c"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="flex items-center justify-between gap-3 p-3 rounded-2xl bg-white/[0.06] hover:bg-blue-500/20 border border-sky-400/30 transition">
+                        <div class="flex items-center gap-3 min-w-0">
+                            <span class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-blue-600 via-indigo-500 to-sky-400 text-white flex items-center justify-center shrink-0 shadow-lg">
+                                <i class="fa-brands fa-facebook-messenger text-lg"></i>
+                            </span>
+                            <div class="min-w-0">
+                                <span class="block text-xs font-extrabold text-white truncate">
+                                    As-Suffah Messenger Group
+                                </span>
+                                <span class="block text-[10px] text-sky-300 truncate">
+                                    গ্রুপে যুক্ত হতে এখানে ট্যাপ করুন
+                                </span>
+                            </div>
+                        </div>
+                        <span class="w-8 h-8 rounded-xl bg-sky-500/25 border border-sky-400/35 text-sky-200 flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                        </span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ================= TOP BACK BAR (For Inner App Views) ================= -->
+        <div id="app-back-bar" class="hidden z-40 px-4 pt-8 pb-2.5 shrink-0 flex items-center justify-between bg-[#060d20]/95 backdrop-blur-xl border-b border-sky-300/15">
             <button type="button"
                     onclick="handleBackAndRefresh()"
-                    class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-600/25 hover:bg-blue-600/40 border border-blue-400/40 text-sky-200 hover:text-white text-xs font-bold transition active:scale-95 shadow-sm">
+                    class="flex items-center gap-2 px-3.5 py-1.5 rounded-2xl bg-blue-500/25 hover:bg-blue-500/40 border border-blue-400/35 text-blue-100 hover:text-white text-xs font-bold transition active:scale-95">
                 <i id="back-btn-icon" class="fa-solid fa-arrow-left text-xs"></i>
                 <span>Back</span>
             </button>
 
-            <span id="active-app-title" class="text-xs font-bold text-white truncate px-2">
+            <span id="active-app-title" class="font-display text-xs font-bold text-white truncate px-2">
                 App View
             </span>
 
             <button type="button"
-                    id="active-app-external-btn"
                     onclick="openCurrentExternal()"
-                    title="Open Chrome"
-                    class="w-8 h-8 rounded-full bg-blue-500/15 hover:bg-blue-500/30 border border-blue-400/25 flex items-center justify-center text-sky-200 hover:text-white transition active:scale-90 shrink-0">
+                    title="Open in Browser"
+                    class="w-8 h-8 rounded-xl bg-sky-500/20 hover:bg-sky-500/35 border border-sky-400/30 flex items-center justify-center text-sky-200 hover:text-white transition active:scale-90 shrink-0">
                 <i class="fa-solid fa-arrow-up-right-from-square text-[11px]"></i>
             </button>
         </div>
 
         <!-- ================= MAIN CONTENT AREA ================= -->
-        <main id="main-container" class="flex-1 min-h-0 w-full flex flex-col justify-between pb-20 z-20">
+        <main id="main-container" class="flex-1 min-h-0 w-full flex flex-col justify-between pb-4 z-20 relative">
 
             <!-- ================= HOME / DASHBOARD VIEW ================= -->
-            <section id="view-home" class="w-full h-full flex flex-col justify-between">
+            <section id="view-home" class="w-full h-full flex flex-col justify-between px-4">
 
-                <!-- TOP ROUNDED ENCLOSURE SHAPE: From Top Camera Cutout Row to Below ATM Card -->
-                <div class="top-enclosure-shape px-4 pt-1 pb-4 shrink-0">
+                <!-- TOP HEADER & 3D SAPPHIRE AURORA ATM CARD -->
+                <div class="pt-1 shrink-0">
+                    <!-- Camera Notch Safe Space -->
+                    <div class="w-full h-6 shrink-0"></div>
 
-                    <!-- EMPTY TOP ROW FOR CAMERA CUTOUT SAFE SPACE -->
-                    <div class="w-full h-7 shrink-0" aria-hidden="true"></div>
-
-                    <!-- HEADER ROW INSIDE ROUNDED SHAPE: Left 3-Dot Button | Center Title | Top-Right Full System Refresh Button -->
-                    <div class="flex items-center justify-between gap-2 mb-3">
-                        <!-- Left 3-Dot Button -->
-                        <button id="left-menu-btn"
-                                type="button"
+                    <!-- Minimal Floating Header with Rounded Squircle Controls -->
+                    <div class="flex items-center justify-between gap-2 mb-3.5">
+                        <button type="button"
                                 onclick="openLeftDrawer()"
-                                aria-label="Open Left Slide Menu"
-                                title="Open Manu"
-                                class="w-9 h-9 rounded-full bg-blue-500/15 hover:bg-blue-500/30 border border-blue-400/30 flex items-center justify-center text-sky-200 hover:text-white transition active:scale-90 shrink-0 shadow-sm">
-                            <i class="fa-solid fa-ellipsis-vertical text-sm"></i>
+                                aria-label="Open Menu"
+                                class="w-9 h-9 rounded-ui-btn flex items-center justify-center text-sky-200 shrink-0">
+                            <i class="fa-solid fa-bars-staggered text-xs"></i>
                         </button>
 
-                        <!-- Center Brand Title -->
-                        <div class="flex items-center gap-2 min-w-0">
-                            <div class="w-8 h-8 rounded-full p-0.5 bg-gradient-to-tr from-blue-500 via-sky-400 to-cyan-300 shadow-md shrink-0">
+                        <div class="flex items-center gap-2.5 min-w-0">
+                            <div class="w-9 h-9 rounded-2xl p-0.5 bg-gradient-to-tr from-blue-600 via-indigo-500 to-sky-400 shrink-0 shadow-[0_6px_16px_rgba(37,99,235,0.45)]">
                                 <img src="https://lh3.googleusercontent.com/d/1PXMzZMIOZbElnjIuOK2ew-FNMhuScYGx"
                                      alt="ASWA Logo"
-                                     class="w-full h-full object-cover rounded-full bg-white"
+                                     class="w-full h-full object-cover rounded-[14px] bg-[#050b1c]"
                                      onerror="handleLogoFallback(this)">
                             </div>
                             <div class="min-w-0 text-left">
-                                <h1 class="text-[11px] sm:text-xs font-extrabold text-white tracking-wide truncate leading-tight">
+                                <h1 class="font-display text-[11px] sm:text-xs font-extrabold text-white tracking-wide truncate leading-tight">
                                     AS-SUFFAH WELFARE ASSOCIATION
                                 </h1>
-                                <p class="text-[9.5px] text-sky-300 font-medium truncate">
+                                <p class="text-[9.5px] text-sky-300 font-semibold truncate">
                                     আস-সুফফাহ কল্যাণ সমিতি
                                 </p>
                             </div>
                         </div>
 
-                        <!-- Top-Right Corner Full System Refresh Button -->
                         <button id="system-refresh-btn"
                                 type="button"
                                 onclick="refreshFullSystem()"
-                                aria-label="Refresh Entire System"
-                                title="System Refresh"
-                                class="w-9 h-9 rounded-full bg-blue-500/20 hover:bg-blue-500/35 border border-blue-400/35 flex items-center justify-center text-sky-300 hover:text-white transition active:scale-90 shrink-0 shadow-sm">
+                                aria-label="Sync System"
+                                class="w-9 h-9 rounded-ui-btn flex items-center justify-center text-sky-300 shrink-0">
                             <i id="system-refresh-icon" class="fa-solid fa-arrows-rotate text-xs"></i>
                         </button>
                     </div>
 
-                    <!-- NEW ARCHITECTURAL ROYAL BLUE ATM CARD (New A/C No: 2778 3324 32630) -->
-                    <div class="new-atm-card select-none">
-                        <!-- Tech Grid & Flowing Sapphire Wave Layers -->
-                        <div class="card-tech-grid"></div>
-                        <div class="card-wave-1"></div>
-                        <div class="card-wave-2"></div>
+                    <!-- ================= 3D INTERACTIVE SAPPHIRE ATM CARD (SLIGHTLY TALLER, NO FLIP) ================= -->
+                    <div id="atm-3d-stage" class="card-3d-scene select-none">
+                        <div id="atm-3d-card" class="aurora-3d-card p-5">
+                            <div class="aurora-contour-lines"></div>
+                            <div id="atm-holo-glare" class="card-holo-glare"></div>
 
-                        <!-- Card Inner Layout -->
-                        <div class="relative z-10 w-full h-full p-3.5 sm:p-4 flex flex-col justify-between">
-
-                            <!-- Top Row: Brand Crest on Left & EMV Chip + Contactless on Right -->
-                            <div class="flex items-center justify-between gap-2">
-                                <div class="flex items-center gap-2 min-w-0">
-                                    <div class="w-7 h-7 rounded-xl bg-blue-400/20 border border-sky-200/40 flex items-center justify-center shadow-sm shrink-0 backdrop-blur-xs">
-                                        <i class="fa-solid fa-shield-halved text-sky-200 text-xs"></i>
-                                    </div>
-                                    <div class="min-w-0">
-                                        <span class="block font-cardTitle text-[11px] sm:text-xs font-black uppercase tracking-[0.14em] text-white text-crisp truncate">
+                            <!-- Top Row: 3D Chip, Brand Title & Show/Hide Pill -->
+                            <div class="relative z-10 flex items-center justify-between gap-2 mb-5">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="aurora-3d-chip"></div>
+                                    <div>
+                                        <span class="block font-display text-xs font-extrabold tracking-[0.14em] text-white">
                                             AS-SUFFAH
                                         </span>
-                                        <span class="block text-[8px] font-bold tracking-[0.2em] uppercase text-sky-200/90">
-                                            Accounting Vault
+                                        <span class="block text-[8px] font-bold uppercase tracking-[0.10em] text-sky-300">
+                                            ACCOUNTING VAULT
                                         </span>
                                     </div>
                                 </div>
 
-                                <div class="flex items-center gap-2.5 shrink-0">
-                                    <i class="fa-solid fa-wifi rotate-90 text-sky-200 text-sm drop-shadow"></i>
-                                    <div class="emv-chip"></div>
-                                </div>
+                                <!-- Privacy Eye Toggle Pill -->
+                                <button id="toggle-eye-btn"
+                                        type="button"
+                                        onclick="toggleSensitiveInfo()"
+                                        class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-blue-600/80 to-sky-500/80 hover:from-blue-500 hover:to-sky-400 border border-sky-300/45 flex items-center gap-1.5 text-white transition active:scale-90 shadow-md">
+                                    <i id="eye-icon" class="fa-solid fa-eye text-[10px] text-sky-100"></i>
+                                    <span id="eye-label" class="text-[9.5px] font-bold uppercase tracking-wider">
+                                        Show
+                                    </span>
+                                </button>
                             </div>
 
-                            <!-- Center Row: Bold Beautiful Embossed Account Number -->
-                            <div class="my-auto py-1">
-                                <div class="flex items-center justify-between px-1 mb-1">
-                                    <span class="text-[8.5px] font-bold uppercase tracking-[0.22em] text-sky-100/85">
-                                        Account Number
-                                    </span>
-                                    <button id="toggle-eye-btn"
-                                            type="button"
-                                            onclick="toggleSensitiveInfo()"
-                                            aria-label="অ্যাকাউন্ট নম্বর ও ব্যালেন্স দেখুন বা লুকান"
-                                            title="Show / Hide Account & Balance"
-                                            class="px-2.5 py-0.5 rounded-full bg-blue-950/55 hover:bg-blue-900/75 backdrop-blur-md border border-sky-300/40 flex items-center gap-1 text-sky-100 hover:text-white transition active:scale-90 cursor-pointer shadow-sm">
-                                        <i id="eye-icon" class="fa-solid fa-eye text-[9px] text-sky-300"></i>
-                                        <span id="eye-label" class="text-[8.5px] font-bold uppercase tracking-wider">
-                                            Show
+                            <!-- Middle Row: 3D Recessed Account Bar -->
+                            <div class="relative z-10 flex items-stretch gap-2.5 py-3.5 px-3.5 rounded-2xl bg-[#040a1a]/60 border border-sky-300/20 mb-5 shadow-inner">
+                                <div class="w-1 rounded-full bg-gradient-to-b from-blue-400 via-sky-400 to-cyan-300 shrink-0 shadow-[0_0_10px_rgba(56,189,248,0.85)]"></div>
+                                <div class="flex-1 min-w-0 flex items-center justify-between gap-2">
+                                    <div class="min-w-0">
+                                        <span class="block text-[8px] font-bold uppercase tracking-[0.2em] text-sky-200/75">
+                                            Account Number
                                         </span>
+                                        <span id="account-number-display"
+                                              class="font-cardNum text-lg sm:text-[19px] font-bold tracking-[0.12em] text-white whitespace-nowrap block">
+                                            27•• •••• ••630
+                                        </span>
+                                    </div>
+                                    <button type="button"
+                                            onclick="copyAccountNumber()"
+                                            title="Copy Account Number"
+                                            class="w-8 h-8 rounded-xl bg-blue-500/25 hover:bg-sky-500/35 border border-sky-300/30 flex items-center justify-center text-sky-200 hover:text-white transition active:scale-90 shrink-0">
+                                        <i class="fa-regular fa-copy text-xs"></i>
                                     </button>
                                 </div>
-
-                                <div class="w-full py-1 px-2.5 rounded-xl bg-blue-950/35 border border-sky-300/20 flex items-center justify-center shadow-inner">
-                                    <span id="account-number-display"
-                                          class="font-cardNum embossed-card-number text-[24px] sm:text-[21px] font-bold tracking-[0.14em] whitespace-nowrap">
-                                        27•• •••• ••630
-                                    </span>
-                                </div>
                             </div>
 
-                            <!-- Bottom Row: Frosted Sapphire Balance Strip -->
-                            <div class="px-3 py-1.5 rounded-xl bg-slate-950/45 backdrop-blur-md border border-sky-300/25 flex items-center justify-between gap-2">
-                                <div class="text-left min-w-0">
-                                    <span class="block text-[8px] font-bold uppercase tracking-[0.14em] text-sky-300">
+                            <!-- Bottom Row: Dual Balance Cards inside 3D ATM -->
+                            <div class="relative z-10 grid grid-cols-2 gap-2.5">
+                                <div class="px-3 py-2.5 rounded-2xl bg-white/[0.06] border border-blue-300/20 backdrop-blur-md">
+                                    <span class="block text-[8px] font-bold uppercase tracking-wider text-blue-200">
                                         Current Balance
                                     </span>
                                     <p id="current-balance-display"
-                                       class="font-balNum text-sm sm:text-[15px] font-bold tracking-wider text-white truncate text-crisp">
+                                       class="font-balNum text-sm font-bold tracking-wider text-white truncate">
                                         BDT: ••••••••
                                     </p>
                                 </div>
 
-                                <div class="h-6 w-[1px] bg-sky-300/25 shrink-0"></div>
-
-                                <div class="text-right min-w-0">
-                                    <span class="block text-[8px] font-bold uppercase tracking-[0.14em] text-cyan-300">
+                                <div class="px-3 py-2.5 rounded-2xl bg-white/[0.06] border border-sky-300/20 backdrop-blur-md text-right">
+                                    <span class="block text-[8px] font-bold uppercase tracking-wider text-sky-300">
                                         Total Balance
                                     </span>
                                     <p id="total-balance-display"
-                                       class="font-balNum text-sm sm:text-[15px] font-bold tracking-wider text-cyan-200 truncate text-crisp">
+                                       class="font-balNum text-sm font-bold tracking-wider text-sky-200 truncate">
                                         BDT: ••••••••
                                     </p>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
 
-                <!-- ================= ROUND APP-SIZE GRID (3 PER ROW - ROYAL BLUE HARMONIZED) ================= -->
-                <div class="px-5 my-auto py-2">
-                    <div class="grid grid-cols-3 gap-y-4 gap-x-3 place-items-center">
+                <!-- ================= 3D ROUNDED SQUIRCLE APP LAUNCHER ================= -->
+                <div class="my-auto py-2 space-y-3">
+                    <!-- Rounded Pill Quick Search Filter -->
+                    <div class="relative">
+                        <i class="fa-solid fa-magnifying-glass text-sky-300/70 text-[11px] absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+                        <input id="app-quick-search"
+                               type="text"
+                               oninput="filterAppTiles(this.value)"
+                               placeholder="অপশন খুঁজুন (Form, Details, Profit, Search...)"
+                               class="w-full pl-9 pr-3 py-2.5 rounded-2xl bg-white/[0.05] border border-sky-300/15 focus:border-sky-400/55 focus:outline-none text-[11px] text-white placeholder-sky-200/45 transition">
+                    </div>
+
+                    <!-- Bento Grid with Rounded Squircle App Icons (Blue Spectrum Only) -->
+                    <div id="bento-apps-grid" class="grid grid-cols-2 gap-3">
 
                         <!-- App 1: Form -->
                         <button type="button"
+                                data-search="form ফরম জমা"
                                 onclick="switchView('app1')"
-                                class="app-item-wrapper flex flex-col items-center gap-1.5 group focus:outline-none">
-                            <div class="app-round-icon bg-gradient-to-br from-indigo-500 via-blue-600 to-blue-800 border border-indigo-300/45 text-white">
-                                <i class="fa-solid fa-file-signature text-xl drop-shadow"></i>
+                                class="app-bento-item aurora-app-tile p-3 flex items-center gap-3 text-left">
+                            <div class="w-12 h-12 squircle-3d-icon bg-gradient-to-br from-blue-500 via-blue-700 to-indigo-900 text-white shrink-0">
+                                <i class="fa-solid fa-file-signature text-lg"></i>
                             </div>
-                            <span class="text-[11px] font-bold text-slate-100 group-hover:text-sky-300 transition-colors text-center leading-tight max-w-[84px] truncate">
-                                Form
-                            </span>
+                            <div class="min-w-0">
+                                <span class="block text-xs font-extrabold text-white truncate">Form</span>
+                                <span class="block text-[9.5px] text-sky-200/70 truncate">ডাটা এন্ট্রি ফরম</span>
+                            </div>
                         </button>
 
                         <!-- App 2: Member Details -->
                         <button type="button"
+                                data-search="member details মেম্বার ডিটেইলস তথ্য"
                                 onclick="switchView('app2')"
-                                class="app-item-wrapper flex flex-col items-center gap-1.5 group focus:outline-none">
-                            <div class="app-round-icon bg-gradient-to-br from-sky-400 via-blue-600 to-indigo-800 border border-sky-300/45 text-white">
-                                <i class="fa-solid fa-id-card text-xl drop-shadow"></i>
+                                class="app-bento-item aurora-app-tile p-3 flex items-center gap-3 text-left">
+                            <div class="w-12 h-12 squircle-3d-icon bg-gradient-to-br from-indigo-500 via-blue-700 to-slate-900 text-white shrink-0">
+                                <i class="fa-solid fa-id-card text-lg"></i>
                             </div>
-                            <span class="text-[11px] font-bold text-slate-100 group-hover:text-sky-300 transition-colors text-center leading-tight max-w-[84px] truncate">
-                                Member Details
-                            </span>
+                            <div class="min-w-0">
+                                <span class="block text-xs font-extrabold text-white truncate">Member Details</span>
+                                <span class="block text-[9.5px] text-sky-200/70 truncate">সদস্যদের তালিকা</span>
+                            </div>
                         </button>
 
                         <!-- App 3: Profit Calculator -->
                         <button type="button"
+                                data-search="profit calculator লাভ হিসাব ক্যালকুলেটর"
                                 onclick="switchView('app3')"
-                                class="app-item-wrapper flex flex-col items-center gap-1.5 group focus:outline-none">
-                            <div class="app-round-icon bg-gradient-to-br from-cyan-400 via-sky-600 to-blue-800 border border-cyan-200/45 text-white">
-                                <i class="fa-solid fa-calculator text-xl drop-shadow"></i>
+                                class="app-bento-item aurora-app-tile p-3 flex items-center gap-3 text-left">
+                            <div class="w-12 h-12 squircle-3d-icon bg-gradient-to-br from-sky-400 via-blue-600 to-indigo-800 text-white shrink-0">
+                                <i class="fa-solid fa-calculator text-lg"></i>
                             </div>
-                            <span class="text-[11px] font-bold text-slate-100 group-hover:text-cyan-300 transition-colors text-center leading-tight max-w-[84px] truncate">
-                                Profit Calc
-                            </span>
+                            <div class="min-w-0">
+                                <span class="block text-xs font-extrabold text-white truncate">Profit Calc</span>
+                                <span class="block text-[9.5px] text-sky-200/70 truncate">মুনাফা হিসাব</span>
+                            </div>
                         </button>
 
                         <!-- App 4: Member Search -->
                         <button type="button"
+                                data-search="member search সার্চ খুঁজুন"
                                 onclick="switchView('app4')"
-                                class="app-item-wrapper flex flex-col items-center gap-1.5 group focus:outline-none">
-                            <div class="app-round-icon bg-gradient-to-br from-blue-400 via-indigo-600 to-slate-900 border border-blue-300/45 text-white">
-                                <i class="fa-solid fa-magnifying-glass text-xl drop-shadow"></i>
+                                class="app-bento-item aurora-app-tile p-3 flex items-center gap-3 text-left">
+                            <div class="w-12 h-12 squircle-3d-icon bg-gradient-to-br from-cyan-400 via-sky-600 to-blue-900 text-white shrink-0">
+                                <i class="fa-solid fa-magnifying-glass text-lg"></i>
                             </div>
-                            <span class="text-[11px] font-bold text-slate-100 group-hover:text-blue-300 transition-colors text-center leading-tight max-w-[84px] truncate">
-                                Member Search
-                            </span>
-                        </button>
-
-                        <!-- App 5: Member Add -->
-                        <button type="button"
-                                onclick="switchView('app5')"
-                                class="app-item-wrapper flex flex-col items-center gap-1.5 group focus:outline-none">
-                            <div class="app-round-icon bg-gradient-to-br from-teal-400 via-cyan-600 to-blue-900 border border-teal-200/45 text-white">
-                                <i class="fa-solid fa-user-plus text-xl drop-shadow"></i>
+                            <div class="min-w-0">
+                                <span class="block text-xs font-extrabold text-white truncate">Member Search</span>
+                                <span class="block text-[9.5px] text-sky-200/70 truncate">সদস্য অনুসন্ধান</span>
                             </div>
-                            <span class="text-[11px] font-bold text-slate-100 group-hover:text-teal-300 transition-colors text-center leading-tight max-w-[84px] truncate">
-                                Member Add
-                            </span>
                         </button>
 
                     </div>
                 </div>
 
-                <!-- Footer Credit -->
+                <!-- Footer Credit (Rounded Pill Badge) -->
                 <div class="text-center pb-1 shrink-0">
-                    <div class="inline-block px-3.5 py-0.5 rounded-full bg-blue-500/10 border border-blue-400/20">
-                        <p class="text-[10px] font-medium text-slate-300">
-                            Created by <span class="text-sky-400 font-bold tracking-wide">M Maksud Rs Ksa</span>
-                        </p>
-                    </div>
+                    <span class="inline-block px-4 py-1 rounded-2xl bg-white/[0.04] border border-sky-300/15 text-[10px] text-sky-200/75">
+                        Designed by <strong class="text-sky-300 font-bold">M Maksud Rs Ksa</strong>
+                    </span>
                 </div>
 
             </section>
 
-            <!-- ================= FULL-SCREEN APP VIEWS (ALL WITH TOP BACK BUTTON) ================= -->
-            <!-- App 1: Form -->
+            <!-- ================= FULL-SCREEN APP VIEWS ================= -->
             <section id="view-app1" class="hidden w-full h-full flex-1">
                 <iframe id="iframe-app1" src="https://docs.google.com/forms/d/e/1FAIpQLScimaLEp4pSTNxQ-X7nI8CogFdbDLLB1a9qjcvngvAl4lJb8g/viewform?embedded=true" class="w-full h-full border-none block"></iframe>
             </section>
 
-            <!-- App 2: Member Details -->
             <section id="view-app2" class="hidden w-full h-full flex-1">
                 <iframe id="iframe-app2" src="https://script.google.com/macros/s/AKfycbzRX0q4LUXo0158xR8EVKiuUXNLW1Vb0O-feSsT281kUwB1uvLhdphy7zQcja1pHOK1/exec" class="w-full h-full border-none block"></iframe>
             </section>
 
-            <!-- App 3: Profit Calculator -->
             <section id="view-app3" class="hidden w-full h-full flex-1">
                 <iframe id="iframe-app3" src="https://script.google.com/macros/s/AKfycbwjamzOou11FPAaO81EaURksOFBq9tJC1_oH8I7o9Olwo6flWC8rrXOBnykH22vru9U/exec?page=profit" class="w-full h-full border-none block"></iframe>
             </section>
 
-            <!-- App 4: Member Search -->
             <section id="view-app4" class="hidden w-full h-full flex-1">
                 <iframe id="iframe-app4" src="https://script.google.com/macros/s/AKfycbyQdAwwXVpCNemd4I4wPbQhiApb3QZ635ViR6cwbBDmLZMzjqCP2dUOuLGlV3tYc4HTig/exec" class="w-full h-full border-none block"></iframe>
             </section>
 
-            <!-- App 5: Member Add -->
             <section id="view-app5" class="hidden w-full h-full flex-1">
                 <iframe id="iframe-app5" src="https://script.google.com/macros/s/AKfycbx9BWnj4XmUi3xJcNx3InSgXgZRP9nWQCJtlAQG0RJO6-HGo5HOXNLKitXTzqsjaw929w/exec" class="w-full h-full border-none block"></iframe>
             </section>
 
         </main>
 
-        <!-- Floating Bottom Navigation Dock (Home + All 5 Apps) -->
-        <nav class="absolute bottom-3 left-3.5 right-3.5 rounded-full glass-dock z-50 px-2.5 py-2 flex justify-around items-center">
-            <button type="button" onclick="switchView('home')" id="mnav-home" title="Home" class="w-9 h-9 rounded-full dock-btn flex items-center justify-center text-slate-300 active:scale-90 transition-all duration-200">
-                <i class="fa-solid fa-house text-xs"></i>
-            </button>
-            <button type="button" onclick="switchView('app1')" id="mnav-app1" title="Form" class="w-9 h-9 rounded-full dock-btn flex items-center justify-center text-slate-300 active:scale-90 transition-all duration-200">
-                <i class="fa-solid fa-file-signature text-xs"></i>
-            </button>
-            <button type="button" onclick="switchView('app2')" id="mnav-app2" title="Member Details" class="w-9 h-9 rounded-full dock-btn flex items-center justify-center text-slate-300 active:scale-90 transition-all duration-200">
-                <i class="fa-solid fa-id-card text-xs"></i>
-            </button>
-            <button type="button" onclick="switchView('app3')" id="mnav-app3" title="Profit Calculator" class="w-9 h-9 rounded-full dock-btn flex items-center justify-center text-slate-300 active:scale-90 transition-all duration-200">
-                <i class="fa-solid fa-calculator text-xs"></i>
-            </button>
-            <button type="button" onclick="switchView('app4')" id="mnav-app4" title="Member Search" class="w-9 h-9 rounded-full dock-btn flex items-center justify-center text-slate-300 active:scale-90 transition-all duration-200">
-                <i class="fa-solid fa-magnifying-glass text-xs"></i>
-            </button>
-            <button type="button" onclick="switchView('app5')" id="mnav-app5" title="Member Add" class="w-9 h-9 rounded-full dock-btn flex items-center justify-center text-slate-300 active:scale-90 transition-all duration-200">
-                <i class="fa-solid fa-user-plus text-xs"></i>
-            </button>
-        </nav>
-
     </div>
 
     <!-- JavaScript Logic -->
     <script>
-        // Google Apps Script Web App (/exec) URL for balance fetch
         const APPS_SCRIPT_EXEC_URL = 'https://script.google.com/macros/s/AKfycby_p4p6_G40RA9suLZ5xCkCoPY4TVDx8NA54aKFcgHeBRm2SlsHR9CMy-xeyqDr2niv2Q/exec';
 
-        // App Metadata for Top Back Bar & External Tab Link
         const APP_CONFIG = {
             app1: {
                 title: 'As Suffah Form',
@@ -777,8 +784,6 @@
         };
 
         let currentActiveView = 'home';
-
-        // Updated Full Account Number: 2778 3324 32630
         const FULL_ACCOUNT_NO = '2778 3324 32630';
         const MASKED_ACCOUNT_NO = '27•• •••• ••630';
         const AUTO_HIDE_SECONDS = 20;
@@ -794,16 +799,95 @@
             loaded: false
         };
 
-        function handleLogoFallback(imgEl) {
+        /* ================= 3D INTERACTIVE CARD TILT & HOLO ENGINE ================= */
+        function init3DCardPhysics() {
             try {
-                if (!imgEl || imgEl.dataset.fallbackApplied) return;
-                imgEl.dataset.fallbackApplied = 'true';
-                imgEl.src = 'https://placehold.co/100x100/0f172a/38bdf8?text=ASWA';
+                const stage = document.getElementById('atm-3d-stage');
+                const card = document.getElementById('atm-3d-card');
+                const glare = document.getElementById('atm-holo-glare');
+                if (!stage || !card) return;
+
+                const applyTilt = (clientX, clientY) => {
+                    const rect = stage.getBoundingClientRect();
+                    const x = clientX - rect.left;
+                    const y = clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+
+                    const rotateX = ((y - centerY) / centerY) * -8;
+                    const rotateY = ((x - centerX) / centerX) * 10;
+
+                    card.style.transition = 'transform 0.1s ease-out';
+                    card.style.transform = `rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg)`;
+
+                    if (glare) {
+                        const pctX = (x / rect.width) * 100;
+                        const pctY = (y / rect.height) * 100;
+                        glare.style.setProperty('--glare-x', pctX + '%');
+                        glare.style.setProperty('--glare-y', pctY + '%');
+                    }
+                };
+
+                const resetTilt = () => {
+                    card.style.transition = 'transform 0.65s cubic-bezier(0.22, 1, 0.36, 1)';
+                    card.style.transform = 'rotateX(0deg) rotateY(0deg)';
+                };
+
+                stage.addEventListener('mousemove', (e) => applyTilt(e.clientX, e.clientY));
+                stage.addEventListener('mouseleave', resetTilt);
+
+                stage.addEventListener('touchmove', (e) => {
+                    if (e.touches && e.touches[0]) {
+                        applyTilt(e.touches[0].clientX, e.touches[0].clientY);
+                    }
+                }, { passive: true });
+                stage.addEventListener('touchend', resetTilt);
+            } catch (err) {}
+        }
+
+        /* Live Search Filter for Bento App Tiles */
+        function filterAppTiles(query) {
+            try {
+                const q = (query || '').toLowerCase().trim();
+                const tiles = document.querySelectorAll('.app-bento-item');
+                tiles.forEach(tile => {
+                    const keywords = (tile.getAttribute('data-search') || '').toLowerCase();
+                    if (!q || keywords.includes(q)) {
+                        tile.style.display = 'flex';
+                    } else {
+                        tile.style.display = 'none';
+                    }
+                });
             } catch (e) {}
         }
 
-        /* ================= COPY CONTACT INFO HELPER ================= */
-        function copyContactText(text, btnEl) {
+        /* Smart Toast */
+        let toastTimeout = null;
+        function showToast(message) {
+            try {
+                const toast = document.getElementById('app-toast');
+                const toastText = document.getElementById('app-toast-text');
+                if (!toast || !toastText) return;
+
+                toastText.textContent = message;
+                toast.classList.remove('hidden');
+
+                if (toastTimeout) clearTimeout(toastTimeout);
+                toastTimeout = setTimeout(() => {
+                    toast.classList.add('hidden');
+                }, 2200);
+            } catch (e) {}
+        }
+
+        function copyAccountNumber() {
+            copyTextToClipboard(FULL_ACCOUNT_NO.replace(/\s+/g, ''), 'Account Number Copied!');
+        }
+
+        function copyContactText(text) {
+            copyTextToClipboard(text, 'Copied: ' + text);
+        }
+
+        function copyTextToClipboard(text, toastMsg) {
             try {
                 const tempInput = document.createElement('input');
                 tempInput.value = text;
@@ -811,211 +895,177 @@
                 tempInput.select();
                 document.execCommand('copy');
                 document.body.removeChild(tempInput);
-
-                if (btnEl) {
-                    const originalHTML = btnEl.innerHTML;
-                    btnEl.innerHTML = '<i class="fa-solid fa-check text-[11px] text-emerald-400"></i>';
-                    setTimeout(() => {
-                        btnEl.innerHTML = originalHTML;
-                    }, 1500);
-                }
-            } catch (err) {
-                console.error('Copy failed:', err);
-            }
+                showToast(toastMsg || 'Copied!');
+            } catch (err) {}
         }
 
-        /* ================= LEFT SLIDE DRAWER CONTROLS ================= */
-        function openLeftDrawer() {
+        function handleLogoFallback(imgEl) {
             try {
-                const backdrop = document.getElementById('side-drawer-backdrop');
-                const panel = document.getElementById('side-drawer-panel');
-                if (!backdrop || !panel) return;
+                if (!imgEl || imgEl.dataset.fallbackApplied) return;
+                imgEl.dataset.fallbackApplied = 'true';
+                imgEl.src = 'https://placehold.co/100x100/09132e/38bdf8?text=ASWA';
+            } catch (e) {}
+        }
 
-                backdrop.classList.remove('hidden');
-                requestAnimationFrame(() => {
-                    backdrop.classList.remove('opacity-0');
-                    panel.classList.remove('-translate-x-full');
-                    panel.setAttribute('aria-hidden', 'false');
-                });
-            } catch (err) {
-                console.error('Error opening drawer:', err);
-            }
+        /* Modal Controls */
+        function openInfoModal(type) {
+            try {
+                closeLeftDrawer();
+                const modal = document.getElementById('info-popup-modal');
+                const contactContent = document.getElementById('modal-content-contact');
+                const messengerContent = document.getElementById('modal-content-messenger');
+                if (!modal) return;
+
+                contactContent.classList.add('hidden');
+                messengerContent.classList.add('hidden');
+
+                if (type === 'contact') contactContent.classList.remove('hidden');
+                if (type === 'messenger') messengerContent.classList.remove('hidden');
+
+                modal.classList.remove('hidden');
+            } catch (err) {}
+        }
+
+        function closeInfoModal() {
+            const modal = document.getElementById('info-popup-modal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        /* Left Drawer Controls */
+        function openLeftDrawer() {
+            const backdrop = document.getElementById('side-drawer-backdrop');
+            const panel = document.getElementById('side-drawer-panel');
+            if (!backdrop || !panel) return;
+
+            backdrop.classList.remove('hidden');
+            requestAnimationFrame(() => {
+                backdrop.classList.remove('opacity-0');
+                panel.classList.remove('-translate-x-full');
+                panel.setAttribute('aria-hidden', 'false');
+            });
         }
 
         function closeLeftDrawer() {
-            try {
-                const backdrop = document.getElementById('side-drawer-backdrop');
-                const panel = document.getElementById('side-drawer-panel');
-                if (!backdrop || !panel) return;
+            const backdrop = document.getElementById('side-drawer-backdrop');
+            const panel = document.getElementById('side-drawer-panel');
+            if (!backdrop || !panel) return;
 
-                backdrop.classList.add('opacity-0');
-                panel.classList.add('-translate-x-full');
-                panel.setAttribute('aria-hidden', 'true');
-
-                setTimeout(() => {
-                    backdrop.classList.add('hidden');
-                }, 300);
-            } catch (err) {
-                console.error('Error closing drawer:', err);
-            }
+            backdrop.classList.add('opacity-0');
+            panel.classList.add('-translate-x-full');
+            panel.setAttribute('aria-hidden', 'true');
+            setTimeout(() => backdrop.classList.add('hidden'), 300);
         }
 
-        /* ================= FULL SYSTEM REFRESH ================= */
+        /* Refresh System */
         function refreshFullSystem() {
-            try {
-                const icon = document.getElementById('system-refresh-icon');
-                if (icon) {
-                    icon.classList.add('fa-spin');
-                }
+            const icon = document.getElementById('system-refresh-icon');
+            if (icon) icon.classList.add('fa-spin');
+            showToast('Syncing Aurora 3D Hub...');
+            fetchBalances(true);
 
-                fetchBalances(true);
+            ['app1', 'app2', 'app3', 'app4', 'app5'].forEach((id) => {
+                const iframe = document.getElementById('iframe-' + id);
+                if (iframe && iframe.src) iframe.src = iframe.src;
+            });
 
-                ['app1', 'app2', 'app3', 'app4', 'app5'].forEach((id) => {
-                    const iframe = document.getElementById('iframe-' + id);
-                    if (iframe && iframe.src) {
-                        iframe.src = iframe.src;
-                    }
-                });
-
-                setTimeout(() => {
-                    window.location.reload();
-                }, 550);
-            } catch (err) {
-                console.error('Error refreshing system:', err);
-                window.location.reload();
-            }
+            setTimeout(() => {
+                if (icon) icon.classList.remove('fa-spin');
+            }, 900);
         }
 
-        /* ================= BACK BUTTON WITH AUTO REFRESH ================= */
         function handleBackAndRefresh() {
-            try {
-                const appToRefresh = currentActiveView;
-                const backIcon = document.getElementById('back-btn-icon');
+            const appToRefresh = currentActiveView;
+            const backIcon = document.getElementById('back-btn-icon');
 
-                if (backIcon) {
-                    backIcon.classList.remove('fa-arrow-left');
-                    backIcon.classList.add('fa-arrows-rotate', 'fa-spin');
-                }
-
-                if (appToRefresh && appToRefresh !== 'home') {
-                    const targetIframe = document.getElementById('iframe-' + appToRefresh);
-                    if (targetIframe && targetIframe.src) {
-                        targetIframe.src = targetIframe.src;
-                    }
-                }
-
-                fetchBalances(true);
-
-                setTimeout(() => {
-                    switchView('home');
-                    if (backIcon) {
-                        backIcon.classList.remove('fa-arrows-rotate', 'fa-spin');
-                        backIcon.classList.add('fa-arrow-left');
-                    }
-                }, 250);
-            } catch (err) {
-                console.error('Error on back and refresh:', err);
-                switchView('home');
+            if (backIcon) {
+                backIcon.classList.remove('fa-arrow-left');
+                backIcon.classList.add('fa-arrows-rotate', 'fa-spin');
             }
+
+            if (appToRefresh && appToRefresh !== 'home') {
+                const targetIframe = document.getElementById('iframe-' + appToRefresh);
+                if (targetIframe && targetIframe.src) targetIframe.src = targetIframe.src;
+            }
+
+            fetchBalances(true);
+
+            setTimeout(() => {
+                switchView('home');
+                if (backIcon) {
+                    backIcon.classList.remove('fa-arrows-rotate', 'fa-spin');
+                    backIcon.classList.add('fa-arrow-left');
+                }
+            }, 250);
         }
 
-        /* ================= ACCOUNT & BALANCE VISIBILITY ================= */
+        /* Sensitive Info Toggle */
         function clearAutoHideTimers() {
-            if (autoHideTimer) {
-                clearTimeout(autoHideTimer);
-                autoHideTimer = null;
-            }
-            if (countdownInterval) {
-                clearInterval(countdownInterval);
-                countdownInterval = null;
-            }
+            if (autoHideTimer) { clearTimeout(autoHideTimer); autoHideTimer = null; }
+            if (countdownInterval) { clearInterval(countdownInterval); countdownInterval = null; }
         }
 
         function hideSensitiveInfo() {
-            try {
-                clearAutoHideTimers();
-                isSensitiveVisible = false;
-                remainingSeconds = 0;
+            clearAutoHideTimers();
+            isSensitiveVisible = false;
+            remainingSeconds = 0;
 
-                const eyeIcon = document.getElementById('eye-icon');
-                const eyeLabel = document.getElementById('eye-label');
-
-                if (eyeIcon) {
-                    eyeIcon.classList.remove('fa-eye-slash');
-                    eyeIcon.classList.add('fa-eye');
-                }
-                if (eyeLabel) {
-                    eyeLabel.textContent = 'Show';
-                }
-
-                renderSensitiveInfo();
-            } catch (err) {
-                console.error('Error hiding sensitive info:', err);
+            const eyeIcon = document.getElementById('eye-icon');
+            const eyeLabel = document.getElementById('eye-label');
+            if (eyeIcon) {
+                eyeIcon.classList.remove('fa-eye-slash');
+                eyeIcon.classList.add('fa-eye');
             }
+            if (eyeLabel) eyeLabel.textContent = 'Show';
+            renderSensitiveInfo();
         }
 
         function toggleSensitiveInfo() {
-            try {
-                if (isSensitiveVisible) {
-                    hideSensitiveInfo();
-                    return;
-                }
+            if (isSensitiveVisible) {
+                hideSensitiveInfo();
+                return;
+            }
 
-                clearAutoHideTimers();
-                isSensitiveVisible = true;
-                remainingSeconds = AUTO_HIDE_SECONDS;
+            clearAutoHideTimers();
+            isSensitiveVisible = true;
+            remainingSeconds = AUTO_HIDE_SECONDS;
 
-                const eyeIcon = document.getElementById('eye-icon');
-                const eyeLabel = document.getElementById('eye-label');
+            const eyeIcon = document.getElementById('eye-icon');
+            const eyeLabel = document.getElementById('eye-label');
+            if (eyeIcon) {
+                eyeIcon.classList.remove('fa-eye');
+                eyeIcon.classList.add('fa-eye-slash');
+            }
+            if (eyeLabel) eyeLabel.textContent = remainingSeconds + 's';
 
-                if (eyeIcon) {
-                    eyeIcon.classList.remove('fa-eye');
-                    eyeIcon.classList.add('fa-eye-slash');
-                }
+            renderSensitiveInfo();
+            fetchBalances(true);
 
-                if (eyeLabel) {
+            countdownInterval = setInterval(() => {
+                remainingSeconds -= 1;
+                if (remainingSeconds > 0 && eyeLabel) {
                     eyeLabel.textContent = remainingSeconds + 's';
                 }
+            }, 1000);
 
-                renderSensitiveInfo();
-                fetchBalances(true);
-
-                countdownInterval = setInterval(function() {
-                    remainingSeconds -= 1;
-                    if (remainingSeconds > 0 && eyeLabel) {
-                        eyeLabel.textContent = remainingSeconds + 's';
-                    }
-                }, 1000);
-
-                autoHideTimer = setTimeout(function() {
-                    hideSensitiveInfo();
-                }, AUTO_HIDE_SECONDS * 1000);
-            } catch (err) {
-                console.error('Error toggling sensitive info:', err);
-            }
+            autoHideTimer = setTimeout(hideSensitiveInfo, AUTO_HIDE_SECONDS * 1000);
         }
 
         function renderSensitiveInfo() {
-            try {
-                const accountEl = document.getElementById('account-number-display');
-                const totalEl = document.getElementById('total-balance-display');
-                const currentEl = document.getElementById('current-balance-display');
+            const accountEl = document.getElementById('account-number-display');
+            const totalEl = document.getElementById('total-balance-display');
+            const currentEl = document.getElementById('current-balance-display');
 
-                if (accountEl) {
-                    accountEl.textContent = isSensitiveVisible ? FULL_ACCOUNT_NO : MASKED_ACCOUNT_NO;
-                }
+            if (accountEl) {
+                accountEl.textContent = isSensitiveVisible ? FULL_ACCOUNT_NO : MASKED_ACCOUNT_NO;
+            }
+            if (!totalEl || !currentEl) return;
 
-                if (!totalEl || !currentEl) return;
-
-                if (!isSensitiveVisible) {
-                    totalEl.textContent = 'BDT: ••••••••';
-                    currentEl.textContent = 'BDT: ••••••••';
-                } else {
-                    totalEl.textContent = 'BDT: ' + balanceData.totalBalance;
-                    currentEl.textContent = 'BDT: ' + balanceData.currentBalance;
-                }
-            } catch (err) {
-                console.error('Error rendering sensitive info:', err);
+            if (!isSensitiveVisible) {
+                totalEl.textContent = 'BDT: ••••••••';
+                currentEl.textContent = 'BDT: ••••••••';
+            } else {
+                totalEl.textContent = 'BDT: ' + balanceData.totalBalance;
+                currentEl.textContent = 'BDT: ' + balanceData.currentBalance;
             }
         }
 
@@ -1031,10 +1081,7 @@
             const currentEl = document.getElementById('current-balance-display');
 
             try {
-                if (showSpin && refreshIcon) {
-                    refreshIcon.classList.add('fa-spin');
-                }
-
+                if (showSpin && refreshIcon) refreshIcon.classList.add('fa-spin');
                 if (isSensitiveVisible && totalEl && currentEl) {
                     totalEl.classList.add('balance-loading');
                     currentEl.classList.add('balance-loading');
@@ -1051,8 +1098,7 @@
                             renderSensitiveInfo();
                             stopBalanceLoading(refreshIcon, totalEl, currentEl);
                         })
-                        .withFailureHandler(function(err) {
-                            console.error('Apps Script error:', err);
+                        .withFailureHandler(function() {
                             renderSensitiveInfo();
                             stopBalanceLoading(refreshIcon, totalEl, currentEl);
                         })
@@ -1060,98 +1106,56 @@
                     return;
                 }
 
-                const response = await fetch(APPS_SCRIPT_EXEC_URL, {
-                    method: 'GET',
-                    redirect: 'follow'
-                });
-
-                if (!response.ok) {
-                    throw new Error('HTTP error! Status: ' + response.status);
-                }
-
+                const response = await fetch(APPS_SCRIPT_EXEC_URL, { method: 'GET', redirect: 'follow' });
+                if (!response.ok) throw new Error('HTTP error');
                 const res = await response.json();
                 if (res && res.ok) {
                     balanceData.totalBalance = res.totalBalance || '0.00';
                     balanceData.currentBalance = res.currentBalance || '0.00';
                     balanceData.loaded = true;
                 }
-
                 renderSensitiveInfo();
             } catch (err) {
-                console.error('Error fetching balances:', err);
                 renderSensitiveInfo();
             } finally {
                 stopBalanceLoading(refreshIcon, totalEl, currentEl);
             }
         }
 
-        /* ================= VIEW NAVIGATION & BACK HANDLING ================= */
         function switchView(viewName) {
-            try {
-                currentActiveView = viewName;
-                const views = ['home', 'app1', 'app2', 'app3', 'app4', 'app5'];
-                const backBar = document.getElementById('app-back-bar');
-                const activeAppTitle = document.getElementById('active-app-title');
-                const mainContainer = document.getElementById('main-container');
+            currentActiveView = viewName;
+            const views = ['home', 'app1', 'app2', 'app3', 'app4', 'app5'];
+            const backBar = document.getElementById('app-back-bar');
+            const activeAppTitle = document.getElementById('active-app-title');
+            const mainContainer = document.getElementById('main-container');
 
-                views.forEach(function(v) {
-                    const el = document.getElementById('view-' + v);
-                    if (el) el.classList.add('hidden');
+            views.forEach(function(v) {
+                const el = document.getElementById('view-' + v);
+                if (el) el.classList.add('hidden');
+            });
 
-                    const mnav = document.getElementById('mnav-' + v);
-                    if (mnav) {
-                        mnav.classList.remove('dock-btn-active');
-                        mnav.classList.add('dock-btn', 'text-slate-300');
-                    }
-                });
+            const activeView = document.getElementById('view-' + viewName);
+            if (activeView) activeView.classList.remove('hidden');
 
-                const activeView = document.getElementById('view-' + viewName);
-                if (activeView) activeView.classList.remove('hidden');
-
-                const activeMnav = document.getElementById('mnav-' + viewName);
-                if (activeMnav) {
-                    activeMnav.classList.remove('dock-btn', 'text-slate-300');
-                    activeMnav.classList.add('dock-btn-active');
+            if (viewName === 'home') {
+                if (backBar) backBar.classList.add('hidden');
+                if (mainContainer) mainContainer.classList.add('pb-4');
+            } else {
+                if (backBar) backBar.classList.remove('hidden');
+                if (activeAppTitle && APP_CONFIG[viewName]) {
+                    activeAppTitle.textContent = APP_CONFIG[viewName].title;
                 }
-
-                if (viewName === 'home') {
-                    if (backBar) backBar.classList.add('hidden');
-                    if (mainContainer) {
-                        mainContainer.classList.add('pb-20');
-                        mainContainer.classList.remove('pb-16');
-                    }
-                } else {
-                    if (backBar) backBar.classList.remove('hidden');
-                    if (activeAppTitle && APP_CONFIG[viewName]) {
-                        activeAppTitle.textContent = APP_CONFIG[viewName].title;
-                    }
-                    if (mainContainer) {
-                        mainContainer.classList.remove('pb-20');
-                        mainContainer.classList.add('pb-16');
-                    }
-                }
-            } catch (err) {
-                console.error('Error switching view:', err);
+                if (mainContainer) mainContainer.classList.remove('pb-4');
             }
         }
 
         function openCurrentExternal() {
             const cfg = APP_CONFIG[currentActiveView];
-            if (cfg && cfg.url) {
-                openExternal(cfg.url);
-            }
-        }
-
-        function openExternal(url, event) {
-            try {
-                if (event) event.stopPropagation();
-                window.open(url, '_blank', 'noopener,noreferrer');
-            } catch (err) {
-                console.error('Error opening external URL:', err);
-            }
+            if (cfg && cfg.url) window.open(cfg.url, '_blank', 'noopener,noreferrer');
         }
 
         document.addEventListener('DOMContentLoaded', function() {
+            init3DCardPhysics();
             switchView('home');
             renderSensitiveInfo();
             fetchBalances(false);
