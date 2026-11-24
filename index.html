@@ -135,7 +135,7 @@
             transform: scale(0.97);
         }
 
-        /* Row 1 & Row 2 Consistent Tile Accent Styles */
+        /* Row 1, Row 2 & Row 3 Consistent Tile Accent Styles */
         .row1-tile {
             background: rgba(95, 160, 0, 0.10);
             border-color: rgba(95, 160, 0, 0.35);
@@ -143,6 +143,10 @@
         .row2-tile {
             background: var(--glass-bg);
             border-color: var(--glass-border);
+        }
+        .row3-tile {
+            background: rgba(95, 160, 0, 0.10);
+            border-color: rgba(95, 160, 0, 0.35);
         }
 
         /* Drawer & Modal Transitions */
@@ -461,7 +465,7 @@
                     <div class="w-full h-5 shrink-0"></div>
 
                     <!-- Minimal Floating Header with Theme Toggle -->
-                    <div class="flex items-center justify-between gap-2 mb-4">
+                    <div class="flex items-center justify-between gap-2 mb-3.5">
                         <button type="button"
                                 onclick="openLeftDrawer()"
                                 aria-label="Open Menu"
@@ -509,12 +513,12 @@
                     </div>
 
                     <!-- ================= CLEAN GLASS ATM CARD ================= -->
-                    <div class="atm-glass-card rounded-3xl p-5 flex flex-col justify-between relative overflow-hidden">
+                    <div class="atm-glass-card rounded-3xl p-4 sm:p-5 flex flex-col justify-between relative overflow-hidden">
                         <!-- Subtle Accent Line at Top -->
                         <div class="absolute top-0 left-0 right-0 h-1 bg-[#5fa000]"></div>
 
                         <!-- Top Row: Brand Title & Show/Hide Toggle -->
-                        <div class="flex items-center justify-between gap-2 mb-5">
+                        <div class="flex items-center justify-between gap-2 mb-4">
                             <div class="flex items-center gap-2.5">
                                 <div class="w-8 h-8 rounded-xl bg-[#5fa000]/20 border border-[#5fa000]/50 flex items-center justify-center text-[#5fa000]">
                                     <i class="fa-solid fa-vault text-xs"></i>
@@ -542,7 +546,7 @@
                         </div>
 
                         <!-- Middle Row: Account Number Bar -->
-                        <div class="flex items-center justify-between gap-2 py-3 px-3.5 rounded-2xl atm-inner-bar mb-4">
+                        <div class="flex items-center justify-between gap-2 py-2.5 px-3.5 rounded-2xl atm-inner-bar mb-3.5">
                             <div class="min-w-0">
                                 <span class="block text-[8.5px] font-semibold uppercase tracking-widest text-theme-muted mb-0.5">
                                     Account Number
@@ -562,7 +566,7 @@
 
                         <!-- Bottom Row: Dual Balances -->
                         <div class="grid grid-cols-2 gap-2.5">
-                            <div class="px-3.5 py-2.5 rounded-2xl simple-glass">
+                            <div class="px-3.5 py-2 rounded-2xl simple-glass">
                                 <span class="block text-[8.5px] font-semibold uppercase tracking-wider text-theme-muted mb-0.5">
                                     Current Balance
                                 </span>
@@ -572,7 +576,7 @@
                                 </p>
                             </div>
 
-                            <div class="px-3.5 py-2.5 rounded-2xl simple-glass text-right">
+                            <div class="px-3.5 py-2 rounded-2xl simple-glass text-right">
                                 <span class="block text-[8.5px] font-semibold uppercase tracking-wider text-[#5fa000] mb-0.5">
                                     Total Balance
                                 </span>
@@ -585,16 +589,16 @@
                     </div>
                 </div>
 
-                <!-- ================= SIMPLE GLASS APP LAUNCHER (ROW 1 SAME COLOR, ROW 2 SAME COLOR) ================= -->
-                <div class="my-auto py-3">
-                    <div id="bento-apps-grid" class="grid grid-cols-2 gap-3.5">
+                <!-- ================= SIMPLE GLASS APP LAUNCHER (ROW 1, ROW 2 & FULL-WIDTH ROW 3) ================= -->
+                <div class="my-auto py-2">
+                    <div id="bento-apps-grid" class="grid grid-cols-2 gap-3">
 
-                        <!-- ROW 1, ITEM 1: As Suffah Form (Same Row 1 Color: Fresh Green Accent) -->
+                        <!-- ROW 1, ITEM 1: As Suffah Form -->
                         <button type="button"
                                 onclick="switchView('app1')"
-                                class="glass-tile row1-tile rounded-2xl p-4 flex flex-col items-start justify-between gap-3 text-left">
-                            <div class="w-10 h-10 rounded-xl bg-[#5fa000] text-white flex items-center justify-center shrink-0 shadow-sm">
-                                <i class="fa-solid fa-file-signature text-base"></i>
+                                class="glass-tile row1-tile rounded-2xl p-3.5 flex flex-col items-start justify-between gap-2.5 text-left">
+                            <div class="w-9 h-9 rounded-xl bg-[#5fa000] text-white flex items-center justify-center shrink-0 shadow-sm">
+                                <i class="fa-solid fa-file-signature text-sm"></i>
                             </div>
                             <div class="w-full">
                                 <span class="block text-[13px] font-bold text-theme-main leading-snug">As Suffah Form</span>
@@ -602,12 +606,12 @@
                             </div>
                         </button>
 
-                        <!-- ROW 1, ITEM 2: Member Details (Same Row 1 Color: Fresh Green Accent) -->
+                        <!-- ROW 1, ITEM 2: Member Details -->
                         <button type="button"
                                 onclick="switchView('app2')"
-                                class="glass-tile row1-tile rounded-2xl p-4 flex flex-col items-start justify-between gap-3 text-left">
-                            <div class="w-10 h-10 rounded-xl bg-[#5fa000] text-white flex items-center justify-center shrink-0 shadow-sm">
-                                <i class="fa-solid fa-id-card text-base"></i>
+                                class="glass-tile row1-tile rounded-2xl p-3.5 flex flex-col items-start justify-between gap-2.5 text-left">
+                            <div class="w-9 h-9 rounded-xl bg-[#5fa000] text-white flex items-center justify-center shrink-0 shadow-sm">
+                                <i class="fa-solid fa-id-card text-sm"></i>
                             </div>
                             <div class="w-full">
                                 <span class="block text-[13px] font-bold text-theme-main leading-snug">Member Details</span>
@@ -615,12 +619,12 @@
                             </div>
                         </button>
 
-                        <!-- ROW 2, ITEM 1: Profit Calculator (Same Row 2 Color: Neutral Glass Accent) -->
+                        <!-- ROW 2, ITEM 1: Profit Calculator -->
                         <button type="button"
                                 onclick="switchView('app3')"
-                                class="glass-tile row2-tile rounded-2xl p-4 flex flex-col items-start justify-between gap-3 text-left">
-                            <div class="w-10 h-10 rounded-xl neutral-icon-box flex items-center justify-center shrink-0">
-                                <i class="fa-solid fa-calculator text-base"></i>
+                                class="glass-tile row2-tile rounded-2xl p-3.5 flex flex-col items-start justify-between gap-2.5 text-left">
+                            <div class="w-9 h-9 rounded-xl neutral-icon-box flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-calculator text-sm"></i>
                             </div>
                             <div class="w-full">
                                 <span class="block text-[13px] font-bold text-theme-main leading-snug">Profit Calculator</span>
@@ -628,17 +632,35 @@
                             </div>
                         </button>
 
-                        <!-- ROW 2, ITEM 2: Member Search (Same Row 2 Color: Neutral Glass Accent) -->
+                        <!-- ROW 2, ITEM 2: Member Search -->
                         <button type="button"
                                 onclick="switchView('app4')"
-                                class="glass-tile row2-tile rounded-2xl p-4 flex flex-col items-start justify-between gap-3 text-left">
-                            <div class="w-10 h-10 rounded-xl neutral-icon-box flex items-center justify-center shrink-0">
-                                <i class="fa-solid fa-magnifying-glass text-base"></i>
+                                class="glass-tile row2-tile rounded-2xl p-3.5 flex flex-col items-start justify-between gap-2.5 text-left">
+                            <div class="w-9 h-9 rounded-xl neutral-icon-box flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-magnifying-glass text-sm"></i>
                             </div>
                             <div class="w-full">
                                 <span class="block text-[13px] font-bold text-theme-main leading-snug">Member Search</span>
                                 <span class="block text-[10.5px] text-theme-muted mt-0.5">সদস্য অনুসন্ধান</span>
                             </div>
+                        </button>
+
+                        <!-- ROW 3 (FULL ROW): Accounting & Ledger Portal -->
+                        <button type="button"
+                                onclick="switchView('app6')"
+                                class="col-span-2 glass-tile row3-tile rounded-2xl p-3.5 flex items-center justify-between gap-3 text-left">
+                            <div class="flex items-center gap-3 min-w-0">
+                                <div class="w-10 h-10 rounded-xl bg-[#5fa000] text-white flex items-center justify-center shrink-0 shadow-sm">
+                                    <i class="fa-solid fa-chart-pie text-base"></i>
+                                </div>
+                                <div class="min-w-0">
+                                    <span class="block text-[13px] font-bold text-theme-main leading-snug truncate">As-Suffah Accounting Portal</span>
+                                    <span class="block text-[10.5px] text-theme-muted mt-0.5 truncate">হিসাব ও লেনদেন বিবরণী</span>
+                                </div>
+                            </div>
+                            <span class="w-8 h-8 rounded-xl neutral-icon-box flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-chevron-right text-xs"></i>
+                            </span>
                         </button>
 
                     </div>
@@ -674,6 +696,11 @@
                 <iframe id="iframe-app5" src="https://script.google.com/macros/s/AKfycbx9BWnj4XmUi3xJcNx3InSgXgZRP9nWQCJtlAQG0RJO6-HGo5HOXNLKitXTzqsjaw929w/exec" class="w-full h-full border-none block"></iframe>
             </section>
 
+            <!-- NEW ROW 3 FULL-WIDTH APP VIEW -->
+            <section id="view-app6" class="hidden w-full h-full flex-1">
+                <iframe id="iframe-app6" src="https://script.google.com/macros/s/AKfycbzEBKOwhdQwXoCP6FF5vPU6ieEAngw8J51IZ4Hl6IFerSxndQG2n7-5rNuTxQFotpqy/exec" class="w-full h-full border-none block"></iframe>
+            </section>
+
         </main>
 
     </div>
@@ -702,6 +729,10 @@
             app5: {
                 title: 'Member Add',
                 url: 'https://script.google.com/macros/s/AKfycbx9BWnj4XmUi3xJcNx3InSgXgZRP9nWQCJtlAQG0RJO6-HGo5HOXNLKitXTzqsjaw929w/exec'
+            },
+            app6: {
+                title: 'As-Suffah Accounting Portal',
+                url: 'https://script.google.com/macros/s/AKfycbzEBKOwhdQwXoCP6FF5vPU6ieEAngw8J51IZ4Hl6IFerSxndQG2n7-5rNuTxQFotpqy/exec'
             }
         };
 
@@ -865,7 +896,7 @@
             showToast('Syncing Data...');
             fetchBalances(true);
 
-            ['app1', 'app2', 'app3', 'app4', 'app5'].forEach((id) => {
+            ['app1', 'app2', 'app3', 'app4', 'app5', 'app6'].forEach((id) => {
                 const iframe = document.getElementById('iframe-' + id);
                 if (iframe && iframe.src) iframe.src = iframe.src;
             });
@@ -1026,7 +1057,7 @@
 
         function switchView(viewName) {
             currentActiveView = viewName;
-            const views = ['home', 'app1', 'app2', 'app3', 'app4', 'app5'];
+            const views = ['home', 'app1', 'app2', 'app3', 'app4', 'app5', 'app6'];
             const backBar = document.getElementById('app-back-bar');
             const activeAppTitle = document.getElementById('active-app-title');
             const mainContainer = document.getElementById('main-container');
