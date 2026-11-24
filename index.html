@@ -3,23 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>As-Suffah Aurora Dusk 3D Hub</title>
+    <title>As-Suffah Welfare Association</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
 
     <script>
         tailwind.config = {
             theme: {
                 extend: {
+                    colors: {
+                        navy: '#131939',
+                        lime: '#5fa000',
+                        pure: '#ffffff',
+                    },
                     fontFamily: {
                         sans: ['Noto Sans Bengali', 'Plus Jakarta Sans', 'sans-serif'],
-                        display: ['Outfit', 'Noto Sans Bengali', 'sans-serif'],
-                        cardNum: ['Space Mono', 'monospace'],
-                        balNum: ['Chakra Petch', 'sans-serif'],
+                        mono: ['Space Mono', 'monospace'],
                     }
                 }
             }
@@ -27,7 +30,39 @@
     </script>
 
     <style>
-        /* Base Reset & Aurora Dusk Deep Cosmic Canvas */
+        /* Strictly 3 Colors: #131939 (Deep Navy), #5fa000 (Fresh Green), #ffffff (Pure White) */
+        :root {
+            --bg-main: #131939;
+            --text-main: #ffffff;
+            --text-muted: rgba(255, 255, 255, 0.70);
+            --glass-bg: rgba(255, 255, 255, 0.06);
+            --glass-border: rgba(255, 255, 255, 0.14);
+            --atm-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.04) 100%);
+            --atm-border: rgba(255, 255, 255, 0.22);
+            --atm-shadow: 0 20px 40px rgba(19, 25, 57, 0.65);
+            --inner-box-bg: rgba(19, 25, 57, 0.60);
+            --panel-solid: rgba(19, 25, 57, 0.96);
+            --icon-neutral-bg: rgba(255, 255, 255, 0.14);
+            --icon-neutral-text: #ffffff;
+            --tile-hover-bg: rgba(95, 160, 0, 0.18);
+        }
+
+        html.light-mode {
+            --bg-main: #ffffff;
+            --text-main: #131939;
+            --text-muted: rgba(19, 25, 57, 0.70);
+            --glass-bg: rgba(19, 25, 57, 0.04);
+            --glass-border: rgba(19, 25, 57, 0.12);
+            --atm-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(19, 25, 57, 0.04) 100%);
+            --atm-border: rgba(19, 25, 57, 0.15);
+            --atm-shadow: 0 18px 36px rgba(19, 25, 57, 0.10);
+            --inner-box-bg: rgba(19, 25, 57, 0.05);
+            --panel-solid: rgba(255, 255, 255, 0.97);
+            --icon-neutral-bg: rgba(19, 25, 57, 0.08);
+            --icon-neutral-text: #131939;
+            --tile-hover-bg: rgba(95, 160, 0, 0.12);
+        }
+
         html, body {
             font-family: 'Noto Sans Bengali', 'Plus Jakarta Sans', sans-serif;
             -webkit-tap-highlight-color: transparent;
@@ -35,261 +70,134 @@
             margin: 0;
             padding: 0;
             overflow: hidden;
-            background-color: #040712;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* Logo-Matched Deep Twilight Blue & Sapphire Ambient Canvas (Zero Red, Rose, Gold, or Green) */
-        .aurora-dusk-canvas {
+        /* Clean Ambient Canvas */
+        .clean-navy-canvas {
             background:
-                radial-gradient(circle at 86% 10%, rgba(56, 189, 248, 0.26) 0%, transparent 48%),
-                radial-gradient(circle at 14% 26%, rgba(37, 99, 235, 0.34) 0%, transparent 52%),
-                radial-gradient(circle at 80% 84%, rgba(14, 165, 233, 0.25) 0%, transparent 48%),
-                radial-gradient(circle at 18% 88%, rgba(79, 70, 229, 0.28) 0%, transparent 48%),
-                #050a1a;
+                radial-gradient(circle at 90% 8%, rgba(95, 160, 0, 0.22) 0%, transparent 45%),
+                radial-gradient(circle at 10% 88%, rgba(95, 160, 0, 0.10) 0%, transparent 45%),
+                var(--bg-main);
             position: relative;
+            transition: background 0.3s ease;
         }
 
-        /* Floating Animated Sapphire Aurora Orbs */
-        @keyframes auroraFloat {
-            0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-            50% { transform: translate3d(14px, -16px, 0) scale(1.08); }
-        }
-        .aurora-orb-1 {
-            position: absolute;
-            top: -45px;
-            right: -35px;
-            width: 225px;
-            height: 225px;
-            border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.36), rgba(56, 189, 248, 0.24));
-            filter: blur(36px);
-            pointer-events: none;
-            animation: auroraFloat 9s ease-in-out infinite;
-        }
-        .aurora-orb-2 {
-            position: absolute;
-            bottom: 35px;
-            left: -50px;
-            width: 235px;
-            height: 235px;
-            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-            background: linear-gradient(135deg, rgba(79, 70, 229, 0.34), rgba(14, 165, 233, 0.24));
-            filter: blur(38px);
-            pointer-events: none;
-            animation: auroraFloat 11s ease-in-out infinite reverse;
+        /* Simple Frosted Glass Panels */
+        .simple-glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
         }
 
-        /* ================= 3D PERSPECTIVE TILT ATM CARD (SLIGHTLY TALLER, NO FLIP) ================= */
-        .card-3d-scene {
-            perspective: 1200px;
-            width: 100%;
+        /* ATM Card Glass Effect */
+        .atm-glass-card {
+            background: var(--atm-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--atm-border);
+            box-shadow: var(--atm-shadow);
         }
 
-        .aurora-3d-card {
-            position: relative;
-            width: 100%;
-            min-height: 248px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            border-radius: 1.75rem;
-            overflow: hidden;
-            transform-style: preserve-3d;
-            transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
-            background:
-                radial-gradient(circle at 92% 10%, rgba(56, 189, 248, 0.42) 0%, transparent 48%),
-                radial-gradient(circle at 12% 18%, rgba(37, 99, 235, 0.56) 0%, transparent 52%),
-                radial-gradient(circle at 80% 92%, rgba(99, 102, 241, 0.45) 0%, transparent 52%),
-                linear-gradient(135deg, #09132e 0%, #122659 48%, #081838 100%);
-            border: 1px solid rgba(125, 211, 252, 0.32);
-            box-shadow:
-                0 24px 46px -14px rgba(3, 8, 24, 0.92),
-                0 0 30px -8px rgba(37, 99, 235, 0.40),
-                inset 0 1px 1.5px rgba(255, 255, 255, 0.40);
+        .atm-inner-bar {
+            background: var(--inner-box-bg);
+            border: 1px solid var(--glass-border);
         }
 
-        /* Holographic Glare Reflection Layer */
-        .card-holo-glare {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(
-                circle at var(--glare-x, 50%) var(--glare-y, 30%),
-                rgba(255, 255, 255, 0.22) 0%,
-                rgba(125, 211, 252, 0.09) 35%,
-                transparent 70%
-            );
-            pointer-events: none;
-            transition: opacity 0.25s ease;
+        .neutral-icon-box {
+            background: var(--icon-neutral-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--icon-neutral-text);
         }
 
-        /* Subtle 3D Geometric Contour Grid inside Card */
-        .aurora-contour-lines {
-            position: absolute;
-            inset: 0;
-            background-image:
-                radial-gradient(circle at 100% 100%, transparent 58%, rgba(125, 211, 252, 0.08) 59%, transparent 60%),
-                radial-gradient(circle at 100% 100%, transparent 44%, rgba(56, 189, 248, 0.08) 45%, transparent 46%),
-                radial-gradient(circle at 100% 100%, transparent 30%, rgba(129, 140, 248, 0.08) 31%, transparent 32%);
-            pointer-events: none;
+        .text-theme-main { color: var(--text-main); }
+        .text-theme-muted { color: var(--text-muted); }
+        .border-theme { border-color: var(--glass-border); }
+        .panel-theme-bg { background: var(--panel-solid); }
+
+        /* Interactive Glass Tile */
+        .glass-tile {
+            background: var(--glass-bg);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid var(--glass-border);
+            transition: all 0.22s ease;
+        }
+        .glass-tile:hover {
+            background: var(--tile-hover-bg);
+            border-color: rgba(95, 160, 0, 0.55);
+            transform: translateY(-2px);
+        }
+        .glass-tile:active {
+            transform: scale(0.97);
         }
 
-        /* Iridescent Platinum-Ice Blue 3D EMV Chip */
-        .aurora-3d-chip {
-            width: 38px;
-            height: 26px;
-            border-radius: 8px;
-            background: linear-gradient(135deg, #f8fafc 0%, #bae6fd 45%, #94a3b8 100%);
-            border: 1px solid rgba(255, 255, 255, 0.9);
-            position: relative;
-            overflow: hidden;
-            box-shadow:
-                0 6px 14px rgba(5, 16, 42, 0.55),
-                inset 0 1px 1px #ffffff;
-        }
-        .aurora-3d-chip::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: rgba(15, 23, 42, 0.42);
-        }
-        .aurora-3d-chip::after {
-            content: '';
-            position: absolute;
-            inset: 4px 8px;
-            border: 1px solid rgba(15, 23, 42, 0.42);
-            border-radius: 4px;
-        }
+        /* Drawer & Modal Transitions */
+        .drawer-backdrop { transition: opacity 0.25s ease; }
+        .drawer-panel { transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1); }
 
-        /* 3D Extruded Sapphire Rounded Squircle App Tiles (Not Circular) */
-        .aurora-app-tile {
-            border-radius: 1.5rem;
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.075) 0%, rgba(255, 255, 255, 0.025) 100%);
-            border: 1px solid rgba(125, 211, 252, 0.16);
-            border-top-color: rgba(255, 255, 255, 0.26);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-            box-shadow:
-                0 10px 22px -8px rgba(3, 8, 22, 0.85),
-                inset 0 1px 0 rgba(255, 255, 255, 0.15);
-            transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-            position: relative;
-            overflow: hidden;
-        }
-        .aurora-app-tile:hover {
-            transform: translateY(-3px) scale(1.015);
-            background: linear-gradient(145deg, rgba(37, 99, 235, 0.24) 0%, rgba(56, 189, 248, 0.14) 100%);
-            border-color: rgba(56, 189, 248, 0.48);
-            box-shadow:
-                0 16px 30px -10px rgba(14, 116, 144, 0.55),
-                inset 0 1px 0 rgba(255, 255, 255, 0.30);
-        }
-        .aurora-app-tile:active {
-            transform: scale(0.95);
-        }
-
-        /* 3D Glossy Squircle Icon Container (Rounded Corners, Not Circle) */
-        .squircle-3d-icon {
-            border-radius: 1.15rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            box-shadow:
-                0 10px 20px -5px rgba(4, 12, 32, 0.78),
-                inset 0 1.5px 1.5px rgba(255, 255, 255, 0.55),
-                inset 0 -2px 4px rgba(0, 0, 0, 0.35);
-            transition: transform 0.25s ease;
-        }
-        .aurora-app-tile:hover .squircle-3d-icon {
-            transform: rotate(-4deg) scale(1.06);
-        }
-
-        /* Rounded Pill & Squircle UI Buttons (No Circles) */
-        .rounded-ui-btn {
-            border-radius: 1rem;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(125, 211, 252, 0.18);
-            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.15);
-            transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        .rounded-ui-btn:hover {
-            background: rgba(37, 99, 235, 0.24);
-            border-color: rgba(56, 189, 248, 0.48);
-        }
-        .rounded-ui-btn:active {
-            transform: scale(0.92);
-        }
-
-        /* Drawer & Modal Animations */
-        .drawer-backdrop { transition: opacity 0.28s ease; }
-        .drawer-panel { transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1); }
-
-        @keyframes popModal {
-            0% { opacity: 0; transform: scale(0.92) translateY(10px); }
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.95) translateY(8px); }
             100% { opacity: 1; transform: scale(1) translateY(0); }
         }
         .modal-pop {
-            animation: popModal 0.24s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            animation: popIn 0.22s ease forwards;
         }
 
-        @keyframes pulseText {
+        @keyframes pulseFade {
             0%, 100% { opacity: 0.45; }
             50% { opacity: 1; }
         }
         .balance-loading {
-            animation: pulseText 1.2s ease-in-out infinite;
+            animation: pulseFade 1.2s ease-in-out infinite;
         }
     </style>
 </head>
-<body class="text-slate-100 h-[100dvh] w-screen flex justify-center items-center selection:bg-sky-500 selection:text-white overflow-hidden p-0 sm:p-4">
+<body class="h-[100dvh] w-screen flex justify-center items-center overflow-hidden p-0 sm:p-4">
 
     <!-- Mobile App Shell -->
-    <div id="app-shell" class="w-full max-w-md aurora-dusk-canvas h-[100dvh] sm:h-[835px] sm:max-h-[92dvh] sm:rounded-[44px] sm:border-[6px] sm:border-slate-900/90 sm:shadow-[0_30px_70px_rgba(0,0,0,0.95)] flex flex-col relative overflow-hidden">
+    <div id="app-shell" class="w-full max-w-md clean-navy-canvas h-[100dvh] sm:h-[820px] sm:max-h-[92dvh] sm:rounded-[36px] sm:border border-theme sm:shadow-2xl flex flex-col relative overflow-hidden">
 
-        <!-- Ambient Floating Aurora Orbs -->
-        <div class="aurora-orb-1"></div>
-        <div class="aurora-orb-2"></div>
-
-        <!-- Smart Toast Notification (Rounded Pill) -->
-        <div id="app-toast" class="hidden fixed bottom-10 left-1/2 -translate-x-1/2 z-[120] px-4 py-2 rounded-2xl bg-[#091530]/95 border border-sky-400/45 shadow-2xl backdrop-blur-xl flex items-center gap-2">
-            <span class="w-5 h-5 rounded-lg bg-gradient-to-tr from-blue-600 to-sky-400 flex items-center justify-center text-white">
+        <!-- Smart Toast Notification -->
+        <div id="app-toast" class="hidden fixed bottom-8 left-1/2 -translate-x-1/2 z-[120] px-4 py-2 rounded-full bg-[#131939] border border-[#5fa000] shadow-xl backdrop-blur-md flex items-center gap-2">
+            <span class="w-5 h-5 rounded-full bg-[#5fa000] flex items-center justify-center text-white">
                 <i class="fa-solid fa-check text-[10px]"></i>
             </span>
-            <span id="app-toast-text" class="text-[11px] font-bold text-white whitespace-nowrap">Copied!</span>
+            <span id="app-toast-text" class="text-xs font-semibold text-white whitespace-nowrap">Copied!</span>
         </div>
 
         <!-- ================= LEFT SLIDE DRAWER ================= -->
         <div id="side-drawer-backdrop"
              onclick="closeLeftDrawer()"
-             class="hidden drawer-backdrop opacity-0 absolute inset-0 bg-[#030712]/80 backdrop-blur-xs z-[60]">
+             class="hidden drawer-backdrop opacity-0 absolute inset-0 bg-[#131939]/75 backdrop-blur-xs z-[60]">
         </div>
 
         <aside id="side-drawer-panel"
                aria-hidden="true"
-               class="drawer-panel -translate-x-full absolute top-0 bottom-0 left-0 w-[83%] max-w-[315px] bg-[#081026]/95 backdrop-blur-2xl border-r border-sky-400/20 z-[70] flex flex-col justify-between p-4 shadow-2xl rounded-r-[32px]">
+               class="drawer-panel -translate-x-full absolute top-0 bottom-0 left-0 w-[82%] max-w-[300px] panel-theme-bg backdrop-blur-xl border-r border-theme z-[70] flex flex-col justify-between p-4 shadow-2xl rounded-r-3xl">
             <div class="flex flex-col min-h-0 flex-1">
-                <div class="w-full h-5 shrink-0"></div>
+                <div class="w-full h-4 shrink-0"></div>
 
                 <!-- Drawer Header -->
-                <div class="flex items-center justify-between pb-3.5 border-b border-sky-300/15 pt-1 shrink-0">
+                <div class="flex items-center justify-between pb-3.5 border-b border-theme pt-1 shrink-0">
                     <div class="flex items-center gap-2.5 min-w-0">
-                        <div class="w-10 h-10 rounded-2xl p-0.5 bg-gradient-to-tr from-blue-600 via-indigo-500 to-sky-400 shrink-0 shadow-lg">
+                        <div class="w-10 h-10 rounded-full p-0.5 bg-[#5fa000] shrink-0 overflow-hidden shadow-md">
                             <img src="https://lh3.googleusercontent.com/d/1PXMzZMIOZbElnjIuOK2ew-FNMhuScYGx"
                                  alt="ASWA Logo"
-                                 class="w-full h-full object-cover rounded-[14px] bg-[#050b1c]"
+                                 class="w-full h-full object-cover rounded-full bg-[#131939]"
                                  onerror="handleLogoFallback(this)">
                         </div>
                         <div class="min-w-0">
-                            <h2 class="font-display text-xs font-extrabold text-white tracking-wide truncate">AS-SUFFAH PLATFROM</h2>
-                            <p class="text-[10px] text-sky-300 font-semibold truncate">Manu</p>
+                            <h2 class="text-xs font-bold text-theme-main tracking-wide truncate">AS-SUFFAH PLATFORM</h2>
+                            <p class="text-[10px] text-[#5fa000] font-semibold truncate">Menu</p>
                         </div>
                     </div>
                     <button type="button"
                             onclick="closeLeftDrawer()"
-                            class="w-8 h-8 rounded-xl bg-white/5 hover:bg-white/15 border border-sky-300/20 flex items-center justify-center text-slate-300 hover:text-white transition active:scale-90 shrink-0">
+                            class="w-8 h-8 rounded-xl simple-glass hover:bg-[#5fa000]/20 flex items-center justify-center text-theme-main transition active:scale-90 shrink-0">
                         <i class="fa-solid fa-xmark text-xs"></i>
                     </button>
                 </div>
@@ -297,40 +205,40 @@
                 <!-- Drawer Options -->
                 <div class="mt-4 space-y-4 overflow-y-auto pr-1 flex-1">
                     <div>
-                        <p class="px-1 text-[10px] font-bold uppercase tracking-widest text-sky-300/75 mb-2.5">
+                        <p class="px-1 text-[10px] font-bold uppercase tracking-widest text-theme-muted mb-2.5">
                             Navigation & Support
                         </p>
                         <div class="grid grid-cols-2 gap-2.5">
-                            <button type="button" onclick="switchView('home'); closeLeftDrawer();" class="flex items-center gap-2.5 p-2.5 rounded-2xl bg-white/[0.05] hover:bg-blue-500/20 border border-sky-300/15 text-left text-[11px] font-bold text-slate-100 transition active:scale-95">
-                                <span class="w-7 h-7 rounded-xl bg-blue-500/25 text-blue-300 flex items-center justify-center shrink-0">
+                            <button type="button" onclick="switchView('home'); closeLeftDrawer();" class="flex items-center gap-2.5 p-2.5 rounded-2xl glass-tile text-left text-xs font-semibold text-theme-main">
+                                <span class="w-7 h-7 rounded-xl bg-[#5fa000]/20 text-[#5fa000] flex items-center justify-center shrink-0">
                                     <i class="fa-solid fa-house text-[11px]"></i>
                                 </span>
                                 <span class="truncate">Home</span>
                             </button>
 
-                            <button type="button" onclick="refreshFullSystem(); closeLeftDrawer();" class="flex items-center gap-2.5 p-2.5 rounded-2xl bg-white/[0.05] hover:bg-blue-500/20 border border-sky-300/15 text-left text-[11px] font-bold text-slate-100 transition active:scale-95">
-                                <span class="w-7 h-7 rounded-xl bg-sky-500/25 text-sky-300 flex items-center justify-center shrink-0">
+                            <button type="button" onclick="refreshFullSystem(); closeLeftDrawer();" class="flex items-center gap-2.5 p-2.5 rounded-2xl glass-tile text-left text-xs font-semibold text-theme-main">
+                                <span class="w-7 h-7 rounded-xl bg-[#5fa000]/20 text-[#5fa000] flex items-center justify-center shrink-0">
                                     <i class="fa-solid fa-arrows-rotate text-[11px]"></i>
                                 </span>
                                 <span class="truncate">Sync All</span>
                             </button>
 
-                            <button type="button" onclick="openInfoModal('contact')" class="flex items-center gap-2.5 p-2.5 rounded-2xl bg-white/[0.05] hover:bg-blue-500/20 border border-sky-300/15 text-left text-[11px] font-bold text-slate-100 transition active:scale-95">
-                                <span class="w-7 h-7 rounded-xl bg-indigo-500/25 text-indigo-300 flex items-center justify-center shrink-0">
+                            <button type="button" onclick="openInfoModal('contact')" class="flex items-center gap-2.5 p-2.5 rounded-2xl glass-tile text-left text-xs font-semibold text-theme-main">
+                                <span class="w-7 h-7 rounded-xl bg-[#5fa000]/20 text-[#5fa000] flex items-center justify-center shrink-0">
                                     <i class="fa-solid fa-headset text-[11px]"></i>
                                 </span>
                                 <span class="truncate">Contact</span>
                             </button>
 
-                            <button type="button" onclick="openInfoModal('messenger')" class="flex items-center gap-2.5 p-2.5 rounded-2xl bg-white/[0.05] hover:bg-blue-500/20 border border-sky-300/15 text-left text-[11px] font-bold text-slate-100 transition active:scale-95">
-                                <span class="w-7 h-7 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-500 to-sky-400 text-white flex items-center justify-center shrink-0">
+                            <button type="button" onclick="openInfoModal('messenger')" class="flex items-center gap-2.5 p-2.5 rounded-2xl glass-tile text-left text-xs font-semibold text-theme-main">
+                                <span class="w-7 h-7 rounded-xl bg-[#5fa000]/20 text-[#5fa000] flex items-center justify-center shrink-0">
                                     <i class="fa-brands fa-facebook-messenger text-[11px]"></i>
                                 </span>
                                 <span class="truncate">Group</span>
                             </button>
 
-                            <button type="button" onclick="switchView('app5'); closeLeftDrawer();" class="col-span-2 flex items-center gap-2.5 p-2.5 rounded-2xl bg-white/[0.05] hover:bg-blue-500/20 border border-sky-300/15 text-left text-[11px] font-bold text-slate-100 transition active:scale-95">
-                                <span class="w-7 h-7 rounded-xl bg-gradient-to-br from-blue-600 via-sky-500 to-cyan-400 text-white flex items-center justify-center shrink-0">
+                            <button type="button" onclick="switchView('app5'); closeLeftDrawer();" class="col-span-2 flex items-center gap-2.5 p-2.5 rounded-2xl glass-tile text-left text-xs font-semibold text-theme-main">
+                                <span class="w-7 h-7 rounded-xl bg-[#5fa000] text-white flex items-center justify-center shrink-0">
                                     <i class="fa-solid fa-user-plus text-[11px]"></i>
                                 </span>
                                 <span class="truncate">Member Add</span>
@@ -338,20 +246,29 @@
                         </div>
                     </div>
 
+                    <!-- Theme Mode Selector inside Drawer -->
+                    <div class="p-3 rounded-2xl simple-glass space-y-2">
+                        <span class="block text-[10px] font-bold uppercase tracking-wider text-theme-muted">Display Mode</span>
+                        <button type="button" onclick="toggleThemeMode()" class="w-full py-2 px-3 rounded-xl glass-tile flex items-center justify-between text-xs font-semibold text-theme-main">
+                            <span id="drawer-theme-label">Switch to Brightness Mode</span>
+                            <i id="drawer-theme-icon" class="fa-solid fa-sun text-[#5fa000]"></i>
+                        </button>
+                    </div>
+
                     <!-- Quick Vault Shortcut -->
-                    <div class="p-3 rounded-2xl bg-white/[0.04] border border-sky-300/15 space-y-2">
-                        <span class="block text-[10px] font-bold uppercase tracking-wider text-sky-300">Vault Shortcut</span>
-                        <button type="button" onclick="copyAccountNumber(); closeLeftDrawer();" class="w-full py-2 px-3 rounded-xl bg-white/[0.06] hover:bg-blue-500/20 border border-sky-300/15 flex items-center justify-between text-[11px] font-semibold text-slate-200 transition">
+                    <div class="p-3 rounded-2xl simple-glass space-y-2">
+                        <span class="block text-[10px] font-bold uppercase tracking-wider text-theme-muted">Vault Shortcut</span>
+                        <button type="button" onclick="copyAccountNumber(); closeLeftDrawer();" class="w-full py-2 px-3 rounded-xl glass-tile flex items-center justify-between text-xs font-semibold text-theme-main">
                             <span>Copy A/C: 2778 3324 32630</span>
-                            <i class="fa-regular fa-copy text-sky-300"></i>
+                            <i class="fa-regular fa-copy text-[#5fa000]"></i>
                         </button>
                     </div>
                 </div>
             </div>
 
-            <div class="pt-3 mt-2 border-t border-sky-300/15 text-center shrink-0">
-                <p class="text-[10px] text-slate-400">
-                    Developed by <span class="text-sky-300 font-bold">M Maksud Rs Ksa</span>
+            <div class="pt-3 mt-2 border-t border-theme text-center shrink-0">
+                <p class="text-[10px] text-theme-muted">
+                    Developed by <span class="text-[#5fa000] font-bold">M Maksud Rs Ksa</span>
                 </p>
             </div>
         </aside>
@@ -359,97 +276,97 @@
         <!-- ================= POPUP MODAL FOR CONTACT & MESSENGER ================= -->
         <div id="info-popup-modal"
              onclick="closeInfoModal()"
-             class="hidden absolute inset-0 bg-[#030712]/85 backdrop-blur-md z-[90] flex items-center justify-center p-4">
+             class="hidden absolute inset-0 bg-[#131939]/80 backdrop-blur-md z-[90] flex items-center justify-center p-4">
 
             <div onclick="event.stopPropagation()"
-                 class="modal-pop w-full max-w-[350px] rounded-[28px] bg-[#0b1530]/95 border border-sky-400/25 shadow-2xl p-4 relative overflow-hidden">
+                 class="modal-pop w-full max-w-[340px] rounded-3xl panel-theme-bg border border-theme shadow-2xl p-4 relative overflow-hidden">
 
                 <!-- 1. CONTACT US POPUP -->
                 <div id="modal-content-contact" class="hidden">
-                    <div class="flex items-center justify-between pb-2.5 mb-3 border-b border-sky-300/15">
+                    <div class="flex items-center justify-between pb-2.5 mb-3 border-b border-theme">
                         <div class="flex items-center gap-2.5">
-                            <span class="w-9 h-9 rounded-2xl bg-gradient-to-br from-blue-600 to-sky-500 text-white flex items-center justify-center shadow-md">
+                            <span class="w-9 h-9 rounded-xl bg-[#5fa000] text-white flex items-center justify-center">
                                 <i class="fa-solid fa-headset text-xs"></i>
                             </span>
                             <div>
-                                <h3 class="text-xs font-extrabold uppercase tracking-wider text-white">Contact & Payment</h3>
-                                <p class="text-[9.5px] text-sky-300">যোগাযোগ ও পেমেন্ট নম্বর</p>
+                                <h3 class="text-xs font-bold uppercase tracking-wider text-theme-main">Contact & Payment</h3>
+                                <p class="text-[10px] text-theme-muted">যোগাযোগ ও পেমেন্ট নম্বর</p>
                             </div>
                         </div>
                         <button type="button"
                                 onclick="closeInfoModal()"
-                                class="w-8 h-8 rounded-xl bg-white/5 hover:bg-white/15 border border-sky-300/20 flex items-center justify-center text-slate-300 hover:text-white transition">
+                                class="w-8 h-8 rounded-xl simple-glass hover:bg-[#5fa000]/20 flex items-center justify-center text-theme-main transition">
                             <i class="fa-solid fa-xmark text-xs"></i>
                         </button>
                     </div>
 
                     <div class="space-y-2.5">
                         <!-- Phone 1 -->
-                        <div class="p-2.5 rounded-2xl bg-black/45 border border-sky-300/15">
+                        <div class="p-3 rounded-2xl simple-glass">
                             <div class="flex items-center justify-between gap-2">
                                 <a href="tel:01881132158" class="flex items-center gap-2.5 min-w-0 flex-1">
-                                    <span class="w-8 h-8 rounded-xl bg-blue-500/25 border border-blue-400/35 text-blue-300 flex items-center justify-center shrink-0">
+                                    <span class="w-8 h-8 rounded-xl bg-[#5fa000]/20 border border-[#5fa000]/40 text-[#5fa000] flex items-center justify-center shrink-0">
                                         <i class="fa-solid fa-phone text-xs"></i>
                                     </span>
                                     <div class="min-w-0">
-                                        <span class="block text-[9.5px] text-slate-400 font-semibold uppercase">M Maksud RS KSa</span>
-                                        <span class="block text-xs font-bold text-white tracking-wide truncate">01881132158</span>
+                                        <span class="block text-[9.5px] text-theme-muted font-semibold uppercase">M Maksud RS KSa</span>
+                                        <span class="block text-xs font-bold text-theme-main tracking-wide truncate">01881132158</span>
                                     </div>
                                 </a>
                                 <button type="button"
                                         onclick="copyContactText('01881132158')"
-                                        class="w-8 h-8 rounded-xl bg-sky-500/20 hover:bg-sky-500/35 text-sky-300 flex items-center justify-center shrink-0 transition">
+                                        class="w-8 h-8 rounded-xl bg-[#5fa000]/20 hover:bg-[#5fa000] text-[#5fa000] hover:text-white flex items-center justify-center shrink-0 transition">
                                     <i class="fa-regular fa-copy text-xs"></i>
                                 </button>
                             </div>
-                            <div class="mt-1.5 pl-10 flex items-center gap-1.5 flex-wrap">
-                                <span class="px-2 py-0.5 rounded-lg bg-blue-500/20 border border-blue-400/35 text-blue-200 text-[9px] font-bold">bKash</span>
-                                <span class="px-2 py-0.5 rounded-lg bg-sky-500/20 border border-sky-400/35 text-sky-200 text-[9px] font-bold">Nagad</span>
-                                <span class="text-[8.5px] text-slate-400">Personal</span>
+                            <div class="mt-2 pl-10 flex items-center gap-1.5 flex-wrap">
+                                <span class="px-2 py-0.5 rounded-md bg-[#5fa000] text-white text-[9px] font-bold">bKash</span>
+                                <span class="px-2 py-0.5 rounded-md neutral-icon-box text-[9px] font-bold">Nagad</span>
+                                <span class="text-[9px] text-theme-muted">Personal</span>
                             </div>
                         </div>
 
                         <!-- Phone 2 -->
-                        <div class="p-2.5 rounded-2xl bg-black/45 border border-sky-300/15">
+                        <div class="p-3 rounded-2xl simple-glass">
                             <div class="flex items-center justify-between gap-2">
                                 <a href="tel:01628998162" class="flex items-center gap-2.5 min-w-0 flex-1">
-                                    <span class="w-8 h-8 rounded-xl bg-sky-500/25 border border-sky-400/35 text-sky-300 flex items-center justify-center shrink-0">
+                                    <span class="w-8 h-8 rounded-xl bg-[#5fa000]/20 border border-[#5fa000]/40 text-[#5fa000] flex items-center justify-center shrink-0">
                                         <i class="fa-solid fa-phone-volume text-xs"></i>
                                     </span>
                                     <div class="min-w-0">
-                                        <span class="block text-[9.5px] text-slate-400 font-semibold uppercase">M Misbah Uddin</span>
-                                        <span class="block text-xs font-bold text-white tracking-wide truncate">01628998162</span>
+                                        <span class="block text-[9.5px] text-theme-muted font-semibold uppercase">M Misbah Uddin</span>
+                                        <span class="block text-xs font-bold text-theme-main tracking-wide truncate">01628998162</span>
                                     </div>
                                 </a>
                                 <button type="button"
                                         onclick="copyContactText('01628998162')"
-                                        class="w-8 h-8 rounded-xl bg-sky-500/20 hover:bg-sky-500/35 text-sky-300 flex items-center justify-center shrink-0 transition">
+                                        class="w-8 h-8 rounded-xl bg-[#5fa000]/20 hover:bg-[#5fa000] text-[#5fa000] hover:text-white flex items-center justify-center shrink-0 transition">
                                     <i class="fa-regular fa-copy text-xs"></i>
                                 </button>
                             </div>
-                            <div class="mt-1.5 pl-10 flex items-center gap-1.5 flex-wrap">
-                                <span class="px-2 py-0.5 rounded-lg bg-blue-500/20 border border-blue-400/35 text-blue-200 text-[9px] font-bold">bKash</span>
-                                <span class="px-2 py-0.5 rounded-lg bg-sky-500/20 border border-sky-400/35 text-sky-200 text-[9px] font-bold">Nagad</span>
-                                <span class="text-[8.5px] text-slate-400">Personal</span>
+                            <div class="mt-2 pl-10 flex items-center gap-1.5 flex-wrap">
+                                <span class="px-2 py-0.5 rounded-md bg-[#5fa000] text-white text-[9px] font-bold">bKash</span>
+                                <span class="px-2 py-0.5 rounded-md neutral-icon-box text-[9px] font-bold">Nagad</span>
+                                <span class="text-[9px] text-theme-muted">Personal</span>
                             </div>
                         </div>
 
                         <!-- Email -->
-                        <div class="flex items-center justify-between gap-2 p-2.5 rounded-2xl bg-black/45 border border-sky-300/15">
+                        <div class="flex items-center justify-between gap-2 p-3 rounded-2xl simple-glass">
                             <a href="mailto:assuffahwelfareassociation@gmail.com" class="flex items-center gap-2.5 min-w-0 flex-1">
-                                <span class="w-8 h-8 rounded-xl bg-indigo-500/25 border border-indigo-400/35 text-indigo-300 flex items-center justify-center shrink-0">
+                                <span class="w-8 h-8 rounded-xl bg-[#5fa000]/20 border border-[#5fa000]/40 text-[#5fa000] flex items-center justify-center shrink-0">
                                     <i class="fa-solid fa-envelope text-xs"></i>
                                 </span>
                                 <div class="min-w-0">
-                                    <span class="block text-[9px] text-slate-400 font-semibold uppercase">Official Email</span>
-                                    <span class="block text-[10.5px] font-bold text-white truncate">
+                                    <span class="block text-[9px] text-theme-muted font-semibold uppercase">Official Email</span>
+                                    <span class="block text-[10.5px] font-bold text-theme-main truncate">
                                         assuffahwelfareassociation@gmail.com
                                     </span>
                                 </div>
                             </a>
                             <button type="button"
                                     onclick="copyContactText('assuffahwelfareassociation@gmail.com')"
-                                    class="w-8 h-8 rounded-xl bg-sky-500/20 hover:bg-sky-500/35 text-sky-300 flex items-center justify-center shrink-0 transition">
+                                    class="w-8 h-8 rounded-xl bg-[#5fa000]/20 hover:bg-[#5fa000] text-[#5fa000] hover:text-white flex items-center justify-center shrink-0 transition">
                                 <i class="fa-regular fa-copy text-xs"></i>
                             </button>
                         </div>
@@ -458,19 +375,19 @@
 
                 <!-- 2. MESSENGER GROUP POPUP -->
                 <div id="modal-content-messenger" class="hidden">
-                    <div class="flex items-center justify-between pb-2.5 mb-3 border-b border-sky-300/15">
+                    <div class="flex items-center justify-between pb-2.5 mb-3 border-b border-theme">
                         <div class="flex items-center gap-2.5">
-                            <span class="w-9 h-9 rounded-2xl bg-gradient-to-tr from-blue-600 via-indigo-500 to-sky-400 text-white flex items-center justify-center shadow-md">
+                            <span class="w-9 h-9 rounded-xl bg-[#5fa000] text-white flex items-center justify-center">
                                 <i class="fa-brands fa-facebook-messenger text-xs"></i>
                             </span>
                             <div>
-                                <h3 class="text-xs font-extrabold uppercase tracking-wider text-white">Messenger Group</h3>
-                                <p class="text-[9.5px] text-sky-300">অফিসিয়াল গ্রুপ লিংক</p>
+                                <h3 class="text-xs font-bold uppercase tracking-wider text-theme-main">Messenger Group</h3>
+                                <p class="text-[10px] text-theme-muted">অফিসিয়াল গ্রুপ লিংক</p>
                             </div>
                         </div>
                         <button type="button"
                                 onclick="closeInfoModal()"
-                                class="w-8 h-8 rounded-xl bg-white/5 hover:bg-white/15 border border-sky-300/20 flex items-center justify-center text-slate-300 hover:text-white transition">
+                                class="w-8 h-8 rounded-xl simple-glass hover:bg-[#5fa000]/20 flex items-center justify-center text-theme-main transition">
                             <i class="fa-solid fa-xmark text-xs"></i>
                         </button>
                     </div>
@@ -478,21 +395,21 @@
                     <a href="https://m.me/j/AbY8i9NxJNZEBWrF/?send_source=gc%3Acopy_invite_link_c"
                        target="_blank"
                        rel="noopener noreferrer"
-                       class="flex items-center justify-between gap-3 p-3 rounded-2xl bg-white/[0.06] hover:bg-blue-500/20 border border-sky-400/30 transition">
+                       class="flex items-center justify-between gap-3 p-3.5 rounded-2xl glass-tile">
                         <div class="flex items-center gap-3 min-w-0">
-                            <span class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-blue-600 via-indigo-500 to-sky-400 text-white flex items-center justify-center shrink-0 shadow-lg">
+                            <span class="w-10 h-10 rounded-xl bg-[#5fa000] text-white flex items-center justify-center shrink-0">
                                 <i class="fa-brands fa-facebook-messenger text-lg"></i>
                             </span>
                             <div class="min-w-0">
-                                <span class="block text-xs font-extrabold text-white truncate">
+                                <span class="block text-xs font-bold text-theme-main truncate">
                                     As-Suffah Messenger Group
                                 </span>
-                                <span class="block text-[10px] text-sky-300 truncate">
+                                <span class="block text-[10px] text-theme-muted truncate">
                                     গ্রুপে যুক্ত হতে এখানে ট্যাপ করুন
                                 </span>
                             </div>
                         </div>
-                        <span class="w-8 h-8 rounded-xl bg-sky-500/25 border border-sky-400/35 text-sky-200 flex items-center justify-center shrink-0">
+                        <span class="w-8 h-8 rounded-xl neutral-icon-box flex items-center justify-center shrink-0">
                             <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
                         </span>
                     </a>
@@ -502,22 +419,22 @@
         </div>
 
         <!-- ================= TOP BACK BAR (For Inner App Views) ================= -->
-        <div id="app-back-bar" class="hidden z-40 px-4 pt-8 pb-2.5 shrink-0 flex items-center justify-between bg-[#060d20]/95 backdrop-blur-xl border-b border-sky-300/15">
+        <div id="app-back-bar" class="hidden z-40 px-4 pt-7 pb-2.5 shrink-0 flex items-center justify-between panel-theme-bg backdrop-blur-xl border-b border-theme">
             <button type="button"
                     onclick="handleBackAndRefresh()"
-                    class="flex items-center gap-2 px-3.5 py-1.5 rounded-2xl bg-blue-500/25 hover:bg-blue-500/40 border border-blue-400/35 text-blue-100 hover:text-white text-xs font-bold transition active:scale-95">
+                    class="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-[#5fa000] hover:bg-[#5fa000]/90 text-white text-xs font-bold transition active:scale-95">
                 <i id="back-btn-icon" class="fa-solid fa-arrow-left text-xs"></i>
                 <span>Back</span>
             </button>
 
-            <span id="active-app-title" class="font-display text-xs font-bold text-white truncate px-2">
+            <span id="active-app-title" class="text-xs font-bold text-theme-main truncate px-2">
                 App View
             </span>
 
             <button type="button"
                     onclick="openCurrentExternal()"
                     title="Open in Browser"
-                    class="w-8 h-8 rounded-xl bg-sky-500/20 hover:bg-sky-500/35 border border-sky-400/30 flex items-center justify-center text-sky-200 hover:text-white transition active:scale-90 shrink-0">
+                    class="w-8 h-8 rounded-xl simple-glass hover:bg-[#5fa000]/20 flex items-center justify-center text-theme-main transition active:scale-90 shrink-0">
                 <i class="fa-solid fa-arrow-up-right-from-square text-[11px]"></i>
             </button>
         </div>
@@ -528,204 +445,199 @@
             <!-- ================= HOME / DASHBOARD VIEW ================= -->
             <section id="view-home" class="w-full h-full flex flex-col justify-between px-4">
 
-                <!-- TOP HEADER & 3D SAPPHIRE AURORA ATM CARD -->
+                <!-- TOP HEADER & CLEAN GLASS ATM CARD -->
                 <div class="pt-1 shrink-0">
-                    <!-- Camera Notch Safe Space -->
-                    <div class="w-full h-6 shrink-0"></div>
+                    <!-- Safe Notch Space -->
+                    <div class="w-full h-5 shrink-0"></div>
 
-                    <!-- Minimal Floating Header with Rounded Squircle Controls -->
-                    <div class="flex items-center justify-between gap-2 mb-3.5">
+                    <!-- Minimal Floating Header with Theme Toggle -->
+                    <div class="flex items-center justify-between gap-2 mb-4">
                         <button type="button"
                                 onclick="openLeftDrawer()"
                                 aria-label="Open Menu"
-                                class="w-9 h-9 rounded-ui-btn flex items-center justify-center text-sky-200 shrink-0">
+                                class="w-9 h-9 rounded-xl simple-glass hover:bg-[#5fa000]/20 flex items-center justify-center text-theme-main shrink-0 transition active:scale-90">
                             <i class="fa-solid fa-bars-staggered text-xs"></i>
                         </button>
 
-                        <div class="flex items-center gap-2.5 min-w-0">
-                            <div class="w-9 h-9 rounded-2xl p-0.5 bg-gradient-to-tr from-blue-600 via-indigo-500 to-sky-400 shrink-0 shadow-[0_6px_16px_rgba(37,99,235,0.45)]">
+                        <div class="flex items-center gap-2 min-w-0">
+                            <div class="w-9 h-9 rounded-full p-0.5 bg-[#5fa000] shrink-0 overflow-hidden shadow-md">
                                 <img src="https://lh3.googleusercontent.com/d/1PXMzZMIOZbElnjIuOK2ew-FNMhuScYGx"
                                      alt="ASWA Logo"
-                                     class="w-full h-full object-cover rounded-[14px] bg-[#050b1c]"
+                                     class="w-full h-full object-cover rounded-full bg-[#131939]"
                                      onerror="handleLogoFallback(this)">
                             </div>
                             <div class="min-w-0 text-left">
-                                <h1 class="font-display text-[11px] sm:text-xs font-extrabold text-white tracking-wide truncate leading-tight">
+                                <h1 class="text-[10.5px] sm:text-xs font-extrabold text-theme-main tracking-wide truncate leading-tight">
                                     AS-SUFFAH WELFARE ASSOCIATION
                                 </h1>
-                                <p class="text-[9.5px] text-sky-300 font-semibold truncate">
+                                <p class="text-[9.5px] text-[#5fa000] font-semibold truncate">
                                     আস-সুফফাহ কল্যাণ সমিতি
                                 </p>
                             </div>
                         </div>
 
-                        <button id="system-refresh-btn"
-                                type="button"
-                                onclick="refreshFullSystem()"
-                                aria-label="Sync System"
-                                class="w-9 h-9 rounded-ui-btn flex items-center justify-center text-sky-300 shrink-0">
-                            <i id="system-refresh-icon" class="fa-solid fa-arrows-rotate text-xs"></i>
-                        </button>
+                        <!-- Brightness / Dark Mode & Sync Buttons -->
+                        <div class="flex items-center gap-1.5 shrink-0">
+                            <button id="theme-toggle-btn"
+                                    type="button"
+                                    onclick="toggleThemeMode()"
+                                    title="Switch Dark / Brightness Mode"
+                                    aria-label="Toggle Theme"
+                                    class="w-9 h-9 rounded-xl simple-glass hover:bg-[#5fa000]/20 flex items-center justify-center text-[#5fa000] transition active:scale-90">
+                                <i id="theme-toggle-icon" class="fa-solid fa-sun text-xs"></i>
+                            </button>
+
+                            <button id="system-refresh-btn"
+                                    type="button"
+                                    onclick="refreshFullSystem()"
+                                    title="Sync Data"
+                                    aria-label="Sync System"
+                                    class="w-9 h-9 rounded-xl simple-glass hover:bg-[#5fa000]/20 flex items-center justify-center text-theme-main transition active:scale-90">
+                                <i id="system-refresh-icon" class="fa-solid fa-arrows-rotate text-xs"></i>
+                            </button>
+                        </div>
                     </div>
 
-                    <!-- ================= 3D INTERACTIVE SAPPHIRE ATM CARD (SLIGHTLY TALLER, NO FLIP) ================= -->
-                    <div id="atm-3d-stage" class="card-3d-scene select-none">
-                        <div id="atm-3d-card" class="aurora-3d-card p-5">
-                            <div class="aurora-contour-lines"></div>
-                            <div id="atm-holo-glare" class="card-holo-glare"></div>
+                    <!-- ================= CLEAN GLASS ATM CARD ================= -->
+                    <div class="atm-glass-card rounded-3xl p-5 flex flex-col justify-between relative overflow-hidden">
+                        <!-- Subtle Accent Line at Top -->
+                        <div class="absolute top-0 left-0 right-0 h-1 bg-[#5fa000]"></div>
 
-                            <!-- Top Row: 3D Chip, Brand Title & Show/Hide Pill -->
-                            <div class="relative z-10 flex items-center justify-between gap-2 mb-5">
-                                <div class="flex items-center gap-2.5">
-                                    <div class="aurora-3d-chip"></div>
-                                    <div>
-                                        <span class="block font-display text-xs font-extrabold tracking-[0.14em] text-white">
-                                            AS-SUFFAH
-                                        </span>
-                                        <span class="block text-[8px] font-bold uppercase tracking-[0.10em] text-sky-300">
-                                            ACCOUNTING VAULT
-                                        </span>
-                                    </div>
+                        <!-- Top Row: Brand Title & Show/Hide Toggle -->
+                        <div class="flex items-center justify-between gap-2 mb-5">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-8 h-8 rounded-xl bg-[#5fa000]/20 border border-[#5fa000]/50 flex items-center justify-center text-[#5fa000]">
+                                    <i class="fa-solid fa-vault text-xs"></i>
                                 </div>
-
-                                <!-- Privacy Eye Toggle Pill -->
-                                <button id="toggle-eye-btn"
-                                        type="button"
-                                        onclick="toggleSensitiveInfo()"
-                                        class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-blue-600/80 to-sky-500/80 hover:from-blue-500 hover:to-sky-400 border border-sky-300/45 flex items-center gap-1.5 text-white transition active:scale-90 shadow-md">
-                                    <i id="eye-icon" class="fa-solid fa-eye text-[10px] text-sky-100"></i>
-                                    <span id="eye-label" class="text-[9.5px] font-bold uppercase tracking-wider">
-                                        Show
+                                <div>
+                                    <span class="block text-xs font-extrabold tracking-widest text-theme-main">
+                                        AS-SUFFAH
                                     </span>
-                                </button>
-                            </div>
-
-                            <!-- Middle Row: 3D Recessed Account Bar -->
-                            <div class="relative z-10 flex items-stretch gap-2.5 py-3.5 px-3.5 rounded-2xl bg-[#040a1a]/60 border border-sky-300/20 mb-5 shadow-inner">
-                                <div class="w-1 rounded-full bg-gradient-to-b from-blue-400 via-sky-400 to-cyan-300 shrink-0 shadow-[0_0_10px_rgba(56,189,248,0.85)]"></div>
-                                <div class="flex-1 min-w-0 flex items-center justify-between gap-2">
-                                    <div class="min-w-0">
-                                        <span class="block text-[8px] font-bold uppercase tracking-[0.2em] text-sky-200/75">
-                                            Account Number
-                                        </span>
-                                        <span id="account-number-display"
-                                              class="font-cardNum text-lg sm:text-[19px] font-bold tracking-[0.12em] text-white whitespace-nowrap block">
-                                            27•• •••• ••630
-                                        </span>
-                                    </div>
-                                    <button type="button"
-                                            onclick="copyAccountNumber()"
-                                            title="Copy Account Number"
-                                            class="w-8 h-8 rounded-xl bg-blue-500/25 hover:bg-sky-500/35 border border-sky-300/30 flex items-center justify-center text-sky-200 hover:text-white transition active:scale-90 shrink-0">
-                                        <i class="fa-regular fa-copy text-xs"></i>
-                                    </button>
+                                    <span class="block text-[8.5px] font-semibold uppercase tracking-wider text-theme-muted">
+                                        ACCOUNTING VAULT
+                                    </span>
                                 </div>
                             </div>
 
-                            <!-- Bottom Row: Dual Balance Cards inside 3D ATM -->
-                            <div class="relative z-10 grid grid-cols-2 gap-2.5">
-                                <div class="px-3 py-2.5 rounded-2xl bg-white/[0.06] border border-blue-300/20 backdrop-blur-md">
-                                    <span class="block text-[8px] font-bold uppercase tracking-wider text-blue-200">
-                                        Current Balance
-                                    </span>
-                                    <p id="current-balance-display"
-                                       class="font-balNum text-sm font-bold tracking-wider text-white truncate">
-                                        BDT: ••••••••
-                                    </p>
-                                </div>
+                            <!-- Privacy Eye Toggle Pill -->
+                            <button id="toggle-eye-btn"
+                                    type="button"
+                                    onclick="toggleSensitiveInfo()"
+                                    class="px-3.5 py-1.5 rounded-xl bg-[#5fa000] hover:bg-[#5fa000]/90 flex items-center gap-1.5 text-white transition active:scale-95">
+                                <i id="eye-icon" class="fa-solid fa-eye text-[10px]"></i>
+                                <span id="eye-label" class="text-[10px] font-bold uppercase tracking-wider">
+                                    Show
+                                </span>
+                            </button>
+                        </div>
 
-                                <div class="px-3 py-2.5 rounded-2xl bg-white/[0.06] border border-sky-300/20 backdrop-blur-md text-right">
-                                    <span class="block text-[8px] font-bold uppercase tracking-wider text-sky-300">
-                                        Total Balance
-                                    </span>
-                                    <p id="total-balance-display"
-                                       class="font-balNum text-sm font-bold tracking-wider text-sky-200 truncate">
-                                        BDT: ••••••••
-                                    </p>
-                                </div>
+                        <!-- Middle Row: Account Number Bar -->
+                        <div class="flex items-center justify-between gap-2 py-3 px-3.5 rounded-2xl atm-inner-bar mb-4">
+                            <div class="min-w-0">
+                                <span class="block text-[8.5px] font-semibold uppercase tracking-widest text-theme-muted mb-0.5">
+                                    Account Number
+                                </span>
+                                <span id="account-number-display"
+                                      class="font-mono text-base sm:text-lg font-bold tracking-wider text-theme-main whitespace-nowrap block">
+                                    27•• •••• ••630
+                                </span>
+                            </div>
+                            <button type="button"
+                                    onclick="copyAccountNumber()"
+                                    title="Copy Account Number"
+                                    class="w-8 h-8 rounded-xl simple-glass hover:bg-[#5fa000] hover:text-white flex items-center justify-center text-theme-main transition active:scale-90 shrink-0">
+                                <i class="fa-regular fa-copy text-xs"></i>
+                            </button>
+                        </div>
+
+                        <!-- Bottom Row: Dual Balances -->
+                        <div class="grid grid-cols-2 gap-2.5">
+                            <div class="px-3.5 py-2.5 rounded-2xl simple-glass">
+                                <span class="block text-[8.5px] font-semibold uppercase tracking-wider text-theme-muted mb-0.5">
+                                    Current Balance
+                                </span>
+                                <p id="current-balance-display"
+                                   class="text-sm font-bold tracking-wide text-theme-main truncate">
+                                    BDT: ••••••••
+                                </p>
+                            </div>
+
+                            <div class="px-3.5 py-2.5 rounded-2xl simple-glass text-right">
+                                <span class="block text-[8.5px] font-semibold uppercase tracking-wider text-[#5fa000] mb-0.5">
+                                    Total Balance
+                                </span>
+                                <p id="total-balance-display"
+                                   class="text-sm font-bold tracking-wide text-theme-main truncate">
+                                    BDT: ••••••••
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- ================= 3D ROUNDED SQUIRCLE APP LAUNCHER ================= -->
-                <div class="my-auto py-2 space-y-3">
-                    <!-- Rounded Pill Quick Search Filter -->
-                    <div class="relative">
-                        <i class="fa-solid fa-magnifying-glass text-sky-300/70 text-[11px] absolute left-3.5 top-1/2 -translate-y-1/2"></i>
-                        <input id="app-quick-search"
-                               type="text"
-                               oninput="filterAppTiles(this.value)"
-                               placeholder="অপশন খুঁজুন (Form, Details, Profit, Search...)"
-                               class="w-full pl-9 pr-3 py-2.5 rounded-2xl bg-white/[0.05] border border-sky-300/15 focus:border-sky-400/55 focus:outline-none text-[11px] text-white placeholder-sky-200/45 transition">
-                    </div>
+                <!-- ================= SIMPLE GLASS APP LAUNCHER (NO SEARCH BOX, FULL READABLE NAMES) ================= -->
+                <div class="my-auto py-3">
+                    <div id="bento-apps-grid" class="grid grid-cols-2 gap-3.5">
 
-                    <!-- Bento Grid with Rounded Squircle App Icons (Blue Spectrum Only) -->
-                    <div id="bento-apps-grid" class="grid grid-cols-2 gap-3">
-
-                        <!-- App 1: Form -->
+                        <!-- App 1: As Suffah Form -->
                         <button type="button"
-                                data-search="form ফরম জমা"
                                 onclick="switchView('app1')"
-                                class="app-bento-item aurora-app-tile p-3 flex items-center gap-3 text-left">
-                            <div class="w-12 h-12 squircle-3d-icon bg-gradient-to-br from-blue-500 via-blue-700 to-indigo-900 text-white shrink-0">
-                                <i class="fa-solid fa-file-signature text-lg"></i>
+                                class="glass-tile rounded-2xl p-4 flex flex-col items-start justify-between gap-3 text-left">
+                            <div class="w-10 h-10 rounded-xl bg-[#5fa000] text-white flex items-center justify-center shrink-0 shadow-sm">
+                                <i class="fa-solid fa-file-signature text-base"></i>
                             </div>
-                            <div class="min-w-0">
-                                <span class="block text-xs font-extrabold text-white truncate">Form</span>
-                                <span class="block text-[9.5px] text-sky-200/70 truncate">ডাটা এন্ট্রি ফরম</span>
+                            <div class="w-full">
+                                <span class="block text-[13px] font-bold text-theme-main leading-snug">As Suffah Form</span>
+                                <span class="block text-[10.5px] text-theme-muted mt-0.5">ডাটা এন্ট্রি ফরম</span>
                             </div>
                         </button>
 
                         <!-- App 2: Member Details -->
                         <button type="button"
-                                data-search="member details মেম্বার ডিটেইলস তথ্য"
                                 onclick="switchView('app2')"
-                                class="app-bento-item aurora-app-tile p-3 flex items-center gap-3 text-left">
-                            <div class="w-12 h-12 squircle-3d-icon bg-gradient-to-br from-indigo-500 via-blue-700 to-slate-900 text-white shrink-0">
-                                <i class="fa-solid fa-id-card text-lg"></i>
+                                class="glass-tile rounded-2xl p-4 flex flex-col items-start justify-between gap-3 text-left">
+                            <div class="w-10 h-10 rounded-xl neutral-icon-box flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-id-card text-base"></i>
                             </div>
-                            <div class="min-w-0">
-                                <span class="block text-xs font-extrabold text-white truncate">Member Details</span>
-                                <span class="block text-[9.5px] text-sky-200/70 truncate">সদস্যদের তালিকা</span>
+                            <div class="w-full">
+                                <span class="block text-[13px] font-bold text-theme-main leading-snug">Member Details</span>
+                                <span class="block text-[10.5px] text-theme-muted mt-0.5">সদস্যদের তালিকা</span>
                             </div>
                         </button>
 
                         <!-- App 3: Profit Calculator -->
                         <button type="button"
-                                data-search="profit calculator লাভ হিসাব ক্যালকুলেটর"
                                 onclick="switchView('app3')"
-                                class="app-bento-item aurora-app-tile p-3 flex items-center gap-3 text-left">
-                            <div class="w-12 h-12 squircle-3d-icon bg-gradient-to-br from-sky-400 via-blue-600 to-indigo-800 text-white shrink-0">
-                                <i class="fa-solid fa-calculator text-lg"></i>
+                                class="glass-tile rounded-2xl p-4 flex flex-col items-start justify-between gap-3 text-left">
+                            <div class="w-10 h-10 rounded-xl neutral-icon-box flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-calculator text-base"></i>
                             </div>
-                            <div class="min-w-0">
-                                <span class="block text-xs font-extrabold text-white truncate">Profit Calc</span>
-                                <span class="block text-[9.5px] text-sky-200/70 truncate">মুনাফা হিসাব</span>
+                            <div class="w-full">
+                                <span class="block text-[13px] font-bold text-theme-main leading-snug">Profit Calculator</span>
+                                <span class="block text-[10.5px] text-theme-muted mt-0.5">মুনাফা হিসাব</span>
                             </div>
                         </button>
 
                         <!-- App 4: Member Search -->
                         <button type="button"
-                                data-search="member search সার্চ খুঁজুন"
                                 onclick="switchView('app4')"
-                                class="app-bento-item aurora-app-tile p-3 flex items-center gap-3 text-left">
-                            <div class="w-12 h-12 squircle-3d-icon bg-gradient-to-br from-cyan-400 via-sky-600 to-blue-900 text-white shrink-0">
-                                <i class="fa-solid fa-magnifying-glass text-lg"></i>
+                                class="glass-tile rounded-2xl p-4 flex flex-col items-start justify-between gap-3 text-left">
+                            <div class="w-10 h-10 rounded-xl bg-[#5fa000] text-white flex items-center justify-center shrink-0 shadow-sm">
+                                <i class="fa-solid fa-magnifying-glass text-base"></i>
                             </div>
-                            <div class="min-w-0">
-                                <span class="block text-xs font-extrabold text-white truncate">Member Search</span>
-                                <span class="block text-[9.5px] text-sky-200/70 truncate">সদস্য অনুসন্ধান</span>
+                            <div class="w-full">
+                                <span class="block text-[13px] font-bold text-theme-main leading-snug">Member Search</span>
+                                <span class="block text-[10.5px] text-theme-muted mt-0.5">সদস্য অনুসন্ধান</span>
                             </div>
                         </button>
 
                     </div>
                 </div>
 
-                <!-- Footer Credit (Rounded Pill Badge) -->
+                <!-- Footer Credit -->
                 <div class="text-center pb-1 shrink-0">
-                    <span class="inline-block px-4 py-1 rounded-2xl bg-white/[0.04] border border-sky-300/15 text-[10px] text-sky-200/75">
-                        Designed by <strong class="text-sky-300 font-bold">M Maksud Rs Ksa</strong>
+                    <span class="inline-block px-4 py-1 rounded-full simple-glass text-[10px] text-theme-muted">
+                        Designed by <strong class="text-[#5fa000] font-bold">M Maksud Rs Ksa</strong>
                     </span>
                 </div>
 
@@ -799,66 +711,46 @@
             loaded: false
         };
 
-        /* ================= 3D INTERACTIVE CARD TILT & HOLO ENGINE ================= */
-        function init3DCardPhysics() {
-            try {
-                const stage = document.getElementById('atm-3d-stage');
-                const card = document.getElementById('atm-3d-card');
-                const glare = document.getElementById('atm-holo-glare');
-                if (!stage || !card) return;
+        /* Dark Mode & Brightness Mode Switcher */
+        let isLightMode = false;
+        function applyThemeMode(light) {
+            isLightMode = !!light;
+            const root = document.documentElement;
+            const headerIcon = document.getElementById('theme-toggle-icon');
+            const drawerIcon = document.getElementById('drawer-theme-icon');
+            const drawerLabel = document.getElementById('drawer-theme-label');
 
-                const applyTilt = (clientX, clientY) => {
-                    const rect = stage.getBoundingClientRect();
-                    const x = clientX - rect.left;
-                    const y = clientY - rect.top;
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-
-                    const rotateX = ((y - centerY) / centerY) * -8;
-                    const rotateY = ((x - centerX) / centerX) * 10;
-
-                    card.style.transition = 'transform 0.1s ease-out';
-                    card.style.transform = `rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg)`;
-
-                    if (glare) {
-                        const pctX = (x / rect.width) * 100;
-                        const pctY = (y / rect.height) * 100;
-                        glare.style.setProperty('--glare-x', pctX + '%');
-                        glare.style.setProperty('--glare-y', pctY + '%');
-                    }
-                };
-
-                const resetTilt = () => {
-                    card.style.transition = 'transform 0.65s cubic-bezier(0.22, 1, 0.36, 1)';
-                    card.style.transform = 'rotateX(0deg) rotateY(0deg)';
-                };
-
-                stage.addEventListener('mousemove', (e) => applyTilt(e.clientX, e.clientY));
-                stage.addEventListener('mouseleave', resetTilt);
-
-                stage.addEventListener('touchmove', (e) => {
-                    if (e.touches && e.touches[0]) {
-                        applyTilt(e.touches[0].clientX, e.touches[0].clientY);
-                    }
-                }, { passive: true });
-                stage.addEventListener('touchend', resetTilt);
-            } catch (err) {}
+            if (isLightMode) {
+                root.classList.remove('dark');
+                root.classList.add('light-mode');
+                if (headerIcon) {
+                    headerIcon.classList.remove('fa-sun');
+                    headerIcon.classList.add('fa-moon');
+                }
+                if (drawerIcon) {
+                    drawerIcon.classList.remove('fa-sun');
+                    drawerIcon.classList.add('fa-moon');
+                }
+                if (drawerLabel) drawerLabel.textContent = 'Switch to Dark Mode';
+            } else {
+                root.classList.remove('light-mode');
+                root.classList.add('dark');
+                if (headerIcon) {
+                    headerIcon.classList.remove('fa-moon');
+                    headerIcon.classList.add('fa-sun');
+                }
+                if (drawerIcon) {
+                    drawerIcon.classList.remove('fa-moon');
+                    drawerIcon.classList.add('fa-sun');
+                }
+                if (drawerLabel) drawerLabel.textContent = 'Switch to Brightness Mode';
+            }
+            try { localStorage.setItem('aswa_theme_mode', isLightMode ? 'light' : 'dark'); } catch (e) {}
         }
 
-        /* Live Search Filter for Bento App Tiles */
-        function filterAppTiles(query) {
-            try {
-                const q = (query || '').toLowerCase().trim();
-                const tiles = document.querySelectorAll('.app-bento-item');
-                tiles.forEach(tile => {
-                    const keywords = (tile.getAttribute('data-search') || '').toLowerCase();
-                    if (!q || keywords.includes(q)) {
-                        tile.style.display = 'flex';
-                    } else {
-                        tile.style.display = 'none';
-                    }
-                });
-            } catch (e) {}
+        function toggleThemeMode() {
+            applyThemeMode(!isLightMode);
+            showToast(isLightMode ? 'Brightness Mode Active' : 'Dark Mode Active');
         }
 
         /* Smart Toast */
@@ -903,7 +795,7 @@
             try {
                 if (!imgEl || imgEl.dataset.fallbackApplied) return;
                 imgEl.dataset.fallbackApplied = 'true';
-                imgEl.src = 'https://placehold.co/100x100/09132e/38bdf8?text=ASWA';
+                imgEl.src = 'https://placehold.co/100x100/131939/5fa000?text=ASWA';
             } catch (e) {}
         }
 
@@ -960,7 +852,7 @@
         function refreshFullSystem() {
             const icon = document.getElementById('system-refresh-icon');
             if (icon) icon.classList.add('fa-spin');
-            showToast('Syncing Aurora 3D Hub...');
+            showToast('Syncing Data...');
             fetchBalances(true);
 
             ['app1', 'app2', 'app3', 'app4', 'app5'].forEach((id) => {
@@ -1155,7 +1047,12 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            init3DCardPhysics();
+            try {
+                const savedTheme = localStorage.getItem('aswa_theme_mode');
+                applyThemeMode(savedTheme === 'light');
+            } catch (e) {
+                applyThemeMode(false);
+            }
             switchView('home');
             renderSensitiveInfo();
             fetchBalances(false);
