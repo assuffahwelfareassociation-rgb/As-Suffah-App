@@ -135,6 +135,16 @@
             transform: scale(0.97);
         }
 
+        /* Row 1 & Row 2 Consistent Tile Accent Styles */
+        .row1-tile {
+            background: rgba(95, 160, 0, 0.10);
+            border-color: rgba(95, 160, 0, 0.35);
+        }
+        .row2-tile {
+            background: var(--glass-bg);
+            border-color: var(--glass-border);
+        }
+
         /* Drawer & Modal Transitions */
         .drawer-backdrop { transition: opacity 0.25s ease; }
         .drawer-panel { transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1); }
@@ -575,14 +585,14 @@
                     </div>
                 </div>
 
-                <!-- ================= SIMPLE GLASS APP LAUNCHER (NO SEARCH BOX, FULL READABLE NAMES) ================= -->
+                <!-- ================= SIMPLE GLASS APP LAUNCHER (ROW 1 SAME COLOR, ROW 2 SAME COLOR) ================= -->
                 <div class="my-auto py-3">
                     <div id="bento-apps-grid" class="grid grid-cols-2 gap-3.5">
 
-                        <!-- App 1: As Suffah Form -->
+                        <!-- ROW 1, ITEM 1: As Suffah Form (Same Row 1 Color: Fresh Green Accent) -->
                         <button type="button"
                                 onclick="switchView('app1')"
-                                class="glass-tile rounded-2xl p-4 flex flex-col items-start justify-between gap-3 text-left">
+                                class="glass-tile row1-tile rounded-2xl p-4 flex flex-col items-start justify-between gap-3 text-left">
                             <div class="w-10 h-10 rounded-xl bg-[#5fa000] text-white flex items-center justify-center shrink-0 shadow-sm">
                                 <i class="fa-solid fa-file-signature text-base"></i>
                             </div>
@@ -592,11 +602,11 @@
                             </div>
                         </button>
 
-                        <!-- App 2: Member Details -->
+                        <!-- ROW 1, ITEM 2: Member Details (Same Row 1 Color: Fresh Green Accent) -->
                         <button type="button"
                                 onclick="switchView('app2')"
-                                class="glass-tile rounded-2xl p-4 flex flex-col items-start justify-between gap-3 text-left">
-                           <div class="w-10 h-10 rounded-xl bg-[#5fa000] text-white flex items-center justify-center shrink-0 shadow-sm">
+                                class="glass-tile row1-tile rounded-2xl p-4 flex flex-col items-start justify-between gap-3 text-left">
+                            <div class="w-10 h-10 rounded-xl bg-[#5fa000] text-white flex items-center justify-center shrink-0 shadow-sm">
                                 <i class="fa-solid fa-id-card text-base"></i>
                             </div>
                             <div class="w-full">
@@ -605,10 +615,10 @@
                             </div>
                         </button>
 
-                        <!-- App 3: Profit Calculator -->
+                        <!-- ROW 2, ITEM 1: Profit Calculator (Same Row 2 Color: Neutral Glass Accent) -->
                         <button type="button"
                                 onclick="switchView('app3')"
-                                class="glass-tile rounded-2xl p-4 flex flex-col items-start justify-between gap-3 text-left">
+                                class="glass-tile row2-tile rounded-2xl p-4 flex flex-col items-start justify-between gap-3 text-left">
                             <div class="w-10 h-10 rounded-xl neutral-icon-box flex items-center justify-center shrink-0">
                                 <i class="fa-solid fa-calculator text-base"></i>
                             </div>
@@ -618,10 +628,10 @@
                             </div>
                         </button>
 
-                        <!-- App 4: Member Search -->
+                        <!-- ROW 2, ITEM 2: Member Search (Same Row 2 Color: Neutral Glass Accent) -->
                         <button type="button"
                                 onclick="switchView('app4')"
-                                class="glass-tile rounded-2xl p-4 flex flex-col items-start justify-between gap-3 text-left">
+                                class="glass-tile row2-tile rounded-2xl p-4 flex flex-col items-start justify-between gap-3 text-left">
                             <div class="w-10 h-10 rounded-xl neutral-icon-box flex items-center justify-center shrink-0">
                                 <i class="fa-solid fa-magnifying-glass text-base"></i>
                             </div>
