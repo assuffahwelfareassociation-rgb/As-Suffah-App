@@ -882,6 +882,29 @@
                             <button type="button"
                                     onclick="openAccountModal()"
                                     title="Account Settings"
+                        <!-- Brightness / Dark Mode, Refresh & Account Shortcut -->
+                        <div class="flex items-center gap-1.5 shrink-0">
+                            <button id="theme-toggle-btn"
+                                    type="button"
+                                    onclick="toggleThemeMode()"
+                                    title="Switch Dark / Brightness Mode"
+                                    aria-label="Toggle Theme"
+                                    class="w-9 h-9 rounded-xl simple-glass hover:bg-[#5fa000]/20 flex items-center justify-center text-[#5fa000] transition active:scale-90">
+                                <i id="theme-toggle-icon" class="fa-solid fa-sun text-xs"></i>
+                            </button>
+
+                            <button id="system-refresh-btn"
+                                    type="button"
+                                    onclick="refreshFullSystem()"
+                                    title="Refresh Data"
+                                    aria-label="Refresh System"
+                                    class="w-9 h-9 rounded-xl simple-glass hover:bg-[#5fa000]/20 flex items-center justify-center text-theme-main transition active:scale-90">
+                                <i id="system-refresh-icon" class="fa-solid fa-arrows-rotate text-xs"></i>
+                            </button>
+
+                            <button type="button"
+                                    onclick="openAccountModal()"
+                                    title="Account Settings"
                                     aria-label="Account Settings"
                                     class="w-9 h-9 rounded-xl simple-glass hover:bg-[#5fa000]/20 flex items-center justify-center text-theme-main transition active:scale-90">
                                 <i class="fa-solid fa-user-gear text-xs"></i>
@@ -889,29 +912,7 @@
                         </div>
                     </div>
 
-                    <!-- ================= 1. ADMIN VAULT ATM CARD (VISIBLE ONLY TO ADMIN) ================= -->
-                    <div id="admin-atm-card" class="hidden atm-glass-card rounded-3xl p-4 sm:p-5 flex flex-col justify-between relative overflow-hidden">
-                        <div class="absolute top-0 left-0 right-0 h-1 bg-[#5fa000]"></div>
-
-                        <div class="flex items-center justify-between gap-2 mb-4">
-                            <div class="flex items-center gap-2.5">
-                                <div class="w-8 h-8 rounded-xl bg-[#5fa000]/20 border border-[#5fa000]/50 flex items-center justify-center text-[#5fa000]">
-                                    <i class="fa-solid fa-vault text-xs"></i>
-                                </div>
-                                <div>
-                                    <span class="block text-xs font-extrabold tracking-widest text-theme-main">
-                                        AS-SUFFAH ADMIN
-                                    </span>
-                                    <span class="block text-[8.5px] font-semibold uppercase tracking-wider text-theme-muted">
-                                        ACCOUNTING VAULT
-                                    </span>
-                                </div>
-                            </div>
-
-                            <button id="toggle-eye-btn"
-                                    type="button"
-                                    onclick="toggleSensitiveInfo()"
-                    <!-- ================= 1. VAULT ATM CARD (VISIBLE TO BOTH ADMIN & MEMBER) ================= -->
+                    <!-- ================= VAULT ATM CARD (VISIBLE TO BOTH ADMIN & MEMBER) ================= -->
                     <div id="admin-atm-card" class="atm-glass-card rounded-3xl p-4 sm:p-5 flex flex-col justify-between relative overflow-hidden">
                         <div class="absolute top-0 left-0 right-0 h-1 bg-[#5fa000]"></div>
 
@@ -1466,6 +1467,12 @@
                 atmCardTitle.textContent = isAdmin ? 'AS-SUFFAH ADMIN' : 'AS-SUFFAH MEMBER';
             }
 
+            // Ensure ATM Vault Card is always visible for both Admin & Member
+            const adminAtmCard = document.getElementById('admin-atm-card');
+            if (adminAtmCard) {
+                adminAtmCard.classList.remove('hidden');
+            }
+
             // Tiles & Drawer Items
             const tileApp2 = document.getElementById('tile-app2'); // Member Details (Admin)
             const tileApp3 = document.getElementById('tile-app3'); // Profit Calculator (Admin)
@@ -1489,56 +1496,6 @@
                 tileMemberContact.classList.remove('hidden');
                 drawerMemberAddBtn.classList.add('hidden');
                 drawerVaultShortcut.classList.remove('hidden');
-            }
-        }
-
-        function applyRoleBasedInterface(user) {
-            const isAdmin = user.role === 'admin';
-
-            // Header & Drawer Role Labels
-            const headerSubtitle = document.getElementById('header-user-subtitle');
-            const drawerBadge = document.getElementById('drawer-role-badge');
-            if (headerSubtitle) {
-                headerSubtitle.textContent = isAdmin ? 'Admin Panel • ' + user.email : 'Member • ' + user.email;
-            }
-            if (drawerBadge) {
-                drawerBadge.textContent = isAdmin ? 'Admin Portal' : 'Member Portal';
-            }
-
-            // Admin vs Member Top Cards
-            const adminAtmCard = document.getElementById('admin-atm-card');
-            const memberWelcomeCard = document.getElementById('member-welcome-card');
-            const memberCardEmail = document.getElementById('member-card-email');
-
-            if (isAdmin) {
-                adminAtmCard.classList.remove('hidden');
-                memberWelcomeCard.classList.add('hidden');
-            } else {
-                adminAtmCard.classList.add('hidden');
-                memberWelcomeCard.classList.remove('hidden');
-                if (memberCardEmail) memberCardEmail.textContent = user.email + ' (' + user.mobile + ')';
-            }
-
-            // Admin-only Tiles & Drawer Items
-            const tileApp2 = document.getElementById('tile-app2'); // Member Details
-            const tileApp3 = document.getElementById('tile-app3'); // Profit Calculator
-            const tileMemberContact = document.getElementById('tile-member-contact'); // Contact Us for Member
-            const drawerMemberAddBtn = document.getElementById('drawer-member-add-btn');
-            const drawerVaultShortcut = document.getElementById('drawer-vault-shortcut');
-
-            if (isAdmin) {
-                tileApp2.classList.remove('hidden');
-                tileApp3.classList.remove('hidden');
-                tileMemberContact.classList.add('hidden');
-                drawerMemberAddBtn.classList.remove('hidden');
-                drawerVaultShortcut.classList.remove('hidden');
-            } else {
-                // Member View: Shows Form (app1), Member Search (app4), Investment Platform (app6), Contact Us
-                tileApp2.classList.add('hidden');
-                tileApp3.classList.add('hidden');
-                tileMemberContact.classList.remove('hidden');
-                drawerMemberAddBtn.classList.add('hidden');
-                drawerVaultShortcut.classList.add('hidden');
             }
         }
 
@@ -1861,15 +1818,21 @@
         }
 
         function refreshFullSystem() {
+            const refreshIcon = document.getElementById('system-refresh-icon');
+            if (refreshIcon) refreshIcon.classList.add('fa-spin');
             showToast('Syncing Data...');
             if (currentUser) {
-                fetchBalances(true);
+                fetchBalances();
             }
 
             ['app1', 'app2', 'app3', 'app4', 'app5', 'app6'].forEach((id) => {
                 const iframe = document.getElementById('iframe-' + id);
                 if (iframe && iframe.src) iframe.src = iframe.src;
             });
+
+            setTimeout(() => {
+                if (refreshIcon) refreshIcon.classList.remove('fa-spin');
+            }, 900);
         }
 
         function handleBackAndRefresh() {
