@@ -148,17 +148,18 @@
             transform: scale(0.97);
         }
 
+        /* Row-wise consistent color styling */
         .row1-tile {
-            background: rgba(95, 160, 0, 0.10);
-            border-color: rgba(95, 160, 0, 0.35);
+            background: rgba(95, 160, 0, 0.12);
+            border-color: rgba(95, 160, 0, 0.40);
         }
         .row2-tile {
             background: var(--glass-bg);
             border-color: var(--glass-border);
         }
         .row3-tile {
-            background: rgba(95, 160, 0, 0.10);
-            border-color: rgba(95, 160, 0, 0.35);
+            background: rgba(95, 160, 0, 0.12);
+            border-color: rgba(95, 160, 0, 0.40);
         }
 
         .drawer-backdrop { transition: opacity 0.25s ease; }
@@ -288,7 +289,6 @@
 
                     <!-- B. CREATE ACCOUNT FORM -->
                     <form id="form-register" onsubmit="handleRegisterSubmit(event)" class="hidden space-y-3">
-                        <!-- Account Role Selector -->
                         <div>
                             <label class="block text-[11px] font-bold text-theme-muted mb-1.5">একাউন্টের ধরন নির্বাচন করুন</label>
                             <div class="grid grid-cols-2 gap-2">
@@ -402,7 +402,7 @@
         </section>
 
         <!-- =========================================================================
-             2. PIN LOCK OVERLAY SCREEN (WHEN APP OPENS & USER HAS PIN LOCK ENABLED)
+             2. PIN LOCK OVERLAY SCREEN
              ========================================================================= -->
         <section id="pin-lock-screen" class="hidden absolute inset-0 z-[110] clean-navy-canvas flex flex-col justify-between p-6">
             <div class="pt-8 text-center">
@@ -412,7 +412,6 @@
                 <h2 class="text-base font-extrabold text-theme-main">অ্যাপ লক করা আছে</h2>
                 <p id="pin-lock-user-label" class="text-xs text-theme-muted mt-1">প্রবেশ করতে আপনার ৪-সংখ্যার PIN দিন</p>
 
-                <!-- 4 PIN Dots Indicator -->
                 <div id="pin-dots-container" class="flex items-center justify-center gap-4 mt-6">
                     <span class="pin-dot w-4 h-4 rounded-full border-2 border-[#5fa000] transition-all"></span>
                     <span class="pin-dot w-4 h-4 rounded-full border-2 border-[#5fa000] transition-all"></span>
@@ -422,7 +421,6 @@
                 <p id="pin-error-text" class="text-xs text-red-400 font-semibold mt-3 h-4"></p>
             </div>
 
-            <!-- Numeric Keypad -->
             <div class="max-w-[280px] w-full mx-auto my-auto">
                 <div class="grid grid-cols-3 gap-3.5">
                     <button type="button" onclick="enterPinDigit('1')" class="h-14 rounded-2xl glass-tile text-lg font-bold text-theme-main">1</button>
@@ -450,7 +448,12 @@
         </section>
 
         <!-- =========================================================================
-             3. LEFT SLIDE DRAWER (ROLE-AWARE NAVIGATION + ACCOUNT OPTION)
+             3. LEFT SLIDE DRAWER (UPDATED AS REQUESTED)
+             - Profile Photo instead of logo & Gmail ID instead of AS-SUFFAH PLATFORM
+             - Same icon color (#5fa000) for all navigation options
+             - Member Group tile spans 2 columns (col-span-2) for Member role
+             - Removed Display Mode and Vault Shortcut
+             - Logout button added at bottom of Menu
              ========================================================================= -->
         <div id="side-drawer-backdrop"
              onclick="closeLeftDrawer()"
@@ -463,17 +466,20 @@
             <div class="flex flex-col min-h-0 flex-1">
                 <div class="w-full h-4 shrink-0"></div>
 
-                <!-- Drawer Header -->
-                <div class="flex items-center justify-between pb-3.5 border-b border-theme pt-1 shrink-0">
+                <!-- Drawer Header: Profile Photo & Gmail ID -->
+                <div class="flex items-center justify-between pb-3.5 border-b border-theme pt-1 shrink-0 gap-2">
                     <div class="flex items-center gap-2.5 min-w-0">
-                        <div class="w-10 h-10 rounded-full p-0.5 bg-[#5fa000] shrink-0 overflow-hidden shadow-md">
-                            <img src="https://lh3.googleusercontent.com/d/1PXMzZMIOZbElnjIuOK2ew-FNMhuScYGx"
-                                 alt="ASWA Logo"
+                        <div class="w-11 h-11 rounded-full p-0.5 bg-[#5fa000] shrink-0 overflow-hidden shadow-md">
+                            <img id="drawer-profile-photo"
+                                 src="https://lh3.googleusercontent.com/d/1PXMzZMIOZbElnjIuOK2ew-FNMhuScYGx"
+                                 alt="Profile Photo"
                                  class="w-full h-full object-cover rounded-full bg-[#131939]"
                                  onerror="handleLogoFallback(this)">
                         </div>
                         <div class="min-w-0">
-                            <h2 class="text-xs font-bold text-theme-main tracking-wide truncate">AS-SUFFAH PLATFORM</h2>
+                            <h2 id="drawer-user-email" class="text-[11.5px] font-bold text-theme-main truncate">
+                                user@gmail.com
+                            </h2>
                             <span id="drawer-role-badge" class="inline-block mt-0.5 px-2 py-0.5 rounded-md bg-[#5fa000]/20 text-[#5fa000] text-[9.5px] font-extrabold uppercase tracking-wider">
                                 Member Portal
                             </span>
@@ -486,7 +492,7 @@
                     </button>
                 </div>
 
-                <!-- Drawer Options -->
+                <!-- Drawer Navigation Options (All Icons Same Color) -->
                 <div class="mt-4 space-y-4 overflow-y-auto pr-1 flex-1">
                     <div>
                         <p class="px-1 text-[10px] font-bold uppercase tracking-widest text-theme-muted mb-2.5">
@@ -501,9 +507,9 @@
                                 <span class="truncate">Dashboard</span>
                             </button>
 
-                            <!-- Account Settings Option (Requested in Menu) -->
-                            <button type="button" onclick="openAccountModal()" class="flex items-center gap-2.5 p-2.5 rounded-2xl glass-tile text-left text-xs font-semibold text-theme-main border-[#5fa000]/40">
-                                <span class="w-7 h-7 rounded-xl bg-[#5fa000] text-white flex items-center justify-center shrink-0">
+                            <!-- Account Settings Option -->
+                            <button type="button" onclick="openAccountModal()" class="flex items-center gap-2.5 p-2.5 rounded-2xl glass-tile text-left text-xs font-semibold text-theme-main">
+                                <span class="w-7 h-7 rounded-xl bg-[#5fa000]/20 text-[#5fa000] flex items-center justify-center shrink-0">
                                     <i class="fa-solid fa-user-gear text-[11px]"></i>
                                 </span>
                                 <span class="truncate">Account</span>
@@ -525,53 +531,41 @@
                                 <span class="truncate">Contact Us</span>
                             </button>
 
-                            <!-- Messenger Group -->
-                            <button type="button" onclick="openInfoModal('messenger')" class="flex items-center gap-2.5 p-2.5 rounded-2xl glass-tile text-left text-xs font-semibold text-theme-main">
+                            <!-- Messenger Group (Takes 2 slots width for Member role) -->
+                            <button type="button" id="drawer-group-btn" onclick="openInfoModal('messenger')" class="flex items-center gap-2.5 p-2.5 rounded-2xl glass-tile text-left text-xs font-semibold text-theme-main">
                                 <span class="w-7 h-7 rounded-xl bg-[#5fa000]/20 text-[#5fa000] flex items-center justify-center shrink-0">
                                     <i class="fa-brands fa-facebook-messenger text-[11px]"></i>
                                 </span>
-                                <span class="truncate">Group</span>
+                                <span class="truncate">Messenger Group</span>
                             </button>
 
-                            <!-- Member Add (ADMIN ONLY) -->
+                            <!-- Member Add (ADMIN ONLY - Same Icon Color) -->
                             <button type="button" id="drawer-member-add-btn" onclick="switchView('app5'); closeLeftDrawer();" class="flex items-center gap-2.5 p-2.5 rounded-2xl glass-tile text-left text-xs font-semibold text-theme-main">
-                                <span class="w-7 h-7 rounded-xl bg-[#5fa000] text-white flex items-center justify-center shrink-0">
+                                <span class="w-7 h-7 rounded-xl bg-[#5fa000]/20 text-[#5fa000] flex items-center justify-center shrink-0">
                                     <i class="fa-solid fa-user-plus text-[11px]"></i>
                                 </span>
                                 <span class="truncate">Member Add</span>
                             </button>
                         </div>
                     </div>
-
-                    <!-- Theme Mode Selector inside Drawer -->
-                    <div class="p-3 rounded-2xl simple-glass space-y-2">
-                        <span class="block text-[10px] font-bold uppercase tracking-wider text-theme-muted">Display Mode</span>
-                        <button type="button" onclick="toggleThemeMode()" class="w-full py-2 px-3 rounded-xl glass-tile flex items-center justify-between text-xs font-semibold text-theme-main">
-                            <span id="drawer-theme-label">Switch to Brightness Mode</span>
-                            <i id="drawer-theme-icon" class="fa-solid fa-sun text-[#5fa000]"></i>
-                        </button>
-                    </div>
-
-                    <!-- Quick Vault Shortcut (ADMIN ONLY) -->
-                    <div id="drawer-vault-shortcut" class="p-3 rounded-2xl simple-glass space-y-2">
-                        <span class="block text-[10px] font-bold uppercase tracking-wider text-theme-muted">Vault Shortcut</span>
-                        <button type="button" onclick="copyAccountNumber(); closeLeftDrawer();" class="w-full py-2 px-3 rounded-xl glass-tile flex items-center justify-between text-xs font-semibold text-theme-main">
-                            <span>Copy A/C: 2778 3324 32630</span>
-                            <i class="fa-regular fa-copy text-[#5fa000]"></i>
-                        </button>
-                    </div>
                 </div>
             </div>
 
-            <div class="pt-3 mt-2 border-t border-theme text-center shrink-0">
-                <p class="text-[10px] text-theme-muted">
+            <!-- Drawer Bottom: Logout Button & Developer Credit -->
+            <div class="pt-3 mt-2 border-t border-theme space-y-2.5 shrink-0">
+                <button type="button" onclick="logoutAccount()"
+                        class="w-full py-2.5 rounded-2xl bg-red-600 hover:bg-red-700 text-white text-xs font-bold tracking-wide shadow-md flex items-center justify-center gap-2 transition active:scale-98">
+                    <i class="fa-solid fa-right-from-bracket text-xs"></i>
+                    <span>লগআউট করুন (Logout)</span>
+                </button>
+                <p class="text-[10px] text-theme-muted text-center">
                     Developed by <span class="text-[#5fa000] font-bold">M Maksud Rs Ksa</span>
                 </p>
             </div>
         </aside>
 
         <!-- =========================================================================
-             4. ACCOUNT SETTINGS MODAL (PROFILE, CHANGE PASSWORD, PIN LOCK, LOGOUT)
+             4. ACCOUNT SETTINGS MODAL (PROFILE PHOTO UPLOAD, PIN LOCK, PASSWORD, LOGOUT)
              ========================================================================= -->
         <div id="account-settings-modal"
              onclick="closeAccountModal()"
@@ -597,15 +591,47 @@
                     </button>
                 </div>
 
-                <!-- User Info Card -->
-                <div class="p-3 rounded-2xl simple-glass mb-3.5 space-y-1">
-                    <div class="flex items-center justify-between text-xs">
-                        <span class="text-theme-muted">Gmail ID:</span>
-                        <span id="acc-modal-email" class="font-bold text-theme-main truncate max-w-[190px]">-</span>
+                <!-- Profile Photo Upload & User Info Card -->
+                <div class="p-3.5 rounded-2xl simple-glass mb-3.5">
+                    <div class="flex items-center gap-3 pb-3 mb-2.5 border-b border-theme">
+                        <div class="relative shrink-0">
+                            <div class="w-14 h-14 rounded-full p-0.5 bg-[#5fa000] overflow-hidden shadow">
+                                <img id="acc-modal-photo-preview"
+                                     src="https://lh3.googleusercontent.com/d/1PXMzZMIOZbElnjIuOK2ew-FNMhuScYGx"
+                                     alt="Profile"
+                                     class="w-full h-full object-cover rounded-full bg-[#131939]"
+                                     onerror="handleLogoFallback(this)">
+                            </div>
+                            <label for="profile-photo-input"
+                                   title="Change Photo"
+                                   class="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-[#5fa000] text-white flex items-center justify-center cursor-pointer shadow-md hover:scale-105 transition">
+                                <i class="fa-solid fa-camera text-[10px]"></i>
+                            </label>
+                            <input type="file" id="profile-photo-input" accept="image/*" class="hidden" onchange="handleProfilePhotoUpload(event)">
+                        </div>
+                        <div class="min-w-0 flex-1">
+                            <span class="block text-xs font-bold text-theme-main">প্রোফাইল ফটো (Profile Photo)</span>
+                            <span class="block text-[10px] text-theme-muted mt-0.5">ছবি যুক্ত বা পরিবর্তন করতে ক্যামেরা আইকনে ট্যাপ করুন</span>
+                            <div class="flex items-center gap-2 mt-1.5">
+                                <label for="profile-photo-input" class="px-2.5 py-1 rounded-lg bg-[#5fa000]/20 text-[#5fa000] text-[10px] font-bold cursor-pointer hover:bg-[#5fa000] hover:text-white transition">
+                                    ছবি নির্বাচন করুন
+                                </label>
+                                <button type="button" id="btn-remove-photo" onclick="removeProfilePhoto()" class="hidden px-2 py-1 rounded-lg bg-red-500/15 text-red-400 text-[10px] font-bold hover:bg-red-500 hover:text-white transition">
+                                    মুছুন
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="flex items-center justify-between text-xs">
-                        <span class="text-theme-muted">Mobile No:</span>
-                        <span id="acc-modal-mobile" class="font-bold text-theme-main">-</span>
+
+                    <div class="space-y-1">
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="text-theme-muted">Gmail ID:</span>
+                            <span id="acc-modal-email" class="font-bold text-theme-main truncate max-w-[190px]">-</span>
+                        </div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="text-theme-muted">Mobile No:</span>
+                            <span id="acc-modal-mobile" class="font-bold text-theme-main">-</span>
+                        </div>
                     </div>
                 </div>
 
@@ -693,7 +719,6 @@
                     </div>
 
                     <div class="space-y-2.5">
-                        <!-- Phone 1 -->
                         <div class="p-3 rounded-2xl simple-glass">
                             <div class="flex items-center justify-between gap-2">
                                 <a href="tel:01881132158" class="flex items-center gap-2.5 min-w-0 flex-1">
@@ -718,7 +743,6 @@
                             </div>
                         </div>
 
-                        <!-- Phone 2 -->
                         <div class="p-3 rounded-2xl simple-glass">
                             <div class="flex items-center justify-between gap-2">
                                 <a href="tel:01628998162" class="flex items-center gap-2.5 min-w-0 flex-1">
@@ -743,7 +767,6 @@
                             </div>
                         </div>
 
-                        <!-- Email -->
                         <div class="flex items-center justify-between gap-2 p-3 rounded-2xl simple-glass">
                             <a href="mailto:assuffahwelfareassociation@gmail.com" class="flex items-center gap-2.5 min-w-0 flex-1">
                                 <span class="w-8 h-8 rounded-xl bg-[#5fa000]/20 border border-[#5fa000]/40 text-[#5fa000] flex items-center justify-center shrink-0">
@@ -842,7 +865,7 @@
                     <!-- Safe Notch Space -->
                     <div class="w-full h-5 shrink-0"></div>
 
-                    <!-- Minimal Floating Header with Theme Toggle -->
+                    <!-- Minimal Floating Header (Account button removed from top, only Theme toggle kept) -->
                     <div class="flex items-center justify-between gap-2 mb-3.5">
                         <button type="button"
                                 onclick="openLeftDrawer()"
@@ -868,8 +891,8 @@
                             </div>
                         </div>
 
-                        <!-- Brightness / Dark Mode & Account Shortcut -->
-                        <div class="flex items-center gap-1.5 shrink-0">
+                        <!-- Single Dark / Brightness Mode Button -->
+                        <div class="flex items-center shrink-0">
                             <button id="theme-toggle-btn"
                                     type="button"
                                     onclick="toggleThemeMode()"
@@ -877,37 +900,6 @@
                                     aria-label="Toggle Theme"
                                     class="w-9 h-9 rounded-xl simple-glass hover:bg-[#5fa000]/20 flex items-center justify-center text-[#5fa000] transition active:scale-90">
                                 <i id="theme-toggle-icon" class="fa-solid fa-sun text-xs"></i>
-                            </button>
-
-                            <button type="button"
-                                    onclick="openAccountModal()"
-                                    title="Account Settings"
-                        <!-- Brightness / Dark Mode, Refresh & Account Shortcut -->
-                        <div class="flex items-center gap-1.5 shrink-0">
-                            <button id="theme-toggle-btn"
-                                    type="button"
-                                    onclick="toggleThemeMode()"
-                                    title="Switch Dark / Brightness Mode"
-                                    aria-label="Toggle Theme"
-                                    class="w-9 h-9 rounded-xl simple-glass hover:bg-[#5fa000]/20 flex items-center justify-center text-[#5fa000] transition active:scale-90">
-                                <i id="theme-toggle-icon" class="fa-solid fa-sun text-xs"></i>
-                            </button>
-
-                            <button id="system-refresh-btn"
-                                    type="button"
-                                    onclick="refreshFullSystem()"
-                                    title="Refresh Data"
-                                    aria-label="Refresh System"
-                                    class="w-9 h-9 rounded-xl simple-glass hover:bg-[#5fa000]/20 flex items-center justify-center text-theme-main transition active:scale-90">
-                                <i id="system-refresh-icon" class="fa-solid fa-arrows-rotate text-xs"></i>
-                            </button>
-
-                            <button type="button"
-                                    onclick="openAccountModal()"
-                                    title="Account Settings"
-                                    aria-label="Account Settings"
-                                    class="w-9 h-9 rounded-xl simple-glass hover:bg-[#5fa000]/20 flex items-center justify-center text-theme-main transition active:scale-90">
-                                <i class="fa-solid fa-user-gear text-xs"></i>
                             </button>
                         </div>
                     </div>
@@ -984,11 +976,11 @@
                     </div>
                 </div>
 
-                <!-- ================= APP LAUNCHER GRID (ROLE-FILTERED TILES) ================= -->
+                <!-- ================= APP LAUNCHER GRID (SAME COLOR PER ROW) ================= -->
                 <div class="my-auto py-2">
                     <div id="bento-apps-grid" class="grid grid-cols-2 gap-3">
 
-                        <!-- 1: As Suffah Form (BOTH ADMIN & MEMBER) -->
+                        <!-- ROW 1 APP 1: Monthly Deposits / মাসিক জমা (BOTH ADMIN & MEMBER) -->
                         <button type="button"
                                 id="tile-app1"
                                 onclick="switchView('app1')"
@@ -997,12 +989,12 @@
                                 <i class="fa-solid fa-file-signature text-sm"></i>
                             </div>
                             <div class="w-full">
-                                <span class="block text-[13px] font-bold text-theme-main leading-snug">As Suffah Form</span>
-                                <span class="block text-[10.5px] text-theme-muted mt-0.5">ডাটা এন্ট্রি ফরম</span>
+                                <span class="block text-[13px] font-bold text-theme-main leading-snug">Monthly Deposits</span>
+                                <span class="block text-[10.5px] text-theme-muted mt-0.5">মাসিক জমা ফরম</span>
                             </div>
                         </button>
 
-                        <!-- 2: Member Details (ADMIN ONLY) -->
+                        <!-- ROW 1 APP 2: Member Details (ADMIN ONLY - SAME COLOR AS ROW 1 APP 1) -->
                         <button type="button"
                                 id="tile-app2"
                                 onclick="switchView('app2')"
@@ -1016,7 +1008,7 @@
                             </div>
                         </button>
 
-                        <!-- 3: Profit Calculator (ADMIN ONLY) -->
+                        <!-- ROW 2 APP 1: Profit Calculator (ADMIN ONLY) -->
                         <button type="button"
                                 id="tile-app3"
                                 onclick="switchView('app3')"
@@ -1030,12 +1022,12 @@
                             </div>
                         </button>
 
-                        <!-- 4: Member Search (BOTH ADMIN & MEMBER) -->
+                        <!-- ROW 1 (Member) / ROW 2 (Admin): Member Search -->
                         <button type="button"
                                 id="tile-app4"
                                 onclick="switchView('app4')"
                                 class="glass-tile row2-tile h-[106px] rounded-2xl p-3.5 flex flex-col items-start justify-between text-left">
-                            <div class="w-9 h-9 rounded-xl neutral-icon-box flex items-center justify-center shrink-0">
+                            <div id="icon-app4" class="w-9 h-9 rounded-xl neutral-icon-box flex items-center justify-center shrink-0">
                                 <i class="fa-solid fa-magnifying-glass text-sm"></i>
                             </div>
                             <div class="w-full">
@@ -1044,26 +1036,26 @@
                             </div>
                         </button>
 
-                        <!-- 5: Investment Platform / Portal (BOTH ADMIN & MEMBER) -->
+                        <!-- ROW 3 (Admin) / ROW 2 (Member): Investment Details -->
                         <button type="button"
                                 id="tile-app6"
                                 onclick="switchView('app6')"
                                 class="col-span-2 glass-tile row3-tile h-[106px] rounded-2xl p-3.5 flex flex-col items-start justify-between text-left">
-                            <div class="w-9 h-9 rounded-xl bg-[#5fa000] text-white flex items-center justify-center shrink-0 shadow-sm">
+                            <div id="icon-app6" class="w-9 h-9 rounded-xl bg-[#5fa000] text-white flex items-center justify-center shrink-0 shadow-sm">
                                 <i class="fa-solid fa-chart-pie text-sm"></i>
                             </div>
                             <div class="w-full">
-                                <span class="block text-[13px] font-bold text-theme-main leading-snug truncate">As-Suffah Investment Platform</span>
+                                <span class="block text-[13px] font-bold text-theme-main leading-snug truncate">Investment Details</span>
                                 <span class="block text-[10.5px] text-theme-muted mt-0.5 truncate">ইনভেস্টমেন্ট ও লেনদেন বিবরণী</span>
                             </div>
                         </button>
 
-                        <!-- 6: Contact Us Tile (MEMBER DASHBOARD - 4TH TILE IN 2X2 GRID) -->
+                        <!-- ROW 2 APP 2 (MEMBER DASHBOARD - SAME COLOR AS INVESTMENT DETAILS IN ROW 2) -->
                         <button type="button"
                                 id="tile-member-contact"
                                 onclick="openInfoModal('contact')"
                                 class="hidden glass-tile row2-tile h-[106px] rounded-2xl p-3.5 flex flex-col items-start justify-between text-left">
-                            <div class="w-9 h-9 rounded-xl neutral-icon-box flex items-center justify-center shrink-0">
+                            <div id="icon-member-contact" class="w-9 h-9 rounded-xl neutral-icon-box flex items-center justify-center shrink-0">
                                 <i class="fa-solid fa-headset text-sm"></i>
                             </div>
                             <div class="w-full">
@@ -1115,13 +1107,14 @@
 
     <!-- JavaScript Logic -->
     <script>
-        // Backend Google Apps Script Web App URL (Deploy your updated Code.gs and keep URL here)
         const APPS_SCRIPT_EXEC_URL = 'https://script.google.com/macros/s/AKfycby_p4p6_G40RA9suLZ5xCkCoPY4TVDx8NA54aKFcgHeBRm2SlsHR9CMy-xeyqDr2niv2Q/exec';
         const SESSION_STORAGE_KEY = 'aswa_logged_in_user_v1';
+        const PHOTO_STORAGE_PREFIX = 'aswa_profile_photo_';
+        const DEFAULT_AVATAR_URL = 'https://lh3.googleusercontent.com/d/1PXMzZMIOZbElnjIuOK2ew-FNMhuScYGx';
 
         const APP_CONFIG = {
             app1: {
-                title: 'As Suffah Form',
+                title: 'Monthly Deposits (মাসিক জমা)',
                 url: 'https://docs.google.com/forms/d/e/1FAIpQLScimaLEp4pSTNxQ-X7nI8CogFdbDLLB1a9qjcvngvAl4lJb8g/viewform?pli=1'
             },
             app2: {
@@ -1141,12 +1134,12 @@
                 url: 'https://script.google.com/macros/s/AKfycbx9BWnj4XmUi3xJcNx3InSgXgZRP9nWQCJtlAQG0RJO6-HGo5HOXNLKitXTzqsjaw929w/exec'
             },
             app6: {
-                title: 'As-Suffah Investment Platform',
+                title: 'Investment Details',
                 url: 'https://script.google.com/macros/s/AKfycbzEBKOwhdQwXoCP6FF5vPU6ieEAngw8J51IZ4Hl6IFerSxndQG2n7-5rNuTxQFotpqy/exec'
             }
         };
 
-        let currentUser = null; // { email, mobile, role: 'admin'|'member', pin }
+        let currentUser = null;
         let currentActiveView = 'home';
         const FULL_ACCOUNT_NO = '2778 3324 32630';
         const MASKED_ACCOUNT_NO = '27•• •••• ••630';
@@ -1164,10 +1157,86 @@
         };
 
         /* =====================================================================
-           API COMMUNICATION HELPER (Supports Google Apps Script & External Host)
+           PROFILE PHOTO MANAGEMENT (ADMIN & MEMBER)
+           ===================================================================== */
+        function getUserPhotoKey(email) {
+            return PHOTO_STORAGE_PREFIX + String(email || '').trim().toLowerCase();
+        }
+
+        function getSavedProfilePhoto(email) {
+            try {
+                return localStorage.getItem(getUserPhotoKey(email)) || '';
+            } catch (e) {
+                return '';
+            }
+        }
+
+        function syncUserProfilePhotoUI() {
+            if (!currentUser) return;
+            const savedPhoto = getSavedProfilePhoto(currentUser.email);
+            const photoSrc = savedPhoto || DEFAULT_AVATAR_URL;
+
+            const drawerPhoto = document.getElementById('drawer-profile-photo');
+            const modalPreview = document.getElementById('acc-modal-photo-preview');
+            const removeBtn = document.getElementById('btn-remove-photo');
+
+            if (drawerPhoto) drawerPhoto.src = photoSrc;
+            if (modalPreview) modalPreview.src = photoSrc;
+            if (removeBtn) {
+                if (savedPhoto) removeBtn.classList.remove('hidden');
+                else removeBtn.classList.add('hidden');
+            }
+        }
+
+        function handleProfilePhotoUpload(event) {
+            if (!currentUser) return;
+            const file = event.target.files && event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    // Compress & resize image to 220x220 so it fits smoothly in localStorage
+                    const canvas = document.createElement('canvas');
+                    const size = 220;
+                    canvas.width = size;
+                    canvas.height = size;
+                    const ctx = canvas.getContext('2d');
+
+                    const minSide = Math.min(img.width, img.height);
+                    const sx = (img.width - minSide) / 2;
+                    const sy = (img.height - minSide) / 2;
+                    ctx.drawImage(img, sx, sy, minSide, minSide, 0, 0, size, size);
+
+                    const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.82);
+                    try {
+                        localStorage.setItem(getUserPhotoKey(currentUser.email), compressedDataUrl);
+                        syncUserProfilePhotoUI();
+                        showToast('প্রোফাইল ফটো সেভ হয়েছে!');
+                    } catch (err) {
+                        showToast('ছবি সেভ করতে সমস্যা হয়েছে');
+                    }
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+            event.target.value = '';
+        }
+
+        function removeProfilePhoto() {
+            if (!currentUser) return;
+            try {
+                localStorage.removeItem(getUserPhotoKey(currentUser.email));
+                syncUserProfilePhotoUI();
+                showToast('প্রোফাইল ফটো মুছে ফেলা হয়েছে');
+            } catch (e) {}
+        }
+
+        /* =====================================================================
+           API COMMUNICATION HELPER
            ===================================================================== */
         async function callBackendPost(payload) {
-            // If running directly inside Google Apps Script HtmlService
             if (typeof google !== 'undefined' && google.script && google.script.run) {
                 return new Promise((resolve, reject) => {
                     const methodMap = {
@@ -1186,7 +1255,6 @@
                 });
             }
 
-            // If running from GitHub Pages / External Web (Uses GET query params to bypass Google 302 POST redirect drop)
             const queryParams = new URLSearchParams();
             Object.keys(payload).forEach((key) => {
                 if (payload[key] !== undefined && payload[key] !== null) {
@@ -1208,12 +1276,12 @@
             try {
                 return JSON.parse(textResponse);
             } catch (parseErr) {
-                throw new Error('Invalid JSON response from server. Check Web App Deployment permissions (Who has access: Anyone).');
+                throw new Error('Invalid JSON response from server.');
             }
         }
 
         /* =====================================================================
-           AUTHENTICATION UI & LOGIC (LOGIN, CREATE ACCOUNT, FORGOT PASSWORD)
+           AUTHENTICATION UI & LOGIC
            ===================================================================== */
         function switchAuthTab(tab) {
             const loginForm = document.getElementById('form-login');
@@ -1436,7 +1504,6 @@
             currentUser = user;
             document.getElementById('auth-screen').classList.add('hidden');
 
-            // If user has a PIN Lock enabled and app just opened, show PIN lock screen first
             if (checkPinLockOnOpen && user.pin && user.pin.length === 4) {
                 openPinLockScreen(user);
             } else {
@@ -1444,6 +1511,7 @@
             }
 
             applyRoleBasedInterface(user);
+            syncUserProfilePhotoUI();
             switchView('home');
 
             renderSensitiveInfo();
@@ -1453,12 +1521,17 @@
         function applyRoleBasedInterface(user) {
             const isAdmin = user.role === 'admin';
 
-            // Header & Drawer Role Labels
+            // Header & Drawer Info
             const headerSubtitle = document.getElementById('header-user-subtitle');
             const drawerBadge = document.getElementById('drawer-role-badge');
+            const drawerUserEmail = document.getElementById('drawer-user-email');
             const atmCardTitle = document.getElementById('atm-card-title');
+
             if (headerSubtitle) {
                 headerSubtitle.textContent = isAdmin ? 'Admin Panel • ' + user.email : 'Member • ' + user.email;
+            }
+            if (drawerUserEmail) {
+                drawerUserEmail.textContent = user.email;
             }
             if (drawerBadge) {
                 drawerBadge.textContent = isAdmin ? 'Admin Portal' : 'Member Portal';
@@ -1467,35 +1540,63 @@
                 atmCardTitle.textContent = isAdmin ? 'AS-SUFFAH ADMIN' : 'AS-SUFFAH MEMBER';
             }
 
-            // Ensure ATM Vault Card is always visible for both Admin & Member
-            const adminAtmCard = document.getElementById('admin-atm-card');
-            if (adminAtmCard) {
-                adminAtmCard.classList.remove('hidden');
-            }
+            // Tiles & Icon Color Consistency (2 apps in 1 row = same color)
+            const tileApp2 = document.getElementById('tile-app2');
+            const tileApp3 = document.getElementById('tile-app3');
+            const tileApp4 = document.getElementById('tile-app4');
+            const iconApp4 = document.getElementById('icon-app4');
+            const tileApp6 = document.getElementById('tile-app6');
+            const iconApp6 = document.getElementById('icon-app6');
+            const tileMemberContact = document.getElementById('tile-member-contact');
+            const iconMemberContact = document.getElementById('icon-member-contact');
 
-            // Tiles & Drawer Items
-            const tileApp2 = document.getElementById('tile-app2'); // Member Details (Admin)
-            const tileApp3 = document.getElementById('tile-app3'); // Profit Calculator (Admin)
-            const tileApp6 = document.getElementById('tile-app6'); // Investment Platform (Both)
-            const tileMemberContact = document.getElementById('tile-member-contact'); // Contact Us (Member)
             const drawerMemberAddBtn = document.getElementById('drawer-member-add-btn');
-            const drawerVaultShortcut = document.getElementById('drawer-vault-shortcut');
+            const drawerGroupBtn = document.getElementById('drawer-group-btn');
 
             if (isAdmin) {
+                // Admin Layout:
+                // Row 1: Monthly Deposits (lime) + Member Details (lime)
+                // Row 2: Profit Calculator (neutral) + Member Search (neutral)
+                // Row 3: Investment Details (lime, col-span-2)
                 tileApp2.classList.remove('hidden');
                 tileApp3.classList.remove('hidden');
-                tileApp6.classList.add('col-span-2');
                 tileMemberContact.classList.add('hidden');
+
+                tileApp4.classList.remove('row1-tile');
+                tileApp4.classList.add('row2-tile');
+                iconApp4.className = 'w-9 h-9 rounded-xl neutral-icon-box flex items-center justify-center shrink-0';
+
+                tileApp6.classList.add('col-span-2', 'row3-tile');
+                tileApp6.classList.remove('row2-tile');
+                iconApp6.className = 'w-9 h-9 rounded-xl bg-[#5fa000] text-white flex items-center justify-center shrink-0 shadow-sm';
+
                 drawerMemberAddBtn.classList.remove('hidden');
-                drawerVaultShortcut.classList.remove('hidden');
+                drawerGroupBtn.classList.remove('col-span-2');
             } else {
-                // Member View: 4 Apps cleanly arranged in 2 Rows (2x2 Grid)
+                // Member Layout:
+                // Row 1: Monthly Deposits (lime) + Member Search (lime) -> SAME COLOR IN ROW 1
+                // Row 2: Investment Details (neutral) + Contact Us (neutral) -> SAME COLOR IN ROW 2
                 tileApp2.classList.add('hidden');
                 tileApp3.classList.add('hidden');
-                tileApp6.classList.remove('col-span-2');
                 tileMemberContact.classList.remove('hidden');
+
+                // Row 1 pair: app1 + app4 -> lime icon & row1-tile
+                tileApp4.classList.remove('row2-tile');
+                tileApp4.classList.add('row1-tile');
+                iconApp4.className = 'w-9 h-9 rounded-xl bg-[#5fa000] text-white flex items-center justify-center shrink-0 shadow-sm';
+
+                // Row 2 pair: app6 + member-contact -> neutral icon & row2-tile
+                tileApp6.classList.remove('col-span-2', 'row3-tile');
+                tileApp6.classList.add('row2-tile');
+                iconApp6.className = 'w-9 h-9 rounded-xl neutral-icon-box flex items-center justify-center shrink-0';
+
+                tileMemberContact.classList.remove('row1-tile');
+                tileMemberContact.classList.add('row2-tile');
+                iconMemberContact.className = 'w-9 h-9 rounded-xl neutral-icon-box flex items-center justify-center shrink-0';
+
+                // Drawer: hide Member Add, make Messenger Group span 2 columns (2x width)
                 drawerMemberAddBtn.classList.add('hidden');
-                drawerVaultShortcut.classList.remove('hidden');
+                drawerGroupBtn.classList.add('col-span-2');
             }
         }
 
@@ -1563,11 +1664,13 @@
         }
 
         /* =====================================================================
-           ACCOUNT MODAL (CHANGE PASSWORD & PIN LOCK MANAGEMENT)
+           ACCOUNT MODAL (PROFILE PHOTO, CHANGE PASSWORD & PIN LOCK MANAGEMENT)
            ===================================================================== */
         function openAccountModal() {
             closeLeftDrawer();
             if (!currentUser) return;
+
+            syncUserProfilePhotoUI();
 
             document.getElementById('acc-modal-role').textContent =
                 currentUser.role === 'admin' ? 'Admin Account' : 'Member Account';
@@ -1694,28 +1797,22 @@
         }
 
         /* =====================================================================
-           EXISTING THEME, TOAST, MODAL, DRAWER & BALANCE FUNCTIONS
+           THEME, TOAST, MODAL, DRAWER & BALANCE FUNCTIONS
            ===================================================================== */
         let isLightMode = false;
         function applyThemeMode(light) {
             isLightMode = !!light;
             const root = document.documentElement;
             const headerIcon = document.getElementById('theme-toggle-icon');
-            const drawerIcon = document.getElementById('drawer-theme-icon');
-            const drawerLabel = document.getElementById('drawer-theme-label');
 
             if (isLightMode) {
                 root.classList.remove('dark');
                 root.classList.add('light-mode');
                 if (headerIcon) headerIcon.classList.replace('fa-sun', 'fa-moon');
-                if (drawerIcon) drawerIcon.classList.replace('fa-sun', 'fa-moon');
-                if (drawerLabel) drawerLabel.textContent = 'Switch to Dark Mode';
             } else {
                 root.classList.remove('light-mode');
                 root.classList.add('dark');
                 if (headerIcon) headerIcon.classList.replace('fa-moon', 'fa-sun');
-                if (drawerIcon) drawerIcon.classList.replace('fa-moon', 'fa-sun');
-                if (drawerLabel) drawerLabel.textContent = 'Switch to Brightness Mode';
             }
             try { localStorage.setItem('aswa_theme_mode', isLightMode ? 'light' : 'dark'); } catch (e) {}
         }
@@ -1818,21 +1915,15 @@
         }
 
         function refreshFullSystem() {
-            const refreshIcon = document.getElementById('system-refresh-icon');
-            if (refreshIcon) refreshIcon.classList.add('fa-spin');
             showToast('Syncing Data...');
             if (currentUser) {
-                fetchBalances();
+                fetchBalances(true);
             }
 
             ['app1', 'app2', 'app3', 'app4', 'app5', 'app6'].forEach((id) => {
                 const iframe = document.getElementById('iframe-' + id);
                 if (iframe && iframe.src) iframe.src = iframe.src;
             });
-
-            setTimeout(() => {
-                if (refreshIcon) refreshIcon.classList.remove('fa-spin');
-            }, 900);
         }
 
         function handleBackAndRefresh() {
@@ -2025,13 +2116,10 @@
                 applyThemeMode(false);
             }
 
-            // Check Persistent Login Session
             const savedUser = getSavedUserSession();
             if (savedUser && savedUser.email) {
-                // User is already logged in; open dashboard (and check PIN lock if active)
                 enterDashboardForUser(savedUser, true);
             } else {
-                // Show Login / Create Account Enter Page first
                 document.getElementById('auth-screen').classList.remove('hidden');
                 switchAuthTab('login');
             }
