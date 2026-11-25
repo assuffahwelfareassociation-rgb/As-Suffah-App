@@ -911,6 +911,28 @@
                             <button id="toggle-eye-btn"
                                     type="button"
                                     onclick="toggleSensitiveInfo()"
+                    <!-- ================= 1. VAULT ATM CARD (VISIBLE TO BOTH ADMIN & MEMBER) ================= -->
+                    <div id="admin-atm-card" class="atm-glass-card rounded-3xl p-4 sm:p-5 flex flex-col justify-between relative overflow-hidden">
+                        <div class="absolute top-0 left-0 right-0 h-1 bg-[#5fa000]"></div>
+
+                        <div class="flex items-center justify-between gap-2 mb-4">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-8 h-8 rounded-xl bg-[#5fa000]/20 border border-[#5fa000]/50 flex items-center justify-center text-[#5fa000]">
+                                    <i class="fa-solid fa-vault text-xs"></i>
+                                </div>
+                                <div>
+                                    <span id="atm-card-title" class="block text-xs font-extrabold tracking-widest text-theme-main">
+                                        AS-SUFFAH
+                                    </span>
+                                    <span class="block text-[8.5px] font-semibold uppercase tracking-wider text-theme-muted">
+                                        ACCOUNTING VAULT
+                                    </span>
+                                </div>
+                            </div>
+
+                            <button id="toggle-eye-btn"
+                                    type="button"
+                                    onclick="toggleSensitiveInfo()"
                                     class="px-3.5 py-1.5 rounded-xl bg-[#5fa000] hover:bg-[#5fa000]/90 flex items-center gap-1.5 text-white transition active:scale-95">
                                 <i id="eye-icon" class="fa-solid fa-eye text-[10px]"></i>
                                 <span id="eye-label" class="text-[10px] font-bold uppercase tracking-wider">
@@ -956,23 +978,6 @@
                                    class="text-sm font-bold tracking-wide text-theme-main truncate">
                                     BDT: ••••••••
                                 </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- ================= 2. MEMBER WELCOME CARD (VISIBLE ONLY TO MEMBER) ================= -->
-                    <div id="member-welcome-card" class="hidden atm-glass-card rounded-3xl p-4 sm:p-5 relative overflow-hidden">
-                        <div class="absolute top-0 left-0 right-0 h-1 bg-[#5fa000]"></div>
-                        <div class="flex items-center justify-between gap-3">
-                            <div class="min-w-0">
-                                <span class="inline-block px-2.5 py-0.5 rounded-full bg-[#5fa000]/20 text-[#5fa000] text-[10px] font-extrabold uppercase tracking-wider mb-1.5">
-                                    Member Portal
-                                </span>
-                                <h2 class="text-sm font-extrabold text-theme-main truncate">স্বাগতম, আস-সুফফাহ সদস্য!</h2>
-                                <p id="member-card-email" class="text-xs text-theme-muted truncate mt-0.5">member@gmail.com</p>
-                            </div>
-                            <div class="w-12 h-12 rounded-2xl bg-[#5fa000] text-white flex items-center justify-center shrink-0 shadow-lg">
-                                <i class="fa-solid fa-hand-holding-heart text-lg"></i>
                             </div>
                         </div>
                     </div>
@@ -1052,23 +1057,18 @@
                             </div>
                         </button>
 
-                        <!-- 6: Contact Us Tile (MEMBER DASHBOARD DIRECT ACCESS) -->
+                        <!-- 6: Contact Us Tile (MEMBER DASHBOARD - 4TH TILE IN 2X2 GRID) -->
                         <button type="button"
                                 id="tile-member-contact"
                                 onclick="openInfoModal('contact')"
-                                class="hidden col-span-2 glass-tile row2-tile h-[96px] rounded-2xl p-3.5 flex items-center justify-between text-left">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-xl bg-[#5fa000]/20 border border-[#5fa000]/40 text-[#5fa000] flex items-center justify-center shrink-0">
-                                    <i class="fa-solid fa-headset text-base"></i>
-                                </div>
-                                <div>
-                                    <span class="block text-[13px] font-bold text-theme-main leading-snug">Contact Us</span>
-                                    <span class="block text-[10.5px] text-theme-muted mt-0.5">যোগাযোগ, বিকাশ/নগদ ও ইমেইল</span>
-                                </div>
+                                class="hidden glass-tile row2-tile h-[106px] rounded-2xl p-3.5 flex flex-col items-start justify-between text-left">
+                            <div class="w-9 h-9 rounded-xl neutral-icon-box flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-headset text-sm"></i>
                             </div>
-                            <span class="w-8 h-8 rounded-xl neutral-icon-box flex items-center justify-center shrink-0">
-                                <i class="fa-solid fa-chevron-right text-xs"></i>
-                            </span>
+                            <div class="w-full">
+                                <span class="block text-[13px] font-bold text-theme-main leading-snug">Contact Us</span>
+                                <span class="block text-[10.5px] text-theme-muted mt-0.5">যোগাযোগ ও পেমেন্ট</span>
+                            </div>
                         </button>
 
                     </div>
@@ -1445,9 +1445,50 @@
             applyRoleBasedInterface(user);
             switchView('home');
 
-            if (user.role === 'admin') {
-                renderSensitiveInfo();
-                fetchBalances(false);
+            renderSensitiveInfo();
+            fetchBalances(false);
+        }
+
+        function applyRoleBasedInterface(user) {
+            const isAdmin = user.role === 'admin';
+
+            // Header & Drawer Role Labels
+            const headerSubtitle = document.getElementById('header-user-subtitle');
+            const drawerBadge = document.getElementById('drawer-role-badge');
+            const atmCardTitle = document.getElementById('atm-card-title');
+            if (headerSubtitle) {
+                headerSubtitle.textContent = isAdmin ? 'Admin Panel • ' + user.email : 'Member • ' + user.email;
+            }
+            if (drawerBadge) {
+                drawerBadge.textContent = isAdmin ? 'Admin Portal' : 'Member Portal';
+            }
+            if (atmCardTitle) {
+                atmCardTitle.textContent = isAdmin ? 'AS-SUFFAH ADMIN' : 'AS-SUFFAH MEMBER';
+            }
+
+            // Tiles & Drawer Items
+            const tileApp2 = document.getElementById('tile-app2'); // Member Details (Admin)
+            const tileApp3 = document.getElementById('tile-app3'); // Profit Calculator (Admin)
+            const tileApp6 = document.getElementById('tile-app6'); // Investment Platform (Both)
+            const tileMemberContact = document.getElementById('tile-member-contact'); // Contact Us (Member)
+            const drawerMemberAddBtn = document.getElementById('drawer-member-add-btn');
+            const drawerVaultShortcut = document.getElementById('drawer-vault-shortcut');
+
+            if (isAdmin) {
+                tileApp2.classList.remove('hidden');
+                tileApp3.classList.remove('hidden');
+                tileApp6.classList.add('col-span-2');
+                tileMemberContact.classList.add('hidden');
+                drawerMemberAddBtn.classList.remove('hidden');
+                drawerVaultShortcut.classList.remove('hidden');
+            } else {
+                // Member View: 4 Apps cleanly arranged in 2 Rows (2x2 Grid)
+                tileApp2.classList.add('hidden');
+                tileApp3.classList.add('hidden');
+                tileApp6.classList.remove('col-span-2');
+                tileMemberContact.classList.remove('hidden');
+                drawerMemberAddBtn.classList.add('hidden');
+                drawerVaultShortcut.classList.remove('hidden');
             }
         }
 
@@ -1821,7 +1862,7 @@
 
         function refreshFullSystem() {
             showToast('Syncing Data...');
-            if (currentUser && currentUser.role === 'admin') {
+            if (currentUser) {
                 fetchBalances(true);
             }
 
@@ -1845,7 +1886,7 @@
                 if (targetIframe && targetIframe.src) targetIframe.src = targetIframe.src;
             }
 
-            if (currentUser && currentUser.role === 'admin') {
+            if (currentUser) {
                 fetchBalances(true);
             }
 
