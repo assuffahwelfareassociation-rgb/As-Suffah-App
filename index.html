@@ -30,7 +30,6 @@
     </script>
 
     <style>
-        /* Strictly 3 Colors: #131939 (Deep Navy), #5fa000 (Fresh Green), #ffffff (Pure White) */
         :root {
             --bg-main: #131939;
             --text-main: #ffffff;
@@ -41,10 +40,11 @@
             --atm-border: rgba(255, 255, 255, 0.22);
             --atm-shadow: 0 20px 40px rgba(19, 25, 57, 0.65);
             --inner-box-bg: rgba(19, 25, 57, 0.60);
-            --panel-solid: rgba(19, 25, 57, 0.96);
+            --panel-solid: rgba(19, 25, 57, 0.97);
             --icon-neutral-bg: rgba(255, 255, 255, 0.14);
             --icon-neutral-text: #ffffff;
             --tile-hover-bg: rgba(95, 160, 0, 0.18);
+            --input-bg: rgba(255, 255, 255, 0.08);
         }
 
         html.light-mode {
@@ -57,10 +57,11 @@
             --atm-border: rgba(19, 25, 57, 0.15);
             --atm-shadow: 0 18px 36px rgba(19, 25, 57, 0.10);
             --inner-box-bg: rgba(19, 25, 57, 0.05);
-            --panel-solid: rgba(255, 255, 255, 0.97);
+            --panel-solid: rgba(255, 255, 255, 0.98);
             --icon-neutral-bg: rgba(19, 25, 57, 0.08);
             --icon-neutral-text: #131939;
             --tile-hover-bg: rgba(95, 160, 0, 0.12);
+            --input-bg: rgba(19, 25, 57, 0.05);
         }
 
         html, body {
@@ -75,7 +76,6 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* Clean Ambient Canvas */
         .clean-navy-canvas {
             background:
                 radial-gradient(circle at 90% 8%, rgba(95, 160, 0, 0.22) 0%, transparent 45%),
@@ -85,7 +85,6 @@
             transition: background 0.3s ease;
         }
 
-        /* Simple Frosted Glass Panels */
         .simple-glass {
             background: var(--glass-bg);
             backdrop-filter: blur(16px);
@@ -93,7 +92,6 @@
             border: 1px solid var(--glass-border);
         }
 
-        /* ATM Card Glass Effect */
         .atm-glass-card {
             background: var(--atm-bg);
             backdrop-filter: blur(20px);
@@ -113,12 +111,27 @@
             color: var(--icon-neutral-text);
         }
 
+        .theme-input {
+            background: var(--input-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-main);
+            transition: all 0.2s ease;
+        }
+        .theme-input:focus {
+            outline: none;
+            border-color: #5fa000;
+            box-shadow: 0 0 0 3px rgba(95, 160, 0, 0.20);
+        }
+        .theme-input::placeholder {
+            color: var(--text-muted);
+            opacity: 0.75;
+        }
+
         .text-theme-main { color: var(--text-main); }
         .text-theme-muted { color: var(--text-muted); }
         .border-theme { border-color: var(--glass-border); }
         .panel-theme-bg { background: var(--panel-solid); }
 
-        /* Interactive Glass Tile */
         .glass-tile {
             background: var(--glass-bg);
             backdrop-filter: blur(14px);
@@ -135,7 +148,6 @@
             transform: scale(0.97);
         }
 
-        /* Row 1, Row 2 & Row 3 Consistent Tile Accent Styles */
         .row1-tile {
             background: rgba(95, 160, 0, 0.10);
             border-color: rgba(95, 160, 0, 0.35);
@@ -149,7 +161,6 @@
             border-color: rgba(95, 160, 0, 0.35);
         }
 
-        /* Drawer & Modal Transitions */
         .drawer-backdrop { transition: opacity 0.25s ease; }
         .drawer-panel { transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1); }
 
@@ -159,6 +170,16 @@
         }
         .modal-pop {
             animation: popIn 0.22s ease forwards;
+        }
+
+        @keyframes shakeX {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            50% { transform: translateX(6px); }
+            75% { transform: translateX(-4px); }
+        }
+        .shake-anim {
+            animation: shakeX 0.32s ease;
         }
 
         @keyframes pulseFade {
@@ -176,14 +197,261 @@
     <div id="app-shell" class="w-full max-w-md clean-navy-canvas h-[100dvh] sm:h-[820px] sm:max-h-[92dvh] sm:rounded-[36px] sm:border border-theme sm:shadow-2xl flex flex-col relative overflow-hidden">
 
         <!-- Smart Toast Notification -->
-        <div id="app-toast" class="hidden fixed bottom-8 left-1/2 -translate-x-1/2 z-[120] px-4 py-2 rounded-full bg-[#131939] border border-[#5fa000] shadow-xl backdrop-blur-md flex items-center gap-2">
-            <span class="w-5 h-5 rounded-full bg-[#5fa000] flex items-center justify-center text-white">
-                <i class="fa-solid fa-check text-[10px]"></i>
+        <div id="app-toast" class="hidden fixed bottom-8 left-1/2 -translate-x-1/2 z-[150] px-4 py-2.5 rounded-full bg-[#131939] border border-[#5fa000] shadow-2xl backdrop-blur-md flex items-center gap-2 max-w-[90vw]">
+            <span id="app-toast-icon-wrap" class="w-5 h-5 rounded-full bg-[#5fa000] flex items-center justify-center text-white shrink-0">
+                <i id="app-toast-icon" class="fa-solid fa-check text-[10px]"></i>
             </span>
-            <span id="app-toast-text" class="text-xs font-semibold text-white whitespace-nowrap">Copied!</span>
+            <span id="app-toast-text" class="text-xs font-semibold text-white truncate">Notification</span>
         </div>
 
-        <!-- ================= LEFT SLIDE DRAWER ================= -->
+        <!-- =========================================================================
+             1. AUTHENTICATION ENTER PAGE (LOGIN / CREATE ACCOUNT / FORGOT PASSWORD)
+             ========================================================================= -->
+        <section id="auth-screen" class="hidden absolute inset-0 z-[100] clean-navy-canvas flex flex-col justify-between p-5 overflow-y-auto">
+            <!-- Top Brand Header -->
+            <div class="pt-4 text-center shrink-0">
+                <div class="w-16 h-16 mx-auto rounded-full p-1 bg-[#5fa000] shadow-lg mb-3 overflow-hidden">
+                    <img src="https://lh3.googleusercontent.com/d/1PXMzZMIOZbElnjIuOK2ew-FNMhuScYGx"
+                         alt="ASWA Logo"
+                         class="w-full h-full object-cover rounded-full bg-[#131939]"
+                         onerror="handleLogoFallback(this)">
+                </div>
+                <h1 class="text-sm font-extrabold tracking-wider text-theme-main">AS-SUFFAH WELFARE ASSOCIATION</h1>
+                <p class="text-xs text-[#5fa000] font-semibold mt-0.5">আস-সুফফাহ কল্যাণ সমিতি</p>
+            </div>
+
+            <!-- Auth Glass Card -->
+            <div class="my-auto py-4">
+                <div class="atm-glass-card rounded-3xl p-5 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 right-0 h-1 bg-[#5fa000]"></div>
+
+                    <!-- Tab Switcher (Login / Create Account) -->
+                    <div id="auth-tabs" class="grid grid-cols-2 gap-1.5 p-1 rounded-2xl atm-inner-bar mb-5">
+                        <button type="button" id="tab-login-btn" onclick="switchAuthTab('login')"
+                                class="py-2 rounded-xl text-xs font-bold transition bg-[#5fa000] text-white shadow">
+                            লগইন (Login)
+                        </button>
+                        <button type="button" id="tab-register-btn" onclick="switchAuthTab('register')"
+                                class="py-2 rounded-xl text-xs font-bold transition text-theme-muted hover:text-theme-main">
+                            নতুন একাউন্ট
+                        </button>
+                    </div>
+
+                    <!-- Error / Success Alert Banner inside Auth -->
+                    <div id="auth-alert-box" class="hidden mb-4 p-3 rounded-2xl text-xs font-medium border flex items-start gap-2.5">
+                        <i id="auth-alert-icon" class="fa-solid fa-circle-info mt-0.5 shrink-0"></i>
+                        <span id="auth-alert-msg" class="leading-relaxed"></span>
+                    </div>
+
+                    <!-- A. LOGIN FORM -->
+                    <form id="form-login" onsubmit="handleLoginSubmit(event)" class="space-y-3.5">
+                        <div>
+                            <label class="block text-[11px] font-bold text-theme-muted mb-1.5">Gmail ID অথবা Mobile No</label>
+                            <div class="relative">
+                                <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#5fa000]">
+                                    <i class="fa-solid fa-user text-xs"></i>
+                                </span>
+                                <input type="text" id="login-identifier" required
+                                       placeholder="example@gmail.com বা 01XXXXXXXXX"
+                                       class="w-full pl-9 pr-3.5 py-2.5 rounded-2xl theme-input text-xs font-medium">
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex items-center justify-between mb-1.5">
+                                <label class="text-[11px] font-bold text-theme-muted">Password</label>
+                                <button type="button" onclick="switchAuthTab('forgot')"
+                                        class="text-[11px] font-bold text-[#5fa000] hover:underline">
+                                    পাসওয়ার্ড ভুলে গেছেন?
+                                </button>
+                            </div>
+                            <div class="relative">
+                                <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#5fa000]">
+                                    <i class="fa-solid fa-lock text-xs"></i>
+                                </span>
+                                <input type="password" id="login-password" required
+                                       placeholder="আপনার পাসওয়ার্ড দিন"
+                                       class="w-full pl-9 pr-10 py-2.5 rounded-2xl theme-input text-xs font-medium">
+                                <button type="button" onclick="toggleInputPassword('login-password', this)"
+                                        class="absolute right-3 top-1/2 -translate-y-1/2 text-theme-muted hover:text-theme-main">
+                                    <i class="fa-regular fa-eye text-xs"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <button type="submit" id="btn-login-submit"
+                                class="w-full py-3 rounded-2xl bg-[#5fa000] hover:bg-[#5fa000]/90 text-white text-xs font-bold tracking-wide shadow-lg transition active:scale-98 flex items-center justify-center gap-2 mt-2">
+                            <span>একাউন্টে প্রবেশ করুন</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </button>
+                    </form>
+
+                    <!-- B. CREATE ACCOUNT FORM -->
+                    <form id="form-register" onsubmit="handleRegisterSubmit(event)" class="hidden space-y-3">
+                        <!-- Account Role Selector -->
+                        <div>
+                            <label class="block text-[11px] font-bold text-theme-muted mb-1.5">একাউন্টের ধরন নির্বাচন করুন</label>
+                            <div class="grid grid-cols-2 gap-2">
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="reg-role" value="member" checked class="peer sr-only" onchange="updateRoleHint()">
+                                    <div class="p-2.5 rounded-2xl simple-glass peer-checked:bg-[#5fa000]/20 peer-checked:border-[#5fa000] text-center transition">
+                                        <i class="fa-solid fa-users text-xs text-[#5fa000] block mb-1"></i>
+                                        <span class="text-xs font-bold text-theme-main block">Member</span>
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="reg-role" value="admin" class="peer sr-only" onchange="updateRoleHint()">
+                                    <div class="p-2.5 rounded-2xl simple-glass peer-checked:bg-[#5fa000]/20 peer-checked:border-[#5fa000] text-center transition">
+                                        <i class="fa-solid fa-user-shield text-xs text-[#5fa000] block mb-1"></i>
+                                        <span class="text-xs font-bold text-theme-main block">Admin</span>
+                                    </div>
+                                </label>
+                            </div>
+                            <p id="role-hint-text" class="text-[10px] text-theme-muted mt-1.5 px-1">
+                                * সাধারণ সদস্যদের জন্য Member একাউন্ট তৈরি করুন।
+                            </p>
+                        </div>
+
+                        <div>
+                            <label class="block text-[11px] font-bold text-theme-muted mb-1">Gmail ID (১টি জিমেইল = ১টি একাউন্ট)</label>
+                            <div class="relative">
+                                <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#5fa000]">
+                                    <i class="fa-solid fa-envelope text-xs"></i>
+                                </span>
+                                <input type="email" id="reg-email" required
+                                       placeholder="yourname@gmail.com"
+                                       class="w-full pl-9 pr-3.5 py-2.5 rounded-2xl theme-input text-xs font-medium">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-[11px] font-bold text-theme-muted mb-1">Mobile No</label>
+                            <div class="relative">
+                                <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#5fa000]">
+                                    <i class="fa-solid fa-phone text-xs"></i>
+                                </span>
+                                <input type="tel" id="reg-mobile" required
+                                       placeholder="01XXXXXXXXX"
+                                       class="w-full pl-9 pr-3.5 py-2.5 rounded-2xl theme-input text-xs font-medium">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-[11px] font-bold text-theme-muted mb-1">Password</label>
+                            <div class="relative">
+                                <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#5fa000]">
+                                    <i class="fa-solid fa-key text-xs"></i>
+                                </span>
+                                <input type="password" id="reg-password" required minlength="4"
+                                       placeholder="কমপক্ষে ৪ অক্ষরের পাসওয়ার্ড দিন"
+                                       class="w-full pl-9 pr-10 py-2.5 rounded-2xl theme-input text-xs font-medium">
+                                <button type="button" onclick="toggleInputPassword('reg-password', this)"
+                                        class="absolute right-3 top-1/2 -translate-y-1/2 text-theme-muted hover:text-theme-main">
+                                    <i class="fa-regular fa-eye text-xs"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <button type="submit" id="btn-register-submit"
+                                class="w-full py-3 rounded-2xl bg-[#5fa000] hover:bg-[#5fa000]/90 text-white text-xs font-bold tracking-wide shadow-lg transition active:scale-98 flex items-center justify-center gap-2 mt-1">
+                            <i class="fa-solid fa-user-plus text-xs"></i>
+                            <span>একাউন্ট তৈরি করুন</span>
+                        </button>
+                    </form>
+
+                    <!-- C. FORGOT PASSWORD FORM -->
+                    <form id="form-forgot" onsubmit="handleForgotSubmit(event)" class="hidden space-y-3.5">
+                        <div class="flex items-center justify-between pb-2 border-b border-theme">
+                            <h3 class="text-xs font-bold text-theme-main">পাসওয়ার্ড পুনরুদ্ধার (Reset)</h3>
+                            <button type="button" onclick="switchAuthTab('login')" class="text-[11px] font-bold text-[#5fa000]">
+                                ← লগইনে ফিরুন
+                            </button>
+                        </div>
+
+                        <div>
+                            <label class="block text-[11px] font-bold text-theme-muted mb-1">নিবন্ধিত Gmail ID</label>
+                            <input type="email" id="forgot-email" required placeholder="yourname@gmail.com"
+                                   class="w-full px-3.5 py-2.5 rounded-2xl theme-input text-xs font-medium">
+                        </div>
+
+                        <div>
+                            <label class="block text-[11px] font-bold text-theme-muted mb-1">নিবন্ধিত Mobile No (যাচাইয়ের জন্য)</label>
+                            <input type="tel" id="forgot-mobile" required placeholder="01XXXXXXXXX"
+                                   class="w-full px-3.5 py-2.5 rounded-2xl theme-input text-xs font-medium">
+                        </div>
+
+                        <div>
+                            <label class="block text-[11px] font-bold text-theme-muted mb-1">নতুন Password সেট করুন</label>
+                            <input type="password" id="forgot-new-password" required minlength="4" placeholder="নতুন পাসওয়ার্ড লিখুন"
+                                   class="w-full px-3.5 py-2.5 rounded-2xl theme-input text-xs font-medium">
+                        </div>
+
+                        <button type="submit" id="btn-forgot-submit"
+                                class="w-full py-3 rounded-2xl bg-[#5fa000] hover:bg-[#5fa000]/90 text-white text-xs font-bold shadow-lg transition active:scale-98">
+                            পাসওয়ার্ড রিসেট করুন
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="text-center pb-2 shrink-0">
+                <span class="text-[10px] text-theme-muted">
+                    Secured Portal • <strong class="text-[#5fa000]">As-Suffah Welfare Association</strong>
+                </span>
+            </div>
+        </section>
+
+        <!-- =========================================================================
+             2. PIN LOCK OVERLAY SCREEN (WHEN APP OPENS & USER HAS PIN LOCK ENABLED)
+             ========================================================================= -->
+        <section id="pin-lock-screen" class="hidden absolute inset-0 z-[110] clean-navy-canvas flex flex-col justify-between p-6">
+            <div class="pt-8 text-center">
+                <div class="w-14 h-14 mx-auto rounded-2xl bg-[#5fa000]/20 border border-[#5fa000] flex items-center justify-center text-[#5fa000] mb-3 shadow-lg">
+                    <i class="fa-solid fa-shield-halved text-xl"></i>
+                </div>
+                <h2 class="text-base font-extrabold text-theme-main">অ্যাপ লক করা আছে</h2>
+                <p id="pin-lock-user-label" class="text-xs text-theme-muted mt-1">প্রবেশ করতে আপনার ৪-সংখ্যার PIN দিন</p>
+
+                <!-- 4 PIN Dots Indicator -->
+                <div id="pin-dots-container" class="flex items-center justify-center gap-4 mt-6">
+                    <span class="pin-dot w-4 h-4 rounded-full border-2 border-[#5fa000] transition-all"></span>
+                    <span class="pin-dot w-4 h-4 rounded-full border-2 border-[#5fa000] transition-all"></span>
+                    <span class="pin-dot w-4 h-4 rounded-full border-2 border-[#5fa000] transition-all"></span>
+                    <span class="pin-dot w-4 h-4 rounded-full border-2 border-[#5fa000] transition-all"></span>
+                </div>
+                <p id="pin-error-text" class="text-xs text-red-400 font-semibold mt-3 h-4"></p>
+            </div>
+
+            <!-- Numeric Keypad -->
+            <div class="max-w-[280px] w-full mx-auto my-auto">
+                <div class="grid grid-cols-3 gap-3.5">
+                    <button type="button" onclick="enterPinDigit('1')" class="h-14 rounded-2xl glass-tile text-lg font-bold text-theme-main">1</button>
+                    <button type="button" onclick="enterPinDigit('2')" class="h-14 rounded-2xl glass-tile text-lg font-bold text-theme-main">2</button>
+                    <button type="button" onclick="enterPinDigit('3')" class="h-14 rounded-2xl glass-tile text-lg font-bold text-theme-main">3</button>
+                    <button type="button" onclick="enterPinDigit('4')" class="h-14 rounded-2xl glass-tile text-lg font-bold text-theme-main">4</button>
+                    <button type="button" onclick="enterPinDigit('5')" class="h-14 rounded-2xl glass-tile text-lg font-bold text-theme-main">5</button>
+                    <button type="button" onclick="enterPinDigit('6')" class="h-14 rounded-2xl glass-tile text-lg font-bold text-theme-main">6</button>
+                    <button type="button" onclick="enterPinDigit('7')" class="h-14 rounded-2xl glass-tile text-lg font-bold text-theme-main">7</button>
+                    <button type="button" onclick="enterPinDigit('8')" class="h-14 rounded-2xl glass-tile text-lg font-bold text-theme-main">8</button>
+                    <button type="button" onclick="enterPinDigit('9')" class="h-14 rounded-2xl glass-tile text-lg font-bold text-theme-main">9</button>
+                    <button type="button" onclick="clearPinEntry()" class="h-14 rounded-2xl simple-glass text-xs font-bold text-theme-muted hover:text-theme-main">Clear</button>
+                    <button type="button" onclick="enterPinDigit('0')" class="h-14 rounded-2xl glass-tile text-lg font-bold text-theme-main">0</button>
+                    <button type="button" onclick="backspacePinDigit()" class="h-14 rounded-2xl simple-glass text-sm font-bold text-theme-main">
+                        <i class="fa-solid fa-delete-left"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="text-center pb-2">
+                <button type="button" onclick="logoutAccount()" class="text-xs font-bold text-[#5fa000] hover:underline">
+                    PIN ভুলে গেছেন? পুনরায় লগইন করুন (Logout)
+                </button>
+            </div>
+        </section>
+
+        <!-- =========================================================================
+             3. LEFT SLIDE DRAWER (ROLE-AWARE NAVIGATION + ACCOUNT OPTION)
+             ========================================================================= -->
         <div id="side-drawer-backdrop"
              onclick="closeLeftDrawer()"
              class="hidden drawer-backdrop opacity-0 absolute inset-0 bg-[#131939]/75 backdrop-blur-xs z-[60]">
@@ -206,7 +474,9 @@
                         </div>
                         <div class="min-w-0">
                             <h2 class="text-xs font-bold text-theme-main tracking-wide truncate">AS-SUFFAH PLATFORM</h2>
-                            <p class="text-[10px] text-[#5fa000] font-semibold truncate">Menu</p>
+                            <span id="drawer-role-badge" class="inline-block mt-0.5 px-2 py-0.5 rounded-md bg-[#5fa000]/20 text-[#5fa000] text-[9.5px] font-extrabold uppercase tracking-wider">
+                                Member Portal
+                            </span>
                         </div>
                     </div>
                     <button type="button"
@@ -220,16 +490,26 @@
                 <div class="mt-4 space-y-4 overflow-y-auto pr-1 flex-1">
                     <div>
                         <p class="px-1 text-[10px] font-bold uppercase tracking-widest text-theme-muted mb-2.5">
-                            Navigation & Support
+                            Navigation & Account
                         </p>
                         <div class="grid grid-cols-2 gap-2.5">
+                            <!-- Dashboard / Home -->
                             <button type="button" onclick="switchView('home'); closeLeftDrawer();" class="flex items-center gap-2.5 p-2.5 rounded-2xl glass-tile text-left text-xs font-semibold text-theme-main">
                                 <span class="w-7 h-7 rounded-xl bg-[#5fa000]/20 text-[#5fa000] flex items-center justify-center shrink-0">
                                     <i class="fa-solid fa-house text-[11px]"></i>
                                 </span>
-                                <span class="truncate">Home</span>
+                                <span class="truncate">Dashboard</span>
                             </button>
 
+                            <!-- Account Settings Option (Requested in Menu) -->
+                            <button type="button" onclick="openAccountModal()" class="flex items-center gap-2.5 p-2.5 rounded-2xl glass-tile text-left text-xs font-semibold text-theme-main border-[#5fa000]/40">
+                                <span class="w-7 h-7 rounded-xl bg-[#5fa000] text-white flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-user-gear text-[11px]"></i>
+                                </span>
+                                <span class="truncate">Account</span>
+                            </button>
+
+                            <!-- Sync All -->
                             <button type="button" onclick="refreshFullSystem(); closeLeftDrawer();" class="flex items-center gap-2.5 p-2.5 rounded-2xl glass-tile text-left text-xs font-semibold text-theme-main">
                                 <span class="w-7 h-7 rounded-xl bg-[#5fa000]/20 text-[#5fa000] flex items-center justify-center shrink-0">
                                     <i class="fa-solid fa-arrows-rotate text-[11px]"></i>
@@ -237,13 +517,15 @@
                                 <span class="truncate">Sync All</span>
                             </button>
 
+                            <!-- Contact Us -->
                             <button type="button" onclick="openInfoModal('contact')" class="flex items-center gap-2.5 p-2.5 rounded-2xl glass-tile text-left text-xs font-semibold text-theme-main">
                                 <span class="w-7 h-7 rounded-xl bg-[#5fa000]/20 text-[#5fa000] flex items-center justify-center shrink-0">
                                     <i class="fa-solid fa-headset text-[11px]"></i>
                                 </span>
-                                <span class="truncate">Contact</span>
+                                <span class="truncate">Contact Us</span>
                             </button>
 
+                            <!-- Messenger Group -->
                             <button type="button" onclick="openInfoModal('messenger')" class="flex items-center gap-2.5 p-2.5 rounded-2xl glass-tile text-left text-xs font-semibold text-theme-main">
                                 <span class="w-7 h-7 rounded-xl bg-[#5fa000]/20 text-[#5fa000] flex items-center justify-center shrink-0">
                                     <i class="fa-brands fa-facebook-messenger text-[11px]"></i>
@@ -251,7 +533,8 @@
                                 <span class="truncate">Group</span>
                             </button>
 
-                            <button type="button" onclick="switchView('app5'); closeLeftDrawer();" class="col-span-2 flex items-center gap-2.5 p-2.5 rounded-2xl glass-tile text-left text-xs font-semibold text-theme-main">
+                            <!-- Member Add (ADMIN ONLY) -->
+                            <button type="button" id="drawer-member-add-btn" onclick="switchView('app5'); closeLeftDrawer();" class="flex items-center gap-2.5 p-2.5 rounded-2xl glass-tile text-left text-xs font-semibold text-theme-main">
                                 <span class="w-7 h-7 rounded-xl bg-[#5fa000] text-white flex items-center justify-center shrink-0">
                                     <i class="fa-solid fa-user-plus text-[11px]"></i>
                                 </span>
@@ -269,8 +552,8 @@
                         </button>
                     </div>
 
-                    <!-- Quick Vault Shortcut -->
-                    <div class="p-3 rounded-2xl simple-glass space-y-2">
+                    <!-- Quick Vault Shortcut (ADMIN ONLY) -->
+                    <div id="drawer-vault-shortcut" class="p-3 rounded-2xl simple-glass space-y-2">
                         <span class="block text-[10px] font-bold uppercase tracking-wider text-theme-muted">Vault Shortcut</span>
                         <button type="button" onclick="copyAccountNumber(); closeLeftDrawer();" class="w-full py-2 px-3 rounded-xl glass-tile flex items-center justify-between text-xs font-semibold text-theme-main">
                             <span>Copy A/C: 2778 3324 32630</span>
@@ -287,7 +570,102 @@
             </div>
         </aside>
 
-        <!-- ================= POPUP MODAL FOR CONTACT & MESSENGER ================= -->
+        <!-- =========================================================================
+             4. ACCOUNT SETTINGS MODAL (PROFILE, CHANGE PASSWORD, PIN LOCK, LOGOUT)
+             ========================================================================= -->
+        <div id="account-settings-modal"
+             onclick="closeAccountModal()"
+             class="hidden absolute inset-0 bg-[#131939]/80 backdrop-blur-md z-[95] flex items-center justify-center p-4">
+
+            <div onclick="event.stopPropagation()"
+                 class="modal-pop w-full max-w-[350px] max-h-[88dvh] overflow-y-auto rounded-3xl panel-theme-bg border border-theme shadow-2xl p-4 relative">
+
+                <!-- Header -->
+                <div class="flex items-center justify-between pb-3 mb-3 border-b border-theme">
+                    <div class="flex items-center gap-2.5">
+                        <span class="w-9 h-9 rounded-xl bg-[#5fa000] text-white flex items-center justify-center">
+                            <i class="fa-solid fa-user-shield text-xs"></i>
+                        </span>
+                        <div>
+                            <h3 class="text-xs font-bold uppercase tracking-wider text-theme-main">Account Settings</h3>
+                            <p id="acc-modal-role" class="text-[10px] text-[#5fa000] font-bold uppercase">Member Account</p>
+                        </div>
+                    </div>
+                    <button type="button" onclick="closeAccountModal()"
+                            class="w-8 h-8 rounded-xl simple-glass hover:bg-[#5fa000]/20 flex items-center justify-center text-theme-main">
+                        <i class="fa-solid fa-xmark text-xs"></i>
+                    </button>
+                </div>
+
+                <!-- User Info Card -->
+                <div class="p-3 rounded-2xl simple-glass mb-3.5 space-y-1">
+                    <div class="flex items-center justify-between text-xs">
+                        <span class="text-theme-muted">Gmail ID:</span>
+                        <span id="acc-modal-email" class="font-bold text-theme-main truncate max-w-[190px]">-</span>
+                    </div>
+                    <div class="flex items-center justify-between text-xs">
+                        <span class="text-theme-muted">Mobile No:</span>
+                        <span id="acc-modal-mobile" class="font-bold text-theme-main">-</span>
+                    </div>
+                </div>
+
+                <!-- Section 1: PIN Lock Setup / Change -->
+                <div class="p-3.5 rounded-2xl simple-glass mb-3.5">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-bold text-theme-main flex items-center gap-1.5">
+                            <i class="fa-solid fa-lock text-[#5fa000]"></i> App PIN Lock (৪-সংখ্যা)
+                        </span>
+                        <span id="acc-pin-status-badge" class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-white/10 text-theme-muted">
+                            OFF
+                        </span>
+                    </div>
+                    <p class="text-[10.5px] text-theme-muted mb-2.5">
+                        পিন লক চালু থাকলে অ্যাপ ওপেন করার সময় ৪-সংখ্যার পিন দিয়ে প্রবেশ করতে হবে।
+                    </p>
+                    <form onsubmit="handlePinUpdateSubmit(event)" class="flex items-center gap-2">
+                        <input type="password" id="acc-new-pin" maxlength="4" inputmode="numeric" pattern="[0-9]{4}"
+                               placeholder="৪ সংখ্যার PIN দিন"
+                               class="flex-1 px-3 py-2 rounded-xl theme-input text-xs font-mono tracking-widest text-center">
+                        <button type="submit" id="btn-save-pin"
+                                class="px-3.5 py-2 rounded-xl bg-[#5fa000] text-white text-xs font-bold shrink-0">
+                            Save PIN
+                        </button>
+                    </form>
+                    <button type="button" id="btn-remove-pin" onclick="removeUserPinLock()"
+                            class="hidden mt-2 w-full py-1.5 rounded-xl border border-red-500/40 text-red-400 text-[11px] font-bold hover:bg-red-500/10">
+                        PIN Lock বন্ধ করুন (Disable)
+                    </button>
+                </div>
+
+                <!-- Section 2: Change Password -->
+                <div class="p-3.5 rounded-2xl simple-glass mb-4">
+                    <span class="block text-xs font-bold text-theme-main mb-2.5 flex items-center gap-1.5">
+                        <i class="fa-solid fa-key text-[#5fa000]"></i> Password পরিবর্তন করুন
+                    </span>
+                    <form onsubmit="handleChangePasswordSubmit(event)" class="space-y-2">
+                        <input type="password" id="acc-old-pass" required placeholder="বর্তমান Password দিন"
+                               class="w-full px-3 py-2 rounded-xl theme-input text-xs">
+                        <input type="password" id="acc-new-pass" required minlength="4" placeholder="নতুন Password দিন"
+                               class="w-full px-3 py-2 rounded-xl theme-input text-xs">
+                        <button type="submit" id="btn-change-pass"
+                                class="w-full py-2.5 rounded-xl bg-[#5fa000]/20 border border-[#5fa000] text-[#5fa000] hover:bg-[#5fa000] hover:text-white text-xs font-bold transition">
+                            Password আপডেট করুন
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Section 3: Logout Button -->
+                <button type="button" onclick="logoutAccount()"
+                        class="w-full py-3 rounded-2xl bg-red-600 hover:bg-red-700 text-white text-xs font-bold tracking-wide shadow-lg flex items-center justify-center gap-2 transition active:scale-98">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>লগআউট করুন (Logout)</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- =========================================================================
+             5. POPUP MODAL FOR CONTACT & MESSENGER
+             ========================================================================= -->
         <div id="info-popup-modal"
              onclick="closeInfoModal()"
              class="hidden absolute inset-0 bg-[#131939]/80 backdrop-blur-md z-[90] flex items-center justify-center p-4">
@@ -453,7 +831,7 @@
             </button>
         </div>
 
-        <!-- ================= MAIN CONTENT AREA ================= -->
+        <!-- ================= MAIN CONTENT AREA (DASHBOARD) ================= -->
         <main id="main-container" class="flex-1 min-h-0 w-full flex flex-col justify-between pb-4 z-20 relative">
 
             <!-- ================= HOME / DASHBOARD VIEW ================= -->
@@ -484,13 +862,13 @@
                                 <h1 class="text-[10.5px] sm:text-xs font-extrabold text-theme-main tracking-wide truncate leading-tight">
                                     AS-SUFFAH WELFARE ASSOCIATION
                                 </h1>
-                                <p class="text-[9.5px] text-[#5fa000] font-semibold truncate">
+                                <p id="header-user-subtitle" class="text-[9.5px] text-[#5fa000] font-semibold truncate">
                                     আস-সুফফাহ কল্যাণ সমিতি
                                 </p>
                             </div>
                         </div>
 
-                        <!-- Brightness / Dark Mode & Sync Buttons -->
+                        <!-- Brightness / Dark Mode & Account Shortcut -->
                         <div class="flex items-center gap-1.5 shrink-0">
                             <button id="theme-toggle-btn"
                                     type="button"
@@ -501,23 +879,20 @@
                                 <i id="theme-toggle-icon" class="fa-solid fa-sun text-xs"></i>
                             </button>
 
-                            <button id="system-refresh-btn"
-                                    type="button"
-                                    onclick="refreshFullSystem()"
-                                    title="Sync Data"
-                                    aria-label="Sync System"
+                            <button type="button"
+                                    onclick="openAccountModal()"
+                                    title="Account Settings"
+                                    aria-label="Account Settings"
                                     class="w-9 h-9 rounded-xl simple-glass hover:bg-[#5fa000]/20 flex items-center justify-center text-theme-main transition active:scale-90">
-                                <i id="system-refresh-icon" class="fa-solid fa-arrows-rotate text-xs"></i>
+                                <i class="fa-solid fa-user-gear text-xs"></i>
                             </button>
                         </div>
                     </div>
 
-                    <!-- ================= CLEAN GLASS ATM CARD ================= -->
-                    <div class="atm-glass-card rounded-3xl p-4 sm:p-5 flex flex-col justify-between relative overflow-hidden">
-                        <!-- Subtle Accent Line at Top -->
+                    <!-- ================= 1. ADMIN VAULT ATM CARD (VISIBLE ONLY TO ADMIN) ================= -->
+                    <div id="admin-atm-card" class="hidden atm-glass-card rounded-3xl p-4 sm:p-5 flex flex-col justify-between relative overflow-hidden">
                         <div class="absolute top-0 left-0 right-0 h-1 bg-[#5fa000]"></div>
 
-                        <!-- Top Row: Brand Title & Show/Hide Toggle -->
                         <div class="flex items-center justify-between gap-2 mb-4">
                             <div class="flex items-center gap-2.5">
                                 <div class="w-8 h-8 rounded-xl bg-[#5fa000]/20 border border-[#5fa000]/50 flex items-center justify-center text-[#5fa000]">
@@ -525,7 +900,7 @@
                                 </div>
                                 <div>
                                     <span class="block text-xs font-extrabold tracking-widest text-theme-main">
-                                        AS-SUFFAH
+                                        AS-SUFFAH ADMIN
                                     </span>
                                     <span class="block text-[8.5px] font-semibold uppercase tracking-wider text-theme-muted">
                                         ACCOUNTING VAULT
@@ -533,7 +908,6 @@
                                 </div>
                             </div>
 
-                            <!-- Privacy Eye Toggle Pill -->
                             <button id="toggle-eye-btn"
                                     type="button"
                                     onclick="toggleSensitiveInfo()"
@@ -545,7 +919,6 @@
                             </button>
                         </div>
 
-                        <!-- Middle Row: Account Number Bar -->
                         <div class="flex items-center justify-between gap-2 py-2.5 px-3.5 rounded-2xl atm-inner-bar mb-3.5">
                             <div class="min-w-0">
                                 <span class="block text-[8.5px] font-semibold uppercase tracking-widest text-theme-muted mb-0.5">
@@ -564,7 +937,6 @@
                             </button>
                         </div>
 
-                        <!-- Bottom Row: Dual Balances -->
                         <div class="grid grid-cols-2 gap-2.5">
                             <div class="px-3.5 py-2 rounded-2xl simple-glass">
                                 <span class="block text-[8.5px] font-semibold uppercase tracking-wider text-theme-muted mb-0.5">
@@ -587,16 +959,34 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- ================= 2. MEMBER WELCOME CARD (VISIBLE ONLY TO MEMBER) ================= -->
+                    <div id="member-welcome-card" class="hidden atm-glass-card rounded-3xl p-4 sm:p-5 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 right-0 h-1 bg-[#5fa000]"></div>
+                        <div class="flex items-center justify-between gap-3">
+                            <div class="min-w-0">
+                                <span class="inline-block px-2.5 py-0.5 rounded-full bg-[#5fa000]/20 text-[#5fa000] text-[10px] font-extrabold uppercase tracking-wider mb-1.5">
+                                    Member Portal
+                                </span>
+                                <h2 class="text-sm font-extrabold text-theme-main truncate">স্বাগতম, আস-সুফফাহ সদস্য!</h2>
+                                <p id="member-card-email" class="text-xs text-theme-muted truncate mt-0.5">member@gmail.com</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-2xl bg-[#5fa000] text-white flex items-center justify-center shrink-0 shadow-lg">
+                                <i class="fa-solid fa-hand-holding-heart text-lg"></i>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- ================= SIMPLE GLASS APP LAUNCHER (ROW 1, ROW 2 & FULL-WIDTH ROW 3) ================= -->
+                <!-- ================= APP LAUNCHER GRID (ROLE-FILTERED TILES) ================= -->
                 <div class="my-auto py-2">
                     <div id="bento-apps-grid" class="grid grid-cols-2 gap-3">
 
-                        <!-- ROW 1, ITEM 1: As Suffah Form -->
+                        <!-- 1: As Suffah Form (BOTH ADMIN & MEMBER) -->
                         <button type="button"
+                                id="tile-app1"
                                 onclick="switchView('app1')"
-                                class="glass-tile row1-tile rounded-2xl p-3.5 flex flex-col items-start justify-between gap-2.5 text-left">
+                                class="glass-tile row1-tile h-[106px] rounded-2xl p-3.5 flex flex-col items-start justify-between text-left">
                             <div class="w-9 h-9 rounded-xl bg-[#5fa000] text-white flex items-center justify-center shrink-0 shadow-sm">
                                 <i class="fa-solid fa-file-signature text-sm"></i>
                             </div>
@@ -606,10 +996,11 @@
                             </div>
                         </button>
 
-                        <!-- ROW 1, ITEM 2: Member Details -->
+                        <!-- 2: Member Details (ADMIN ONLY) -->
                         <button type="button"
+                                id="tile-app2"
                                 onclick="switchView('app2')"
-                                class="glass-tile row1-tile rounded-2xl p-3.5 flex flex-col items-start justify-between gap-2.5 text-left">
+                                class="glass-tile row1-tile h-[106px] rounded-2xl p-3.5 flex flex-col items-start justify-between text-left">
                             <div class="w-9 h-9 rounded-xl bg-[#5fa000] text-white flex items-center justify-center shrink-0 shadow-sm">
                                 <i class="fa-solid fa-id-card text-sm"></i>
                             </div>
@@ -619,10 +1010,11 @@
                             </div>
                         </button>
 
-                        <!-- ROW 2, ITEM 1: Profit Calculator -->
+                        <!-- 3: Profit Calculator (ADMIN ONLY) -->
                         <button type="button"
+                                id="tile-app3"
                                 onclick="switchView('app3')"
-                                class="glass-tile row2-tile rounded-2xl p-3.5 flex flex-col items-start justify-between gap-2.5 text-left">
+                                class="glass-tile row2-tile h-[106px] rounded-2xl p-3.5 flex flex-col items-start justify-between text-left">
                             <div class="w-9 h-9 rounded-xl neutral-icon-box flex items-center justify-center shrink-0">
                                 <i class="fa-solid fa-calculator text-sm"></i>
                             </div>
@@ -632,10 +1024,11 @@
                             </div>
                         </button>
 
-                        <!-- ROW 2, ITEM 2: Member Search -->
+                        <!-- 4: Member Search (BOTH ADMIN & MEMBER) -->
                         <button type="button"
+                                id="tile-app4"
                                 onclick="switchView('app4')"
-                                class="glass-tile row2-tile rounded-2xl p-3.5 flex flex-col items-start justify-between gap-2.5 text-left">
+                                class="glass-tile row2-tile h-[106px] rounded-2xl p-3.5 flex flex-col items-start justify-between text-left">
                             <div class="w-9 h-9 rounded-xl neutral-icon-box flex items-center justify-center shrink-0">
                                 <i class="fa-solid fa-magnifying-glass text-sm"></i>
                             </div>
@@ -645,17 +1038,32 @@
                             </div>
                         </button>
 
-                        <!-- ROW 3 (FULL ROW): Accounting & Ledger Portal -->
+                        <!-- 5: Investment Platform / Portal (BOTH ADMIN & MEMBER) -->
                         <button type="button"
+                                id="tile-app6"
                                 onclick="switchView('app6')"
-                                class="col-span-2 glass-tile row3-tile rounded-2xl p-3.5 flex items-center justify-between gap-3 text-left">
-                            <div class="flex items-center gap-3 min-w-0">
-                                <div class="w-10 h-10 rounded-xl bg-[#5fa000] text-white flex items-center justify-center shrink-0 shadow-sm">
-                                    <i class="fa-solid fa-chart-pie text-base"></i>
+                                class="col-span-2 glass-tile row3-tile h-[106px] rounded-2xl p-3.5 flex flex-col items-start justify-between text-left">
+                            <div class="w-9 h-9 rounded-xl bg-[#5fa000] text-white flex items-center justify-center shrink-0 shadow-sm">
+                                <i class="fa-solid fa-chart-pie text-sm"></i>
+                            </div>
+                            <div class="w-full">
+                                <span class="block text-[13px] font-bold text-theme-main leading-snug truncate">As-Suffah Investment Platform</span>
+                                <span class="block text-[10.5px] text-theme-muted mt-0.5 truncate">ইনভেস্টমেন্ট ও লেনদেন বিবরণী</span>
+                            </div>
+                        </button>
+
+                        <!-- 6: Contact Us Tile (MEMBER DASHBOARD DIRECT ACCESS) -->
+                        <button type="button"
+                                id="tile-member-contact"
+                                onclick="openInfoModal('contact')"
+                                class="hidden col-span-2 glass-tile row2-tile h-[96px] rounded-2xl p-3.5 flex items-center justify-between text-left">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-[#5fa000]/20 border border-[#5fa000]/40 text-[#5fa000] flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-headset text-base"></i>
                                 </div>
-                                <div class="min-w-0">
-                                    <span class="block text-[13px] font-bold text-theme-main leading-snug truncate">As-Suffah Accounting Portal</span>
-                                    <span class="block text-[10.5px] text-theme-muted mt-0.5 truncate">হিসাব ও লেনদেন বিবরণী</span>
+                                <div>
+                                    <span class="block text-[13px] font-bold text-theme-main leading-snug">Contact Us</span>
+                                    <span class="block text-[10.5px] text-theme-muted mt-0.5">যোগাযোগ, বিকাশ/নগদ ও ইমেইল</span>
                                 </div>
                             </div>
                             <span class="w-8 h-8 rounded-xl neutral-icon-box flex items-center justify-center shrink-0">
@@ -696,7 +1104,6 @@
                 <iframe id="iframe-app5" src="https://script.google.com/macros/s/AKfycbx9BWnj4XmUi3xJcNx3InSgXgZRP9nWQCJtlAQG0RJO6-HGo5HOXNLKitXTzqsjaw929w/exec" class="w-full h-full border-none block"></iframe>
             </section>
 
-            <!-- NEW ROW 3 FULL-WIDTH APP VIEW -->
             <section id="view-app6" class="hidden w-full h-full flex-1">
                 <iframe id="iframe-app6" src="https://script.google.com/macros/s/AKfycbzEBKOwhdQwXoCP6FF5vPU6ieEAngw8J51IZ4Hl6IFerSxndQG2n7-5rNuTxQFotpqy/exec" class="w-full h-full border-none block"></iframe>
             </section>
@@ -707,7 +1114,9 @@
 
     <!-- JavaScript Logic -->
     <script>
+        // Backend Google Apps Script Web App URL (Deploy your updated Code.gs and keep URL here)
         const APPS_SCRIPT_EXEC_URL = 'https://script.google.com/macros/s/AKfycby_p4p6_G40RA9suLZ5xCkCoPY4TVDx8NA54aKFcgHeBRm2SlsHR9CMy-xeyqDr2niv2Q/exec';
+        const SESSION_STORAGE_KEY = 'aswa_logged_in_user_v1';
 
         const APP_CONFIG = {
             app1: {
@@ -731,11 +1140,12 @@
                 url: 'https://script.google.com/macros/s/AKfycbx9BWnj4XmUi3xJcNx3InSgXgZRP9nWQCJtlAQG0RJO6-HGo5HOXNLKitXTzqsjaw929w/exec'
             },
             app6: {
-                title: 'As-Suffah Accounting Portal',
+                title: 'As-Suffah Investment Platform',
                 url: 'https://script.google.com/macros/s/AKfycbzEBKOwhdQwXoCP6FF5vPU6ieEAngw8J51IZ4Hl6IFerSxndQG2n7-5rNuTxQFotpqy/exec'
             }
         };
 
+        let currentUser = null; // { email, mobile, role: 'admin'|'member', pin }
         let currentActiveView = 'home';
         const FULL_ACCOUNT_NO = '2778 3324 32630';
         const MASKED_ACCOUNT_NO = '27•• •••• ••630';
@@ -752,7 +1162,527 @@
             loaded: false
         };
 
-        /* Dark Mode & Brightness Mode Switcher */
+        /* =====================================================================
+           API COMMUNICATION HELPER (Supports Google Apps Script & External Host)
+           ===================================================================== */
+        async function callBackendPost(payload) {
+            // If running directly inside Google Apps Script HtmlService
+            if (typeof google !== 'undefined' && google.script && google.script.run) {
+                return new Promise((resolve, reject) => {
+                    const methodMap = {
+                        register: 'registerUserAccount',
+                        login: 'loginUserAccount',
+                        forgotPassword: 'resetForgottenPassword',
+                        changePassword: 'changeUserPassword',
+                        updatePin: 'updateUserPinLock'
+                    };
+                    const fnName = methodMap[payload.action];
+                    if (!fnName) return reject(new Error('Invalid action'));
+
+                    google.script.run
+                        .withSuccessHandler(resolve)
+                        .withFailureHandler(reject)[fnName](payload);
+                });
+            }
+
+            // If running from GitHub Pages / External Web
+            const response = await fetch(APPS_SCRIPT_EXEC_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify(payload),
+                redirect: 'follow'
+            });
+            if (!response.ok) throw new Error('Network response failed');
+            return await response.json();
+        }
+
+        /* =====================================================================
+           AUTHENTICATION UI & LOGIC (LOGIN, CREATE ACCOUNT, FORGOT PASSWORD)
+           ===================================================================== */
+        function switchAuthTab(tab) {
+            const loginForm = document.getElementById('form-login');
+            const regForm = document.getElementById('form-register');
+            const forgotForm = document.getElementById('form-forgot');
+            const tabsBar = document.getElementById('auth-tabs');
+            const tabLoginBtn = document.getElementById('tab-login-btn');
+            const tabRegBtn = document.getElementById('tab-register-btn');
+
+            hideAuthAlert();
+            loginForm.classList.add('hidden');
+            regForm.classList.add('hidden');
+            forgotForm.classList.add('hidden');
+
+            if (tab === 'login') {
+                tabsBar.classList.remove('hidden');
+                loginForm.classList.remove('hidden');
+                tabLoginBtn.className = 'py-2 rounded-xl text-xs font-bold transition bg-[#5fa000] text-white shadow';
+                tabRegBtn.className = 'py-2 rounded-xl text-xs font-bold transition text-theme-muted hover:text-theme-main';
+            } else if (tab === 'register') {
+                tabsBar.classList.remove('hidden');
+                regForm.classList.remove('hidden');
+                tabRegBtn.className = 'py-2 rounded-xl text-xs font-bold transition bg-[#5fa000] text-white shadow';
+                tabLoginBtn.className = 'py-2 rounded-xl text-xs font-bold transition text-theme-muted hover:text-theme-main';
+            } else if (tab === 'forgot') {
+                tabsBar.classList.add('hidden');
+                forgotForm.classList.remove('hidden');
+            }
+        }
+
+        function updateRoleHint() {
+            const selectedRole = document.querySelector('input[name="reg-role"]:checked').value;
+            const hintEl = document.getElementById('role-hint-text');
+            if (selectedRole === 'admin') {
+                hintEl.textContent = '* শুধুমাত্র Admin তালিকাভুক্ত Gmail ID দিয়ে Admin একাউন্ট তৈরি করা যাবে।';
+                hintEl.classList.add('text-[#5fa000]');
+            } else {
+                hintEl.textContent = '* সাধারণ সদস্যদের জন্য Member একাউন্ট তৈরি করুন।';
+                hintEl.classList.remove('text-[#5fa000]');
+            }
+        }
+
+        function showAuthAlert(msg, isSuccess = false) {
+            const box = document.getElementById('auth-alert-box');
+            const icon = document.getElementById('auth-alert-icon');
+            const text = document.getElementById('auth-alert-msg');
+            if (!box) return;
+
+            box.classList.remove('hidden', 'bg-red-500/15', 'border-red-500/40', 'text-red-300', 'bg-[#5fa000]/20', 'border-[#5fa000]', 'text-[#5fa000]');
+            if (isSuccess) {
+                box.classList.add('bg-[#5fa000]/20', 'border-[#5fa000]', 'text-[#5fa000]');
+                icon.className = 'fa-solid fa-circle-check mt-0.5 shrink-0';
+            } else {
+                box.classList.add('bg-red-500/15', 'border-red-500/40', 'text-red-300');
+                icon.className = 'fa-solid fa-circle-exclamation mt-0.5 shrink-0';
+            }
+            text.textContent = msg;
+        }
+
+        function hideAuthAlert() {
+            const box = document.getElementById('auth-alert-box');
+            if (box) box.classList.add('hidden');
+        }
+
+        function toggleInputPassword(inputId, btn) {
+            const input = document.getElementById(inputId);
+            const icon = btn.querySelector('i');
+            if (!input) return;
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.replace('fa-eye', 'fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.replace('fa-eye-slash', 'fa-eye');
+            }
+        }
+
+        async function handleLoginSubmit(e) {
+            e.preventDefault();
+            hideAuthAlert();
+
+            const identifier = document.getElementById('login-identifier').value.trim();
+            const password = document.getElementById('login-password').value.trim();
+            const btn = document.getElementById('btn-login-submit');
+            const originalHtml = btn.innerHTML;
+
+            try {
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>যাচাই করা হচ্ছে...</span>';
+
+                const res = await callBackendPost({
+                    action: 'login',
+                    identifier: identifier,
+                    password: password
+                });
+
+                if (res && res.ok && res.user) {
+                    saveUserSession(res.user);
+                    showToast(res.message || 'লগইন সফল হয়েছে!');
+                    enterDashboardForUser(res.user, false);
+                } else {
+                    showAuthAlert(res && res.message ? res.message : 'লগইন ব্যর্থ হয়েছে।');
+                }
+            } catch (err) {
+                showAuthAlert('সার্ভারের সাথে সংযোগ স্থাপন করা যাচ্ছে না। ইন্টারনেট চেক করুন।');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = originalHtml;
+            }
+        }
+
+        async function handleRegisterSubmit(e) {
+            e.preventDefault();
+            hideAuthAlert();
+
+            const role = document.querySelector('input[name="reg-role"]:checked').value;
+            const email = document.getElementById('reg-email').value.trim();
+            const mobile = document.getElementById('reg-mobile').value.trim();
+            const password = document.getElementById('reg-password').value.trim();
+            const btn = document.getElementById('btn-register-submit');
+            const originalHtml = btn.innerHTML;
+
+            try {
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>একাউন্ট তৈরি হচ্ছে...</span>';
+
+                const res = await callBackendPost({
+                    action: 'register',
+                    role: role,
+                    email: email,
+                    mobile: mobile,
+                    password: password
+                });
+
+                if (res && res.ok && res.user) {
+                    saveUserSession(res.user);
+                    showToast(res.message || 'একাউন্ট তৈরি সফল!');
+                    enterDashboardForUser(res.user, false);
+                } else {
+                    showAuthAlert(res && res.message ? res.message : 'একাউন্ট তৈরি করা যায়নি।');
+                }
+            } catch (err) {
+                showAuthAlert('সার্ভার ত্রুটি! অনুগ্রহ করে আবার চেষ্টা করুন।');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = originalHtml;
+            }
+        }
+
+        async function handleForgotSubmit(e) {
+            e.preventDefault();
+            hideAuthAlert();
+
+            const email = document.getElementById('forgot-email').value.trim();
+            const mobile = document.getElementById('forgot-mobile').value.trim();
+            const newPassword = document.getElementById('forgot-new-password').value.trim();
+            const btn = document.getElementById('btn-forgot-submit');
+            const originalText = btn.textContent;
+
+            try {
+                btn.disabled = true;
+                btn.textContent = 'প্রসেসিং হচ্ছে...';
+
+                const res = await callBackendPost({
+                    action: 'forgotPassword',
+                    email: email,
+                    mobile: mobile,
+                    newPassword: newPassword
+                });
+
+                if (res && res.ok) {
+                    switchAuthTab('login');
+                    showAuthAlert(res.message, true);
+                    document.getElementById('login-identifier').value = email;
+                } else {
+                    showAuthAlert(res && res.message ? res.message : 'পাসওয়ার্ড রিসেট করা যায়নি।');
+                }
+            } catch (err) {
+                showAuthAlert('সার্ভারের সাথে সংযোগ বিচ্ছিন্ন হয়েছে।');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = originalText;
+            }
+        }
+
+        /* =====================================================================
+           SESSION MANAGEMENT & ROLE-BASED DASHBOARD (ADMIN VS MEMBER)
+           ===================================================================== */
+        function saveUserSession(userObj) {
+            currentUser = userObj;
+            try {
+                localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(userObj));
+            } catch (e) {}
+        }
+
+        function getSavedUserSession() {
+            try {
+                const raw = localStorage.getItem(SESSION_STORAGE_KEY);
+                return raw ? JSON.parse(raw) : null;
+            } catch (e) {
+                return null;
+            }
+        }
+
+        function logoutAccount() {
+            closeAccountModal();
+            closeLeftDrawer();
+            currentUser = null;
+            try {
+                localStorage.removeItem(SESSION_STORAGE_KEY);
+            } catch (e) {}
+
+            document.getElementById('pin-lock-screen').classList.add('hidden');
+            document.getElementById('auth-screen').classList.remove('hidden');
+            switchAuthTab('login');
+            showToast('সফলভাবে লগআউট হয়েছে');
+        }
+
+        function enterDashboardForUser(user, checkPinLockOnOpen = false) {
+            currentUser = user;
+            document.getElementById('auth-screen').classList.add('hidden');
+
+            // If user has a PIN Lock enabled and app just opened, show PIN lock screen first
+            if (checkPinLockOnOpen && user.pin && user.pin.length === 4) {
+                openPinLockScreen(user);
+            } else {
+                document.getElementById('pin-lock-screen').classList.add('hidden');
+            }
+
+            applyRoleBasedInterface(user);
+            switchView('home');
+
+            if (user.role === 'admin') {
+                renderSensitiveInfo();
+                fetchBalances(false);
+            }
+        }
+
+        function applyRoleBasedInterface(user) {
+            const isAdmin = user.role === 'admin';
+
+            // Header & Drawer Role Labels
+            const headerSubtitle = document.getElementById('header-user-subtitle');
+            const drawerBadge = document.getElementById('drawer-role-badge');
+            if (headerSubtitle) {
+                headerSubtitle.textContent = isAdmin ? 'Admin Panel • ' + user.email : 'Member • ' + user.email;
+            }
+            if (drawerBadge) {
+                drawerBadge.textContent = isAdmin ? 'Admin Portal' : 'Member Portal';
+            }
+
+            // Admin vs Member Top Cards
+            const adminAtmCard = document.getElementById('admin-atm-card');
+            const memberWelcomeCard = document.getElementById('member-welcome-card');
+            const memberCardEmail = document.getElementById('member-card-email');
+
+            if (isAdmin) {
+                adminAtmCard.classList.remove('hidden');
+                memberWelcomeCard.classList.add('hidden');
+            } else {
+                adminAtmCard.classList.add('hidden');
+                memberWelcomeCard.classList.remove('hidden');
+                if (memberCardEmail) memberCardEmail.textContent = user.email + ' (' + user.mobile + ')';
+            }
+
+            // Admin-only Tiles & Drawer Items
+            const tileApp2 = document.getElementById('tile-app2'); // Member Details
+            const tileApp3 = document.getElementById('tile-app3'); // Profit Calculator
+            const tileMemberContact = document.getElementById('tile-member-contact'); // Contact Us for Member
+            const drawerMemberAddBtn = document.getElementById('drawer-member-add-btn');
+            const drawerVaultShortcut = document.getElementById('drawer-vault-shortcut');
+
+            if (isAdmin) {
+                tileApp2.classList.remove('hidden');
+                tileApp3.classList.remove('hidden');
+                tileMemberContact.classList.add('hidden');
+                drawerMemberAddBtn.classList.remove('hidden');
+                drawerVaultShortcut.classList.remove('hidden');
+            } else {
+                // Member View: Shows Form (app1), Member Search (app4), Investment Platform (app6), Contact Us
+                tileApp2.classList.add('hidden');
+                tileApp3.classList.add('hidden');
+                tileMemberContact.classList.remove('hidden');
+                drawerMemberAddBtn.classList.add('hidden');
+                drawerVaultShortcut.classList.add('hidden');
+            }
+        }
+
+        /* =====================================================================
+           PIN LOCK SCREEN LOGIC
+           ===================================================================== */
+        let enteredPinBuffer = '';
+
+        function openPinLockScreen(user) {
+            enteredPinBuffer = '';
+            updatePinDotsUI();
+            document.getElementById('pin-error-text').textContent = '';
+            document.getElementById('pin-lock-user-label').textContent = user.email + ' - এর ৪-সংখ্যার PIN দিন';
+            document.getElementById('pin-lock-screen').classList.remove('hidden');
+        }
+
+        function enterPinDigit(digit) {
+            if (enteredPinBuffer.length >= 4) return;
+            enteredPinBuffer += digit;
+            document.getElementById('pin-error-text').textContent = '';
+            updatePinDotsUI();
+
+            if (enteredPinBuffer.length === 4) {
+                setTimeout(verifyPinCode, 150);
+            }
+        }
+
+        function backspacePinDigit() {
+            enteredPinBuffer = enteredPinBuffer.slice(0, -1);
+            updatePinDotsUI();
+        }
+
+        function clearPinEntry() {
+            enteredPinBuffer = '';
+            document.getElementById('pin-error-text').textContent = '';
+            updatePinDotsUI();
+        }
+
+        function updatePinDotsUI() {
+            const dots = document.querySelectorAll('#pin-dots-container .pin-dot');
+            dots.forEach((dot, idx) => {
+                if (idx < enteredPinBuffer.length) {
+                    dot.classList.add('bg-[#5fa000]', 'scale-110');
+                } else {
+                    dot.classList.remove('bg-[#5fa000]', 'scale-110');
+                }
+            });
+        }
+
+        function verifyPinCode() {
+            if (!currentUser) return;
+            if (enteredPinBuffer === String(currentUser.pin)) {
+                document.getElementById('pin-lock-screen').classList.add('hidden');
+                enteredPinBuffer = '';
+                showToast('অ্যাপ আনলক হয়েছে');
+            } else {
+                const dotsContainer = document.getElementById('pin-dots-container');
+                dotsContainer.classList.remove('shake-anim');
+                void dotsContainer.offsetWidth;
+                dotsContainer.classList.add('shake-anim');
+                document.getElementById('pin-error-text').textContent = 'ভুল PIN! আবার চেষ্টা করুন।';
+                enteredPinBuffer = '';
+                updatePinDotsUI();
+            }
+        }
+
+        /* =====================================================================
+           ACCOUNT MODAL (CHANGE PASSWORD & PIN LOCK MANAGEMENT)
+           ===================================================================== */
+        function openAccountModal() {
+            closeLeftDrawer();
+            if (!currentUser) return;
+
+            document.getElementById('acc-modal-role').textContent =
+                currentUser.role === 'admin' ? 'Admin Account' : 'Member Account';
+            document.getElementById('acc-modal-email').textContent = currentUser.email;
+            document.getElementById('acc-modal-mobile').textContent = currentUser.mobile;
+
+            const pinBadge = document.getElementById('acc-pin-status-badge');
+            const removePinBtn = document.getElementById('btn-remove-pin');
+            document.getElementById('acc-new-pin').value = '';
+            document.getElementById('acc-old-pass').value = '';
+            document.getElementById('acc-new-pass').value = '';
+
+            if (currentUser.pin && currentUser.pin.length === 4) {
+                pinBadge.textContent = 'ACTIVE';
+                pinBadge.className = 'px-2 py-0.5 rounded-md text-[10px] font-bold bg-[#5fa000] text-white';
+                removePinBtn.classList.remove('hidden');
+            } else {
+                pinBadge.textContent = 'OFF';
+                pinBadge.className = 'px-2 py-0.5 rounded-md text-[10px] font-bold bg-white/10 text-theme-muted';
+                removePinBtn.classList.add('hidden');
+            }
+
+            document.getElementById('account-settings-modal').classList.remove('hidden');
+        }
+
+        function closeAccountModal() {
+            document.getElementById('account-settings-modal').classList.add('hidden');
+        }
+
+        async function handlePinUpdateSubmit(e) {
+            e.preventDefault();
+            if (!currentUser) return;
+
+            const pinVal = document.getElementById('acc-new-pin').value.trim();
+            if (!/^\d{4}$/.test(pinVal)) {
+                showToast('অবশ্যই ৪ সংখ্যার PIN দিন');
+                return;
+            }
+
+            const btn = document.getElementById('btn-save-pin');
+            const origText = btn.textContent;
+            try {
+                btn.disabled = true;
+                btn.textContent = 'Saving...';
+
+                const res = await callBackendPost({
+                    action: 'updatePin',
+                    email: currentUser.email,
+                    pin: pinVal
+                });
+
+                if (res && res.ok) {
+                    currentUser.pin = pinVal;
+                    saveUserSession(currentUser);
+                    showToast(res.message || 'PIN সেট হয়েছে!');
+                    openAccountModal();
+                } else {
+                    showToast(res && res.message ? res.message : 'PIN সেভ হয়নি');
+                }
+            } catch (err) {
+                showToast('সার্ভার ত্রুটি!');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = origText;
+            }
+        }
+
+        async function removeUserPinLock() {
+            if (!currentUser) return;
+            const btn = document.getElementById('btn-remove-pin');
+            btn.disabled = true;
+            try {
+                const res = await callBackendPost({
+                    action: 'updatePin',
+                    email: currentUser.email,
+                    pin: ''
+                });
+                if (res && res.ok) {
+                    currentUser.pin = '';
+                    saveUserSession(currentUser);
+                    showToast(res.message || 'PIN বন্ধ করা হয়েছে');
+                    openAccountModal();
+                }
+            } catch (err) {
+                showToast('PIN বন্ধ করতে সমস্যা হয়েছে');
+            } finally {
+                btn.disabled = false;
+            }
+        }
+
+        async function handleChangePasswordSubmit(e) {
+            e.preventDefault();
+            if (!currentUser) return;
+
+            const oldPassword = document.getElementById('acc-old-pass').value.trim();
+            const newPassword = document.getElementById('acc-new-pass').value.trim();
+            const btn = document.getElementById('btn-change-pass');
+            const origText = btn.textContent;
+
+            try {
+                btn.disabled = true;
+                btn.textContent = 'আপডেট হচ্ছে...';
+
+                const res = await callBackendPost({
+                    action: 'changePassword',
+                    email: currentUser.email,
+                    oldPassword: oldPassword,
+                    newPassword: newPassword
+                });
+
+                if (res && res.ok) {
+                    showToast(res.message || 'Password পরিবর্তিত হয়েছে!');
+                    document.getElementById('acc-old-pass').value = '';
+                    document.getElementById('acc-new-pass').value = '';
+                } else {
+                    showToast(res && res.message ? res.message : 'Password পরিবর্তন ব্যর্থ');
+                }
+            } catch (err) {
+                showToast('সার্ভার সংযোগ ত্রুটি!');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = origText;
+            }
+        }
+
+        /* =====================================================================
+           EXISTING THEME, TOAST, MODAL, DRAWER & BALANCE FUNCTIONS
+           ===================================================================== */
         let isLightMode = false;
         function applyThemeMode(light) {
             isLightMode = !!light;
@@ -764,26 +1694,14 @@
             if (isLightMode) {
                 root.classList.remove('dark');
                 root.classList.add('light-mode');
-                if (headerIcon) {
-                    headerIcon.classList.remove('fa-sun');
-                    headerIcon.classList.add('fa-moon');
-                }
-                if (drawerIcon) {
-                    drawerIcon.classList.remove('fa-sun');
-                    drawerIcon.classList.add('fa-moon');
-                }
+                if (headerIcon) headerIcon.classList.replace('fa-sun', 'fa-moon');
+                if (drawerIcon) drawerIcon.classList.replace('fa-sun', 'fa-moon');
                 if (drawerLabel) drawerLabel.textContent = 'Switch to Dark Mode';
             } else {
                 root.classList.remove('light-mode');
                 root.classList.add('dark');
-                if (headerIcon) {
-                    headerIcon.classList.remove('fa-moon');
-                    headerIcon.classList.add('fa-sun');
-                }
-                if (drawerIcon) {
-                    drawerIcon.classList.remove('fa-moon');
-                    drawerIcon.classList.add('fa-sun');
-                }
+                if (headerIcon) headerIcon.classList.replace('fa-moon', 'fa-sun');
+                if (drawerIcon) drawerIcon.classList.replace('fa-moon', 'fa-sun');
                 if (drawerLabel) drawerLabel.textContent = 'Switch to Brightness Mode';
             }
             try { localStorage.setItem('aswa_theme_mode', isLightMode ? 'light' : 'dark'); } catch (e) {}
@@ -794,7 +1712,6 @@
             showToast(isLightMode ? 'Brightness Mode Active' : 'Dark Mode Active');
         }
 
-        /* Smart Toast */
         let toastTimeout = null;
         function showToast(message) {
             try {
@@ -808,7 +1725,7 @@
                 if (toastTimeout) clearTimeout(toastTimeout);
                 toastTimeout = setTimeout(() => {
                     toast.classList.add('hidden');
-                }, 2200);
+                }, 2500);
             } catch (e) {}
         }
 
@@ -840,7 +1757,6 @@
             } catch (e) {}
         }
 
-        /* Modal Controls */
         function openInfoModal(type) {
             try {
                 closeLeftDrawer();
@@ -864,7 +1780,6 @@
             if (modal) modal.classList.add('hidden');
         }
 
-        /* Left Drawer Controls */
         function openLeftDrawer() {
             const backdrop = document.getElementById('side-drawer-backdrop');
             const panel = document.getElementById('side-drawer-panel');
@@ -889,21 +1804,16 @@
             setTimeout(() => backdrop.classList.add('hidden'), 300);
         }
 
-        /* Refresh System */
         function refreshFullSystem() {
-            const icon = document.getElementById('system-refresh-icon');
-            if (icon) icon.classList.add('fa-spin');
             showToast('Syncing Data...');
-            fetchBalances(true);
+            if (currentUser && currentUser.role === 'admin') {
+                fetchBalances(true);
+            }
 
             ['app1', 'app2', 'app3', 'app4', 'app5', 'app6'].forEach((id) => {
                 const iframe = document.getElementById('iframe-' + id);
                 if (iframe && iframe.src) iframe.src = iframe.src;
             });
-
-            setTimeout(() => {
-                if (icon) icon.classList.remove('fa-spin');
-            }, 900);
         }
 
         function handleBackAndRefresh() {
@@ -920,7 +1830,9 @@
                 if (targetIframe && targetIframe.src) targetIframe.src = targetIframe.src;
             }
 
-            fetchBalances(true);
+            if (currentUser && currentUser.role === 'admin') {
+                fetchBalances(true);
+            }
 
             setTimeout(() => {
                 switchView('home');
@@ -931,7 +1843,6 @@
             }, 250);
         }
 
-        /* Sensitive Info Toggle */
         function clearAutoHideTimers() {
             if (autoHideTimer) { clearTimeout(autoHideTimer); autoHideTimer = null; }
             if (countdownInterval) { clearInterval(countdownInterval); countdownInterval = null; }
@@ -1002,19 +1913,16 @@
             }
         }
 
-        function stopBalanceLoading(refreshIcon, totalEl, currentEl) {
-            if (refreshIcon) refreshIcon.classList.remove('fa-spin');
+        function stopBalanceLoading(totalEl, currentEl) {
             if (totalEl) totalEl.classList.remove('balance-loading');
             if (currentEl) currentEl.classList.remove('balance-loading');
         }
 
-        async function fetchBalances(showSpin = false) {
-            const refreshIcon = document.getElementById('system-refresh-icon');
+        async function fetchBalances() {
             const totalEl = document.getElementById('total-balance-display');
             const currentEl = document.getElementById('current-balance-display');
 
             try {
-                if (showSpin && refreshIcon) refreshIcon.classList.add('fa-spin');
                 if (isSensitiveVisible && totalEl && currentEl) {
                     totalEl.classList.add('balance-loading');
                     currentEl.classList.add('balance-loading');
@@ -1029,17 +1937,17 @@
                                 balanceData.loaded = true;
                             }
                             renderSensitiveInfo();
-                            stopBalanceLoading(refreshIcon, totalEl, currentEl);
+                            stopBalanceLoading(totalEl, currentEl);
                         })
                         .withFailureHandler(function() {
                             renderSensitiveInfo();
-                            stopBalanceLoading(refreshIcon, totalEl, currentEl);
+                            stopBalanceLoading(totalEl, currentEl);
                         })
                         .getDashboardBalances();
                     return;
                 }
 
-                const response = await fetch(APPS_SCRIPT_EXEC_URL, { method: 'GET', redirect: 'follow' });
+                const response = await fetch(APPS_SCRIPT_EXEC_URL + '?action=balances', { method: 'GET', redirect: 'follow' });
                 if (!response.ok) throw new Error('HTTP error');
                 const res = await response.json();
                 if (res && res.ok) {
@@ -1051,7 +1959,7 @@
             } catch (err) {
                 renderSensitiveInfo();
             } finally {
-                stopBalanceLoading(refreshIcon, totalEl, currentEl);
+                stopBalanceLoading(totalEl, currentEl);
             }
         }
 
@@ -1087,6 +1995,9 @@
             if (cfg && cfg.url) window.open(cfg.url, '_blank', 'noopener,noreferrer');
         }
 
+        /* =====================================================================
+           INITIALIZATION ON APP STARTUP
+           ===================================================================== */
         document.addEventListener('DOMContentLoaded', function() {
             try {
                 const savedTheme = localStorage.getItem('aswa_theme_mode');
@@ -1094,9 +2005,17 @@
             } catch (e) {
                 applyThemeMode(false);
             }
-            switchView('home');
-            renderSensitiveInfo();
-            fetchBalances(false);
+
+            // Check Persistent Login Session
+            const savedUser = getSavedUserSession();
+            if (savedUser && savedUser.email) {
+                // User is already logged in; open dashboard (and check PIN lock if active)
+                enterDashboardForUser(savedUser, true);
+            } else {
+                // Show Login / Create Account Enter Page first
+                document.getElementById('auth-screen').classList.remove('hidden');
+                switchAuthTab('login');
+            }
         });
     </script>
 </body>
