@@ -1185,15 +1185,30 @@
                 });
             }
 
-            // If running from GitHub Pages / External Web
-            const response = await fetch(APPS_SCRIPT_EXEC_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                body: JSON.stringify(payload),
+            // If running from GitHub Pages / External Web (Uses GET query params to bypass Google 302 POST redirect drop)
+            const queryParams = new URLSearchParams();
+            Object.keys(payload).forEach((key) => {
+                if (payload[key] !== undefined && payload[key] !== null) {
+                    queryParams.append(key, String(payload[key]));
+                }
+            });
+
+            const requestUrl = APPS_SCRIPT_EXEC_URL + '?' + queryParams.toString();
+            const response = await fetch(requestUrl, {
+                method: 'GET',
                 redirect: 'follow'
             });
-            if (!response.ok) throw new Error('Network response failed');
-            return await response.json();
+
+            if (!response.ok) {
+                throw new Error('HTTP ' + response.status);
+            }
+
+            const textResponse = await response.text();
+            try {
+                return JSON.parse(textResponse);
+            } catch (parseErr) {
+                throw new Error('Invalid JSON response from server. Check Web App Deployment permissions (Who has access: Anyone).');
+            }
         }
 
         /* =====================================================================
@@ -1302,7 +1317,7 @@
                     showAuthAlert(res && res.message ? res.message : 'লগইন ব্যর্থ হয়েছে।');
                 }
             } catch (err) {
-                showAuthAlert('সার্ভারের সাথে সংযোগ স্থাপন করা যাচ্ছে না। ইন্টারনেট চেক করুন।');
+                showAuthAlert('সার্ভার ত্রুটি! (' + (err && err.message ? err.message : 'সংযোগ ব্যর্থ') + ')');
             } finally {
                 btn.disabled = false;
                 btn.innerHTML = originalHtml;
