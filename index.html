@@ -2,27 +2,23 @@
 <html lang="bn" class="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0a1020">
     <title>As-Suffah Welfare Association</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: {
-                        navy: '#131939',
-                        lime: '#5fa000',
-                        pure: '#ffffff',
-                    },
+                    colors: { navy: '#0a1020', lime: '#5fa000' },
                     fontFamily: {
-                        sans: ['Noto Sans Bengali', 'Plus Jakarta Sans', 'sans-serif'],
-                        mono: ['Space Mono', 'monospace'],
+                        sans: ['Plus Jakarta Sans', 'DM Sans', 'Noto Sans Bengali', 'sans-serif'],
+                        bn: ['Noto Sans Bengali', 'sans-serif'],
+                        ar: ['Amiri', 'serif'],
+                        mono: ['Space Mono', 'monospace']
                     }
                 }
             }
@@ -31,206 +27,457 @@
 
     <style>
         :root {
-            --bg-main: #131939;
-            --text-main: #ffffff;
-            --text-muted: rgba(255, 255, 255, 0.70);
-            --glass-bg: rgba(255, 255, 255, 0.06);
-            --glass-border: rgba(255, 255, 255, 0.14);
-            --atm-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.04) 100%);
-            --atm-border: rgba(255, 255, 255, 0.22);
-            --atm-shadow: 0 20px 40px rgba(19, 25, 57, 0.65);
-            --inner-box-bg: rgba(19, 25, 57, 0.60);
-            --panel-solid: rgba(19, 25, 57, 0.97);
-            --icon-neutral-bg: rgba(255, 255, 255, 0.14);
-            --icon-neutral-text: #ffffff;
-            --tile-hover-bg: rgba(95, 160, 0, 0.18);
-            --input-bg: rgba(255, 255, 255, 0.08);
+            --bg: #0a1020;
+            --bg-soft: #111a30;
+            --text: #f4f7fb;
+            --muted: rgba(244, 247, 251, 0.60);
+            --faint: rgba(244, 247, 251, 0.38);
+            --surface: rgba(255, 255, 255, 0.055);
+            --surface-2: rgba(255, 255, 255, 0.035);
+            --border: rgba(255, 255, 255, 0.10);
+            --border-strong: rgba(255, 255, 255, 0.18);
+            --accent: #5fa000;
+            --accent-2: #8ed12f;
+            --accent-soft: rgba(142, 209, 47, 0.14);
+            --danger: #ff6b70;
+            --shadow: 0 30px 70px rgba(0, 0, 0, 0.45);
+            --ease: cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         html.light-mode {
-            --bg-main: #ffffff;
-            --text-main: #131939;
-            --text-muted: rgba(19, 25, 57, 0.70);
-            --glass-bg: rgba(19, 25, 57, 0.04);
-            --glass-border: rgba(19, 25, 57, 0.12);
-            --atm-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(19, 25, 57, 0.04) 100%);
-            --atm-border: rgba(19, 25, 57, 0.15);
-            --atm-shadow: 0 18px 36px rgba(19, 25, 57, 0.10);
-            --inner-box-bg: rgba(19, 25, 57, 0.05);
-            --panel-solid: rgba(255, 255, 255, 0.98);
-            --icon-neutral-bg: rgba(19, 25, 57, 0.08);
-            --icon-neutral-text: #131939;
-            --tile-hover-bg: rgba(95, 160, 0, 0.12);
-            --input-bg: rgba(19, 25, 57, 0.05);
+            --bg: #f2f5fa;
+            --bg-soft: #e8edf5;
+            --text: #101a2c;
+            --muted: rgba(16, 26, 44, 0.62);
+            --faint: rgba(16, 26, 44, 0.40);
+            --surface: rgba(255, 255, 255, 0.86);
+            --surface-2: rgba(255, 255, 255, 0.62);
+            --border: rgba(16, 26, 44, 0.09);
+            --border-strong: rgba(16, 26, 44, 0.18);
+            --accent-soft: rgba(95, 160, 0, 0.10);
+            --danger: #e5484d;
+            --shadow: 0 30px 70px rgba(30, 45, 80, 0.14);
         }
 
+        * { -webkit-tap-highlight-color: transparent; }
         html, body {
-            font-family: 'Noto Sans Bengali', 'Plus Jakarta Sans', sans-serif;
-            -webkit-tap-highlight-color: transparent;
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            transition: background-color 0.3s ease, color 0.3s ease;
+            height: 100%; margin: 0; padding: 0;
+            font-family: 'Plus Jakarta Sans', 'DM Sans', 'Noto Sans Bengali', sans-serif;
+            background: #05080f;
+            transition: background-color .35s ease;
+        }
+        button, input { font-family: inherit; }
+        button { cursor: pointer; }
+        ::selection { background: rgba(142, 209, 47, .32); }
+
+        /* Page backdrop */
+        .app-bg {
+            background:
+                radial-gradient(1000px 700px at 12% -10%, rgba(95,160,0,.16), transparent 60%),
+                radial-gradient(900px 700px at 100% 110%, rgba(45,90,180,.18), transparent 60%),
+                #05080f;
         }
 
+        /* Phone shell */
+        .app-shell {
+            background: var(--bg);
+            box-shadow: var(--shadow), 0 0 0 1px rgba(255,255,255,.05);
+            isolation: isolate;
+        }
+        @media (min-width: 640px) {
+            .app-shell { border: 1px solid var(--border); }
+        }
+
+        /* Screen canvas */
         .clean-navy-canvas {
             background:
-                radial-gradient(circle at 90% 8%, rgba(95, 160, 0, 0.22) 0%, transparent 45%),
-                radial-gradient(circle at 10% 88%, rgba(95, 160, 0, 0.10) 0%, transparent 45%),
-                var(--bg-main);
-            position: relative;
-            transition: background 0.3s ease;
+                radial-gradient(520px 340px at 88% -6%, rgba(142,209,47,.13), transparent 70%),
+                radial-gradient(420px 320px at -10% 102%, rgba(70,110,220,.12), transparent 70%),
+                var(--bg);
+            transition: background .35s ease;
         }
+        .ambient-orb {
+            position: absolute; border-radius: 999px; filter: blur(60px);
+            pointer-events: none; opacity: .5; z-index: 0;
+        }
+        .orb-one { width: 190px; height: 190px; top: 70px; right: -70px; background: rgba(142,209,47,.16); }
+        .orb-two { width: 220px; height: 220px; bottom: 80px; left: -110px; background: rgba(70,110,220,.15); }
+        html.light-mode .ambient-orb { opacity: .35; }
 
+        /* Surfaces */
         .simple-glass {
-            background: var(--glass-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--glass-border);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
         }
-
-        .atm-glass-card {
-            background: var(--atm-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--atm-border);
-            box-shadow: var(--atm-shadow);
-        }
-
         .atm-inner-bar {
-            background: var(--inner-box-bg);
-            border: 1px solid var(--glass-border);
+            background: var(--surface-2);
+            border: 1px solid var(--border);
         }
+        .neutral-icon-box { background: var(--surface); border: 1px solid var(--border); color: var(--text); }
+        .panel-theme-bg { background: var(--bg-soft); }
+        .border-theme { border-color: var(--border); }
+        .text-theme-main { color: var(--text); }
+        .text-theme-muted { color: var(--muted); }
+        .text-theme-faint { color: var(--faint); }
 
-        .neutral-icon-box {
-            background: var(--icon-neutral-bg);
-            border: 1px solid var(--glass-border);
-            color: var(--icon-neutral-text);
-        }
-
+        /* Inputs */
         .theme-input {
-            background: var(--input-bg);
-            border: 1px solid var(--glass-border);
-            color: var(--text-main);
-            transition: all 0.2s ease;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text);
+            border-radius: 15px;
+            transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
         }
+        .theme-input::placeholder { color: var(--faint); }
         .theme-input:focus {
             outline: none;
-            border-color: #5fa000;
-            box-shadow: 0 0 0 3px rgba(95, 160, 0, 0.20);
+            border-color: rgba(142,209,47,.65);
+            box-shadow: 0 0 0 4px rgba(142,209,47,.13);
+            background: var(--surface-2);
         }
-        .theme-input::placeholder {
-            color: var(--text-muted);
-            opacity: 0.75;
+        .field-label { color: var(--muted); font-size: 11px; font-weight: 700; letter-spacing: .02em; }
+        .input-wrap { position: relative; }
+        .input-wrap > .input-icon {
+            position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+            color: var(--accent-2); pointer-events: none;
         }
+        .input-wrap > .input-trailing {
+            position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+            color: var(--muted);
+        }
+        .has-icon { padding-left: 40px !important; }
+        .has-trailing { padding-right: 42px !important; }
 
-        .text-theme-main { color: var(--text-main); }
-        .text-theme-muted { color: var(--text-muted); }
-        .border-theme { border-color: var(--glass-border); }
-        .panel-theme-bg { background: var(--panel-solid); }
+        /* Buttons */
+        .btn-primary {
+            background: linear-gradient(135deg, #6fb318, #4d8a00);
+            color: #fff; border-radius: 16px; font-weight: 800;
+            box-shadow: 0 10px 24px rgba(95,160,0,.28), inset 0 1px 0 rgba(255,255,255,.22);
+            transition: transform .18s var(--ease), box-shadow .18s ease, filter .18s ease;
+        }
+        .btn-primary:hover { filter: brightness(1.06); box-shadow: 0 14px 30px rgba(95,160,0,.36); }
+        .btn-primary:active { transform: scale(.97); }
+        .btn-soft {
+            background: var(--accent-soft); color: var(--accent-2);
+            border: 1px solid rgba(142,209,47,.25); border-radius: 14px; font-weight: 700;
+            transition: background .18s ease, transform .18s var(--ease);
+        }
+        .btn-soft:hover { background: rgba(142,209,47,.22); }
+        .btn-soft:active { transform: scale(.97); }
+        .btn-danger {
+            background: linear-gradient(135deg, rgba(255,107,112,.18), rgba(255,107,112,.10));
+            border: 1px solid rgba(255,107,112,.35); color: var(--danger);
+            border-radius: 16px; font-weight: 800;
+            transition: background .18s ease, transform .18s var(--ease);
+        }
+        .btn-danger:hover { background: rgba(255,107,112,.24); }
+        .btn-danger:active { transform: scale(.97); }
+        .icon-btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 38px; height: 38px; border-radius: 13px;
+            background: var(--surface); border: 1px solid var(--border); color: var(--text);
+            transition: background .18s ease, color .18s ease, transform .18s var(--ease), border-color .18s ease;
+        }
+        .icon-btn:hover { background: var(--accent-soft); border-color: rgba(142,209,47,.35); color: var(--accent-2); }
+        .icon-btn:active { transform: scale(.9); }
 
+        /* Tiles */
         .glass-tile {
-            background: var(--glass-bg);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border: 1px solid var(--glass-border);
-            transition: all 0.22s ease;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+            border-radius: 22px;
+            transition: transform .22s var(--ease), border-color .22s ease, background .22s ease, box-shadow .22s ease;
         }
         .glass-tile:hover {
-            background: var(--tile-hover-bg);
-            border-color: rgba(95, 160, 0, 0.55);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            border-color: rgba(142,209,47,.45);
+            box-shadow: 0 16px 30px rgba(0,0,0,.22);
         }
-        .glass-tile:active {
-            transform: scale(0.97);
+        .glass-tile:active { transform: scale(.97); }
+        .row1-tile { background: linear-gradient(150deg, rgba(142,209,47,.15), rgba(142,209,47,.05)); border-color: rgba(142,209,47,.28); }
+        .row2-tile { background: var(--surface); border-color: var(--border); }
+        .row3-tile { background: linear-gradient(150deg, rgba(142,209,47,.13), rgba(142,209,47,.04)); border-color: rgba(142,209,47,.24); }
+        .nav-tile {
+            display: flex; align-items: center; gap: 11px; padding: 11px 12px;
+            border-radius: 16px; background: var(--surface); border: 1px solid var(--border);
+            text-align: left; font-size: 12px; font-weight: 700; color: var(--text);
+            transition: background .18s ease, border-color .18s ease, transform .18s var(--ease);
+        }
+        .nav-tile:hover { background: var(--accent-soft); border-color: rgba(142,209,47,.32); }
+        .nav-tile:active { transform: scale(.97); }
+        .nav-tile .nav-icon {
+            width: 30px; height: 30px; border-radius: 11px; flex-shrink: 0;
+            display: inline-flex; align-items: center; justify-content: center;
+            background: var(--accent-soft); color: var(--accent-2); font-size: 12px;
         }
 
-        /* Row-wise consistent color styling */
-        .row1-tile {
-            background: rgba(95, 160, 0, 0.12);
-            border-color: rgba(95, 160, 0, 0.40);
+        /* Vault card */
+        .vault-card {
+            position: relative; overflow: hidden;
+            background:
+                radial-gradient(420px 200px at 110% -10%, rgba(142,209,47,.18), transparent 65%),
+                linear-gradient(150deg, #172344 0%, #0d152b 60%, #0b1224 100%);
+            border: 1px solid rgba(255,255,255,.13);
+            border-radius: 28px;
+            box-shadow: 0 24px 50px rgba(0,0,0,.38), inset 0 1px 0 rgba(255,255,255,.09);
+            color: #fff;
         }
-        .row2-tile {
-            background: var(--glass-bg);
-            border-color: var(--glass-border);
+        html.light-mode .vault-card {
+            background:
+                radial-gradient(420px 200px at 110% -10%, rgba(142,209,47,.20), transparent 65%),
+                linear-gradient(150deg, #ffffff 0%, #eef3fb 100%);
+            border-color: rgba(16,26,44,.10);
+            box-shadow: 0 20px 40px rgba(30,45,80,.13);
+            color: var(--text);
         }
-        .row3-tile {
-            background: rgba(95, 160, 0, 0.12);
-            border-color: rgba(95, 160, 0, 0.40);
+        .vault-sheen {
+            position: absolute; top: -120px; right: -60px; width: 260px; height: 260px;
+            border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,.10), transparent 70%);
+            pointer-events: none;
+        }
+        .vault-grid {
+            position: absolute; inset: 0; opacity: .25; pointer-events: none;
+            background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+            background-size: 26px 26px;
+            mask-image: linear-gradient(to bottom, #000, transparent 70%);
+            -webkit-mask-image: linear-gradient(to bottom, #000, transparent 70%);
+        }
+        .vault-label { font-size: 9.5px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; opacity: .62; }
+        .vault-strong { color: #fff; }
+        html.light-mode .vault-strong { color: var(--text); }
+        .vault-accent { color: #8ed12f; }
+        html.light-mode .vault-accent { color: #4d8a00; }
+        .balance-value { font-family: 'Space Mono', monospace; font-size: 15px; font-weight: 700; letter-spacing: -.02em; }
+        .balance-box {
+            border-radius: 18px; padding: 12px 14px;
+            background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.10);
+        }
+        html.light-mode .balance-box { background: rgba(255,255,255,.75); border-color: rgba(16,26,44,.07); }
+        html.light-mode .vault-card .atm-inner-bar { background: rgba(255,255,255,.75) !important; border-color: rgba(16,26,44,.07) !important; }
+        .eye-btn {
+            display: inline-flex; align-items: center; gap: 7px;
+            padding: 8px 13px; border-radius: 12px; color: #fff; font-size: 10px; font-weight: 800;
+            letter-spacing: .1em; text-transform: uppercase;
+            background: linear-gradient(135deg, #6fb318, #4d8a00);
+            box-shadow: 0 8px 18px rgba(95,160,0,.32);
+            transition: transform .18s var(--ease), filter .18s ease;
+        }
+        .eye-btn:hover { filter: brightness(1.08); }
+        .eye-btn:active { transform: scale(.95); }
+        html.light-mode .eye-btn { color: #fff; }
+        .copy-btn {
+            width: 34px; height: 34px; border-radius: 11px; display: inline-flex;
+            align-items: center; justify-content: center; flex-shrink: 0;
+            background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14);
+            color: inherit; transition: background .18s ease, transform .18s var(--ease);
+        }
+        .copy-btn:hover { background: rgba(142,209,47,.28); }
+        .copy-btn:active { transform: scale(.9); }
+        html.light-mode .copy-btn { background: rgba(16,26,44,.06); border-color: rgba(16,26,44,.10); }
+        #account-number-display { letter-spacing: .14em; }
+
+        /* Countdown Panel on Login Screen */
+        .countdown-panel {
+            background: linear-gradient(135deg, rgba(142, 209, 47, 0.16), rgba(95, 160, 0, 0.06));
+            border: 1px solid rgba(142, 209, 47, 0.35);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+        }
+        .countdown-box {
+            background: var(--bg-soft);
+            border: 1px solid var(--border-strong);
+            border-radius: 12px;
         }
 
-        .drawer-backdrop { transition: opacity 0.25s ease; }
-        .drawer-panel { transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1); }
+        /* Notice Board */
+        .notice-board-card {
+            background: linear-gradient(145deg, rgba(255, 193, 7, 0.12), rgba(142, 209, 47, 0.08));
+            border: 1px solid rgba(255, 193, 7, 0.32);
+            border-radius: 22px;
+            box-shadow: 0 10px 26px rgba(0, 0, 0, 0.18);
+        }
+        html.light-mode .notice-board-card {
+            background: linear-gradient(145deg, #fffbeb, #f4fce8);
+            border-color: rgba(217, 119, 6, 0.28);
+        }
 
+        /* Specific icon sizing */
+        #icon-app4, #icon-app6, #icon-member-contact { width: 42px; height: 42px; border-radius: 14px; font-size: 15px; }
+        #icon-app4 svg, #icon-app6 svg, #icon-member-contact svg { font-size: inherit; }
+
+        /* Auth tabs */
+        #auth-tabs { border-radius: 18px; }
+        #auth-tabs button { border-radius: 14px !important; font-size: 11.5px !important; letter-spacing: .01em; }
+        #auth-tabs button[class*="bg-[#5fa000]"] {
+            background: linear-gradient(135deg, #6fb318, #4d8a00) !important;
+            box-shadow: 0 8px 18px rgba(95,160,0,.28) !important;
+        }
+
+        /* Drawer */
+        .drawer-backdrop { background: rgba(4,8,18,.72); transition: opacity .28s ease; }
+        html.light-mode .drawer-backdrop { background: rgba(16,26,44,.42); }
+        .drawer-panel {
+            background: var(--bg-soft);
+            border-right: 1px solid var(--border);
+            transition: transform .38s var(--ease);
+            box-shadow: 24px 0 60px rgba(0,0,0,.35);
+        }
+        .drawer-head {
+            background: linear-gradient(135deg, rgba(142,209,47,.14), transparent 70%);
+            border-bottom: 1px solid var(--border);
+        }
+        .drawer-grip { width: 38px; height: 4px; border-radius: 99px; background: var(--border-strong); margin: 0 auto; }
+
+        /* Modals */
+        .modal-overlay { background: rgba(4,8,18,.76); transition: opacity .22s ease; }
+        html.light-mode .modal-overlay { background: rgba(16,26,44,.46); }
+        .modal-card {
+            background: var(--bg-soft); border: 1px solid var(--border);
+            box-shadow: 0 30px 80px rgba(0,0,0,.5);
+        }
+        html.light-mode .modal-card { box-shadow: 0 30px 70px rgba(30,45,80,.18); }
+        .section-card {
+            background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
+        }
+        .section-title { font-size: 11px; font-weight: 800; letter-spacing: .02em; color: var(--text); }
+        .section-icon {
+            width: 32px; height: 32px; border-radius: 11px; display: inline-flex;
+            align-items: center; justify-content: center; flex-shrink: 0;
+            background: var(--accent-soft); color: var(--accent-2); font-size: 12px;
+        }
         @keyframes popIn {
-            0% { opacity: 0; transform: scale(0.95) translateY(8px); }
-            100% { opacity: 1; transform: scale(1) translateY(0); }
+            0% { opacity: 0; transform: translateY(12px) scale(.96); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
         }
-        .modal-pop {
-            animation: popIn 0.22s ease forwards;
-        }
-
+        .modal-pop { animation: popIn .28s var(--ease) both; }
         @keyframes shakeX {
             0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-6px); }
-            50% { transform: translateX(6px); }
-            75% { transform: translateX(-4px); }
+            20% { transform: translateX(-7px); }
+            40% { transform: translateX(7px); }
+            60% { transform: translateX(-5px); }
+            80% { transform: translateX(5px); }
         }
-        .shake-anim {
-            animation: shakeX 0.32s ease;
+        .shake-anim { animation: shakeX .36s ease; }
+        @keyframes pulseFade { 0%, 100% { opacity: .35; } 50% { opacity: 1; } }
+        .balance-loading { animation: pulseFade 1.0s ease-in-out infinite; }
+
+        /* PIN dots */
+        .pin-dot {
+            width: 13px; height: 13px; border-radius: 999px;
+            border: 2px solid rgba(142,209,47,.55);
+            background: transparent;
+            transition: all .2s var(--ease);
         }
 
-        @keyframes pulseFade {
-            0%, 100% { opacity: 0.45; }
-            50% { opacity: 1; }
+        /* Toast */
+        #app-toast {
+            background: rgba(12,19,36,.94); border: 1px solid rgba(142,209,47,.42);
+            box-shadow: 0 18px 40px rgba(0,0,0,.5);
+            backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            animation: toastIn .3s var(--ease) both;
         }
-        .balance-loading {
-            animation: pulseFade 1.2s ease-in-out infinite;
+        html.light-mode #app-toast { background: rgba(255,255,255,.97); border-color: rgba(95,160,0,.4); }
+        @keyframes toastIn {
+            0% { opacity: 0; transform: translate(-50%, 16px) scale(.94); }
+            100% { opacity: 1; transform: translate(-50%, 0) scale(1); }
         }
+
+        .brand-ring { box-shadow: 0 0 0 4px rgba(142,209,47,.10), 0 8px 22px rgba(0,0,0,.3); }
+        .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .tabular { font-variant-numeric: tabular-nums; }
+        .fade-in { animation: fadeIn .4s ease both; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
-<body class="h-[100dvh] w-screen flex justify-center items-center overflow-hidden p-0 sm:p-4">
+<body class="app-bg min-h-[100dvh] w-full flex justify-center items-center overflow-hidden p-0 sm:p-5">
 
-    <!-- Mobile App Shell -->
-    <div id="app-shell" class="w-full max-w-md clean-navy-canvas h-[100dvh] sm:h-[820px] sm:max-h-[92dvh] sm:rounded-[36px] sm:border border-theme sm:shadow-2xl flex flex-col relative overflow-hidden">
+    <!-- Phone shell -->
+    <div id="app-shell" class="app-shell w-full max-w-[430px] h-[100dvh] sm:h-[880px] sm:max-h-[94dvh] sm:rounded-[40px] flex flex-col relative overflow-hidden">
 
-        <!-- Smart Toast Notification -->
-        <div id="app-toast" class="hidden fixed bottom-8 left-1/2 -translate-x-1/2 z-[150] px-4 py-2.5 rounded-full bg-[#131939] border border-[#5fa000] shadow-2xl backdrop-blur-md flex items-center gap-2 max-w-[90vw]">
+        <!-- Ambient decoration -->
+        <div class="ambient-orb orb-one"></div>
+        <div class="ambient-orb orb-two"></div>
+
+        <!-- Smart Toast -->
+        <div id="app-toast" class="hidden fixed bottom-8 left-1/2 z-[150] px-4 py-2.5 rounded-full flex items-center gap-2.5 max-w-[90vw]">
             <span id="app-toast-icon-wrap" class="w-5 h-5 rounded-full bg-[#5fa000] flex items-center justify-center text-white shrink-0">
                 <i id="app-toast-icon" class="fa-solid fa-check text-[10px]"></i>
             </span>
-            <span id="app-toast-text" class="text-xs font-semibold text-white truncate">Notification</span>
+            <span id="app-toast-text" class="text-[11px] font-bold truncate" style="color:var(--text)">Notification</span>
         </div>
 
-        <!-- =========================================================================
-             1. AUTHENTICATION ENTER PAGE (LOGIN / CREATE ACCOUNT / FORGOT PASSWORD)
-             ========================================================================= -->
-        <section id="auth-screen" class="hidden absolute inset-0 z-[100] clean-navy-canvas flex flex-col justify-between p-5 overflow-y-auto">
-            <!-- Top Brand Header -->
-            <div class="pt-4 text-center shrink-0">
-                <div class="w-16 h-16 mx-auto rounded-full p-1 bg-[#5fa000] shadow-lg mb-3 overflow-hidden">
+        <!-- =====================================================================
+             1. AUTH SCREEN (WITH 1st-5th MONTHLY FEE COUNTDOWN PANEL)
+             ===================================================================== -->
+        <section id="auth-screen" class="hidden absolute inset-0 z-[100] clean-navy-canvas flex flex-col overflow-y-auto no-scrollbar px-5 pt-11 pb-5" style="padding-top: max(44px, env(safe-area-inset-top, 44px));">
+
+            <!-- Brand hero with Arabic Title & Circle Logo -->
+            <div class="text-center shrink-0 fade-in">
+                <p dir="rtl" lang="ar" class="font-ar text-[22px] font-bold text-[#8ed12f] leading-snug mb-2 tracking-wide">
+                    لجنة الصُّفَّة الخيرية
+                </p>
+                <div class="w-[68px] h-[68px] mx-auto rounded-full p-[3px] brand-ring bg-[#5fa000] mb-2.5 overflow-hidden">
                     <img src="https://lh3.googleusercontent.com/d/1PXMzZMIOZbElnjIuOK2ew-FNMhuScYGx"
                          alt="ASWA Logo"
-                         class="w-full h-full object-cover rounded-full bg-[#131939]"
+                         class="w-full h-full object-cover rounded-full bg-[#0a1020]"
                          onerror="handleLogoFallback(this)">
                 </div>
-                <h1 class="text-sm font-extrabold tracking-wider text-theme-main">AS-SUFFAH WELFARE ASSOCIATION</h1>
-                <p class="text-xs text-[#5fa000] font-semibold mt-0.5">আস-সুফফাহ কল্যাণ সমিতি</p>
+                <h1 class="text-[13px] font-extrabold tracking-[.18em] text-theme-main">AS-SUFFAH</h1>
+                <p class="text-[9.5px] font-bold tracking-[.30em] text-[#5fa000] mt-0.5">WELFARE ASSOCIATION</p>
+                <p class="font-bn text-[11px] text-theme-muted mt-1">আস-সুফফাহ কল্যাণ সমিতি</p>
             </div>
 
-            <!-- Auth Glass Card -->
-            <div class="my-auto py-4">
-                <div class="atm-glass-card rounded-3xl p-5 relative overflow-hidden">
-                    <div class="absolute top-0 left-0 right-0 h-1 bg-[#5fa000]"></div>
+            <!-- Monthly Fee Countdown Panel (1st to 5th of Every Month) -->
+            <div id="monthly-countdown-panel" class="w-full max-w-[360px] mx-auto mt-3.5 shrink-0 fade-in">
+                <div class="countdown-panel rounded-[22px] p-3.5 relative overflow-hidden">
+                    <div class="flex items-center justify-between gap-2 mb-2">
+                        <div class="flex items-center gap-2">
+                            <span id="cd-pulse-dot" class="w-2.5 h-2.5 rounded-full bg-[#8ed12f] animate-ping"></span>
+                            <span id="cd-badge-title" class="font-bn text-[11px] font-extrabold text-[#8ed12f] tracking-wide">
+                                মাসিক ফি জমার সময় চলছে (১ - ৫ তারিখ)
+                            </span>
+                        </div>
+                        <span class="px-2 py-0.5 rounded-full bg-[#5fa000]/25 text-[#8ed12f] text-[9px] font-bold font-bn">
+                            ১-৫ তারিখ
+                        </span>
+                    </div>
+                    <p id="cd-subtitle-text" class="font-bn text-[10px] text-theme-muted mb-2.5 leading-relaxed">
+                        প্রতি মাসের ১ থেকে ৫ তারিখের মধ্যে মাসিক ফি পরিশোধ করতে হবে। বাকি সময়:
+                    </p>
+                    <div class="grid grid-cols-4 gap-2 text-center">
+                        <div class="countdown-box py-2 px-1">
+                            <span id="cd-days" class="font-mono text-[15px] font-extrabold text-theme-main block leading-none tabular">00</span>
+                            <span class="font-bn text-[9px] text-theme-muted mt-1 block">দিন</span>
+                        </div>
+                        <div class="countdown-box py-2 px-1">
+                            <span id="cd-hours" class="font-mono text-[15px] font-extrabold text-[#8ed12f] block leading-none tabular">00</span>
+                            <span class="font-bn text-[9px] text-theme-muted mt-1 block">ঘণ্টা</span>
+                        </div>
+                        <div class="countdown-box py-2 px-1">
+                            <span id="cd-minutes" class="font-mono text-[15px] font-extrabold text-theme-main block leading-none tabular">00</span>
+                            <span class="font-bn text-[9px] text-theme-muted mt-1 block">মিনিট</span>
+                        </div>
+                        <div class="countdown-box py-2 px-1">
+                            <span id="cd-seconds" class="font-mono text-[15px] font-extrabold text-[#8ed12f] block leading-none tabular">00</span>
+                            <span class="font-bn text-[9px] text-theme-muted mt-1 block">সেকেন্ড</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                    <!-- Tab Switcher (Login / Create Account) -->
-                    <div id="auth-tabs" class="grid grid-cols-2 gap-1.5 p-1 rounded-2xl atm-inner-bar mb-5">
+            <!-- Auth card -->
+            <div class="my-auto py-3.5 w-full max-w-[360px] mx-auto">
+                <div class="section-card rounded-[26px] p-5 relative overflow-hidden fade-in">
+                    <div class="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#5fa000] via-[#8ed12f] to-[#5fa000]"></div>
+
+                    <!-- Tabs -->
+                    <div id="auth-tabs" class="grid grid-cols-2 gap-1 p-1 rounded-[18px] atm-inner-bar mb-4">
                         <button type="button" id="tab-login-btn" onclick="switchAuthTab('login')"
                                 class="py-2 rounded-xl text-xs font-bold transition bg-[#5fa000] text-white shadow">
-                            লগইন (Login)
+                            লগইন
                         </button>
                         <button type="button" id="tab-register-btn" onclick="switchAuthTab('register')"
                                 class="py-2 rounded-xl text-xs font-bold transition text-theme-muted hover:text-theme-main">
@@ -238,191 +485,158 @@
                         </button>
                     </div>
 
-                    <!-- Error / Success Alert Banner inside Auth -->
-                    <div id="auth-alert-box" class="hidden mb-4 p-3 rounded-2xl text-xs font-medium border flex items-start gap-2.5">
+                    <!-- Alert -->
+                    <div id="auth-alert-box" class="hidden mb-4 p-3 rounded-2xl text-[11px] font-semibold border flex items-start gap-2.5">
                         <i id="auth-alert-icon" class="fa-solid fa-circle-info mt-0.5 shrink-0"></i>
                         <span id="auth-alert-msg" class="leading-relaxed"></span>
                     </div>
 
-                    <!-- A. LOGIN FORM -->
+                    <!-- Login -->
                     <form id="form-login" onsubmit="handleLoginSubmit(event)" class="space-y-3.5">
                         <div>
-                            <label class="block text-[11px] font-bold text-theme-muted mb-1.5">Gmail ID অথবা Mobile No</label>
-                            <div class="relative">
-                                <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#5fa000]">
-                                    <i class="fa-solid fa-user text-xs"></i>
-                                </span>
+                            <label class="field-label block mb-1.5">Gmail ID অথবা Mobile No</label>
+                            <div class="input-wrap">
+                                <span class="input-icon"><i class="fa-regular fa-user text-[13px]"></i></span>
                                 <input type="text" id="login-identifier" required
                                        placeholder="example@gmail.com বা 01XXXXXXXXX"
-                                       class="w-full pl-9 pr-3.5 py-2.5 rounded-2xl theme-input text-xs font-medium">
+                                       class="theme-input has-icon w-full px-3.5 py-3 text-xs font-semibold">
                             </div>
                         </div>
-
                         <div>
                             <div class="flex items-center justify-between mb-1.5">
-                                <label class="text-[11px] font-bold text-theme-muted">Password</label>
-                                <button type="button" onclick="switchAuthTab('forgot')"
-                                        class="text-[11px] font-bold text-[#5fa000] hover:underline">
-                                    পাসওয়ার্ড ভুলে গেছেন?
+                                <label class="field-label">Password</label>
+                                <button type="button" onclick="switchAuthTab('forgot')" class="text-[10.5px] font-bold text-[#5fa000] hover:underline">
+                                    ভুলে গেছেন?
                                 </button>
                             </div>
-                            <div class="relative">
-                                <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#5fa000]">
-                                    <i class="fa-solid fa-lock text-xs"></i>
-                                </span>
+                            <div class="input-wrap">
+                                <span class="input-icon"><i class="fa-solid fa-lock text-[13px]"></i></span>
                                 <input type="password" id="login-password" required
                                        placeholder="আপনার পাসওয়ার্ড দিন"
-                                       class="w-full pl-9 pr-10 py-2.5 rounded-2xl theme-input text-xs font-medium">
-                                <button type="button" onclick="toggleInputPassword('login-password', this)"
-                                        class="absolute right-3 top-1/2 -translate-y-1/2 text-theme-muted hover:text-theme-main">
-                                    <i class="fa-regular fa-eye text-xs"></i>
+                                       class="theme-input has-icon has-trailing w-full px-3.5 py-3 text-xs font-semibold">
+                                <button type="button" onclick="toggleInputPassword('login-password', this)" class="input-trailing">
+                                    <i class="fa-regular fa-eye text-[13px]"></i>
                                 </button>
                             </div>
                         </div>
-
                         <button type="submit" id="btn-login-submit"
-                                class="w-full py-3 rounded-2xl bg-[#5fa000] hover:bg-[#5fa000]/90 text-white text-xs font-bold tracking-wide shadow-lg transition active:scale-98 flex items-center justify-center gap-2 mt-2">
+                                class="btn-primary w-full py-3.5 text-xs flex items-center justify-center gap-2 mt-1">
                             <span>একাউন্টে প্রবেশ করুন</span>
-                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                            <i class="fa-solid fa-arrow-right text-[11px]"></i>
                         </button>
                     </form>
 
-                    <!-- B. CREATE ACCOUNT FORM -->
-                    <form id="form-register" onsubmit="handleRegisterSubmit(event)" class="hidden space-y-3">
+                    <!-- Register -->
+                    <form id="form-register" onsubmit="handleRegisterSubmit(event)" class="hidden space-y-3.5">
                         <div>
-                            <label class="block text-[11px] font-bold text-theme-muted mb-1.5">একাউন্টের ধরন নির্বাচন করুন</label>
+                            <label class="field-label block mb-1.5">একাউন্টের ধরন</label>
                             <div class="grid grid-cols-2 gap-2">
                                 <label class="cursor-pointer">
                                     <input type="radio" name="reg-role" value="member" checked class="peer sr-only" onchange="updateRoleHint()">
                                     <div class="p-2.5 rounded-2xl simple-glass peer-checked:bg-[#5fa000]/20 peer-checked:border-[#5fa000] text-center transition">
                                         <i class="fa-solid fa-users text-xs text-[#5fa000] block mb-1"></i>
-                                        <span class="text-xs font-bold text-theme-main block">Member</span>
+                                        <span class="text-[11px] font-bold text-theme-main">Member</span>
                                     </div>
                                 </label>
                                 <label class="cursor-pointer">
                                     <input type="radio" name="reg-role" value="admin" class="peer sr-only" onchange="updateRoleHint()">
                                     <div class="p-2.5 rounded-2xl simple-glass peer-checked:bg-[#5fa000]/20 peer-checked:border-[#5fa000] text-center transition">
                                         <i class="fa-solid fa-user-shield text-xs text-[#5fa000] block mb-1"></i>
-                                        <span class="text-xs font-bold text-theme-main block">Admin</span>
+                                        <span class="text-[11px] font-bold text-theme-main">Admin</span>
                                     </div>
                                 </label>
                             </div>
-                            <p id="role-hint-text" class="text-[10px] text-theme-muted mt-1.5 px-1">
+                            <p id="role-hint-text" class="font-bn text-[10px] text-theme-muted mt-1.5 px-1">
                                 * সাধারণ সদস্যদের জন্য Member একাউন্ট তৈরি করুন।
                             </p>
                         </div>
-
                         <div>
-                            <label class="block text-[11px] font-bold text-theme-muted mb-1">Gmail ID (১টি জিমেইল = ১টি একাউন্ট)</label>
-                            <div class="relative">
-                                <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#5fa000]">
-                                    <i class="fa-solid fa-envelope text-xs"></i>
-                                </span>
-                                <input type="email" id="reg-email" required
-                                       placeholder="yourname@gmail.com"
-                                       class="w-full pl-9 pr-3.5 py-2.5 rounded-2xl theme-input text-xs font-medium">
+                            <label class="field-label block mb-1">Gmail ID</label>
+                            <div class="input-wrap">
+                                <span class="input-icon"><i class="fa-regular fa-envelope text-[13px]"></i></span>
+                                <input type="email" id="reg-email" required placeholder="yourname@gmail.com"
+                                       class="theme-input has-icon w-full px-3.5 py-3 text-xs font-semibold">
                             </div>
                         </div>
-
                         <div>
-                            <label class="block text-[11px] font-bold text-theme-muted mb-1">Mobile No</label>
-                            <div class="relative">
-                                <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#5fa000]">
-                                    <i class="fa-solid fa-phone text-xs"></i>
-                                </span>
-                                <input type="tel" id="reg-mobile" required
-                                       placeholder="01XXXXXXXXX"
-                                       class="w-full pl-9 pr-3.5 py-2.5 rounded-2xl theme-input text-xs font-medium">
+                            <label class="field-label block mb-1">Mobile No</label>
+                            <div class="input-wrap">
+                                <span class="input-icon"><i class="fa-solid fa-phone text-[13px]"></i></span>
+                                <input type="tel" id="reg-mobile" required placeholder="01XXXXXXXXX"
+                                       class="theme-input has-icon w-full px-3.5 py-3 text-xs font-semibold">
                             </div>
                         </div>
-
                         <div>
-                            <label class="block text-[11px] font-bold text-theme-muted mb-1">Password</label>
-                            <div class="relative">
-                                <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#5fa000]">
-                                    <i class="fa-solid fa-key text-xs"></i>
-                                </span>
+                            <label class="field-label block mb-1">Password</label>
+                            <div class="input-wrap">
+                                <span class="input-icon"><i class="fa-solid fa-key text-[13px]"></i></span>
                                 <input type="password" id="reg-password" required minlength="4"
-                                       placeholder="কমপক্ষে ৪ অক্ষরের পাসওয়ার্ড দিন"
-                                       class="w-full pl-9 pr-10 py-2.5 rounded-2xl theme-input text-xs font-medium">
-                                <button type="button" onclick="toggleInputPassword('reg-password', this)"
-                                        class="absolute right-3 top-1/2 -translate-y-1/2 text-theme-muted hover:text-theme-main">
-                                    <i class="fa-regular fa-eye text-xs"></i>
+                                       placeholder="কমপক্ষে ৪ অক্ষর"
+                                       class="theme-input has-icon has-trailing w-full px-3.5 py-3 text-xs font-semibold">
+                                <button type="button" onclick="toggleInputPassword('reg-password', this)" class="input-trailing">
+                                    <i class="fa-regular fa-eye text-[13px]"></i>
                                 </button>
                             </div>
                         </div>
-
                         <button type="submit" id="btn-register-submit"
-                                class="w-full py-3 rounded-2xl bg-[#5fa000] hover:bg-[#5fa000]/90 text-white text-xs font-bold tracking-wide shadow-lg transition active:scale-98 flex items-center justify-center gap-2 mt-1">
-                            <i class="fa-solid fa-user-plus text-xs"></i>
+                                class="btn-primary w-full py-3.5 text-xs flex items-center justify-center gap-2 mt-1">
+                            <i class="fa-solid fa-user-plus text-[11px]"></i>
                             <span>একাউন্ট তৈরি করুন</span>
                         </button>
                     </form>
 
-                    <!-- C. FORGOT PASSWORD FORM -->
+                    <!-- Forgot -->
                     <form id="form-forgot" onsubmit="handleForgotSubmit(event)" class="hidden space-y-3.5">
-                        <div class="flex items-center justify-between pb-2 border-b border-theme">
-                            <h3 class="text-xs font-bold text-theme-main">পাসওয়ার্ড পুনরুদ্ধার (Reset)</h3>
-                            <button type="button" onclick="switchAuthTab('login')" class="text-[11px] font-bold text-[#5fa000]">
-                                ← লগইনে ফিরুন
-                            </button>
+                        <div class="flex items-center justify-between pb-2.5 border-b border-theme mb-1">
+                            <h3 class="text-xs font-bold text-theme-main">পাসওয়ার্ড পুনরুদ্ধার</h3>
+                            <button type="button" onclick="switchAuthTab('login')" class="text-[10.5px] font-bold text-[#5fa000]">← লগইনে ফিরুন</button>
                         </div>
-
                         <div>
-                            <label class="block text-[11px] font-bold text-theme-muted mb-1">নিবন্ধিত Gmail ID</label>
+                            <label class="field-label block mb-1">নিবন্ধিত Gmail ID</label>
                             <input type="email" id="forgot-email" required placeholder="yourname@gmail.com"
-                                   class="w-full px-3.5 py-2.5 rounded-2xl theme-input text-xs font-medium">
+                                   class="theme-input w-full px-3.5 py-3 text-xs font-semibold">
                         </div>
-
                         <div>
-                            <label class="block text-[11px] font-bold text-theme-muted mb-1">নিবন্ধিত Mobile No (যাচাইয়ের জন্য)</label>
+                            <label class="field-label block mb-1">নিবন্ধিত Mobile No</label>
                             <input type="tel" id="forgot-mobile" required placeholder="01XXXXXXXXX"
-                                   class="w-full px-3.5 py-2.5 rounded-2xl theme-input text-xs font-medium">
+                                   class="theme-input w-full px-3.5 py-3 text-xs font-semibold">
                         </div>
-
                         <div>
-                            <label class="block text-[11px] font-bold text-theme-muted mb-1">নতুন Password সেট করুন</label>
+                            <label class="field-label block mb-1">নতুন Password</label>
                             <input type="password" id="forgot-new-password" required minlength="4" placeholder="নতুন পাসওয়ার্ড লিখুন"
-                                   class="w-full px-3.5 py-2.5 rounded-2xl theme-input text-xs font-medium">
+                                   class="theme-input w-full px-3.5 py-3 text-xs font-semibold">
                         </div>
-
                         <button type="submit" id="btn-forgot-submit"
-                                class="w-full py-3 rounded-2xl bg-[#5fa000] hover:bg-[#5fa000]/90 text-white text-xs font-bold shadow-lg transition active:scale-98">
-                            পাসওয়ার্ড রিসেট করুন
-                        </button>
+                                class="btn-primary w-full py-3.5 text-xs">পাসওয়ার্ড রিসেট করুন</button>
                     </form>
                 </div>
             </div>
 
-            <div class="text-center pb-2 shrink-0">
-                <span class="text-[10px] text-theme-muted">
-                    Secured Portal • <strong class="text-[#5fa000]">As-Suffah Welfare Association</strong>
+            <div class="text-center pb-1 shrink-0">
+                <span class="text-[9.5px] text-theme-muted font-semibold tracking-wide">
+                    SECURE PORTAL · <strong class="text-[#5fa000]">AS-SUFFAH</strong>
                 </span>
             </div>
         </section>
 
-        <!-- =========================================================================
-             2. PIN LOCK OVERLAY SCREEN
-             ========================================================================= -->
-        <section id="pin-lock-screen" class="hidden absolute inset-0 z-[110] clean-navy-canvas flex flex-col justify-between p-6">
-            <div class="pt-8 text-center">
-                <div class="w-14 h-14 mx-auto rounded-2xl bg-[#5fa000]/20 border border-[#5fa000] flex items-center justify-center text-[#5fa000] mb-3 shadow-lg">
-                    <i class="fa-solid fa-shield-halved text-xl"></i>
+        <!-- =====================================================================
+             2. PIN LOCK
+             ===================================================================== -->
+        <section id="pin-lock-screen" class="hidden absolute inset-0 z-[110] clean-navy-canvas flex flex-col px-7 pt-14 pb-8 overflow-y-auto no-scrollbar">
+            <div class="text-center shrink-0 fade-in">
+                <div class="w-14 h-14 mx-auto rounded-[19px] section-icon flex items-center justify-center !w-14 !h-14 mb-4" style="width:56px;height:56px;border-radius:19px;background:var(--accent-soft);border:1px solid rgba(142,209,47,.3)">
+                    <i class="fa-solid fa-shield-halved text-xl text-[#5fa000]"></i>
                 </div>
                 <h2 class="text-base font-extrabold text-theme-main">অ্যাপ লক করা আছে</h2>
-                <p id="pin-lock-user-label" class="text-xs text-theme-muted mt-1">প্রবেশ করতে আপনার ৪-সংখ্যার PIN দিন</p>
-
-                <div id="pin-dots-container" class="flex items-center justify-center gap-4 mt-6">
-                    <span class="pin-dot w-4 h-4 rounded-full border-2 border-[#5fa000] transition-all"></span>
-                    <span class="pin-dot w-4 h-4 rounded-full border-2 border-[#5fa000] transition-all"></span>
-                    <span class="pin-dot w-4 h-4 rounded-full border-2 border-[#5fa000] transition-all"></span>
-                    <span class="pin-dot w-4 h-4 rounded-full border-2 border-[#5fa000] transition-all"></span>
+                <p id="pin-lock-user-label" class="text-[11px] text-theme-muted mt-1.5">প্রবেশ করতে আপনার ৪-সংখ্যার PIN দিন</p>
+                <div id="pin-dots-container" class="flex items-center justify-center gap-3.5 mt-7">
+                    <span class="pin-dot"></span><span class="pin-dot"></span><span class="pin-dot"></span><span class="pin-dot"></span>
                 </div>
-                <p id="pin-error-text" class="text-xs text-red-400 font-semibold mt-3 h-4"></p>
+                <p id="pin-error-text" class="text-[11px] font-bold mt-3 h-4" style="color:var(--danger)"></p>
             </div>
 
-            <div class="max-w-[280px] w-full mx-auto my-auto">
-                <div class="grid grid-cols-3 gap-3.5">
+            <div class="max-w-[290px] w-full mx-auto my-auto">
+                <div class="grid grid-cols-3 gap-3">
                     <button type="button" onclick="enterPinDigit('1')" class="h-14 rounded-2xl glass-tile text-lg font-bold text-theme-main">1</button>
                     <button type="button" onclick="enterPinDigit('2')" class="h-14 rounded-2xl glass-tile text-lg font-bold text-theme-main">2</button>
                     <button type="button" onclick="enterPinDigit('3')" class="h-14 rounded-2xl glass-tile text-lg font-bold text-theme-main">3</button>
@@ -432,7 +646,7 @@
                     <button type="button" onclick="enterPinDigit('7')" class="h-14 rounded-2xl glass-tile text-lg font-bold text-theme-main">7</button>
                     <button type="button" onclick="enterPinDigit('8')" class="h-14 rounded-2xl glass-tile text-lg font-bold text-theme-main">8</button>
                     <button type="button" onclick="enterPinDigit('9')" class="h-14 rounded-2xl glass-tile text-lg font-bold text-theme-main">9</button>
-                    <button type="button" onclick="clearPinEntry()" class="h-14 rounded-2xl simple-glass text-xs font-bold text-theme-muted hover:text-theme-main">Clear</button>
+                    <button type="button" onclick="clearPinEntry()" class="h-14 rounded-2xl simple-glass text-[11px] font-bold text-theme-muted">Clear</button>
                     <button type="button" onclick="enterPinDigit('0')" class="h-14 rounded-2xl glass-tile text-lg font-bold text-theme-main">0</button>
                     <button type="button" onclick="backspacePinDigit()" class="h-14 rounded-2xl simple-glass text-sm font-bold text-theme-main">
                         <i class="fa-solid fa-delete-left"></i>
@@ -440,666 +654,531 @@
                 </div>
             </div>
 
-            <div class="text-center pb-2">
-                <button type="button" onclick="logoutAccount()" class="text-xs font-bold text-[#5fa000] hover:underline">
-                    PIN ভুলে গেছেন? পুনরায় লগইন করুন (Logout)
+            <div class="text-center pb-1 shrink-0">
+                <button type="button" onclick="logoutAccount()" class="text-[11px] font-bold text-[#5fa000] hover:underline">
+                    PIN ভুলে গেছেন? পুনরায় লগইন করুন
                 </button>
             </div>
         </section>
 
-        <!-- =========================================================================
-             3. LEFT SLIDE DRAWER (UPDATED AS REQUESTED)
-             - Profile Photo instead of logo & Gmail ID instead of AS-SUFFAH PLATFORM
-             - Same icon color (#5fa000) for all navigation options
-             - Member Group tile spans 2 columns (col-span-2) for Member role
-             - Removed Display Mode and Vault Shortcut
-             - Logout button added at bottom of Menu
-             ========================================================================= -->
-        <div id="side-drawer-backdrop"
-             onclick="closeLeftDrawer()"
-             class="hidden drawer-backdrop opacity-0 absolute inset-0 bg-[#131939]/75 backdrop-blur-xs z-[60]">
-        </div>
+        <!-- =====================================================================
+             3. SIDE DRAWER
+             ===================================================================== -->
+        <div id="side-drawer-backdrop" onclick="closeLeftDrawer()"
+             class="hidden drawer-backdrop opacity-0 absolute inset-0 z-[60] backdrop-blur-[2px]"></div>
 
-        <aside id="side-drawer-panel"
-               aria-hidden="true"
-               class="drawer-panel -translate-x-full absolute top-0 bottom-0 left-0 w-[82%] max-w-[300px] panel-theme-bg backdrop-blur-xl border-r border-theme z-[70] flex flex-col justify-between p-4 shadow-2xl rounded-r-3xl">
+        <aside id="side-drawer-panel" aria-hidden="true"
+               class="drawer-panel -translate-x-full absolute top-0 bottom-0 left-0 w-[84%] max-w-[310px] z-[70] flex flex-col justify-between p-4">
             <div class="flex flex-col min-h-0 flex-1">
-                <div class="w-full h-4 shrink-0"></div>
+                <div class="drawer-grip mt-1 mb-4"></div>
 
-                <!-- Drawer Header: Profile Photo & Gmail ID -->
-                <div class="flex items-center justify-between pb-3.5 border-b border-theme pt-1 shrink-0 gap-2">
-                    <div class="flex items-center gap-2.5 min-w-0">
-                        <div class="w-11 h-11 rounded-full p-0.5 bg-[#5fa000] shrink-0 overflow-hidden shadow-md">
+                <!-- Profile -->
+                <div class="drawer-head rounded-[22px] p-3.5 flex items-center justify-between gap-2 pb-3.5 shrink-0">
+                    <div class="flex items-center gap-3 min-w-0">
+                        <div class="w-11 h-11 rounded-full p-[2px] bg-[#5fa000] shrink-0 overflow-hidden shadow-md">
                             <img id="drawer-profile-photo"
                                  src="https://lh3.googleusercontent.com/d/1PXMzZMIOZbElnjIuOK2ew-FNMhuScYGx"
-                                 alt="Profile Photo"
-                                 class="w-full h-full object-cover rounded-full bg-[#131939]"
+                                 alt="Profile"
+                                 class="w-full h-full object-cover rounded-full bg-[#0a1020]"
                                  onerror="handleLogoFallback(this)">
                         </div>
                         <div class="min-w-0">
-                            <h2 id="drawer-user-email" class="text-[11.5px] font-bold text-theme-main truncate">
-                                user@gmail.com
-                            </h2>
-                            <span id="drawer-role-badge" class="inline-block mt-0.5 px-2 py-0.5 rounded-md bg-[#5fa000]/20 text-[#5fa000] text-[9.5px] font-extrabold uppercase tracking-wider">
-                                Member Portal
-                            </span>
+                            <h2 id="drawer-user-email" class="text-[11px] font-bold text-theme-main truncate">user@gmail.com</h2>
+                            <span id="drawer-role-badge" class="inline-block mt-1 px-2 py-0.5 rounded-md bg-[#5fa000]/20 text-[#5fa000] text-[9px] font-extrabold uppercase tracking-wider">Member Portal</span>
                         </div>
                     </div>
-                    <button type="button"
-                            onclick="closeLeftDrawer()"
-                            class="w-8 h-8 rounded-xl simple-glass hover:bg-[#5fa000]/20 flex items-center justify-center text-theme-main transition active:scale-90 shrink-0">
-                        <i class="fa-solid fa-xmark text-xs"></i>
+                    <button type="button" onclick="closeLeftDrawer()" aria-label="Close" class="icon-btn !w-8 !h-8 shrink-0" style="width:32px;height:32px">
+                        <i class="fa-solid fa-xmark text-[11px]"></i>
                     </button>
                 </div>
 
-                <!-- Drawer Navigation Options (All Icons Same Color) -->
-                <div class="mt-4 space-y-4 overflow-y-auto pr-1 flex-1">
-                    <div>
-                        <p class="px-1 text-[10px] font-bold uppercase tracking-widest text-theme-muted mb-2.5">
-                            Navigation & Account
-                        </p>
-                        <div class="grid grid-cols-2 gap-2.5">
-                            <!-- Dashboard / Home -->
-                            <button type="button" onclick="switchView('home'); closeLeftDrawer();" class="flex items-center gap-2.5 p-2.5 rounded-2xl glass-tile text-left text-xs font-semibold text-theme-main">
-                                <span class="w-7 h-7 rounded-xl bg-[#5fa000]/20 text-[#5fa000] flex items-center justify-center shrink-0">
-                                    <i class="fa-solid fa-house text-[11px]"></i>
-                                </span>
-                                <span class="truncate">Dashboard</span>
-                            </button>
-
-                            <!-- Account Settings Option -->
-                            <button type="button" onclick="openAccountModal()" class="flex items-center gap-2.5 p-2.5 rounded-2xl glass-tile text-left text-xs font-semibold text-theme-main">
-                                <span class="w-7 h-7 rounded-xl bg-[#5fa000]/20 text-[#5fa000] flex items-center justify-center shrink-0">
-                                    <i class="fa-solid fa-user-gear text-[11px]"></i>
-                                </span>
-                                <span class="truncate">Account</span>
-                            </button>
-
-                            <!-- Sync All -->
-                            <button type="button" onclick="refreshFullSystem(); closeLeftDrawer();" class="flex items-center gap-2.5 p-2.5 rounded-2xl glass-tile text-left text-xs font-semibold text-theme-main">
-                                <span class="w-7 h-7 rounded-xl bg-[#5fa000]/20 text-[#5fa000] flex items-center justify-center shrink-0">
-                                    <i class="fa-solid fa-arrows-rotate text-[11px]"></i>
-                                </span>
-                                <span class="truncate">Sync All</span>
-                            </button>
-
-                            <!-- Contact Us -->
-                            <button type="button" onclick="openInfoModal('contact')" class="flex items-center gap-2.5 p-2.5 rounded-2xl glass-tile text-left text-xs font-semibold text-theme-main">
-                                <span class="w-7 h-7 rounded-xl bg-[#5fa000]/20 text-[#5fa000] flex items-center justify-center shrink-0">
-                                    <i class="fa-solid fa-headset text-[11px]"></i>
-                                </span>
-                                <span class="truncate">Contact Us</span>
-                            </button>
-
-                            <!-- Messenger Group (Takes 2 slots width for Member role) -->
-                            <button type="button" id="drawer-group-btn" onclick="openInfoModal('messenger')" class="flex items-center gap-2.5 p-2.5 rounded-2xl glass-tile text-left text-xs font-semibold text-theme-main">
-                                <span class="w-7 h-7 rounded-xl bg-[#5fa000]/20 text-[#5fa000] flex items-center justify-center shrink-0">
-                                    <i class="fa-brands fa-facebook-messenger text-[11px]"></i>
-                                </span>
-                                <span class="truncate">Messenger Group</span>
-                            </button>
-
-                            <!-- Member Add (ADMIN ONLY - Same Icon Color) -->
-                            <button type="button" id="drawer-member-add-btn" onclick="switchView('app5'); closeLeftDrawer();" class="flex items-center gap-2.5 p-2.5 rounded-2xl glass-tile text-left text-xs font-semibold text-theme-main">
-                                <span class="w-7 h-7 rounded-xl bg-[#5fa000]/20 text-[#5fa000] flex items-center justify-center shrink-0">
-                                    <i class="fa-solid fa-user-plus text-[11px]"></i>
-                                </span>
-                                <span class="truncate">Member Add</span>
-                            </button>
-                        </div>
+                <!-- Nav -->
+                <div class="mt-5 flex-1 min-h-0 overflow-y-auto no-scrollbar pr-1">
+                    <p class="px-1 text-[9.5px] font-extrabold uppercase tracking-[.18em] text-theme-faint mb-3">Menu</p>
+                    <div class="grid grid-cols-2 gap-2.5">
+                        <button type="button" onclick="navigateToView('home'); closeLeftDrawer(true);" class="nav-tile">
+                            <span class="nav-icon"><i class="fa-solid fa-house"></i></span><span class="truncate">Dashboard</span>
+                        </button>
+                        <button type="button" id="drawer-due-members-btn" onclick="openDueMembersModal()" class="nav-tile relative">
+                            <span class="nav-icon" style="background:rgba(255,107,112,0.16);color:#ff6b70"><i class="fa-solid fa-user-clock"></i></span>
+                            <span class="truncate">Due Members</span>
+                        </button>
+                        <button type="button" onclick="openAccountModal()" class="nav-tile">
+                            <span class="nav-icon"><i class="fa-solid fa-user-gear"></i></span><span class="truncate">Account</span>
+                        </button>
+                        <button type="button" onclick="refreshFullSystem(); closeLeftDrawer(true);" class="nav-tile">
+                            <span class="nav-icon"><i class="fa-solid fa-arrows-rotate"></i></span><span class="truncate">Sync All</span>
+                        </button>
+                        <button type="button" onclick="openInfoModal('contact')" class="nav-tile">
+                            <span class="nav-icon"><i class="fa-solid fa-headset"></i></span><span class="truncate">Contact Us</span>
+                        </button>
+                        <button type="button" id="drawer-group-btn" onclick="openInfoModal('messenger')" class="nav-tile">
+                            <span class="nav-icon"><i class="fa-brands fa-facebook-messenger"></i></span><span class="truncate">Messenger</span>
+                        </button>
+                        <button type="button" id="drawer-member-add-btn" onclick="navigateToView('app5'); closeLeftDrawer(true);" class="nav-tile col-span-2">
+                            <span class="nav-icon"><i class="fa-solid fa-user-plus"></i></span><span class="truncate">Member Add (নতুন সদস্য যোগ)</span>
+                        </button>
                     </div>
                 </div>
             </div>
 
-            <!-- Drawer Bottom: Logout Button & Developer Credit -->
-            <div class="pt-3 mt-2 border-t border-theme space-y-2.5 shrink-0">
-                <button type="button" onclick="logoutAccount()"
-                        class="w-full py-2.5 rounded-2xl bg-red-600 hover:bg-red-700 text-white text-xs font-bold tracking-wide shadow-md flex items-center justify-center gap-2 transition active:scale-98">
-                    <i class="fa-solid fa-right-from-bracket text-xs"></i>
-                    <span>লগআউট করুন (Logout)</span>
+            <!-- Footer -->
+            <div class="pt-3.5 mt-2 border-t border-theme shrink-0 space-y-3">
+                <button type="button" onclick="logoutAccount()" class="btn-danger w-full py-3 text-[11px] flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-right-from-bracket text-[11px]"></i><span>লগআউট করুন</span>
                 </button>
-                <p class="text-[10px] text-theme-muted text-center">
-                    Developed by <span class="text-[#5fa000] font-bold">M Maksud Rs Ksa</span>
-                </p>
+                <p class="text-[9.5px] text-theme-faint text-center">Developed by <span class="text-[#5fa000] font-bold">M Maksud Rs Ksa</span></p>
             </div>
         </aside>
 
-        <!-- =========================================================================
-             4. ACCOUNT SETTINGS MODAL (PROFILE PHOTO UPLOAD, PIN LOCK, PASSWORD, LOGOUT)
-             ========================================================================= -->
-        <div id="account-settings-modal"
-             onclick="closeAccountModal()"
-             class="hidden absolute inset-0 bg-[#131939]/80 backdrop-blur-md z-[95] flex items-center justify-center p-4">
-
+        <!-- =====================================================================
+             3B. DUE MEMBERS MODAL (FROM MONTHLY DASHBOARD COLUMN I)
+             ===================================================================== -->
+        <div id="due-members-modal" onclick="closeDueMembersModal()"
+             class="hidden modal-overlay absolute inset-0 z-[92] flex items-center justify-center p-4 backdrop-blur-md">
             <div onclick="event.stopPropagation()"
-                 class="modal-pop w-full max-w-[350px] max-h-[88dvh] overflow-y-auto rounded-3xl panel-theme-bg border border-theme shadow-2xl p-4 relative">
+                 class="modal-pop modal-card w-full max-w-[365px] max-h-[84dvh] flex flex-col rounded-[28px] overflow-hidden">
 
                 <!-- Header -->
-                <div class="flex items-center justify-between pb-3 mb-3 border-b border-theme">
+                <div class="flex items-center justify-between p-4 border-b border-theme shrink-0">
                     <div class="flex items-center gap-2.5">
-                        <span class="w-9 h-9 rounded-xl bg-[#5fa000] text-white flex items-center justify-center">
-                            <i class="fa-solid fa-user-shield text-xs"></i>
+                        <span class="section-icon" style="width:36px;height:36px;border-radius:13px;background:rgba(255,107,112,0.18);color:#ff6b70">
+                            <i class="fa-solid fa-user-clock"></i>
                         </span>
                         <div>
-                            <h3 class="text-xs font-bold uppercase tracking-wider text-theme-main">Account Settings</h3>
-                            <p id="acc-modal-role" class="text-[10px] text-[#5fa000] font-bold uppercase">Member Account</p>
+                            <h3 class="text-xs font-extrabold text-theme-main">Due Member List</h3>
+                            <p id="due-month-subtitle" class="font-bn text-[10px] text-theme-muted">বকেয়া সদস্যদের তালিকা (Monthly Dashboard)</p>
                         </div>
                     </div>
-                    <button type="button" onclick="closeAccountModal()"
-                            class="w-8 h-8 rounded-xl simple-glass hover:bg-[#5fa000]/20 flex items-center justify-center text-theme-main">
-                        <i class="fa-solid fa-xmark text-xs"></i>
+                    <div class="flex items-center gap-1.5">
+                        <button type="button" onclick="fetchDueMembers(true)" title="Refresh Due List" class="icon-btn" style="width:32px;height:32px">
+                            <i id="due-refresh-icon" class="fa-solid fa-arrows-rotate text-[11px]"></i>
+                        </button>
+                        <button type="button" onclick="closeDueMembersModal()" class="icon-btn" style="width:32px;height:32px">
+                            <i class="fa-solid fa-xmark text-[11px]"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Summary & Search -->
+                <div class="px-4 pt-3 pb-2 shrink-0 space-y-2.5">
+                    <div class="flex items-center justify-between px-3 py-2 rounded-2xl simple-glass">
+                        <span class="font-bn text-[11px] font-bold text-theme-muted">মোট বকেয়া সদস্য:</span>
+                        <span id="due-total-count-badge" class="px-2.5 py-0.5 rounded-full bg-red-500/20 text-[#ff6b70] text-[11px] font-extrabold tabular">
+                            লোড হচ্ছে...
+                        </span>
+                    </div>
+                    <div class="input-wrap">
+                        <span class="input-icon"><i class="fa-solid fa-magnifying-glass text-[12px]"></i></span>
+                        <input type="text" id="due-search-input" oninput="filterDueMembersList()"
+                               placeholder="সদস্যের নাম খুঁজুন..."
+                               class="theme-input has-icon w-full px-3 py-2.5 text-xs font-semibold">
+                    </div>
+                </div>
+
+                <!-- List Body -->
+                <div id="due-members-list-container" class="flex-1 min-h-0 overflow-y-auto no-scrollbar px-4 pb-4 space-y-2">
+                    <div class="py-10 text-center text-theme-muted">
+                        <i class="fa-solid fa-spinner fa-spin text-xl text-[#5fa000] mb-2"></i>
+                        <p class="font-bn text-xs">বকেয়া তালিকা লোড হচ্ছে...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =====================================================================
+             4. ACCOUNT SETTINGS MODAL
+             ===================================================================== -->
+        <div id="account-settings-modal" onclick="closeAccountModal()"
+             class="hidden modal-overlay absolute inset-0 z-[95] flex items-center justify-center p-4 backdrop-blur-md">
+            <div onclick="event.stopPropagation()"
+                 class="modal-pop modal-card w-full max-w-[360px] max-h-[88dvh] overflow-y-auto no-scrollbar rounded-[28px] relative"
+                 style="padding:18px">
+
+                <div class="flex items-center justify-between pb-3.5 mb-3.5 border-b border-theme">
+                    <div class="flex items-center gap-2.5">
+                        <span class="section-icon !rounded-[13px]" style="width:36px;height:36px;border-radius:13px;background:var(--accent);color:#fff;border:none">
+                            <i class="fa-solid fa-user-shield"></i>
+                        </span>
+                        <div>
+                            <h3 class="text-[11px] font-extrabold uppercase tracking-wider text-theme-main">Account Settings</h3>
+                            <p id="acc-modal-role" class="text-[9.5px] text-[#5fa000] font-bold uppercase">Member Account</p>
+                        </div>
+                    </div>
+                    <button type="button" onclick="closeAccountModal()" class="icon-btn !w-8 !h-8" style="width:32px;height:32px">
+                        <i class="fa-solid fa-xmark text-[11px]"></i>
                     </button>
                 </div>
 
-                <!-- Profile Photo Upload & User Info Card -->
-                <div class="p-3.5 rounded-2xl simple-glass mb-3.5">
-                    <div class="flex items-center gap-3 pb-3 mb-2.5 border-b border-theme">
+                <!-- Profile -->
+                <div class="section-card p-3.5 mb-3.5">
+                    <div class="flex items-center gap-3 pb-3 mb-3 border-b border-theme">
                         <div class="relative shrink-0">
-                            <div class="w-14 h-14 rounded-full p-0.5 bg-[#5fa000] overflow-hidden shadow">
+                            <div class="w-14 h-14 rounded-full p-[2px] bg-[#5fa000] overflow-hidden shadow-md">
                                 <img id="acc-modal-photo-preview"
                                      src="https://lh3.googleusercontent.com/d/1PXMzZMIOZbElnjIuOK2ew-FNMhuScYGx"
                                      alt="Profile"
-                                     class="w-full h-full object-cover rounded-full bg-[#131939]"
+                                     class="w-full h-full object-cover rounded-full bg-[#0a1020]"
                                      onerror="handleLogoFallback(this)">
                             </div>
-                            <label for="profile-photo-input"
-                                   title="Change Photo"
+                            <label for="profile-photo-input" title="Change Photo"
                                    class="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-[#5fa000] text-white flex items-center justify-center cursor-pointer shadow-md hover:scale-105 transition">
                                 <i class="fa-solid fa-camera text-[10px]"></i>
                             </label>
                             <input type="file" id="profile-photo-input" accept="image/*" class="hidden" onchange="handleProfilePhotoUpload(event)">
                         </div>
                         <div class="min-w-0 flex-1">
-                            <span class="block text-xs font-bold text-theme-main">প্রোফাইল ফটো (Profile Photo)</span>
-                            <span class="block text-[10px] text-theme-muted mt-0.5">ছবি যুক্ত বা পরিবর্তন করতে ক্যামেরা আইকনে ট্যাপ করুন</span>
-                            <div class="flex items-center gap-2 mt-1.5">
-                                <label for="profile-photo-input" class="px-2.5 py-1 rounded-lg bg-[#5fa000]/20 text-[#5fa000] text-[10px] font-bold cursor-pointer hover:bg-[#5fa000] hover:text-white transition">
-                                    ছবি নির্বাচন করুন
-                                </label>
-                                <button type="button" id="btn-remove-photo" onclick="removeProfilePhoto()" class="hidden px-2 py-1 rounded-lg bg-red-500/15 text-red-400 text-[10px] font-bold hover:bg-red-500 hover:text-white transition">
-                                    মুছুন
-                                </button>
+                            <span class="block text-[11px] font-bold text-theme-main">প্রোফাইল ফটো</span>
+                            <span class="block text-[9.5px] text-theme-muted mt-0.5">ছবি পরিবর্তন করতে ক্যামেরা আইকনে ট্যাপ করুন</span>
+                            <div class="flex items-center gap-2 mt-2">
+                                <label for="profile-photo-input" class="btn-soft px-2.5 py-1 text-[9.5px] cursor-pointer">ছবি নির্বাচন করুন</label>
+                                <button type="button" id="btn-remove-photo" onclick="removeProfilePhoto()" class="hidden px-2 py-1 rounded-lg text-[9.5px] font-bold" style="background:rgba(255,107,112,.14);color:var(--danger)">মুছুন</button>
                             </div>
                         </div>
                     </div>
-
-                    <div class="space-y-1">
-                        <div class="flex items-center justify-between text-xs">
-                            <span class="text-theme-muted">Gmail ID:</span>
+                    <div class="space-y-1.5">
+                        <div class="flex items-center justify-between text-[11px] gap-3">
+                            <span class="text-theme-muted">Gmail ID</span>
                             <span id="acc-modal-email" class="font-bold text-theme-main truncate max-w-[190px]">-</span>
                         </div>
-                        <div class="flex items-center justify-between text-xs">
-                            <span class="text-theme-muted">Mobile No:</span>
+                        <div class="flex items-center justify-between text-[11px]">
+                            <span class="text-theme-muted">Mobile No</span>
                             <span id="acc-modal-mobile" class="font-bold text-theme-main">-</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Section 1: PIN Lock Setup / Change -->
-                <div class="p-3.5 rounded-2xl simple-glass mb-3.5">
+                <!-- PIN -->
+                <div class="section-card p-3.5 mb-3.5">
                     <div class="flex items-center justify-between mb-2">
-                        <span class="text-xs font-bold text-theme-main flex items-center gap-1.5">
-                            <i class="fa-solid fa-lock text-[#5fa000]"></i> App PIN Lock (৪-সংখ্যা)
-                        </span>
-                        <span id="acc-pin-status-badge" class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-white/10 text-theme-muted">
-                            OFF
-                        </span>
+                        <span class="section-title flex items-center gap-2"><span class="section-icon"><i class="fa-solid fa-lock"></i></span> App PIN Lock</span>
+                        <span id="acc-pin-status-badge" class="px-2 py-0.5 rounded-md text-[9.5px] font-bold" style="background:var(--surface);color:var(--muted)">OFF</span>
                     </div>
-                    <p class="text-[10.5px] text-theme-muted mb-2.5">
-                        পিন লক চালু থাকলে অ্যাপ ওপেন করার সময় ৪-সংখ্যার পিন দিয়ে প্রবেশ করতে হবে।
-                    </p>
+                    <p class="text-[10px] text-theme-muted mb-2.5">পিন লক চালু থাকলে অ্যাপ ওপেন করার সময় ৪-সংখ্যার পিন দিতে হবে।</p>
                     <form onsubmit="handlePinUpdateSubmit(event)" class="flex items-center gap-2">
                         <input type="password" id="acc-new-pin" maxlength="4" inputmode="numeric" pattern="[0-9]{4}"
                                placeholder="৪ সংখ্যার PIN দিন"
-                               class="flex-1 px-3 py-2 rounded-xl theme-input text-xs font-mono tracking-widest text-center">
-                        <button type="submit" id="btn-save-pin"
-                                class="px-3.5 py-2 rounded-xl bg-[#5fa000] text-white text-xs font-bold shrink-0">
-                            Save PIN
-                        </button>
+                               class="theme-input flex-1 px-3 py-2.5 text-xs font-mono tracking-widest text-center">
+                        <button type="submit" id="btn-save-pin" class="btn-primary px-4 py-2.5 text-[11px] shrink-0">Save PIN</button>
                     </form>
-                    <button type="button" id="btn-remove-pin" onclick="removeUserPinLock()"
-                            class="hidden mt-2 w-full py-1.5 rounded-xl border border-red-500/40 text-red-400 text-[11px] font-bold hover:bg-red-500/10">
-                        PIN Lock বন্ধ করুন (Disable)
-                    </button>
+                    <button type="button" id="btn-remove-pin" onclick="removeUserPinLock()" class="hidden mt-2 w-full py-2 rounded-xl text-[10.5px] font-bold" style="background:rgba(255,107,112,.12);color:var(--danger)">PIN Lock বন্ধ করুন</button>
                 </div>
 
-                <!-- Section 2: Change Password -->
-                <div class="p-3.5 rounded-2xl simple-glass mb-4">
-                    <span class="block text-xs font-bold text-theme-main mb-2.5 flex items-center gap-1.5">
-                        <i class="fa-solid fa-key text-[#5fa000]"></i> Password পরিবর্তন করুন
-                    </span>
+                <!-- Password -->
+                <div class="section-card p-3.5 mb-4">
+                    <span class="section-title flex items-center gap-2 mb-2.5"><span class="section-icon"><i class="fa-solid fa-key"></i></span> Password পরিবর্তন করুন</span>
                     <form onsubmit="handleChangePasswordSubmit(event)" class="space-y-2">
                         <input type="password" id="acc-old-pass" required placeholder="বর্তমান Password দিন"
-                               class="w-full px-3 py-2 rounded-xl theme-input text-xs">
+                               class="theme-input w-full px-3 py-2.5 text-xs">
                         <input type="password" id="acc-new-pass" required minlength="4" placeholder="নতুন Password দিন"
-                               class="w-full px-3 py-2 rounded-xl theme-input text-xs">
-                        <button type="submit" id="btn-change-pass"
-                                class="w-full py-2.5 rounded-xl bg-[#5fa000]/20 border border-[#5fa000] text-[#5fa000] hover:bg-[#5fa000] hover:text-white text-xs font-bold transition">
-                            Password আপডেট করুন
-                        </button>
+                               class="theme-input w-full px-3 py-2.5 text-xs">
+                        <button type="submit" id="btn-change-pass" class="btn-soft w-full py-2.5 text-[11px]">Password আপডেট করুন</button>
                     </form>
                 </div>
 
-                <!-- Section 3: Logout Button -->
-                <button type="button" onclick="logoutAccount()"
-                        class="w-full py-3 rounded-2xl bg-red-600 hover:bg-red-700 text-white text-xs font-bold tracking-wide shadow-lg flex items-center justify-center gap-2 transition active:scale-98">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                    <span>লগআউট করুন (Logout)</span>
+                <button type="button" onclick="logoutAccount()" class="btn-danger w-full py-3 text-[11px] flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-right-from-bracket"></i><span>লগআউট করুন</span>
                 </button>
             </div>
         </div>
 
-        <!-- =========================================================================
-             5. POPUP MODAL FOR CONTACT & MESSENGER
-             ========================================================================= -->
-        <div id="info-popup-modal"
-             onclick="closeInfoModal()"
-             class="hidden absolute inset-0 bg-[#131939]/80 backdrop-blur-md z-[90] flex items-center justify-center p-4">
-
+        <!-- =====================================================================
+             5. INFO MODAL (CONTACT / MESSENGER)
+             ===================================================================== -->
+        <div id="info-popup-modal" onclick="closeInfoModal()"
+             class="hidden modal-overlay absolute inset-0 z-[90] flex items-center justify-center p-4 backdrop-blur-md">
             <div onclick="event.stopPropagation()"
-                 class="modal-pop w-full max-w-[340px] rounded-3xl panel-theme-bg border border-theme shadow-2xl p-4 relative overflow-hidden">
+                 class="modal-pop modal-card w-full max-w-[350px] rounded-[28px] relative overflow-hidden" style="padding:18px">
 
-                <!-- 1. CONTACT US POPUP -->
+                <!-- Contact -->
                 <div id="modal-content-contact" class="hidden">
-                    <div class="flex items-center justify-between pb-2.5 mb-3 border-b border-theme">
+                    <div class="flex items-center justify-between pb-3 mb-3.5 border-b border-theme">
                         <div class="flex items-center gap-2.5">
-                            <span class="w-9 h-9 rounded-xl bg-[#5fa000] text-white flex items-center justify-center">
-                                <i class="fa-solid fa-headset text-xs"></i>
-                            </span>
+                            <span class="section-icon" style="width:36px;height:36px;border-radius:13px;background:var(--accent);color:#fff;border:none"><i class="fa-solid fa-headset"></i></span>
                             <div>
-                                <h3 class="text-xs font-bold uppercase tracking-wider text-theme-main">Contact & Payment</h3>
-                                <p class="text-[10px] text-theme-muted">যোগাযোগ ও পেমেন্ট নম্বর</p>
+                                <h3 class="text-[11px] font-extrabold uppercase tracking-wider text-theme-main">Contact & Payment</h3>
+                                <p class="text-[9.5px] text-theme-muted">যোগাযোগ ও পেমেন্ট নম্বর</p>
                             </div>
                         </div>
-                        <button type="button"
-                                onclick="closeInfoModal()"
-                                class="w-8 h-8 rounded-xl simple-glass hover:bg-[#5fa000]/20 flex items-center justify-center text-theme-main transition">
-                            <i class="fa-solid fa-xmark text-xs"></i>
-                        </button>
+                        <button type="button" onclick="closeInfoModal()" class="icon-btn" style="width:32px;height:32px"><i class="fa-solid fa-xmark text-[11px]"></i></button>
                     </div>
 
                     <div class="space-y-2.5">
-                        <div class="p-3 rounded-2xl simple-glass">
+                        <div class="section-card p-3">
                             <div class="flex items-center justify-between gap-2">
                                 <a href="tel:01881132158" class="flex items-center gap-2.5 min-w-0 flex-1">
-                                    <span class="w-8 h-8 rounded-xl bg-[#5fa000]/20 border border-[#5fa000]/40 text-[#5fa000] flex items-center justify-center shrink-0">
-                                        <i class="fa-solid fa-phone text-xs"></i>
-                                    </span>
+                                    <span class="section-icon"><i class="fa-solid fa-phone"></i></span>
                                     <div class="min-w-0">
-                                        <span class="block text-[9.5px] text-theme-muted font-semibold uppercase">M Maksud RS KSa</span>
-                                        <span class="block text-xs font-bold text-theme-main tracking-wide truncate">01881132158</span>
+                                        <span class="block text-[9px] text-theme-muted font-bold uppercase tracking-wide">M Maksud RS KSa</span>
+                                        <span class="block text-xs font-extrabold text-theme-main tracking-wide">01881132158</span>
                                     </div>
                                 </a>
-                                <button type="button"
-                                        onclick="copyContactText('01881132158')"
-                                        class="w-8 h-8 rounded-xl bg-[#5fa000]/20 hover:bg-[#5fa000] text-[#5fa000] hover:text-white flex items-center justify-center shrink-0 transition">
-                                    <i class="fa-regular fa-copy text-xs"></i>
-                                </button>
+                                <button type="button" onclick="copyContactText('01881132158')" class="copy-btn"><i class="fa-regular fa-copy text-[11px]"></i></button>
                             </div>
-                            <div class="mt-2 pl-10 flex items-center gap-1.5 flex-wrap">
+                            <div class="mt-2.5 pl-[42px] flex items-center gap-1.5 flex-wrap">
                                 <span class="px-2 py-0.5 rounded-md bg-[#5fa000] text-white text-[9px] font-bold">bKash</span>
                                 <span class="px-2 py-0.5 rounded-md neutral-icon-box text-[9px] font-bold">Nagad</span>
-                                <span class="text-[9px] text-theme-muted">Personal</span>
+                                <span class="text-[9px] text-theme-faint">Personal</span>
                             </div>
                         </div>
 
-                        <div class="p-3 rounded-2xl simple-glass">
+                        <div class="section-card p-3">
                             <div class="flex items-center justify-between gap-2">
                                 <a href="tel:01628998162" class="flex items-center gap-2.5 min-w-0 flex-1">
-                                    <span class="w-8 h-8 rounded-xl bg-[#5fa000]/20 border border-[#5fa000]/40 text-[#5fa000] flex items-center justify-center shrink-0">
-                                        <i class="fa-solid fa-phone-volume text-xs"></i>
-                                    </span>
+                                    <span class="section-icon"><i class="fa-solid fa-phone-volume"></i></span>
                                     <div class="min-w-0">
-                                        <span class="block text-[9.5px] text-theme-muted font-semibold uppercase">M Misbah Uddin</span>
-                                        <span class="block text-xs font-bold text-theme-main tracking-wide truncate">01628998162</span>
+                                        <span class="block text-[9px] text-theme-muted font-bold uppercase tracking-wide">M Misbah Uddin</span>
+                                        <span class="block text-xs font-extrabold text-theme-main tracking-wide">01628998162</span>
                                     </div>
                                 </a>
-                                <button type="button"
-                                        onclick="copyContactText('01628998162')"
-                                        class="w-8 h-8 rounded-xl bg-[#5fa000]/20 hover:bg-[#5fa000] text-[#5fa000] hover:text-white flex items-center justify-center shrink-0 transition">
-                                    <i class="fa-regular fa-copy text-xs"></i>
-                                </button>
+                                <button type="button" onclick="copyContactText('01628998162')" class="copy-btn"><i class="fa-regular fa-copy text-[11px]"></i></button>
                             </div>
-                            <div class="mt-2 pl-10 flex items-center gap-1.5 flex-wrap">
+                            <div class="mt-2.5 pl-[42px] flex items-center gap-1.5 flex-wrap">
                                 <span class="px-2 py-0.5 rounded-md bg-[#5fa000] text-white text-[9px] font-bold">bKash</span>
                                 <span class="px-2 py-0.5 rounded-md neutral-icon-box text-[9px] font-bold">Nagad</span>
-                                <span class="text-[9px] text-theme-muted">Personal</span>
+                                <span class="text-[9px] text-theme-faint">Personal</span>
                             </div>
                         </div>
 
-                        <div class="flex items-center justify-between gap-2 p-3 rounded-2xl simple-glass">
+                        <div class="section-card p-3 flex items-center justify-between gap-2">
                             <a href="mailto:assuffahwelfareassociation@gmail.com" class="flex items-center gap-2.5 min-w-0 flex-1">
-                                <span class="w-8 h-8 rounded-xl bg-[#5fa000]/20 border border-[#5fa000]/40 text-[#5fa000] flex items-center justify-center shrink-0">
-                                    <i class="fa-solid fa-envelope text-xs"></i>
-                                </span>
+                                <span class="section-icon"><i class="fa-regular fa-envelope"></i></span>
                                 <div class="min-w-0">
-                                    <span class="block text-[9px] text-theme-muted font-semibold uppercase">Official Email</span>
-                                    <span class="block text-[10.5px] font-bold text-theme-main truncate">
-                                        assuffahwelfareassociation@gmail.com
-                                    </span>
+                                    <span class="block text-[9px] text-theme-muted font-bold uppercase tracking-wide">Official Email</span>
+                                    <span class="block text-[10px] font-bold text-theme-main truncate">assuffahwelfareassociation@gmail.com</span>
                                 </div>
                             </a>
-                            <button type="button"
-                                    onclick="copyContactText('assuffahwelfareassociation@gmail.com')"
-                                    class="w-8 h-8 rounded-xl bg-[#5fa000]/20 hover:bg-[#5fa000] text-[#5fa000] hover:text-white flex items-center justify-center shrink-0 transition">
-                                <i class="fa-regular fa-copy text-xs"></i>
-                            </button>
+                            <button type="button" onclick="copyContactText('assuffahwelfareassociation@gmail.com')" class="copy-btn"><i class="fa-regular fa-copy text-[11px]"></i></button>
                         </div>
                     </div>
                 </div>
 
-                <!-- 2. MESSENGER GROUP POPUP -->
+                <!-- Messenger -->
                 <div id="modal-content-messenger" class="hidden">
-                    <div class="flex items-center justify-between pb-2.5 mb-3 border-b border-theme">
+                    <div class="flex items-center justify-between pb-3 mb-3.5 border-b border-theme">
                         <div class="flex items-center gap-2.5">
-                            <span class="w-9 h-9 rounded-xl bg-[#5fa000] text-white flex items-center justify-center">
-                                <i class="fa-brands fa-facebook-messenger text-xs"></i>
-                            </span>
+                            <span class="section-icon" style="width:36px;height:36px;border-radius:13px;background:var(--accent);color:#fff;border:none"><i class="fa-brands fa-facebook-messenger"></i></span>
                             <div>
-                                <h3 class="text-xs font-bold uppercase tracking-wider text-theme-main">Messenger Group</h3>
-                                <p class="text-[10px] text-theme-muted">অফিসিয়াল গ্রুপ লিংক</p>
+                                <h3 class="text-[11px] font-extrabold uppercase tracking-wider text-theme-main">Messenger Group</h3>
+                                <p class="text-[9.5px] text-theme-muted">অফিসিয়াল গ্রুপ লিংক</p>
                             </div>
                         </div>
-                        <button type="button"
-                                onclick="closeInfoModal()"
-                                class="w-8 h-8 rounded-xl simple-glass hover:bg-[#5fa000]/20 flex items-center justify-center text-theme-main transition">
-                            <i class="fa-solid fa-xmark text-xs"></i>
-                        </button>
+                        <button type="button" onclick="closeInfoModal()" class="icon-btn" style="width:32px;height:32px"><i class="fa-solid fa-xmark text-[11px]"></i></button>
                     </div>
 
-                    <a href="https://m.me/j/AbY8i9NxJNZEBWrF/?send_source=gc%3Acopy_invite_link_c"
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       class="flex items-center justify-between gap-3 p-3.5 rounded-2xl glass-tile">
+                    <a href="https://m.me/j/AbY8i9NxJNZEBWrF/?send_source=gc%3Acopy_invite_link_c" target="_blank" rel="noopener noreferrer"
+                       class="glass-tile flex items-center justify-between gap-3 p-3.5">
                         <div class="flex items-center gap-3 min-w-0">
-                            <span class="w-10 h-10 rounded-xl bg-[#5fa000] text-white flex items-center justify-center shrink-0">
-                                <i class="fa-brands fa-facebook-messenger text-lg"></i>
-                            </span>
+                            <span class="section-icon" style="width:42px;height:42px;border-radius:14px;background:var(--accent);color:#fff;border:none;font-size:16px"><i class="fa-brands fa-facebook-messenger"></i></span>
                             <div class="min-w-0">
-                                <span class="block text-xs font-bold text-theme-main truncate">
-                                    As-Suffah Messenger Group
-                                </span>
-                                <span class="block text-[10px] text-theme-muted truncate">
-                                    গ্রুপে যুক্ত হতে এখানে ট্যাপ করুন
-                                </span>
+                                <span class="block text-xs font-bold text-theme-main truncate">As-Suffah Messenger Group</span>
+                                <span class="block text-[10px] text-theme-muted">গ্রুপে যুক্ত হতে এখানে ট্যাপ করুন</span>
                             </div>
                         </div>
-                        <span class="w-8 h-8 rounded-xl neutral-icon-box flex items-center justify-center shrink-0">
-                            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-                        </span>
+                        <span class="copy-btn"><i class="fa-solid fa-arrow-up-right-from-square text-[11px]"></i></span>
                     </a>
                 </div>
-
             </div>
         </div>
 
-        <!-- ================= TOP BACK BAR (For Inner App Views) ================= -->
-        <div id="app-back-bar" class="hidden z-40 px-4 pt-7 pb-2.5 shrink-0 flex items-center justify-between panel-theme-bg backdrop-blur-xl border-b border-theme">
-            <button type="button"
-                    onclick="handleBackAndRefresh()"
-                    class="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-[#5fa000] hover:bg-[#5fa000]/90 text-white text-xs font-bold transition active:scale-95">
-                <i id="back-btn-icon" class="fa-solid fa-arrow-left text-xs"></i>
-                <span>Back</span>
+        <!-- ================= TOP BACK BAR ================= -->
+        <div id="app-back-bar" class="hidden z-40 px-4 pt-11 pb-3 shrink-0 flex items-center justify-between panel-theme-bg backdrop-blur-xl border-b border-theme" style="padding-top: max(42px, env(safe-area-inset-top, 42px));">
+            <button type="button" onclick="triggerNativeOrManualBack()"
+                    class="btn-primary flex items-center gap-2 px-3.5 py-2 text-[11px]">
+                <i id="back-btn-icon" class="fa-solid fa-arrow-left text-[11px]"></i><span>Back</span>
             </button>
-
-            <span id="active-app-title" class="text-xs font-bold text-theme-main truncate px-2">
-                App View
-            </span>
-
-            <button type="button"
-                    onclick="openCurrentExternal()"
-                    title="Open in Browser"
-                    class="w-8 h-8 rounded-xl simple-glass hover:bg-[#5fa000]/20 flex items-center justify-center text-theme-main transition active:scale-90 shrink-0">
+            <span id="active-app-title" class="text-[11px] font-bold text-theme-main truncate px-2">App View</span>
+            <button type="button" onclick="openCurrentExternal()" title="Open in Browser" class="icon-btn" style="width:34px;height:34px">
                 <i class="fa-solid fa-arrow-up-right-from-square text-[11px]"></i>
             </button>
         </div>
 
-        <!-- ================= MAIN CONTENT AREA (DASHBOARD) ================= -->
-        <main id="main-container" class="flex-1 min-h-0 w-full flex flex-col justify-between pb-4 z-20 relative">
+        <!-- ================= MAIN ================= -->
+        <main id="main-container" class="flex-1 min-h-0 w-full flex flex-col pb-4 z-20 relative">
 
-            <!-- ================= HOME / DASHBOARD VIEW ================= -->
-            <section id="view-home" class="w-full h-full flex flex-col justify-between px-4">
+            <!-- HOME -->
+            <section id="view-home" class="w-full h-full flex flex-col overflow-y-auto no-scrollbar px-4 pb-2">
 
-                <!-- TOP HEADER & CLEAN GLASS ATM CARD -->
                 <div class="pt-1 shrink-0">
-                    <!-- Safe Notch Space -->
-                    <div class="w-full h-5 shrink-0"></div>
+                    <!-- Topmost Arabic Organization Name (Positioned cleanly below Camera Cutout) -->
+                    <div class="text-center pt-8 pb-1.5" style="padding-top: max(32px, calc(env(safe-area-inset-top, 28px) + 4px));">
+                        <p dir="rtl" lang="ar" class="font-ar text-[20px] font-bold text-[#8ed12f] leading-tight tracking-wide">
+                            لجنة الصُّفَّة الخيرية
+                        </p>
+                    </div>
 
-                    <!-- Minimal Floating Header (Account button removed from top, only Theme toggle kept) -->
+                    <!-- Top Bar: Menu | Logged-in User Profile & Gmail ID | Theme Toggle -->
                     <div class="flex items-center justify-between gap-2 mb-3.5">
-                        <button type="button"
-                                onclick="openLeftDrawer()"
-                                aria-label="Open Menu"
-                                class="w-9 h-9 rounded-xl simple-glass hover:bg-[#5fa000]/20 flex items-center justify-center text-theme-main shrink-0 transition active:scale-90">
-                            <i class="fa-solid fa-bars-staggered text-xs"></i>
+                        <button type="button" onclick="openLeftDrawer()" aria-label="Open Menu" class="icon-btn shrink-0">
+                            <i class="fa-solid fa-bars-staggered text-[12px]"></i>
                         </button>
 
-                        <div class="flex items-center gap-2 min-w-0">
-                            <div class="w-9 h-9 rounded-full p-0.5 bg-[#5fa000] shrink-0 overflow-hidden shadow-md">
-                                <img src="https://lh3.googleusercontent.com/d/1PXMzZMIOZbElnjIuOK2ew-FNMhuScYGx"
-                                     alt="ASWA Logo"
-                                     class="w-full h-full object-cover rounded-full bg-[#131939]"
+                        <button type="button" onclick="openAccountModal()" title="Account & Profile"
+                                class="flex items-center gap-2.5 min-w-0 px-2.5 py-1.5 rounded-2xl simple-glass hover:border-[#5fa000]/50 transition">
+                            <div class="w-9 h-9 rounded-full p-[2px] bg-[#5fa000] shrink-0 overflow-hidden shadow-md">
+                                <img id="header-profile-photo"
+                                     src="https://lh3.googleusercontent.com/d/1PXMzZMIOZbElnjIuOK2ew-FNMhuScYGx"
+                                     alt="User Profile"
+                                     class="w-full h-full object-cover rounded-full bg-[#0a1020]"
                                      onerror="handleLogoFallback(this)">
                             </div>
                             <div class="min-w-0 text-left">
-                                <h1 class="text-[10.5px] sm:text-xs font-extrabold text-theme-main tracking-wide truncate leading-tight">
-                                    AS-SUFFAH WELFARE ASSOCIATION
-                                </h1>
-                                <p id="header-user-subtitle" class="text-[9.5px] text-[#5fa000] font-semibold truncate">
-                                    আস-সুফফাহ কল্যাণ সমিতি
-                                </p>
+                                <h1 id="header-user-email" class="text-[11px] font-extrabold text-theme-main truncate leading-tight">user@gmail.com</h1>
+                                <p id="header-user-subtitle" class="text-[9.5px] text-[#5fa000] font-bold truncate">Member Account</p>
                             </div>
-                        </div>
+                        </button>
 
-                        <!-- Single Dark / Brightness Mode Button -->
-                        <div class="flex items-center shrink-0">
-                            <button id="theme-toggle-btn"
-                                    type="button"
-                                    onclick="toggleThemeMode()"
-                                    title="Switch Dark / Brightness Mode"
-                                    aria-label="Toggle Theme"
-                                    class="w-9 h-9 rounded-xl simple-glass hover:bg-[#5fa000]/20 flex items-center justify-center text-[#5fa000] transition active:scale-90">
-                                <i id="theme-toggle-icon" class="fa-solid fa-sun text-xs"></i>
-                            </button>
+                        <button id="theme-toggle-btn" type="button" onclick="toggleThemeMode()" title="Dark / Light Mode" aria-label="Toggle Theme"
+                                class="icon-btn !text-[#5fa000] shrink-0" style="color:var(--accent-2)">
+                            <i id="theme-toggle-icon" class="fa-solid fa-sun text-[12px]"></i>
+                        </button>
+                    </div>
+
+                    <!-- Vault (ATM Card) -->
+                    <div id="admin-atm-card" class="vault-card p-4 sm:p-5 mb-3.5">
+                        <div class="vault-grid"></div>
+                        <div class="vault-sheen"></div>
+                        <div class="relative z-10">
+                            <div class="flex items-start justify-between gap-2 mb-4">
+                                <div class="flex items-center gap-3 min-w-0">
+                                    <div class="w-9 h-9 rounded-[13px] flex items-center justify-center shrink-0" style="background:rgba(142,209,47,.18);border:1px solid rgba(142,209,47,.35)">
+                                        <i class="fa-solid fa-vault text-[13px] vault-accent"></i>
+                                    </div>
+                                    <div class="min-w-0">
+                                        <span id="atm-card-title" class="vault-strong block text-[11px] font-extrabold tracking-[.16em] truncate">AS-SUFFAH</span>
+                                        <span class="vault-label block mt-0.5">Accounting Vault</span>
+                                    </div>
+                                </div>
+                                <button id="toggle-eye-btn" type="button" onclick="toggleSensitiveInfo()" class="eye-btn shrink-0">
+                                    <i id="eye-icon" class="fa-solid fa-eye text-[10px]"></i>
+                                    <span id="eye-label" class="text-[9.5px]">Show</span>
+                                </button>
+                            </div>
+
+                            <div class="atm-inner-bar flex items-center justify-between gap-2 py-2.5 px-3.5 rounded-2xl mb-3" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)">
+                                <div class="min-w-0">
+                                    <span class="vault-label block mb-1">Account Number</span>
+                                    <span id="account-number-display" class="vault-strong font-mono text-[15px] sm:text-[17px] font-bold whitespace-nowrap block">27•• •••• ••630</span>
+                                </div>
+                                <button type="button" onclick="copyAccountNumber()" title="Copy Account Number" class="copy-btn shrink-0"><i class="fa-regular fa-copy text-[12px]"></i></button>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-2.5">
+                                <div class="balance-box">
+                                    <span class="vault-label block mb-1">Current Balance</span>
+                                    <p id="current-balance-display" class="balance-value tabular truncate vault-strong">BDT: ••••••••</p>
+                                </div>
+                                <div class="balance-box text-right">
+                                    <span class="vault-label block mb-1 vault-accent">Total Balance</span>
+                                    <p id="total-balance-display" class="balance-value tabular truncate vault-strong">BDT: ••••••••</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- ================= VAULT ATM CARD (VISIBLE TO BOTH ADMIN & MEMBER) ================= -->
-                    <div id="admin-atm-card" class="atm-glass-card rounded-3xl p-4 sm:p-5 flex flex-col justify-between relative overflow-hidden">
-                        <div class="absolute top-0 left-0 right-0 h-1 bg-[#5fa000]"></div>
-
-                        <div class="flex items-center justify-between gap-2 mb-4">
-                            <div class="flex items-center gap-2.5">
-                                <div class="w-8 h-8 rounded-xl bg-[#5fa000]/20 border border-[#5fa000]/50 flex items-center justify-center text-[#5fa000]">
-                                    <i class="fa-solid fa-vault text-xs"></i>
-                                </div>
-                                <div>
-                                    <span id="atm-card-title" class="block text-xs font-extrabold tracking-widest text-theme-main">
-                                        AS-SUFFAH
+                    <!-- Beautiful Notice Board (Below ATM Card) -->
+                    <div id="dashboard-notice-board" class="notice-board-card p-3.5 relative overflow-hidden">
+                        <div class="flex items-start gap-3">
+                            <div class="w-9 h-9 rounded-[13px] bg-amber-500/20 border border-amber-400/35 text-amber-400 flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="fa-solid fa-bullhorn text-[14px]"></i>
+                            </div>
+                            <div class="min-w-0 flex-1">
+                                <div class="flex items-center justify-between gap-2 mb-1">
+                                    <span class="font-bn text-[10.5px] font-extrabold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
+                                        <span>নোটিশ বোর্ড</span>
+                                        <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
                                     </span>
-                                    <span class="block text-[8.5px] font-semibold uppercase tracking-wider text-theme-muted">
-                                        ACCOUNTING VAULT
-                                    </span>
+                                    <button type="button" onclick="fetchNoticeBoard(true)" title="Refresh Notice" class="text-[10px] text-theme-muted hover:text-amber-400 transition">
+                                        <i id="notice-refresh-icon" class="fa-solid fa-arrows-rotate"></i>
+                                    </button>
                                 </div>
-                            </div>
-
-                            <button id="toggle-eye-btn"
-                                    type="button"
-                                    onclick="toggleSensitiveInfo()"
-                                    class="px-3.5 py-1.5 rounded-xl bg-[#5fa000] hover:bg-[#5fa000]/90 flex items-center gap-1.5 text-white transition active:scale-95">
-                                <i id="eye-icon" class="fa-solid fa-eye text-[10px]"></i>
-                                <span id="eye-label" class="text-[10px] font-bold uppercase tracking-wider">
-                                    Show
-                                </span>
-                            </button>
-                        </div>
-
-                        <div class="flex items-center justify-between gap-2 py-2.5 px-3.5 rounded-2xl atm-inner-bar mb-3.5">
-                            <div class="min-w-0">
-                                <span class="block text-[8.5px] font-semibold uppercase tracking-widest text-theme-muted mb-0.5">
-                                    Account Number
-                                </span>
-                                <span id="account-number-display"
-                                      class="font-mono text-base sm:text-lg font-bold tracking-wider text-theme-main whitespace-nowrap block">
-                                    27•• •••• ••630
-                                </span>
-                            </div>
-                            <button type="button"
-                                    onclick="copyAccountNumber()"
-                                    title="Copy Account Number"
-                                    class="w-8 h-8 rounded-xl simple-glass hover:bg-[#5fa000] hover:text-white flex items-center justify-center text-theme-main transition active:scale-90 shrink-0">
-                                <i class="fa-regular fa-copy text-xs"></i>
-                            </button>
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-2.5">
-                            <div class="px-3.5 py-2 rounded-2xl simple-glass">
-                                <span class="block text-[8.5px] font-semibold uppercase tracking-wider text-theme-muted mb-0.5">
-                                    Current Balance
-                                </span>
-                                <p id="current-balance-display"
-                                   class="text-sm font-bold tracking-wide text-theme-main truncate">
-                                    BDT: ••••••••
-                                </p>
-                            </div>
-
-                            <div class="px-3.5 py-2 rounded-2xl simple-glass text-right">
-                                <span class="block text-[8.5px] font-semibold uppercase tracking-wider text-[#5fa000] mb-0.5">
-                                    Total Balance
-                                </span>
-                                <p id="total-balance-display"
-                                   class="text-sm font-bold tracking-wide text-theme-main truncate">
-                                    BDT: ••••••••
+                                <p id="notice-board-text" class="font-bn text-[11.5px] font-semibold text-theme-main leading-relaxed">
+                                    নোটিশ লোড হচ্ছে...
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- ================= APP LAUNCHER GRID (SAME COLOR PER ROW) ================= -->
-                <div class="my-auto py-2">
+                <!-- App launcher -->
+                <div class="my-auto py-3.5">
+                    <div class="flex items-center justify-between px-1 mb-2.5">
+                        <span class="text-[9.5px] font-extrabold uppercase tracking-[.18em] text-theme-faint">Quick Access</span>
+                        <span class="text-[9.5px] font-bold text-[#5fa000]"><i class="fa-solid fa-grip text-[9px] mr-1"></i>Apps</span>
+                    </div>
                     <div id="bento-apps-grid" class="grid grid-cols-2 gap-3">
 
-                        <!-- ROW 1 APP 1: Monthly Deposits / মাসিক জমা (BOTH ADMIN & MEMBER) -->
-                        <button type="button"
-                                id="tile-app1"
-                                onclick="switchView('app1')"
-                                class="glass-tile row1-tile h-[106px] rounded-2xl p-3.5 flex flex-col items-start justify-between text-left">
-                            <div class="w-9 h-9 rounded-xl bg-[#5fa000] text-white flex items-center justify-center shrink-0 shadow-sm">
-                                <i class="fa-solid fa-file-signature text-sm"></i>
-                            </div>
+                        <button type="button" id="tile-app1" onclick="navigateToView('app1')"
+                                class="glass-tile row1-tile min-h-[104px] rounded-[22px] p-4 flex flex-col items-start justify-between text-left">
+                            <div class="w-10 h-10 rounded-[14px] bg-[#5fa000] text-white flex items-center justify-center shrink-0 shadow-md"><i class="fa-solid fa-file-signature text-[15px]"></i></div>
                             <div class="w-full">
-                                <span class="block text-[13px] font-bold text-theme-main leading-snug">Monthly Deposits</span>
-                                <span class="block text-[10.5px] text-theme-muted mt-0.5">মাসিক জমা ফরম</span>
+                                <span class="block text-[12.5px] font-bold text-theme-main leading-snug">Monthly Deposits</span>
+                                <span class="font-bn block text-[10px] text-theme-muted mt-0.5">মাসিক জমা ফরম</span>
                             </div>
                         </button>
 
-                        <!-- ROW 1 APP 2: Member Details (ADMIN ONLY - SAME COLOR AS ROW 1 APP 1) -->
-                        <button type="button"
-                                id="tile-app2"
-                                onclick="switchView('app2')"
-                                class="glass-tile row1-tile h-[106px] rounded-2xl p-3.5 flex flex-col items-start justify-between text-left">
-                            <div class="w-9 h-9 rounded-xl bg-[#5fa000] text-white flex items-center justify-center shrink-0 shadow-sm">
-                                <i class="fa-solid fa-id-card text-sm"></i>
-                            </div>
+                        <button type="button" id="tile-app2" onclick="navigateToView('app2')"
+                                class="glass-tile row1-tile min-h-[104px] rounded-[22px] p-4 flex flex-col items-start justify-between text-left">
+                            <div class="w-10 h-10 rounded-[14px] bg-[#5fa000] text-white flex items-center justify-center shrink-0 shadow-md"><i class="fa-solid fa-id-card text-[15px]"></i></div>
                             <div class="w-full">
-                                <span class="block text-[13px] font-bold text-theme-main leading-snug">Member Details</span>
-                                <span class="block text-[10.5px] text-theme-muted mt-0.5">সদস্যদের তালিকা</span>
+                                <span class="block text-[12.5px] font-bold text-theme-main leading-snug">Member Details</span>
+                                <span class="font-bn block text-[10px] text-theme-muted mt-0.5">সদস্যদের তালিকা</span>
                             </div>
                         </button>
 
-                        <!-- ROW 2 APP 1: Profit Calculator (ADMIN ONLY) -->
-                        <button type="button"
-                                id="tile-app3"
-                                onclick="switchView('app3')"
-                                class="glass-tile row2-tile h-[106px] rounded-2xl p-3.5 flex flex-col items-start justify-between text-left">
-                            <div class="w-9 h-9 rounded-xl neutral-icon-box flex items-center justify-center shrink-0">
-                                <i class="fa-solid fa-calculator text-sm"></i>
-                            </div>
+                        <button type="button" id="tile-app3" onclick="navigateToView('app3')"
+                                class="glass-tile row2-tile min-h-[104px] rounded-[22px] p-4 flex flex-col items-start justify-between text-left">
+                            <div class="w-10 h-10 rounded-[14px] neutral-icon-box flex items-center justify-center shrink-0"><i class="fa-solid fa-calculator text-[15px]"></i></div>
                             <div class="w-full">
-                                <span class="block text-[13px] font-bold text-theme-main leading-snug">Profit Calculator</span>
-                                <span class="block text-[10.5px] text-theme-muted mt-0.5">মুনাফা হিসাব</span>
+                                <span class="block text-[12.5px] font-bold text-theme-main leading-snug">Profit Calculator</span>
+                                <span class="font-bn block text-[10px] text-theme-muted mt-0.5">মুনাফা হিসাব</span>
                             </div>
                         </button>
 
-                        <!-- ROW 1 (Member) / ROW 2 (Admin): Member Search -->
-                        <button type="button"
-                                id="tile-app4"
-                                onclick="switchView('app4')"
-                                class="glass-tile row2-tile h-[106px] rounded-2xl p-3.5 flex flex-col items-start justify-between text-left">
-                            <div id="icon-app4" class="w-9 h-9 rounded-xl neutral-icon-box flex items-center justify-center shrink-0">
-                                <i class="fa-solid fa-magnifying-glass text-sm"></i>
-                            </div>
+                        <button type="button" id="tile-app4" onclick="navigateToView('app4')"
+                                class="glass-tile row2-tile min-h-[104px] rounded-[22px] p-4 flex flex-col items-start justify-between text-left">
+                            <div id="icon-app4" class="w-10 h-10 rounded-[14px] neutral-icon-box flex items-center justify-center shrink-0"><i class="fa-solid fa-magnifying-glass text-[15px]"></i></div>
                             <div class="w-full">
-                                <span class="block text-[13px] font-bold text-theme-main leading-snug">Member Search</span>
-                                <span class="block text-[10.5px] text-theme-muted mt-0.5">সদস্য অনুসন্ধান</span>
+                                <span class="block text-[12.5px] font-bold text-theme-main leading-snug">Member Search</span>
+                                <span class="font-bn block text-[10px] text-theme-muted mt-0.5">সদস্য অনুসন্ধান</span>
                             </div>
                         </button>
 
-                        <!-- ROW 3 (Admin) / ROW 2 (Member): Investment Details -->
-                        <button type="button"
-                                id="tile-app6"
-                                onclick="switchView('app6')"
-                                class="col-span-2 glass-tile row3-tile h-[106px] rounded-2xl p-3.5 flex flex-col items-start justify-between text-left">
-                            <div id="icon-app6" class="w-9 h-9 rounded-xl bg-[#5fa000] text-white flex items-center justify-center shrink-0 shadow-sm">
-                                <i class="fa-solid fa-chart-pie text-sm"></i>
+                        <button type="button" id="tile-app6" onclick="navigateToView('app6')"
+                                class="col-span-2 glass-tile row3-tile min-h-[92px] rounded-[22px] p-4 flex flex-row items-center gap-3.5 text-left">
+                            <div id="icon-app6" class="w-11 h-11 rounded-[15px] bg-[#5fa000] text-white flex items-center justify-center shrink-0 shadow-md"><i class="fa-solid fa-chart-pie text-[16px]"></i></div>
+                            <div class="min-w-0">
+                                <span class="block text-[12.5px] font-bold text-theme-main leading-snug truncate">Investment Details</span>
+                                <span class="font-bn block text-[10px] text-theme-muted mt-0.5 truncate">ইনভেস্টমেন্ট ও লেনদেন বিবরণী</span>
                             </div>
-                            <div class="w-full">
-                                <span class="block text-[13px] font-bold text-theme-main leading-snug truncate">Investment Details</span>
-                                <span class="block text-[10.5px] text-theme-muted mt-0.5 truncate">ইনভেস্টমেন্ট ও লেনদেন বিবরণী</span>
-                            </div>
+                            <i class="fa-solid fa-chevron-right text-[11px] text-theme-faint ml-auto shrink-0"></i>
                         </button>
 
-                        <!-- ROW 2 APP 2 (MEMBER DASHBOARD - SAME COLOR AS INVESTMENT DETAILS IN ROW 2) -->
-                        <button type="button"
-                                id="tile-member-contact"
-                                onclick="openInfoModal('contact')"
-                                class="hidden glass-tile row2-tile h-[106px] rounded-2xl p-3.5 flex flex-col items-start justify-between text-left">
-                            <div id="icon-member-contact" class="w-9 h-9 rounded-xl neutral-icon-box flex items-center justify-center shrink-0">
-                                <i class="fa-solid fa-headset text-sm"></i>
-                            </div>
+                        <button type="button" id="tile-member-contact" onclick="openInfoModal('contact')"
+                                class="hidden glass-tile row2-tile min-h-[104px] rounded-[22px] p-4 flex flex-col items-start justify-between text-left">
+                            <div id="icon-member-contact" class="w-10 h-10 rounded-[14px] neutral-icon-box flex items-center justify-center shrink-0"><i class="fa-solid fa-headset text-[15px]"></i></div>
                             <div class="w-full">
-                                <span class="block text-[13px] font-bold text-theme-main leading-snug">Contact Us</span>
-                                <span class="block text-[10.5px] text-theme-muted mt-0.5">যোগাযোগ ও পেমেন্ট</span>
+                                <span class="block text-[12.5px] font-bold text-theme-main leading-snug">Contact Us</span>
+                                <span class="font-bn block text-[10px] text-theme-muted mt-0.5">যোগাযোগ ও পেমেন্ট</span>
                             </div>
                         </button>
-
                     </div>
                 </div>
 
-                <!-- Footer Credit -->
                 <div class="text-center pb-1 shrink-0">
-                    <span class="inline-block px-4 py-1 rounded-full simple-glass text-[10px] text-theme-muted">
-                        Designed by <strong class="text-[#5fa000] font-bold">M Maksud Rs Ksa</strong>
+                    <span class="inline-block px-4 py-1.5 rounded-full simple-glass text-[9.5px] text-theme-muted font-semibold">
+                        Crafted by <strong class="text-[#5fa000]">M Maksud Rs Ksa</strong>
                     </span>
                 </div>
-
             </section>
 
-            <!-- ================= FULL-SCREEN APP VIEWS ================= -->
-            <section id="view-app1" class="hidden w-full h-full flex-1">
-                <iframe id="iframe-app1" src="https://docs.google.com/forms/d/e/1FAIpQLScimaLEp4pSTNxQ-X7nI8CogFdbDLLB1a9qjcvngvAl4lJb8g/viewform?embedded=true" class="w-full h-full border-none block"></iframe>
-            </section>
-
-            <section id="view-app2" class="hidden w-full h-full flex-1">
-                <iframe id="iframe-app2" src="https://script.google.com/macros/s/AKfycbzRX0q4LUXo0158xR8EVKiuUXNLW1Vb0O-feSsT281kUwB1uvLhdphy7zQcja1pHOK1/exec" class="w-full h-full border-none block"></iframe>
-            </section>
-
-            <section id="view-app3" class="hidden w-full h-full flex-1">
-                <iframe id="iframe-app3" src="https://script.google.com/macros/s/AKfycbzRX0q4LUXo0158xR8EVKiuUXNLW1Vb0O-feSsT281kUwB1uvLhdphy7zQcja1pHOK1/exec?page=profit" class="w-full h-full border-none block"></iframe>
-            </section>
-
-            <section id="view-app4" class="hidden w-full h-full flex-1">
-                <iframe id="iframe-app4" src="https://script.google.com/macros/s/AKfycbyQdAwwXVpCNemd4I4wPbQhiApb3QZ635ViR6cwbBDmLZMzjqCP2dUOuLGlV3tYc4HTig/exec" class="w-full h-full border-none block"></iframe>
-            </section>
-
-            <section id="view-app5" class="hidden w-full h-full flex-1">
-                <iframe id="iframe-app5" src="https://script.google.com/macros/s/AKfycbx9BWnj4XmUi3xJcNx3InSgXgZRP9nWQCJtlAQG0RJO6-HGo5HOXNLKitXTzqsjaw929w/exec" class="w-full h-full border-none block"></iframe>
-            </section>
-
-            <section id="view-app6" class="hidden w-full h-full flex-1">
-                <iframe id="iframe-app6" src="https://script.google.com/macros/s/AKfycbzEBKOwhdQwXoCP6FF5vPU6ieEAngw8J51IZ4Hl6IFerSxndQG2n7-5rNuTxQFotpqy/exec" class="w-full h-full border-none block"></iframe>
-            </section>
+            <!-- APP VIEWS -->
+            <section id="view-app1" class="hidden w-full h-full flex-1"><iframe id="iframe-app1" src="https://docs.google.com/forms/d/e/1FAIpQLScimaLEp4pSTNxQ-X7nI8CogFdbDLLB1a9qjcvngvAl4lJb8g/viewform?embedded=true" class="w-full h-full border-none block"></iframe></section>
+            <section id="view-app2" class="hidden w-full h-full flex-1"><iframe id="iframe-app2" src="https://script.google.com/macros/s/AKfycbzRX0q4LUXo0158xR8EVKiuUXNLW1Vb0O-feSsT281kUwB1uvLhdphy7zQcja1pHOK1/exec" class="w-full h-full border-none block"></iframe></section>
+            <section id="view-app3" class="hidden w-full h-full flex-1"><iframe id="iframe-app3" src="https://script.google.com/macros/s/AKfycbzRX0q4LUXo0158xR8EVKiuUXNLW1Vb0O-feSsT281kUwB1uvLhdphy7zQcja1pHOK1/exec?page=profit" class="w-full h-full border-none block"></iframe></section>
+            <section id="view-app4" class="hidden w-full h-full flex-1"><iframe id="iframe-app4" src="https://script.google.com/macros/s/AKfycbyQdAwwXVpCNemd4I4wPbQhiApb3QZ635ViR6cwbBDmLZMzjqCP2dUOuLGlV3tYc4HTig/exec" class="w-full h-full border-none block"></iframe></section>
+            <section id="view-app5" class="hidden w-full h-full flex-1"><iframe id="iframe-app5" src="https://script.google.com/macros/s/AKfycbx9BWnj4XmUi3xJcNx3InSgXgZRP9nWQCJtlAQG0RJO6-HGo5HOXNLKitXTzqsjaw929w/exec" class="w-full h-full border-none block"></iframe></section>
+            <section id="view-app6" class="hidden w-full h-full flex-1"><iframe id="iframe-app6" src="https://script.google.com/macros/s/AKfycbzEBKOwhdQwXoCP6FF5vPU6ieEAngw8J51IZ4Hl6IFerSxndQG2n7-5rNuTxQFotpqy/exec" class="w-full h-full border-none block"></iframe></section>
 
         </main>
 
@@ -1150,11 +1229,330 @@
         let countdownInterval = null;
         let remainingSeconds = 0;
 
+        // Balance state: Never shows '0.00' until fresh data is actually fetched from server!
         let balanceData = {
-            totalBalance: '0.00',
-            currentBalance: '0.00',
-            loaded: false
+            totalBalance: null,
+            currentBalance: null,
+            loaded: false,
+            fetching: false
         };
+
+        // Due Members State
+        let dueMembersCache = [];
+
+        /* =====================================================================
+           MOBILE HARDWARE / GESTURE BACK BUTTON SUPPORT (HISTORY API)
+           ===================================================================== */
+        let isPopStateHandling = false;
+
+        function pushAppHistoryState(stateName) {
+            try {
+                if (window.history && window.history.pushState) {
+                    window.history.pushState({ aswaState: stateName }, '', '#' + stateName);
+                }
+            } catch (e) {}
+        }
+
+        function triggerNativeOrManualBack() {
+            // If we have a pushed history entry, let history.back() fire popstate cleanly
+            if (window.history && window.history.state && window.history.state.aswaState && window.history.state.aswaState !== 'home') {
+                window.history.back();
+            } else {
+                handleBackAndRefresh();
+            }
+        }
+
+        window.addEventListener('popstate', function(event) {
+            isPopStateHandling = true;
+            try {
+                // 1. Close Due Members Modal if open
+                const dueModal = document.getElementById('due-members-modal');
+                if (dueModal && !dueModal.classList.contains('hidden')) {
+                    closeDueMembersModal(true);
+                    return;
+                }
+                // 2. Close Account Modal if open
+                const accModal = document.getElementById('account-settings-modal');
+                if (accModal && !accModal.classList.contains('hidden')) {
+                    closeAccountModal(true);
+                    return;
+                }
+                // 3. Close Info Modal if open
+                const infoModal = document.getElementById('info-popup-modal');
+                if (infoModal && !infoModal.classList.contains('hidden')) {
+                    closeInfoModal(true);
+                    return;
+                }
+                // 4. Close Side Drawer if open
+                const drawerPanel = document.getElementById('side-drawer-panel');
+                if (drawerPanel && !drawerPanel.classList.contains('-translate-x-full')) {
+                    closeLeftDrawer(true);
+                    return;
+                }
+                // 5. Return to Home Dashboard if currently inside a sub-app (app1..app6)
+                if (currentActiveView !== 'home') {
+                    handleBackAndRefresh();
+                    return;
+                }
+            } finally {
+                isPopStateHandling = false;
+            }
+        });
+
+        /* =====================================================================
+           1st TO 5th MONTHLY FEE COUNTDOWN PANEL (LOGIN SCREEN)
+           ===================================================================== */
+        let feeCountdownTimer = null;
+
+        function startMonthlyFeeCountdown() {
+            updateMonthlyFeeCountdown();
+            if (feeCountdownTimer) clearInterval(feeCountdownTimer);
+            feeCountdownTimer = setInterval(updateMonthlyFeeCountdown, 1000);
+        }
+
+        function updateMonthlyFeeCountdown() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = now.getMonth();
+            const day = now.getDate();
+
+            const badgeTitleEl = document.getElementById('cd-badge-title');
+            const subtitleEl = document.getElementById('cd-subtitle-text');
+            const pulseDotEl = document.getElementById('cd-pulse-dot');
+            const daysEl = document.getElementById('cd-days');
+            const hoursEl = document.getElementById('cd-hours');
+            const minutesEl = document.getElementById('cd-minutes');
+            const secondsEl = document.getElementById('cd-seconds');
+
+            if (!daysEl) return;
+
+            let targetDate;
+            if (day >= 1 && day <= 5) {
+                // Active window: 1st to 5th (ends at 5th 23:59:59)
+                targetDate = new Date(year, month, 5, 23, 59, 59);
+                if (badgeTitleEl) {
+                    badgeTitleEl.textContent = 'মাসিক ফি জমার সময় চলছে (১ - ৫ তারিখ)';
+                    badgeTitleEl.className = 'font-bn text-[11px] font-extrabold text-[#8ed12f] tracking-wide';
+                }
+                if (subtitleEl) {
+                    subtitleEl.textContent = 'প্রতি মাসের ১ থেকে ৫ তারিখের মধ্যে মাসিক ফি পরিশোধ করতে হবে। সময় বাকি:';
+                }
+                if (pulseDotEl) {
+                    pulseDotEl.className = 'w-2.5 h-2.5 rounded-full bg-[#8ed12f] animate-ping';
+                }
+            } else {
+                // Next month's 1st date countdown
+                targetDate = new Date(year, month + 1, 1, 0, 0, 0);
+                if (badgeTitleEl) {
+                    badgeTitleEl.textContent = 'পরবর্তী মাসিক ফি জমা শুরু হতে বাকি';
+                    badgeTitleEl.className = 'font-bn text-[11px] font-extrabold text-amber-400 tracking-wide';
+                }
+                if (subtitleEl) {
+                    subtitleEl.textContent = 'আগামী মাসের ১ তারিখ থেকে ৫ তারিখের মধ্যে মাসিক ফি জমা নেওয়া হবে:';
+                }
+                if (pulseDotEl) {
+                    pulseDotEl.className = 'w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse';
+                }
+            }
+
+            const diffMs = Math.max(0, targetDate.getTime() - now.getTime());
+            const totalSeconds = Math.floor(diffMs / 1000);
+            const d = Math.floor(totalSeconds / 86400);
+            const h = Math.floor((totalSeconds % 86400) / 3600);
+            const m = Math.floor((totalSeconds % 3600) / 60);
+            const s = totalSeconds % 60;
+
+            daysEl.textContent = String(d).padStart(2, '0');
+            hoursEl.textContent = String(h).padStart(2, '0');
+            minutesEl.textContent = String(m).padStart(2, '0');
+            secondsEl.textContent = String(s).padStart(2, '0');
+        }
+
+        /* =====================================================================
+           NOTICE BOARD (FETCHES FROM 'Notice' SHEET IN GOOGLE SPREADSHEET)
+           ===================================================================== */
+        async function fetchNoticeBoard(showToastMsg = false) {
+            const noticeTextEl = document.getElementById('notice-board-text');
+            const refreshIcon = document.getElementById('notice-refresh-icon');
+            if (!noticeTextEl) return;
+
+            if (refreshIcon) refreshIcon.classList.add('fa-spin');
+
+            try {
+                let res;
+                if (typeof google !== 'undefined' && google.script && google.script.run) {
+                    res = await new Promise((resolve, reject) => {
+                        google.script.run
+                            .withSuccessHandler(resolve)
+                            .withFailureHandler(reject)
+                            .getNoticeBoardData();
+                    });
+                } else {
+                    const response = await fetch(APPS_SCRIPT_EXEC_URL + '?action=notices&_t=' + Date.now(), {
+                        method: 'GET',
+                        redirect: 'follow'
+                    });
+                    res = await response.json();
+                }
+
+                if (res && res.ok && res.notices && res.notices.length > 0) {
+                    noticeTextEl.textContent = res.notices.join('  •  ');
+                    if (showToastMsg) showToast('নোটিশ আপডেট হয়েছে');
+                } else {
+                    noticeTextEl.textContent = 'আস-সুফফাহ কল্যাণ সমিতিতে স্বাগতম! প্রতি মাসের ১-৫ তারিখের মধ্যে মাসিক ফি পরিশোধ করুন।';
+                }
+            } catch (err) {
+                noticeTextEl.textContent = 'আস-সুফফাহ কল্যাণ সমিতিতে স্বাগতম! প্রতি মাসের ১-৫ তারিখের মধ্যে মাসিক ফি পরিশোধ করুন।';
+            } finally {
+                if (refreshIcon) refreshIcon.classList.remove('fa-spin');
+            }
+        }
+
+        /* =====================================================================
+           DUE MEMBERS LIST (FROM 'Monthly Dashboard' SHEET COLUMN I)
+           ===================================================================== */
+        function openDueMembersModal() {
+            closeLeftDrawer(true);
+            const modal = document.getElementById('due-members-modal');
+            const searchInput = document.getElementById('due-search-input');
+            if (!modal) return;
+
+            if (searchInput) searchInput.value = '';
+            modal.classList.remove('hidden');
+            if (!isPopStateHandling) pushAppHistoryState('due-members');
+            fetchDueMembers(false);
+        }
+
+        function closeDueMembersModal(fromPopState = false) {
+            const modal = document.getElementById('due-members-modal');
+            if (modal) modal.classList.add('hidden');
+            if (!fromPopState && window.history && window.history.state && window.history.state.aswaState === 'due-members') {
+                window.history.back();
+            }
+        }
+
+        async function fetchDueMembers(forceRefresh = false) {
+            const container = document.getElementById('due-members-list-container');
+            const countBadge = document.getElementById('due-total-count-badge');
+            const refreshIcon = document.getElementById('due-refresh-icon');
+            if (!container) return;
+
+            if (refreshIcon) refreshIcon.classList.add('fa-spin');
+
+            if (!forceRefresh && dueMembersCache.length > 0) {
+                renderDueMembersList(dueMembersCache);
+                if (refreshIcon) refreshIcon.classList.remove('fa-spin');
+                return;
+            }
+
+            container.innerHTML = `
+                <div class="py-10 text-center text-theme-muted">
+                    <i class="fa-solid fa-spinner fa-spin text-xl text-[#5fa000] mb-2"></i>
+                    <p class="font-bn text-xs">Monthly Dashboard থেকে বকেয়া তালিকা লোড হচ্ছে...</p>
+                </div>
+            `;
+
+            try {
+                let res;
+                if (typeof google !== 'undefined' && google.script && google.script.run) {
+                    res = await new Promise((resolve, reject) => {
+                        google.script.run
+                            .withSuccessHandler(resolve)
+                            .withFailureHandler(reject)
+                            .getDueMembersList();
+                    });
+                } else {
+                    const response = await fetch(APPS_SCRIPT_EXEC_URL + '?action=dueMembers&_t=' + Date.now(), {
+                        method: 'GET',
+                        redirect: 'follow'
+                    });
+                    res = await response.json();
+                }
+
+                if (res && res.ok) {
+                    dueMembersCache = res.dueMembers || [];
+                    renderDueMembersList(dueMembersCache);
+                    if (forceRefresh) showToast('বকেয়া তালিকা আপডেট হয়েছে');
+                } else {
+                    if (countBadge) countBadge.textContent = '0 জন';
+                    container.innerHTML = `
+                        <div class="py-8 text-center text-red-400">
+                            <i class="fa-solid fa-circle-exclamation text-xl mb-2"></i>
+                            <p class="font-bn text-xs">${res && res.message ? res.message : 'তথ্য লোড করা যায়নি।'}</p>
+                        </div>
+                    `;
+                }
+            } catch (err) {
+                if (countBadge) countBadge.textContent = 'Error';
+                container.innerHTML = `
+                    <div class="py-8 text-center text-red-400">
+                        <i class="fa-solid fa-wifi text-xl mb-2"></i>
+                        <p class="font-bn text-xs">সার্ভার সংযোগ ব্যর্থ হয়েছে। আবার চেষ্টা করুন।</p>
+                    </div>
+                `;
+            } finally {
+                if (refreshIcon) refreshIcon.classList.remove('fa-spin');
+            }
+        }
+
+        function renderDueMembersList(list) {
+            const container = document.getElementById('due-members-list-container');
+            const countBadge = document.getElementById('due-total-count-badge');
+            if (!container) return;
+
+            if (countBadge) {
+                countBadge.textContent = list.length + ' জন';
+            }
+
+            if (!list || list.length === 0) {
+                container.innerHTML = `
+                    <div class="py-10 text-center">
+                        <div class="w-12 h-12 rounded-full bg-[#5fa000]/20 text-[#8ed12f] flex items-center justify-center mx-auto mb-2.5">
+                            <i class="fa-solid fa-check-double text-lg"></i>
+                        </div>
+                        <p class="font-bn text-xs font-bold text-theme-main">আলহামদুলিল্লাহ! কোনো বকেয়া সদস্য নেই।</p>
+                        <p class="font-bn text-[10px] text-theme-muted mt-1">সকল সদস্যের মাসিক ফি পরিশোধিত।</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = list.map((member, idx) => `
+                <div class="section-card p-3 flex items-center justify-between gap-2.5">
+                    <div class="flex items-center gap-3 min-w-0">
+                        <span class="w-7 h-7 rounded-xl bg-red-500/15 border border-red-500/30 text-[#ff6b70] text-[11px] font-extrabold flex items-center justify-center shrink-0 tabular">
+                            ${idx + 1}
+                        </span>
+                        <div class="min-w-0">
+                            <span class="font-bn block text-xs font-bold text-theme-main truncate">${escapeHtml(member.name)}</span>
+                            <span class="font-bn block text-[9.5px] text-theme-muted">মাসিক ফি বকেয়া (Due)</span>
+                        </div>
+                    </div>
+                    <span class="px-2.5 py-1 rounded-lg bg-red-500/15 text-[#ff6b70] text-[9.5px] font-extrabold uppercase tracking-wider shrink-0">
+                        DUE
+                    </span>
+                </div>
+            `).join('');
+        }
+
+        function filterDueMembersList() {
+            const query = (document.getElementById('due-search-input').value || '').trim().toLowerCase();
+            if (!query) {
+                renderDueMembersList(dueMembersCache);
+                return;
+            }
+            const filtered = dueMembersCache.filter(m => String(m.name || '').toLowerCase().includes(query));
+            renderDueMembersList(filtered);
+        }
+
+        function escapeHtml(str) {
+            return String(str || '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
 
         /* =====================================================================
            PROFILE PHOTO MANAGEMENT (ADMIN & MEMBER)
@@ -1176,10 +1574,12 @@
             const savedPhoto = getSavedProfilePhoto(currentUser.email);
             const photoSrc = savedPhoto || DEFAULT_AVATAR_URL;
 
+            const headerPhoto = document.getElementById('header-profile-photo');
             const drawerPhoto = document.getElementById('drawer-profile-photo');
             const modalPreview = document.getElementById('acc-modal-photo-preview');
             const removeBtn = document.getElementById('btn-remove-photo');
 
+            if (headerPhoto) headerPhoto.src = photoSrc;
             if (drawerPhoto) drawerPhoto.src = photoSrc;
             if (modalPreview) modalPreview.src = photoSrc;
             if (removeBtn) {
@@ -1197,7 +1597,6 @@
             reader.onload = function(e) {
                 const img = new Image();
                 img.onload = function() {
-                    // Compress & resize image to 220x220 so it fits smoothly in localStorage
                     const canvas = document.createElement('canvas');
                     const size = 220;
                     canvas.width = size;
@@ -1468,7 +1867,7 @@
         }
 
         /* =====================================================================
-           SESSION MANAGEMENT & ROLE-BASED DASHBOARD (ADMIN VS MEMBER)
+           SESSION MANAGEMENT & ROLE-BASED DASHBOARD
            ===================================================================== */
         function saveUserSession(userObj) {
             currentUser = userObj;
@@ -1487,9 +1886,12 @@
         }
 
         function logoutAccount() {
-            closeAccountModal();
-            closeLeftDrawer();
+            closeAccountModal(true);
+            closeLeftDrawer(true);
             currentUser = null;
+            balanceData = { totalBalance: null, currentBalance: null, loaded: false, fetching: false };
+            hideSensitiveInfo();
+
             try {
                 localStorage.removeItem(SESSION_STORAGE_KEY);
             } catch (e) {}
@@ -1497,6 +1899,7 @@
             document.getElementById('pin-lock-screen').classList.add('hidden');
             document.getElementById('auth-screen').classList.remove('hidden');
             switchAuthTab('login');
+            startMonthlyFeeCountdown();
             showToast('সফলভাবে লগআউট হয়েছে');
         }
 
@@ -1514,21 +1917,30 @@
             syncUserProfilePhotoUI();
             switchView('home');
 
+            // Reset balance cache on fresh app open so '0.00' is never shown prematurely
+            balanceData.loaded = false;
+            balanceData.totalBalance = null;
+            balanceData.currentBalance = null;
             renderSensitiveInfo();
-            fetchBalances(false);
+
+            fetchNoticeBoard(false);
+            fetchBalances();
         }
 
         function applyRoleBasedInterface(user) {
             const isAdmin = user.role === 'admin';
 
-            // Header & Drawer Info
+            const headerEmailEl = document.getElementById('header-user-email');
             const headerSubtitle = document.getElementById('header-user-subtitle');
             const drawerBadge = document.getElementById('drawer-role-badge');
             const drawerUserEmail = document.getElementById('drawer-user-email');
             const atmCardTitle = document.getElementById('atm-card-title');
 
+            if (headerEmailEl) {
+                headerEmailEl.textContent = user.email;
+            }
             if (headerSubtitle) {
-                headerSubtitle.textContent = isAdmin ? 'Admin Panel • ' + user.email : 'Member • ' + user.email;
+                headerSubtitle.textContent = isAdmin ? 'Admin Account • AS-SUFFAH' : 'Member Account • AS-SUFFAH';
             }
             if (drawerUserEmail) {
                 drawerUserEmail.textContent = user.email;
@@ -1540,7 +1952,6 @@
                 atmCardTitle.textContent = isAdmin ? 'AS-SUFFAH ADMIN' : 'AS-SUFFAH MEMBER';
             }
 
-            // Tiles & Icon Color Consistency (2 apps in 1 row = same color)
             const tileApp2 = document.getElementById('tile-app2');
             const tileApp3 = document.getElementById('tile-app3');
             const tileApp4 = document.getElementById('tile-app4');
@@ -1551,13 +1962,10 @@
             const iconMemberContact = document.getElementById('icon-member-contact');
 
             const drawerMemberAddBtn = document.getElementById('drawer-member-add-btn');
+            const drawerDueMembersBtn = document.getElementById('drawer-due-members-btn');
             const drawerGroupBtn = document.getElementById('drawer-group-btn');
 
             if (isAdmin) {
-                // Admin Layout:
-                // Row 1: Monthly Deposits (lime) + Member Details (lime)
-                // Row 2: Profit Calculator (neutral) + Member Search (neutral)
-                // Row 3: Investment Details (lime, col-span-2)
                 tileApp2.classList.remove('hidden');
                 tileApp3.classList.remove('hidden');
                 tileMemberContact.classList.add('hidden');
@@ -1570,22 +1978,18 @@
                 tileApp6.classList.remove('row2-tile');
                 iconApp6.className = 'w-9 h-9 rounded-xl bg-[#5fa000] text-white flex items-center justify-center shrink-0 shadow-sm';
 
-                drawerMemberAddBtn.classList.remove('hidden');
-                drawerGroupBtn.classList.remove('col-span-2');
+                if (drawerDueMembersBtn) drawerDueMembersBtn.classList.remove('hidden');
+                if (drawerMemberAddBtn) drawerMemberAddBtn.classList.remove('hidden');
+                if (drawerGroupBtn) drawerGroupBtn.classList.remove('col-span-2');
             } else {
-                // Member Layout:
-                // Row 1: Monthly Deposits (lime) + Member Search (lime) -> SAME COLOR IN ROW 1
-                // Row 2: Investment Details (neutral) + Contact Us (neutral) -> SAME COLOR IN ROW 2
                 tileApp2.classList.add('hidden');
                 tileApp3.classList.add('hidden');
                 tileMemberContact.classList.remove('hidden');
 
-                // Row 1 pair: app1 + app4 -> lime icon & row1-tile
                 tileApp4.classList.remove('row2-tile');
                 tileApp4.classList.add('row1-tile');
                 iconApp4.className = 'w-9 h-9 rounded-xl bg-[#5fa000] text-white flex items-center justify-center shrink-0 shadow-sm';
 
-                // Row 2 pair: app6 + member-contact -> neutral icon & row2-tile
                 tileApp6.classList.remove('col-span-2', 'row3-tile');
                 tileApp6.classList.add('row2-tile');
                 iconApp6.className = 'w-9 h-9 rounded-xl neutral-icon-box flex items-center justify-center shrink-0';
@@ -1594,9 +1998,9 @@
                 tileMemberContact.classList.add('row2-tile');
                 iconMemberContact.className = 'w-9 h-9 rounded-xl neutral-icon-box flex items-center justify-center shrink-0';
 
-                // Drawer: hide Member Add, make Messenger Group span 2 columns (2x width)
-                drawerMemberAddBtn.classList.add('hidden');
-                drawerGroupBtn.classList.add('col-span-2');
+                if (drawerDueMembersBtn) drawerDueMembersBtn.classList.add('hidden');
+                if (drawerMemberAddBtn) drawerMemberAddBtn.classList.add('hidden');
+                if (drawerGroupBtn) drawerGroupBtn.classList.add('col-span-2');
             }
         }
 
@@ -1664,10 +2068,10 @@
         }
 
         /* =====================================================================
-           ACCOUNT MODAL (PROFILE PHOTO, CHANGE PASSWORD & PIN LOCK MANAGEMENT)
+           ACCOUNT MODAL
            ===================================================================== */
         function openAccountModal() {
-            closeLeftDrawer();
+            closeLeftDrawer(true);
             if (!currentUser) return;
 
             syncUserProfilePhotoUI();
@@ -1694,10 +2098,14 @@
             }
 
             document.getElementById('account-settings-modal').classList.remove('hidden');
+            if (!isPopStateHandling) pushAppHistoryState('account-modal');
         }
 
-        function closeAccountModal() {
+        function closeAccountModal(fromPopState = false) {
             document.getElementById('account-settings-modal').classList.add('hidden');
+            if (!fromPopState && window.history && window.history.state && window.history.state.aswaState === 'account-modal') {
+                window.history.back();
+            }
         }
 
         async function handlePinUpdateSubmit(e) {
@@ -1869,7 +2277,7 @@
 
         function openInfoModal(type) {
             try {
-                closeLeftDrawer();
+                closeLeftDrawer(true);
                 const modal = document.getElementById('info-popup-modal');
                 const contactContent = document.getElementById('modal-content-contact');
                 const messengerContent = document.getElementById('modal-content-messenger');
@@ -1882,12 +2290,16 @@
                 if (type === 'messenger') messengerContent.classList.remove('hidden');
 
                 modal.classList.remove('hidden');
+                if (!isPopStateHandling) pushAppHistoryState('info-modal');
             } catch (err) {}
         }
 
-        function closeInfoModal() {
+        function closeInfoModal(fromPopState = false) {
             const modal = document.getElementById('info-popup-modal');
             if (modal) modal.classList.add('hidden');
+            if (!fromPopState && window.history && window.history.state && window.history.state.aswaState === 'info-modal') {
+                window.history.back();
+            }
         }
 
         function openLeftDrawer() {
@@ -1901,9 +2313,10 @@
                 panel.classList.remove('-translate-x-full');
                 panel.setAttribute('aria-hidden', 'false');
             });
+            if (!isPopStateHandling) pushAppHistoryState('drawer');
         }
 
-        function closeLeftDrawer() {
+        function closeLeftDrawer(fromPopState = false) {
             const backdrop = document.getElementById('side-drawer-backdrop');
             const panel = document.getElementById('side-drawer-panel');
             if (!backdrop || !panel) return;
@@ -1912,12 +2325,18 @@
             panel.classList.add('-translate-x-full');
             panel.setAttribute('aria-hidden', 'true');
             setTimeout(() => backdrop.classList.add('hidden'), 300);
+
+            if (!fromPopState && window.history && window.history.state && window.history.state.aswaState === 'drawer') {
+                window.history.back();
+            }
         }
 
         function refreshFullSystem() {
-            showToast('Syncing Data...');
+            showToast('Syncing All Data...');
             if (currentUser) {
-                fetchBalances(true);
+                fetchBalances();
+                fetchNoticeBoard(false);
+                dueMembersCache = [];
             }
 
             ['app1', 'app2', 'app3', 'app4', 'app5', 'app6'].forEach((id) => {
@@ -1941,7 +2360,8 @@
             }
 
             if (currentUser) {
-                fetchBalances(true);
+                fetchBalances();
+                fetchNoticeBoard(false);
             }
 
             setTimeout(() => {
@@ -1950,7 +2370,7 @@
                     backIcon.classList.remove('fa-arrows-rotate', 'fa-spin');
                     backIcon.classList.add('fa-arrow-left');
                 }
-            }, 250);
+            }, 220);
         }
 
         function clearAutoHideTimers() {
@@ -1992,7 +2412,7 @@
             if (eyeLabel) eyeLabel.textContent = remainingSeconds + 's';
 
             renderSensitiveInfo();
-            fetchBalances(true);
+            fetchBalances();
 
             countdownInterval = setInterval(() => {
                 remainingSeconds -= 1;
@@ -2004,6 +2424,10 @@
             autoHideTimer = setTimeout(hideSensitiveInfo, AUTO_HIDE_SECONDS * 1000);
         }
 
+        /**
+         * Renders ATM Card info cleanly:
+         * Never displays '0.00' while waiting for data after 1-2 days inactivity!
+         */
         function renderSensitiveInfo() {
             const accountEl = document.getElementById('account-number-display');
             const totalEl = document.getElementById('total-balance-display');
@@ -2017,9 +2441,22 @@
             if (!isSensitiveVisible) {
                 totalEl.textContent = 'BDT: ••••••••';
                 currentEl.textContent = 'BDT: ••••••••';
+                stopBalanceLoading(totalEl, currentEl);
+                return;
+            }
+
+            // If data is not yet loaded from Google Sheet, show loading indicator instead of 0.00
+            if (!balanceData.loaded || balanceData.totalBalance === null || balanceData.currentBalance === null) {
+                totalEl.textContent = 'লোড হচ্ছে...';
+                currentEl.textContent = 'লোড হচ্ছে...';
+                totalEl.classList.add('balance-loading');
+                currentEl.classList.add('balance-loading');
             } else {
                 totalEl.textContent = 'BDT: ' + balanceData.totalBalance;
                 currentEl.textContent = 'BDT: ' + balanceData.currentBalance;
+                if (!balanceData.fetching) {
+                    stopBalanceLoading(totalEl, currentEl);
+                }
             }
         }
 
@@ -2032,6 +2469,9 @@
             const totalEl = document.getElementById('total-balance-display');
             const currentEl = document.getElementById('current-balance-display');
 
+            balanceData.fetching = true;
+            renderSensitiveInfo();
+
             try {
                 if (isSensitiveVisible && totalEl && currentEl) {
                     totalEl.classList.add('balance-loading');
@@ -2041,15 +2481,17 @@
                 if (typeof google !== 'undefined' && google.script && google.script.run) {
                     google.script.run
                         .withSuccessHandler(function(res) {
+                            balanceData.fetching = false;
                             if (res && res.ok) {
-                                balanceData.totalBalance = res.totalBalance || '0.00';
-                                balanceData.currentBalance = res.currentBalance || '0.00';
+                                balanceData.totalBalance = res.totalBalance;
+                                balanceData.currentBalance = res.currentBalance;
                                 balanceData.loaded = true;
                             }
                             renderSensitiveInfo();
                             stopBalanceLoading(totalEl, currentEl);
                         })
                         .withFailureHandler(function() {
+                            balanceData.fetching = false;
                             renderSensitiveInfo();
                             stopBalanceLoading(totalEl, currentEl);
                         })
@@ -2057,20 +2499,33 @@
                     return;
                 }
 
-                const response = await fetch(APPS_SCRIPT_EXEC_URL + '?action=balances', { method: 'GET', redirect: 'follow' });
+                const response = await fetch(APPS_SCRIPT_EXEC_URL + '?action=balances&_t=' + Date.now(), {
+                    method: 'GET',
+                    redirect: 'follow'
+                });
                 if (!response.ok) throw new Error('HTTP error');
                 const res = await response.json();
+
+                balanceData.fetching = false;
                 if (res && res.ok) {
-                    balanceData.totalBalance = res.totalBalance || '0.00';
-                    balanceData.currentBalance = res.currentBalance || '0.00';
+                    balanceData.totalBalance = res.totalBalance;
+                    balanceData.currentBalance = res.currentBalance;
                     balanceData.loaded = true;
                 }
                 renderSensitiveInfo();
             } catch (err) {
+                balanceData.fetching = false;
                 renderSensitiveInfo();
             } finally {
                 stopBalanceLoading(totalEl, currentEl);
             }
+        }
+
+        function navigateToView(viewName) {
+            if (viewName !== 'home' && currentActiveView === 'home' && !isPopStateHandling) {
+                pushAppHistoryState(viewName);
+            }
+            switchView(viewName);
         }
 
         function switchView(viewName) {
@@ -2116,12 +2571,32 @@
                 applyThemeMode(false);
             }
 
+            // Initialize base browser history state for mobile back button
+            try {
+                if (window.history && window.history.replaceState) {
+                    window.history.replaceState({ aswaState: 'home' }, '', '#home');
+                }
+            } catch (e) {}
+
+            // Start 1st-5th Monthly Fee Countdown
+            startMonthlyFeeCountdown();
+
             const savedUser = getSavedUserSession();
             if (savedUser && savedUser.email) {
                 enterDashboardForUser(savedUser, true);
             } else {
                 document.getElementById('auth-screen').classList.remove('hidden');
                 switchAuthTab('login');
+            }
+        });
+
+        // Re-fetch balances & notices automatically if user returns to tab/app after being idle
+        document.addEventListener('visibilitychange', function() {
+            if (!document.hidden && currentUser) {
+                balanceData.loaded = false;
+                renderSensitiveInfo();
+                fetchBalances();
+                fetchNoticeBoard(false);
             }
         });
     </script>
