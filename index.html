@@ -786,6 +786,7 @@
                         <button type="button" id="drawer-due-members-btn" onclick="openDueMembersModal()" class="nav-tile relative">
                             <span class="nav-icon" style="background:rgba(255,107,112,0.16);color:#ff6b70"><i class="fa-solid fa-user-clock"></i></span>
                             <span class="truncate">Due Members</span>
+                            <span id="drawer-due-badge" class="hidden ml-auto px-1.5 py-0.5 rounded-full bg-red-500/20 text-[#ff6b70] text-[9.5px] font-extrabold tabular">0</span>
                         </button>
                         <button type="button" onclick="openAccountModal()" class="nav-tile">
                             <span class="nav-icon"><i class="fa-solid fa-user-gear"></i></span><span class="truncate">Account</span>
@@ -1277,6 +1278,9 @@
         const APPS_SCRIPT_EXEC_URL = 'https://script.google.com/macros/s/AKfycby_p4p6_G40RA9suLZ5xCkCoPY4TVDx8NA54aKFcgHeBRm2SlsHR9CMy-xeyqDr2niv2Q/exec';
         const SESSION_STORAGE_KEY = 'aswa_logged_in_user_v1';
         const PHOTO_STORAGE_PREFIX = 'aswa_profile_photo_';
+        const DUE_CACHE_STORAGE_KEY = 'aswa_due_members_cache_v1';
+        const BALANCE_CACHE_STORAGE_KEY = 'aswa_balances_cache_v1';
+        const NOTICES_CACHE_STORAGE_KEY = 'aswa_notices_cache_v1';
         const DEFAULT_AVATAR_URL = 'https://lh3.googleusercontent.com/d/1PXMzZMIOZbElnjIuOK2ew-FNMhuScYGx';
 
         const APP_CONFIG = {
@@ -1325,6 +1329,64 @@
         };
 
         let dueMembersCache = [];
+        let dueMembersLoaded = false;
+        let dueMembersFetching = false;
+        let dueMembersPromise = null;
+
+        /* =====================================================================
+           INSTANT PRELOAD & PERSISTENT CACHE HYDRATION
+           ===================================================================== */
+        function hydrateCachedAppData() {
+            try {
+                const rawBalances = localStorage.getItem(BALANCE_CACHE_STORAGE_KEY);
+                if (rawBalances) {
+                    const parsedBal = JSON.parse(rawBalances);
+                    if (parsedBal && parsedBal.totalBalance !== undefined && parsedBal.currentBalance !== undefined) {
+                        balanceData.totalBalance = parsedBal.totalBalance;
+                        balanceData.currentBalance = parsedBal.currentBalance;
+                        balanceData.loaded = true;
+                    }
+                }
+            } catch (e) {}
+
+            try {
+                const rawDue = localStorage.getItem(DUE_CACHE_STORAGE_KEY);
+                if (rawDue) {
+                    const parsedDue = JSON.parse(rawDue);
+                    if (Array.isArray(parsedDue)) {
+                        dueMembersCache = parsedDue;
+                        dueMembersLoaded = true;
+                        updateDueMembersBadgeCount();
+                    }
+                }
+            } catch (e) {}
+
+            try {
+                const rawNotices = localStorage.getItem(NOTICES_CACHE_STORAGE_KEY);
+                if (rawNotices) {
+                    const parsedNotices = JSON.parse(rawNotices);
+                    if (Array.isArray(parsedNotices) && parsedNotices.length > 0) {
+                        startNoticeTypingLoop(parsedNotices);
+                    }
+                }
+            } catch (e) {}
+        }
+
+        function preloadAllDashboardData() {
+            // Fire all data fetches in parallel immediately on app open / before login
+            fetchBalances();
+            fetchNoticeBoard(false);
+            fetchDueMembers(false, true);
+        }
+
+        function updateDueMembersBadgeCount() {
+            const drawerBadge = document.getElementById('drawer-due-badge');
+            if (!drawerBadge) return;
+            if (dueMembersLoaded) {
+                drawerBadge.textContent = String(dueMembersCache.length);
+                drawerBadge.classList.remove('hidden');
+            }
+        }
 
         /* =====================================================================
            MOBILE HARDWARE / GESTURE BACK BUTTON SUPPORT (HISTORY API)
@@ -1479,17 +1541,22 @@
                 }
 
                 if (res && res.ok && res.notices && res.notices.length > 0) {
+                    try {
+                        localStorage.setItem(NOTICES_CACHE_STORAGE_KEY, JSON.stringify(res.notices));
+                    } catch (e) {}
                     startNoticeTypingLoop(res.notices);
                     if (showToastMsg) showToast('নোটিশ আপডেট হয়েছে');
-                } else {
+                } else if (activeNoticesList.length === 0) {
                     startNoticeTypingLoop([
                         'আস-সুফফাহ কল্যাণ সমিতিতে স্বাগতম! প্রতি মাসের ১-৫ তারিখের মধ্যে মাসিক ফি পরিশোধ করুন।'
                     ]);
                 }
             } catch (err) {
-                startNoticeTypingLoop([
-                    'আস-সুফফাহ কল্যাণ সমিতিতে স্বাগতম! প্রতি মাসের ১-৫ তারিখের মধ্যে মাসিক ফি পরিশোধ করুন।'
-                ]);
+                if (activeNoticesList.length === 0) {
+                    startNoticeTypingLoop([
+                        'আস-সুফফাহ কল্যাণ সমিতিতে স্বাগতম! প্রতি মাসের ১-৫ তারিখের মধ্যে মাসিক ফি পরিশোধ করুন।'
+                    ]);
+                }
             } finally {
                 if (refreshIcon) refreshIcon.classList.remove('fa-spin');
             }
@@ -1528,7 +1595,6 @@
                 if (nextPos < currentFullText.length) {
                     noticeTypingTimer = setTimeout(() => runNoticeTypingStep(nextPos, false), 42);
                 } else {
-                    // Pause at full text before erasing/cycling
                     noticeTypingTimer = setTimeout(() => runNoticeTypingStep(nextPos, true), 3200);
                 }
             } else {
@@ -1545,7 +1611,7 @@
         }
 
         /* =====================================================================
-           DUE MEMBERS LIST (FROM 'Monthly Dashboard' SHEET COLUMN I)
+           DUE MEMBERS LIST (PRELOADED ON STARTUP + INSTANT MODAL DISPLAY)
            ===================================================================== */
         function openDueMembersModal() {
             closeLeftDrawer(true);
@@ -1556,7 +1622,14 @@
             if (searchInput) searchInput.value = '';
             modal.classList.remove('hidden');
             if (!isPopStateHandling) pushAppHistoryState('due-members');
-            fetchDueMembers(false);
+
+            // Render immediately if already preloaded or cached, while silently refreshing if needed
+            if (dueMembersLoaded) {
+                renderDueMembersList(dueMembersCache);
+                fetchDueMembers(false, true);
+            } else {
+                fetchDueMembers(false, false);
+            }
         }
 
         function closeDueMembersModal(fromPopState = false) {
@@ -1567,68 +1640,113 @@
             }
         }
 
-        async function fetchDueMembers(forceRefresh = false) {
+        async function fetchDueMembers(forceRefresh = false, silentBackground = false) {
             const container = document.getElementById('due-members-list-container');
             const countBadge = document.getElementById('due-total-count-badge');
             const refreshIcon = document.getElementById('due-refresh-icon');
-            if (!container) return;
 
-            if (refreshIcon) refreshIcon.classList.add('fa-spin');
+            if (refreshIcon && !silentBackground) refreshIcon.classList.add('fa-spin');
 
-            if (!forceRefresh && dueMembersCache.length > 0) {
+            // If already loaded and not forcing a refresh, render instantly
+            if (!forceRefresh && dueMembersLoaded && !silentBackground) {
                 renderDueMembersList(dueMembersCache);
                 if (refreshIcon) refreshIcon.classList.remove('fa-spin');
                 return;
             }
 
-            container.innerHTML = `
-                <div class="py-10 text-center text-theme-muted">
-                    <i class="fa-solid fa-spinner fa-spin text-xl text-[#5fa000] mb-2"></i>
-                    <p class="font-bn text-xs">Monthly Dashboard থেকে বকেয়া তালিকা লোড হচ্ছে...</p>
-                </div>
-            `;
-
-            try {
-                let res;
-                if (typeof google !== 'undefined' && google.script && google.script.run) {
-                    res = await new Promise((resolve, reject) => {
-                        google.script.run
-                            .withSuccessHandler(resolve)
-                            .withFailureHandler(reject)
-                            .getDueMembersList();
-                    });
-                } else {
-                    const response = await fetch(APPS_SCRIPT_EXEC_URL + '?action=dueMembers&_t=' + Date.now(), {
-                        method: 'GET',
-                        redirect: 'follow'
-                    });
-                    res = await response.json();
-                }
-
-                if (res && res.ok) {
-                    dueMembersCache = res.dueMembers || [];
-                    renderDueMembersList(dueMembersCache);
-                    if (forceRefresh) showToast('বকেয়া তালিকা আপডেট হয়েছে');
-                } else {
-                    if (countBadge) countBadge.textContent = '0 জন';
+            // Deduplicate concurrent network requests (e.g., startup preload + user click)
+            if (dueMembersFetching && dueMembersPromise) {
+                if (!silentBackground && !dueMembersLoaded && container) {
                     container.innerHTML = `
-                        <div class="py-8 text-center text-red-400">
-                            <i class="fa-solid fa-circle-exclamation text-xl mb-2"></i>
-                            <p class="font-bn text-xs">${res && res.message ? res.message : 'তথ্য লোড করা যায়নি।'}</p>
+                        <div class="py-10 text-center text-theme-muted">
+                            <i class="fa-solid fa-spinner fa-spin text-xl text-[#5fa000] mb-2"></i>
+                            <p class="font-bn text-xs">বকেয়া তালিকা প্রস্তুত হচ্ছে...</p>
                         </div>
                     `;
                 }
-            } catch (err) {
-                if (countBadge) countBadge.textContent = 'Error';
+                await dueMembersPromise;
+                if (refreshIcon) refreshIcon.classList.remove('fa-spin');
+                if (!silentBackground && dueMembersLoaded) {
+                    renderDueMembersList(dueMembersCache);
+                }
+                return;
+            }
+
+            if (!silentBackground && !dueMembersLoaded && container) {
                 container.innerHTML = `
-                    <div class="py-8 text-center text-red-400">
-                        <i class="fa-solid fa-wifi text-xl mb-2"></i>
-                        <p class="font-bn text-xs">সার্ভার সংযোগ ব্যর্থ হয়েছে। আবার চেষ্টা করুন।</p>
+                    <div class="py-10 text-center text-theme-muted">
+                        <i class="fa-solid fa-spinner fa-spin text-xl text-[#5fa000] mb-2"></i>
+                        <p class="font-bn text-xs">Monthly Dashboard থেকে বকেয়া তালিকা লোড হচ্ছে...</p>
                     </div>
                 `;
-            } finally {
-                if (refreshIcon) refreshIcon.classList.remove('fa-spin');
             }
+
+            dueMembersFetching = true;
+            dueMembersPromise = (async () => {
+                try {
+                    let res;
+                    if (typeof google !== 'undefined' && google.script && google.script.run) {
+                        res = await new Promise((resolve, reject) => {
+                            google.script.run
+                                .withSuccessHandler(resolve)
+                                .withFailureHandler(reject)
+                                .getDueMembersList();
+                        });
+                    } else {
+                        const response = await fetch(APPS_SCRIPT_EXEC_URL + '?action=dueMembers&_t=' + Date.now(), {
+                            method: 'GET',
+                            redirect: 'follow'
+                        });
+                        res = await response.json();
+                    }
+
+                    if (res && res.ok) {
+                        dueMembersCache = res.dueMembers || [];
+                        dueMembersLoaded = true;
+                        try {
+                            localStorage.setItem(DUE_CACHE_STORAGE_KEY, JSON.stringify(dueMembersCache));
+                        } catch (e) {}
+
+                        updateDueMembersBadgeCount();
+
+                        // Update modal UI if open and user hasn't typed a search filter
+                        const searchInput = document.getElementById('due-search-input');
+                        if (!searchInput || !searchInput.value.trim()) {
+                            renderDueMembersList(dueMembersCache);
+                        } else {
+                            filterDueMembersList();
+                        }
+
+                        if (forceRefresh && !silentBackground) {
+                            showToast('বকেয়া তালিকা আপডেট হয়েছে');
+                        }
+                    } else if (!silentBackground && !dueMembersLoaded && container) {
+                        if (countBadge) countBadge.textContent = '0 জন';
+                        container.innerHTML = `
+                            <div class="py-8 text-center text-red-400">
+                                <i class="fa-solid fa-circle-exclamation text-xl mb-2"></i>
+                                <p class="font-bn text-xs">${res && res.message ? res.message : 'তথ্য লোড করা যায়নি।'}</p>
+                            </div>
+                        `;
+                    }
+                } catch (err) {
+                    if (!silentBackground && !dueMembersLoaded && container) {
+                        if (countBadge) countBadge.textContent = 'Error';
+                        container.innerHTML = `
+                            <div class="py-8 text-center text-red-400">
+                                <i class="fa-solid fa-wifi text-xl mb-2"></i>
+                                <p class="font-bn text-xs">সার্ভার সংযোগ ব্যর্থ হয়েছে। আবার চেষ্টা করুন।</p>
+                            </div>
+                        `;
+                    }
+                } finally {
+                    dueMembersFetching = false;
+                    dueMembersPromise = null;
+                    if (refreshIcon) refreshIcon.classList.remove('fa-spin');
+                }
+            })();
+
+            await dueMembersPromise;
         }
 
         function renderDueMembersList(list) {
@@ -1907,6 +2025,9 @@
                 btn.disabled = true;
                 btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>যাচাই করা হচ্ছে...</span>';
 
+                // Ensure all dashboard & due list data are preloading concurrently during login
+                preloadAllDashboardData();
+
                 const res = await callBackendPost({
                     action: 'login',
                     identifier: identifier,
@@ -1942,6 +2063,8 @@
             try {
                 btn.disabled = true;
                 btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>একাউন্ট তৈরি হচ্ছে...</span>';
+
+                preloadAllDashboardData();
 
                 const res = await callBackendPost({
                     action: 'register',
@@ -2025,7 +2148,6 @@
             closeAccountModal(true);
             closeLeftDrawer(true);
             currentUser = null;
-            balanceData = { totalBalance: null, currentBalance: null, loaded: false, fetching: false };
             hideSensitiveInfo();
 
             try {
@@ -2036,6 +2158,7 @@
             document.getElementById('auth-screen').classList.remove('hidden');
             switchAuthTab('login');
             startMonthlyFeeCountdown();
+            preloadAllDashboardData();
             showToast('সফলভাবে লগআউট হয়েছে');
         }
 
@@ -2052,14 +2175,11 @@
             applyRoleBasedInterface(user);
             syncUserProfilePhotoUI();
             switchView('home');
-
-            balanceData.loaded = false;
-            balanceData.totalBalance = null;
-            balanceData.currentBalance = null;
             renderSensitiveInfo();
+            updateDueMembersBadgeCount();
 
-            fetchNoticeBoard(false);
-            fetchBalances();
+            // Refresh all data silently in the background so cached data shows instantly
+            preloadAllDashboardData();
         }
 
         function applyRoleBasedInterface(user) {
@@ -2449,6 +2569,9 @@
                 panel.setAttribute('aria-hidden', 'false');
             });
             if (!isPopStateHandling) pushAppHistoryState('drawer');
+
+            // Ensure due list is fresh in background when menu opens
+            fetchDueMembers(false, true);
         }
 
         function closeLeftDrawer(fromPopState = false) {
@@ -2468,11 +2591,9 @@
 
         function refreshFullSystem() {
             showToast('Syncing All Data...');
-            if (currentUser) {
-                fetchBalances();
-                fetchNoticeBoard(false);
-                dueMembersCache = [];
-            }
+            fetchBalances();
+            fetchNoticeBoard(false);
+            fetchDueMembers(true, true);
 
             ['app1', 'app2', 'app3', 'app4', 'app5', 'app6'].forEach((id) => {
                 const iframe = document.getElementById('iframe-' + id);
@@ -2494,10 +2615,9 @@
                 if (targetIframe && targetIframe.src) targetIframe.src = targetIframe.src;
             }
 
-            if (currentUser) {
-                fetchBalances();
-                fetchNoticeBoard(false);
-            }
+            fetchBalances();
+            fetchNoticeBoard(false);
+            fetchDueMembers(true, true);
 
             setTimeout(() => {
                 switchView('home');
@@ -2603,7 +2723,7 @@
             renderSensitiveInfo();
 
             try {
-                if (isSensitiveVisible && totalEl && currentEl) {
+                if (isSensitiveVisible && !balanceData.loaded && totalEl && currentEl) {
                     totalEl.classList.add('balance-loading');
                     currentEl.classList.add('balance-loading');
                 }
@@ -2616,6 +2736,12 @@
                                 balanceData.totalBalance = res.totalBalance;
                                 balanceData.currentBalance = res.currentBalance;
                                 balanceData.loaded = true;
+                                try {
+                                    localStorage.setItem(BALANCE_CACHE_STORAGE_KEY, JSON.stringify({
+                                        totalBalance: res.totalBalance,
+                                        currentBalance: res.currentBalance
+                                    }));
+                                } catch (e) {}
                             }
                             renderSensitiveInfo();
                             stopBalanceLoading(totalEl, currentEl);
@@ -2641,6 +2767,12 @@
                     balanceData.totalBalance = res.totalBalance;
                     balanceData.currentBalance = res.currentBalance;
                     balanceData.loaded = true;
+                    try {
+                        localStorage.setItem(BALANCE_CACHE_STORAGE_KEY, JSON.stringify({
+                            totalBalance: res.totalBalance,
+                            currentBalance: res.currentBalance
+                        }));
+                    } catch (e) {}
                 }
                 renderSensitiveInfo();
             } catch (err) {
@@ -2691,7 +2823,7 @@
         }
 
         /* =====================================================================
-           INITIALIZATION ON APP STARTUP
+           INITIALIZATION ON APP STARTUP (PRELOADS ALL DATA IMMEDIATELY)
            ===================================================================== */
         document.addEventListener('DOMContentLoaded', function() {
             try {
@@ -2707,6 +2839,12 @@
                 }
             } catch (e) {}
 
+            // 1. Hydrate local cache immediately for 0ms startup display
+            hydrateCachedAppData();
+
+            // 2. Start fetching fresh Due List, Balances & Notices immediately (even before login)
+            preloadAllDashboardData();
+
             startMonthlyFeeCountdown();
 
             const savedUser = getSavedUserSession();
@@ -2719,11 +2857,8 @@
         });
 
         document.addEventListener('visibilitychange', function() {
-            if (!document.hidden && currentUser) {
-                balanceData.loaded = false;
-                renderSensitiveInfo();
-                fetchBalances();
-                fetchNoticeBoard(false);
+            if (!document.hidden) {
+                preloadAllDashboardData();
             }
         });
     </script>
