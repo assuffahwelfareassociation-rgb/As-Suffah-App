@@ -28,38 +28,38 @@
 
     <style>
         :root {
-            --bg: #0a1020;
+            --bg: #080d1a;
             --bg-soft: #111a30;
             --text: #f4f7fb;
-            --muted: rgba(244, 247, 251, 0.60);
-            --faint: rgba(244, 247, 251, 0.38);
-            --surface: rgba(255, 255, 255, 0.055);
-            --surface-2: rgba(255, 255, 255, 0.035);
-            --border: rgba(255, 255, 255, 0.10);
-            --border-strong: rgba(255, 255, 255, 0.18);
+            --muted: rgba(244, 247, 251, 0.68);
+            --faint: rgba(244, 247, 251, 0.44);
+            --surface: rgba(255, 255, 255, 0.065);
+            --surface-2: rgba(255, 255, 255, 0.04);
+            --border: rgba(255, 255, 255, 0.12);
+            --border-strong: rgba(255, 255, 255, 0.19);
             --accent: #5fa000;
             --accent-2: #8ed12f;
             --accent-soft: rgba(142, 209, 47, 0.14);
-            --danger: #ff6b70;
-            --shadow: 0 30px 70px rgba(0, 0, 0, 0.45);
+            --danger: #ff5c61;
+            --shadow: 0 30px 70px rgba(0, 0, 0, 0.48);
             --ease: cubic-bezier(0.22, 1, 0.36, 1);
-            --arabic-color: #8ed12f;
+            --arabic-color: #9be838;
         }
 
         html.light-mode {
-            --bg: #f2f5fa;
-            --bg-soft: #e8edf5;
-            --text: #101a2c;
-            --muted: rgba(16, 26, 44, 0.62);
-            --faint: rgba(16, 26, 44, 0.40);
-            --surface: rgba(255, 255, 255, 0.86);
-            --surface-2: rgba(255, 255, 255, 0.62);
-            --border: rgba(16, 26, 44, 0.09);
-            --border-strong: rgba(16, 26, 44, 0.18);
-            --accent-soft: rgba(95, 160, 0, 0.10);
-            --danger: #e5484d;
+            --bg: #eef4fa;
+            --bg-soft: #e4ecf6;
+            --text: #0f172a;
+            --muted: #334155;
+            --faint: #64748b;
+            --surface: rgba(255, 255, 255, 0.92);
+            --surface-2: rgba(255, 255, 255, 0.75);
+            --border: rgba(15, 23, 42, 0.10);
+            --border-strong: rgba(15, 23, 42, 0.18);
+            --accent-soft: rgba(95, 160, 0, 0.12);
+            --danger: #dc2626;
             --shadow: 0 30px 70px rgba(30, 45, 80, 0.14);
-            --arabic-color: #0a1020;
+            --arabic-color: #1f4700;
         }
 
         .arabic-title-text {
@@ -71,7 +71,7 @@
         html, body {
             height: 100%; margin: 0; padding: 0;
             font-family: 'Plus Jakarta Sans', 'DM Sans', 'Noto Sans Bengali', sans-serif;
-            background: #05080f;
+            background: #04070e;
             transition: background-color .35s ease;
         }
         button, input { font-family: inherit; }
@@ -80,34 +80,87 @@
 
         .app-bg {
             background:
-                radial-gradient(1000px 700px at 12% -10%, rgba(95,160,0,.16), transparent 60%),
-                radial-gradient(900px 700px at 100% 110%, rgba(45,90,180,.18), transparent 60%),
-                #05080f;
+                radial-gradient(1000px 700px at 12% -10%, rgba(95,160,0,.18), transparent 60%),
+                radial-gradient(900px 700px at 100% 110%, rgba(45,90,180,.20), transparent 60%),
+                #04070e;
         }
 
         .app-shell {
-            background: var(--bg);
-            box-shadow: var(--shadow), 0 0 0 1px rgba(255,255,255,.05);
+            background:
+                radial-gradient(480px 360px at 95% 18%, rgba(142, 209, 47, 0.12), transparent 65%),
+                radial-gradient(440px 380px at -5% 75%, rgba(56, 130, 246, 0.14), transparent 65%),
+                linear-gradient(180deg, #080d1a 0%, #0b1326 52%, #080e1d 100%);
+            box-shadow: var(--shadow), 0 0 0 1px rgba(255,255,255,.06);
             isolation: isolate;
+        }
+        html.light-mode .app-shell {
+            background:
+                radial-gradient(480px 360px at 95% 18%, rgba(142, 209, 47, 0.16), transparent 65%),
+                radial-gradient(440px 380px at -5% 75%, rgba(59, 130, 246, 0.12), transparent 65%),
+                linear-gradient(180deg, #f3f7fc 0%, #eaf1f9 55%, #e4edf7 100%);
         }
         @media (min-width: 640px) {
             .app-shell { border: 1px solid var(--border); }
         }
 
-        .clean-navy-canvas {
+        /* Dashboard Ambient Lighting Effect (Pattern Removed — Separate for Dark & Light Mode) */
+        .dashboard-pattern-bg {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
             background:
-                radial-gradient(520px 340px at 88% -6%, rgba(142,209,47,.13), transparent 70%),
-                radial-gradient(420px 320px at -10% 102%, rgba(70,110,220,.12), transparent 70%),
-                var(--bg);
+                radial-gradient(340px 260px at 88% 12%, rgba(142, 209, 47, 0.22), transparent 70%),
+                radial-gradient(380px 300px at 10% 52%, rgba(56, 130, 246, 0.20), transparent 72%),
+                radial-gradient(320px 240px at 82% 90%, rgba(16, 185, 129, 0.16), transparent 70%);
+            transition: background 0.4s ease;
+        }
+        html.light-mode .dashboard-pattern-bg {
+            background:
+                radial-gradient(360px 270px at 88% 12%, rgba(142, 209, 47, 0.28), transparent 70%),
+                radial-gradient(380px 300px at 8% 52%, rgba(251, 191, 36, 0.20), transparent 72%),
+                radial-gradient(340px 260px at 85% 90%, rgba(56, 189, 248, 0.22), transparent 70%);
+        }
+
+        /* Login & PIN Screen — Plain Clean Background */
+        .clean-navy-canvas {
+            background: var(--bg);
             transition: background .35s ease;
         }
-        .ambient-orb {
-            position: absolute; border-radius: 999px; filter: blur(60px);
-            pointer-events: none; opacity: .5; z-index: 0;
+
+        /* Top Arabic Header Shape — PLAIN CLEAN BACKGROUND (No Pattern Inside Top Shape) */
+        .arabic-top-header-shape {
+            position: relative;
+            z-index: 5;
+            margin-left: -14px;
+            margin-right: -14px;
+            padding-top: max(30px, calc(env(safe-area-inset-top, 26px) + 6px));
+            padding-bottom: 12px;
+            padding-left: 16px;
+            padding-right: 16px;
+            margin-bottom: 10px;
+            background: linear-gradient(180deg, #131e3b 0%, #0e172f 100%);
+            border-bottom: 1.5px solid rgba(142, 209, 47, 0.34);
+            border-bottom-left-radius: 26px;
+            border-bottom-right-radius: 26px;
+            box-shadow: 0 10px 26px rgba(0, 0, 0, 0.30);
         }
-        .orb-one { width: 190px; height: 190px; top: 70px; right: -70px; background: rgba(142,209,47,.16); }
-        .orb-two { width: 220px; height: 220px; bottom: 80px; left: -110px; background: rgba(70,110,220,.15); }
-        html.light-mode .ambient-orb { opacity: .35; }
+        html.light-mode .arabic-top-header-shape {
+            background: linear-gradient(180deg, #ffffff 0%, #eef6e4 100%);
+            border-bottom: 1.5px solid rgba(95, 160, 0, 0.36);
+            box-shadow: 0 10px 22px rgba(15, 23, 42, 0.07);
+        }
+
+        .ambient-orb {
+            position: absolute; border-radius: 999px; filter: blur(72px);
+            pointer-events: none; opacity: .65; z-index: 0;
+            transition: background 0.4s ease, opacity 0.4s ease;
+        }
+        .orb-one { width: 220px; height: 220px; top: 85px; right: -75px; background: rgba(142,209,47,.22); }
+        .orb-two { width: 250px; height: 250px; bottom: 55px; left: -105px; background: rgba(59,130,246,.22); }
+        html.light-mode .ambient-orb { opacity: .55; }
+        html.light-mode .orb-one { background: rgba(142, 209, 47, 0.30); }
+        html.light-mode .orb-two { background: rgba(56, 189, 248, 0.26); }
 
         .simple-glass {
             background: var(--surface);
@@ -165,15 +218,16 @@
             border: 1px solid rgba(142,209,47,.25); border-radius: 14px; font-weight: 700;
             transition: background .18s ease, transform .18s var(--ease);
         }
+        html.light-mode .btn-soft { color: #3d7000; }
         .btn-soft:hover { background: rgba(142,209,47,.22); }
         .btn-soft:active { transform: scale(.97); }
         .btn-danger {
-            background: linear-gradient(135deg, rgba(255,107,112,.18), rgba(255,107,112,.10));
-            border: 1px solid rgba(255,107,112,.35); color: var(--danger);
+            background: linear-gradient(135deg, rgba(239,68,68,.18), rgba(239,68,68,.10));
+            border: 1px solid rgba(239,68,68,.38); color: var(--danger);
             border-radius: 16px; font-weight: 800;
             transition: background .18s ease, transform .18s var(--ease);
         }
-        .btn-danger:hover { background: rgba(255,107,112,.24); }
+        .btn-danger:hover { background: rgba(239,68,68,.24); }
         .btn-danger:active { transform: scale(.97); }
         .icon-btn {
             display: inline-flex; align-items: center; justify-content: center;
@@ -197,9 +251,9 @@
             box-shadow: 0 12px 24px rgba(0,0,0,.20);
         }
         .glass-tile:active { transform: scale(.97); }
-        .row1-tile { background: linear-gradient(150deg, rgba(142,209,47,.15), rgba(142,209,47,.05)); border-color: rgba(142,209,47,.28); }
+        .row1-tile { background: linear-gradient(150deg, rgba(142,209,47,.16), rgba(142,209,47,.06)); border-color: rgba(142,209,47,.28); }
         .row2-tile { background: var(--surface); border-color: var(--border); }
-        .row3-tile { background: linear-gradient(150deg, rgba(142,209,47,.13), rgba(142,209,47,.04)); border-color: rgba(142,209,47,.24); }
+        .row3-tile { background: linear-gradient(150deg, rgba(142,209,47,.14), rgba(142,209,47,.05)); border-color: rgba(142,209,47,.25); }
         .nav-tile {
             display: flex; align-items: center; gap: 11px; padding: 11px 12px;
             border-radius: 16px; background: var(--surface); border: 1px solid var(--border);
@@ -213,6 +267,7 @@
             display: inline-flex; align-items: center; justify-content: center;
             background: var(--accent-soft); color: var(--accent-2); font-size: 12px;
         }
+        html.light-mode .nav-tile .nav-icon { color: #3d7000; }
 
         .vault-card {
             position: relative; overflow: hidden;
@@ -228,7 +283,7 @@
             background:
                 radial-gradient(420px 200px at 110% -10%, rgba(142,209,47,.20), transparent 65%),
                 linear-gradient(150deg, #ffffff 0%, #eef3fb 100%);
-            border-color: rgba(16,26,44,.10);
+            border-color: rgba(16,26,44,.12);
             box-shadow: 0 16px 32px rgba(30,45,80,.12);
             color: var(--text);
         }
@@ -238,25 +293,25 @@
             pointer-events: none;
         }
         .vault-grid {
-            position: absolute; inset: 0; opacity: .25; pointer-events: none;
+            position: absolute; inset: 0; opacity: .22; pointer-events: none;
             background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
                               linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
             background-size: 24px 24px;
             mask-image: linear-gradient(to bottom, #000, transparent 70%);
             -webkit-mask-image: linear-gradient(to bottom, #000, transparent 70%);
         }
-        .vault-label { font-size: 8.5px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; opacity: .62; }
+        .vault-label { font-size: 8.5px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; opacity: .68; }
         .vault-strong { color: #fff; }
         html.light-mode .vault-strong { color: var(--text); }
         .vault-accent { color: #8ed12f; }
-        html.light-mode .vault-accent { color: #4d8a00; }
+        html.light-mode .vault-accent { color: #3d7000; }
         .balance-value { font-family: 'Space Mono', monospace; font-size: 13.5px; font-weight: 700; letter-spacing: -.02em; }
         .balance-box {
             border-radius: 14px; padding: 8px 11px;
             background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.10);
         }
-        html.light-mode .balance-box { background: rgba(255,255,255,.75); border-color: rgba(16,26,44,.07); }
-        html.light-mode .vault-card .atm-inner-bar { background: rgba(255,255,255,.75) !important; border-color: rgba(16,26,44,.07) !important; }
+        html.light-mode .balance-box { background: rgba(255,255,255,.85); border-color: rgba(16,26,44,.08); }
+        html.light-mode .vault-card .atm-inner-bar { background: rgba(255,255,255,.85) !important; border-color: rgba(16,26,44,.08) !important; }
         .eye-btn {
             display: inline-flex; align-items: center; gap: 6px;
             padding: 6px 10px; border-radius: 10px; color: #fff; font-size: 9px; font-weight: 800;
@@ -284,17 +339,23 @@
             border: 1px solid rgba(142, 209, 47, 0.35);
             box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
         }
+        html.light-mode .countdown-panel {
+            background: linear-gradient(135deg, #ffffff, #edf6e2);
+            border: 1px solid rgba(95, 160, 0, 0.35);
+            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.07);
+        }
         .countdown-box {
             background: var(--bg-soft);
             border: 1px solid var(--border-strong);
             border-radius: 12px;
         }
 
+        /* Notice Board Styles (High Contrast in Both Dark & Light Mode) */
         .notice-board-card {
-            background: linear-gradient(145deg, rgba(255, 193, 7, 0.12), rgba(142, 209, 47, 0.08));
-            border: 1px solid rgba(255, 193, 7, 0.32);
+            background: linear-gradient(145deg, rgba(255, 193, 7, 0.13), rgba(142, 209, 47, 0.09));
+            border: 1px solid rgba(255, 193, 7, 0.34);
             border-radius: 16px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
             animation: fadeSlideUp .55s var(--ease) both;
         }
         .notice-icon-box {
@@ -304,20 +365,21 @@
         }
         .notice-title-text { color: #fbbf24; }
         .notice-dot-ping { background-color: #fbbf24; }
+        .notice-marquee-text-color { color: #f4f7fb; }
 
         html.light-mode .notice-board-card {
-            background: linear-gradient(145deg, #ffffff, #edf6e2);
-            border: 1.5px solid rgba(95, 160, 0, 0.38);
-            box-shadow: 0 10px 24px rgba(10, 16, 32, 0.08);
+            background: linear-gradient(145deg, #ffffff, #eaf5dc);
+            border: 1.5px solid rgba(95, 160, 0, 0.45);
+            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.09);
         }
         html.light-mode .notice-icon-box {
-            background: rgba(95, 160, 0, 0.15);
-            border-color: rgba(95, 160, 0, 0.35);
-            color: #4d8a00;
+            background: rgba(95, 160, 0, 0.16);
+            border-color: rgba(95, 160, 0, 0.40);
+            color: #3d7000;
         }
-        html.light-mode .notice-title-text { color: #0a1020; }
-        html.light-mode .notice-dot-ping { background-color: #5fa000; }
-        html.light-mode #notice-marquee-track { color: #0a1020; font-weight: 700; }
+        html.light-mode .notice-title-text { color: #2b5200; }
+        html.light-mode .notice-dot-ping { background-color: #4d8a00; }
+        html.light-mode .notice-marquee-text-color { color: #0f172a !important; font-weight: 700; }
 
         .notice-marquee-wrapper {
             overflow: hidden;
@@ -342,6 +404,18 @@
         @keyframes noticeSeamlessMarquee {
             0% { transform: translateX(0%); }
             100% { transform: translateX(-50%); }
+        }
+
+        /* Explicit Error Alert Styling */
+        .error-alert-style {
+            background: rgba(239, 68, 68, 0.15) !important;
+            border-color: rgba(239, 68, 68, 0.50) !important;
+            color: #fca5a5 !important;
+        }
+        html.light-mode .error-alert-style {
+            background: #fef2f2 !important;
+            border-color: #ef4444 !important;
+            color: #dc2626 !important;
         }
 
         @keyframes fadeSlideUp {
@@ -428,6 +502,7 @@
             align-items: center; justify-content: center; flex-shrink: 0;
             background: var(--accent-soft); color: var(--accent-2); font-size: 12px;
         }
+        html.light-mode .section-icon { color: #3d7000; }
         @keyframes popIn {
             0% { opacity: 0; transform: translateY(12px) scale(.96); }
             100% { opacity: 1; transform: translateY(0) scale(1); }
@@ -452,12 +527,20 @@
         }
 
         #app-toast {
-            background: rgba(12,19,36,.94); border: 1px solid rgba(142,209,47,.42);
+            background: rgba(12,19,36,.96); border: 1px solid rgba(142,209,47,.42);
             box-shadow: 0 18px 40px rgba(0,0,0,.5);
             backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
             animation: toastIn .3s var(--ease) both;
         }
-        html.light-mode #app-toast { background: rgba(255,255,255,.97); border-color: rgba(95,160,0,.4); }
+        html.light-mode #app-toast { background: rgba(255,255,255,.98); border-color: rgba(95,160,0,.45); }
+        #app-toast.toast-error {
+            border-color: rgba(239, 68, 68, 0.65) !important;
+            background: rgba(38, 12, 16, 0.96) !important;
+        }
+        html.light-mode #app-toast.toast-error {
+            background: #fef2f2 !important;
+            border-color: #ef4444 !important;
+        }
         @keyframes toastIn {
             0% { opacity: 0; transform: translate(-50%, 16px) scale(.94); }
             100% { opacity: 1; transform: translate(-50%, 0) scale(1); }
@@ -476,11 +559,12 @@
     <!-- Phone shell -->
     <div id="app-shell" class="app-shell w-full max-w-[430px] h-[100dvh] sm:h-[860px] sm:max-h-[94dvh] sm:rounded-[40px] flex flex-col relative overflow-hidden">
 
-        <!-- Ambient decoration -->
+        <!-- Dashboard Background Pattern & Ambient Orbs -->
+        <div class="dashboard-pattern-bg"></div>
         <div class="ambient-orb orb-one"></div>
         <div class="ambient-orb orb-two"></div>
 
-        <!-- Smart Toast -->
+        <!-- Smart Toast (Supports Success & Red Error Mode with Icon) -->
         <div id="app-toast" class="hidden fixed bottom-6 left-1/2 z-[150] px-4 py-2 rounded-full flex items-center gap-2 max-w-[90vw]">
             <span id="app-toast-icon-wrap" class="w-5 h-5 rounded-full bg-[#5fa000] flex items-center justify-center text-white shrink-0">
                 <i id="app-toast-icon" class="fa-solid fa-check text-[10px]"></i>
@@ -489,16 +573,16 @@
         </div>
 
         <!-- =====================================================================
-             1. AUTH SCREEN (WITH 1st-5th MONTHLY FEE COUNTDOWN PANEL)
+             1. AUTH SCREEN (WITH COUNTDOWN + LIGHT-MODE SAFE NOTICE BOARD)
              ===================================================================== -->
-        <section id="auth-screen" class="hidden absolute inset-0 z-[100] clean-navy-canvas flex flex-col overflow-y-auto no-scrollbar px-5 pt-10 pb-5" style="padding-top: max(40px, env(safe-area-inset-top, 40px));">
+        <section id="auth-screen" class="hidden absolute inset-0 z-[100] clean-navy-canvas flex flex-col overflow-y-auto no-scrollbar px-5 pt-9 pb-5" style="padding-top: max(36px, env(safe-area-inset-top, 36px));">
 
             <!-- Brand hero with Arabic Title & Circle Logo -->
-            <div class="text-center shrink-0 fade-in">
-                <p dir="rtl" lang="ar" class="font-ar arabic-title-text text-[22px] font-bold leading-snug mb-2 tracking-wide">
+            <div class="text-center shrink-0 fade-in relative z-10">
+                <p dir="rtl" lang="ar" class="font-ar arabic-title-text text-[22px] font-bold leading-snug mb-1.5 tracking-wide">
                     لجنة الصُّفَّة الخيرية
                 </p>
-                <div class="w-[66px] h-[66px] mx-auto rounded-full p-[3px] brand-ring bg-[#5fa000] mb-2 overflow-hidden">
+                <div class="w-[62px] h-[62px] mx-auto rounded-full p-[3px] brand-ring bg-[#5fa000] mb-1.5 overflow-hidden">
                     <img src="https://lh3.googleusercontent.com/d/1PXMzZMIOZbElnjIuOK2ew-FNMhuScYGx"
                          alt="ASWA Logo"
                          class="w-full h-full object-cover rounded-full bg-[#0a1020]"
@@ -509,17 +593,43 @@
                 <p class="font-bn text-[11px] text-theme-muted mt-0.5">আস-সুফফাহ কল্যাণ সমিতি</p>
             </div>
 
+            <!-- Login Page Notice Board (High Contrast in Light & Dark Mode) -->
+            <div id="auth-notice-board" class="notice-board-card w-full max-w-[360px] mx-auto mt-3 px-3 py-2 shrink-0 relative z-10 overflow-hidden">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-7 h-7 rounded-[10px] notice-icon-box flex items-center justify-center shrink-0">
+                        <i class="fa-solid fa-bullhorn text-[11px] notice-bell-anim"></i>
+                    </div>
+                    <div class="min-w-0 flex-1">
+                        <div class="flex items-center justify-between gap-2 mb-0.5">
+                            <span class="font-bn text-[9.5px] font-extrabold uppercase tracking-wider notice-title-text flex items-center gap-1.5">
+                                <span>নোটিশ বোর্ড</span>
+                                <span class="w-1.5 h-1.5 rounded-full notice-dot-ping animate-ping"></span>
+                            </span>
+                            <button type="button" onclick="fetchNoticeBoard(true)" title="Refresh Notice" class="text-[9.5px] text-theme-muted hover:text-[#5fa000] transition">
+                                <i class="fa-solid fa-arrows-rotate"></i>
+                            </button>
+                        </div>
+                        <div class="notice-marquee-wrapper">
+                            <div id="auth-notice-marquee-track" class="notice-marquee-track font-bn text-[11px] font-semibold notice-marquee-text-color">
+                                <span id="auth-notice-board-text" class="pr-8">নোটিশ লোড হচ্ছে...</span>
+                                <span id="auth-notice-board-text-clone" class="pr-8" aria-hidden="true">নোটিশ লোড হচ্ছে...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Monthly Fee Countdown Panel (1st to 5th of Every Month) -->
-            <div id="monthly-countdown-panel" class="w-full max-w-[360px] mx-auto mt-3 shrink-0 fade-in">
+            <div id="monthly-countdown-panel" class="w-full max-w-[360px] mx-auto mt-2.5 shrink-0 fade-in relative z-10">
                 <div class="countdown-panel rounded-[20px] p-3 relative overflow-hidden">
-                    <div class="flex items-center justify-between gap-2 mb-1.5">
+                    <div class="flex items-center justify-between gap-2 mb-1">
                         <div class="flex items-center gap-2">
                             <span id="cd-pulse-dot" class="w-2.5 h-2.5 rounded-full bg-[#8ed12f] animate-ping"></span>
                             <span id="cd-badge-title" class="font-bn text-[11px] font-extrabold text-[#8ed12f] tracking-wide">
                                 মাসিক ফি জমার সময় চলছে (১ - ৫ তারিখ)
                             </span>
                         </div>
-                        <span class="px-2 py-0.5 rounded-full bg-[#5fa000]/25 text-[#8ed12f] text-[9px] font-bold font-bn">
+                        <span class="px-2 py-0.5 rounded-full bg-[#5fa000]/25 text-[#5fa000] text-[9px] font-bold font-bn">
                             ১-৫ তারিখ
                         </span>
                     </div>
@@ -532,7 +642,7 @@
                             <span class="font-bn text-[9px] text-theme-muted mt-1 block">দিন</span>
                         </div>
                         <div class="countdown-box py-1.5 px-1">
-                            <span id="cd-hours" class="font-mono text-[14px] font-extrabold text-[#8ed12f] block leading-none tabular">00</span>
+                            <span id="cd-hours" class="font-mono text-[14px] font-extrabold text-[#5fa000] block leading-none tabular">00</span>
                             <span class="font-bn text-[9px] text-theme-muted mt-1 block">ঘণ্টা</span>
                         </div>
                         <div class="countdown-box py-1.5 px-1">
@@ -540,7 +650,7 @@
                             <span class="font-bn text-[9px] text-theme-muted mt-1 block">মিনিট</span>
                         </div>
                         <div class="countdown-box py-1.5 px-1">
-                            <span id="cd-seconds" class="font-mono text-[14px] font-extrabold text-[#8ed12f] block leading-none tabular">00</span>
+                            <span id="cd-seconds" class="font-mono text-[14px] font-extrabold text-[#5fa000] block leading-none tabular">00</span>
                             <span class="font-bn text-[9px] text-theme-muted mt-1 block">সেকেন্ড</span>
                         </div>
                     </div>
@@ -548,12 +658,12 @@
             </div>
 
             <!-- Auth card -->
-            <div class="my-auto py-3 w-full max-w-[360px] mx-auto">
-                <div class="section-card rounded-[24px] p-4.5 relative overflow-hidden fade-in" style="padding:18px">
+            <div class="my-auto py-2.5 w-full max-w-[360px] mx-auto relative z-10">
+                <div class="section-card rounded-[24px] relative overflow-hidden fade-in" style="padding:16px">
                     <div class="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#5fa000] via-[#8ed12f] to-[#5fa000]"></div>
 
                     <!-- Tabs -->
-                    <div id="auth-tabs" class="grid grid-cols-2 gap-1 p-1 rounded-[18px] atm-inner-bar mb-4">
+                    <div id="auth-tabs" class="grid grid-cols-2 gap-1 p-1 rounded-[18px] atm-inner-bar mb-3.5">
                         <button type="button" id="tab-login-btn" onclick="switchAuthTab('login')"
                                 class="py-2 rounded-xl text-xs font-bold transition bg-[#5fa000] text-white shadow">
                             লগইন
@@ -564,9 +674,9 @@
                         </button>
                     </div>
 
-                    <!-- Alert -->
-                    <div id="auth-alert-box" class="hidden mb-3.5 p-2.5 rounded-2xl text-[11px] font-semibold border flex items-start gap-2">
-                        <i id="auth-alert-icon" class="fa-solid fa-circle-info mt-0.5 shrink-0"></i>
+                    <!-- Alert (Red Error with Error Icon) -->
+                    <div id="auth-alert-box" class="hidden mb-3.5 p-2.5 rounded-2xl text-[11px] font-bold border flex items-start gap-2">
+                        <i id="auth-alert-icon" class="fa-solid fa-circle-exclamation mt-0.5 shrink-0 text-red-500"></i>
                         <span id="auth-alert-msg" class="leading-relaxed"></span>
                     </div>
 
@@ -691,7 +801,7 @@
                 </div>
             </div>
 
-            <div class="text-center pb-1 shrink-0">
+            <div class="text-center pb-1 shrink-0 relative z-10">
                 <span class="text-[9.5px] text-theme-muted font-semibold tracking-wide">
                     SECURE PORTAL · <strong class="text-[#5fa000]">AS-SUFFAH</strong>
                 </span>
@@ -699,10 +809,10 @@
         </section>
 
         <!-- =====================================================================
-             2. PIN LOCK (SERVER-SIDE VERIFIED PIN)
+             2. PIN LOCK (SERVER-SIDE VERIFIED PIN WITH RED ERROR ICON)
              ===================================================================== -->
         <section id="pin-lock-screen" class="hidden absolute inset-0 z-[110] clean-navy-canvas flex flex-col px-7 pt-12 pb-8 overflow-y-auto no-scrollbar" style="padding-top: max(48px, env(safe-area-inset-top, 48px));">
-            <div class="text-center shrink-0 fade-in">
+            <div class="text-center shrink-0 fade-in relative z-10">
                 <div class="relative w-[76px] h-[76px] mx-auto mb-3">
                     <div class="w-full h-full rounded-full p-[3px] brand-ring bg-[#5fa000] overflow-hidden shadow-lg">
                         <img id="pin-lock-profile-photo"
@@ -726,10 +836,13 @@
                 <div id="pin-dots-container" class="flex items-center justify-center gap-3.5 mt-6">
                     <span class="pin-dot"></span><span class="pin-dot"></span><span class="pin-dot"></span><span class="pin-dot"></span>
                 </div>
-                <p id="pin-error-text" class="text-[11px] font-bold mt-2.5 h-4" style="color:var(--danger)"></p>
+                <div id="pin-error-box" class="hidden items-center justify-center gap-1.5 mt-2.5 text-red-500">
+                    <i class="fa-solid fa-circle-exclamation text-[11px]"></i>
+                    <span id="pin-error-text" class="text-[11px] font-bold"></span>
+                </div>
             </div>
 
-            <div class="max-w-[290px] w-full mx-auto my-auto">
+            <div class="max-w-[290px] w-full mx-auto my-auto relative z-10">
                 <div class="grid grid-cols-3 gap-3">
                     <button type="button" onclick="enterPinDigit('1')" class="h-14 rounded-2xl glass-tile text-lg font-bold text-theme-main">1</button>
                     <button type="button" onclick="enterPinDigit('2')" class="h-14 rounded-2xl glass-tile text-lg font-bold text-theme-main">2</button>
@@ -748,7 +861,7 @@
                 </div>
             </div>
 
-            <div class="text-center pb-1 shrink-0">
+            <div class="text-center pb-1 shrink-0 relative z-10">
                 <button type="button" onclick="logoutAccount()" class="text-[11px] font-bold text-[#5fa000] hover:underline">
                     PIN ভুলে গেছেন? পুনরায় লগইন করুন
                 </button>
@@ -794,7 +907,7 @@
                             <span class="nav-icon"><i class="fa-solid fa-house"></i></span><span class="truncate">Dashboard</span>
                         </button>
                         <button type="button" id="drawer-due-members-btn" onclick="openDueMembersModal()" class="nav-tile relative hidden">
-                            <span class="nav-icon" style="background:rgba(255,107,112,0.16);color:#ff6b70"><i class="fa-solid fa-user-clock"></i></span>
+                            <span class="nav-icon" style="background:rgba(239,68,68,0.16);color:#ef4444"><i class="fa-solid fa-user-clock"></i></span>
                             <span class="truncate">Due Members</span>
                         </button>
                         <button type="button" onclick="openAccountModal()" class="nav-tile">
@@ -835,7 +948,7 @@
 
                 <div class="flex items-center justify-between p-4 border-b border-theme shrink-0">
                     <div class="flex items-center gap-2.5">
-                        <span class="section-icon" style="width:36px;height:36px;border-radius:13px;background:rgba(255,107,112,0.18);color:#ff6b70">
+                        <span class="section-icon" style="width:36px;height:36px;border-radius:13px;background:rgba(239,68,68,0.18);color:#ef4444">
                             <i class="fa-solid fa-user-clock"></i>
                         </span>
                         <div>
@@ -856,7 +969,7 @@
                 <div class="px-4 pt-3 pb-2 shrink-0 space-y-2.5">
                     <div class="flex items-center justify-between px-3 py-2 rounded-2xl simple-glass">
                         <span class="font-bn text-[11px] font-bold text-theme-muted">মোট বকেয়া সদস্য:</span>
-                        <span id="due-total-count-badge" class="px-2.5 py-0.5 rounded-full bg-red-500/20 text-[#ff6b70] text-[11px] font-extrabold tabular">
+                        <span id="due-total-count-badge" class="px-2.5 py-0.5 rounded-full bg-red-500/20 text-red-500 text-[11px] font-extrabold tabular">
                             লোড হচ্ছে...
                         </span>
                     </div>
@@ -923,7 +1036,7 @@
                             <span class="block text-[9.5px] text-theme-muted mt-0.5">ছবি পরিবর্তন করতে ক্যামেরা আইকনে ট্যাপ করুন</span>
                             <div class="flex items-center gap-2 mt-2">
                                 <label for="profile-photo-input" class="btn-soft px-2.5 py-1 text-[9.5px] cursor-pointer">ছবি নির্বাচন করুন</label>
-                                <button type="button" id="btn-remove-photo" onclick="removeProfilePhoto()" class="hidden px-2 py-1 rounded-lg text-[9.5px] font-bold" style="background:rgba(255,107,112,.14);color:var(--danger)">মুছুন</button>
+                                <button type="button" id="btn-remove-photo" onclick="removeProfilePhoto()" class="hidden px-2 py-1 rounded-lg text-[9.5px] font-bold" style="background:rgba(239,68,68,.14);color:var(--danger)">মুছুন</button>
                             </div>
                         </div>
                     </div>
@@ -952,7 +1065,7 @@
                                class="theme-input flex-1 px-3 py-2.5 text-xs font-mono tracking-widest text-center">
                         <button type="submit" id="btn-save-pin" class="btn-primary px-4 py-2.5 text-[11px] shrink-0">Save PIN</button>
                     </form>
-                    <button type="button" id="btn-remove-pin" onclick="removeUserPinLock()" class="hidden mt-2 w-full py-2 rounded-xl text-[10.5px] font-bold" style="background:rgba(255,107,112,.12);color:var(--danger)">PIN Lock বন্ধ করুন</button>
+                    <button type="button" id="btn-remove-pin" onclick="removeUserPinLock()" class="hidden mt-2 w-full py-2 rounded-xl text-[10.5px] font-bold" style="background:rgba(239,68,68,.12);color:var(--danger)">PIN Lock বন্ধ করুন</button>
                 </div>
 
                 <!-- Password -->
@@ -1092,9 +1205,9 @@
 
                 <!-- Top Header + Vault + Notice Board -->
                 <div class="shrink-0">
-                    <!-- Topmost Arabic Organization Name -->
-                    <div class="text-center pt-7 pb-1" style="padding-top: max(28px, calc(env(safe-area-inset-top, 24px) + 4px));">
-                        <p dir="rtl" lang="ar" class="font-ar arabic-title-text text-[18px] font-bold leading-tight tracking-wide">
+                    <!-- Top Arabic Header Shape (Plain Clean Background) -->
+                    <div class="arabic-top-header-shape text-center">
+                        <p dir="rtl" lang="ar" class="font-ar arabic-title-text text-[19px] font-bold leading-tight tracking-wide relative z-10">
                             لجنة الصُّفَّة الخيرية
                         </p>
                     </div>
@@ -1185,7 +1298,7 @@
                                     </button>
                                 </div>
                                 <div class="notice-marquee-wrapper">
-                                    <div id="notice-marquee-track" class="notice-marquee-track font-bn text-[11px] font-semibold text-theme-main">
+                                    <div id="notice-marquee-track" class="notice-marquee-track font-bn text-[11px] font-semibold notice-marquee-text-color">
                                         <span id="notice-board-text" class="pr-8">নোটিশ লোড হচ্ছে...</span>
                                         <span id="notice-board-text-clone" class="pr-8" aria-hidden="true">নোটিশ লোড হচ্ছে...</span>
                                     </div>
@@ -1471,25 +1584,25 @@
                 targetDate = new Date(year, month, 5, 23, 59, 59);
                 if (badgeTitleEl) {
                     badgeTitleEl.textContent = 'মাসিক ফি জমার সময় চলছে (১ - ৫ তারিখ)';
-                    badgeTitleEl.className = 'font-bn text-[11px] font-extrabold text-[#8ed12f] tracking-wide';
+                    badgeTitleEl.className = 'font-bn text-[11px] font-extrabold text-[#5fa000] tracking-wide';
                 }
                 if (subtitleEl) {
                     subtitleEl.textContent = 'প্রতি মাসের ১ থেকে ৫ তারিখের মধ্যে মাসিক ফি পরিশোধ করতে হবে। সময় বাকি:';
                 }
                 if (pulseDotEl) {
-                    pulseDotEl.className = 'w-2.5 h-2.5 rounded-full bg-[#8ed12f] animate-ping';
+                    pulseDotEl.className = 'w-2.5 h-2.5 rounded-full bg-[#5fa000] animate-ping';
                 }
             } else {
                 targetDate = new Date(year, month + 1, 1, 0, 0, 0);
                 if (badgeTitleEl) {
                     badgeTitleEl.textContent = 'পরবর্তী মাসিক ফি জমা শুরু হতে বাকি';
-                    badgeTitleEl.className = 'font-bn text-[11px] font-extrabold text-amber-400 tracking-wide';
+                    badgeTitleEl.className = 'font-bn text-[11px] font-extrabold text-amber-500 tracking-wide';
                 }
                 if (subtitleEl) {
                     subtitleEl.textContent = 'আগামী মাসের ১ তারিখ থেকে ৫ তারিখের মধ্যে মাসিক ফি জমা নেওয়া হবে:';
                 }
                 if (pulseDotEl) {
-                    pulseDotEl.className = 'w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse';
+                    pulseDotEl.className = 'w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse';
                 }
             }
 
@@ -1507,23 +1620,27 @@
         }
 
         /* =====================================================================
-           NOTICE BOARD
+           NOTICE BOARD (SYNCED FOR BOTH LOGIN PAGE & DASHBOARD)
            ===================================================================== */
         let noticeAnimationDelayTimer = null;
         let currentNoticeDurationSec = 18;
         let noticeStartAtTimestamp = 0;
 
-        function scheduleNoticeMarqueeStart(delayMs = 3000) {
-            const track = document.getElementById('notice-marquee-track');
-            if (!track) return;
+        function scheduleNoticeMarqueeStart(delayMs = 2000) {
+            const tracks = [
+                document.getElementById('notice-marquee-track'),
+                document.getElementById('auth-notice-marquee-track')
+            ].filter(Boolean);
 
             if (noticeAnimationDelayTimer) {
                 clearTimeout(noticeAnimationDelayTimer);
                 noticeAnimationDelayTimer = null;
             }
 
-            track.style.animation = 'none';
-            track.style.transform = 'translateX(0%)';
+            tracks.forEach(track => {
+                track.style.animation = 'none';
+                track.style.transform = 'translateX(0%)';
+            });
             noticeStartAtTimestamp = Date.now() + delayMs;
 
             noticeAnimationDelayTimer = setTimeout(() => {
@@ -1533,12 +1650,16 @@
         }
 
         function startNoticeMarqueeAnimation() {
-            const track = document.getElementById('notice-marquee-track');
-            if (!track) return;
+            const tracks = [
+                document.getElementById('notice-marquee-track'),
+                document.getElementById('auth-notice-marquee-track')
+            ].filter(Boolean);
 
-            track.style.animation = 'none';
-            void track.offsetWidth;
-            track.style.animation = `noticeSeamlessMarquee ${currentNoticeDurationSec}s linear infinite`;
+            tracks.forEach(track => {
+                track.style.animation = 'none';
+                void track.offsetWidth;
+                track.style.animation = `noticeSeamlessMarquee ${currentNoticeDurationSec}s linear infinite`;
+            });
         }
 
         async function fetchNoticeBoard(showToastMsg = false) {
@@ -1587,22 +1708,26 @@
         }
 
         function renderNoticeMarquee(noticesArray) {
-            const noticeTextEl = document.getElementById('notice-board-text');
-            const noticeCloneEl = document.getElementById('notice-board-text-clone');
-            const track = document.getElementById('notice-marquee-track');
-            if (!noticeTextEl || !noticeCloneEl) return;
-
             const list = Array.isArray(noticesArray) && noticesArray.length > 0
                 ? noticesArray.map(n => String(n || '').trim()).filter(Boolean)
                 : ['আস-সুফফাহ কল্যাণ সমিতিতে স্বাগতম!'];
 
             const singlePassText = list.join('   ★   ') + '   ★   ';
-
-            noticeTextEl.textContent = singlePassText;
-            noticeCloneEl.textContent = singlePassText;
             currentNoticeDurationSec = Math.max(10, Math.min(45, Math.round(singlePassText.length * 0.19)));
 
-            if (track && noticeStartAtTimestamp <= Date.now()) {
+            const ids = [
+                ['notice-board-text', 'notice-board-text-clone'],
+                ['auth-notice-board-text', 'auth-notice-board-text-clone']
+            ];
+
+            ids.forEach(([mainId, cloneId]) => {
+                const el = document.getElementById(mainId);
+                const clone = document.getElementById(cloneId);
+                if (el) el.textContent = singlePassText;
+                if (clone) clone.textContent = singlePassText;
+            });
+
+            if (noticeStartAtTimestamp <= Date.now()) {
                 startNoticeMarqueeAnimation();
             }
         }
@@ -1613,7 +1738,7 @@
         function openDueMembersModal() {
             closeLeftDrawer(true);
             if (!currentUser || currentUser.role !== 'admin') {
-                showToast('শুধুমাত্র Admin এই তালিকা দেখতে পারবেন');
+                showToast('শুধুমাত্র Admin এই তালিকা দেখতে পারবেন', true);
                 return;
             }
             const modal = document.getElementById('due-members-modal');
@@ -1698,9 +1823,9 @@
                     } else if (!dueMembersLoaded && container) {
                         if (countBadge) countBadge.textContent = '0 জন';
                         container.innerHTML = `
-                            <div class="py-8 text-center text-red-400">
+                            <div class="py-8 text-center text-red-500">
                                 <i class="fa-solid fa-circle-exclamation text-xl mb-2"></i>
-                                <p class="font-bn text-xs">${escapeHtml(res && res.message ? res.message : 'তথ্য লোড করা যায়নি।')}</p>
+                                <p class="font-bn text-xs font-bold">${escapeHtml(res && res.message ? res.message : 'তথ্য লোড করা যায়নি।')}</p>
                             </div>
                         `;
                     }
@@ -1708,9 +1833,9 @@
                     if (!dueMembersLoaded && container) {
                         if (countBadge) countBadge.textContent = 'Error';
                         container.innerHTML = `
-                            <div class="py-8 text-center text-red-400">
-                                <i class="fa-solid fa-wifi text-xl mb-2"></i>
-                                <p class="font-bn text-xs">সার্ভার সংযোগ ব্যর্থ হয়েছে। আবার চেষ্টা করুন।</p>
+                            <div class="py-8 text-center text-red-500">
+                                <i class="fa-solid fa-circle-exclamation text-xl mb-2"></i>
+                                <p class="font-bn text-xs font-bold">সার্ভার সংযোগ ব্যর্থ হয়েছে। আবার চেষ্টা করুন।</p>
                             </div>
                         `;
                     }
@@ -1734,7 +1859,7 @@
             if (!list || list.length === 0) {
                 container.innerHTML = `
                     <div class="py-10 text-center">
-                        <div class="w-12 h-12 rounded-full bg-[#5fa000]/20 text-[#8ed12f] flex items-center justify-center mx-auto mb-2.5">
+                        <div class="w-12 h-12 rounded-full bg-[#5fa000]/20 text-[#5fa000] flex items-center justify-center mx-auto mb-2.5">
                             <i class="fa-solid fa-check-double text-lg"></i>
                         </div>
                         <p class="font-bn text-xs font-bold text-theme-main">আলহামদুলিল্লাহ! কোনো বকেয়া সদস্য নেই।</p>
@@ -1747,7 +1872,7 @@
             container.innerHTML = list.map((member, idx) => `
                 <div class="section-card p-3 flex items-center justify-between gap-2.5">
                     <div class="flex items-center gap-3 min-w-0">
-                        <span class="w-7 h-7 rounded-xl bg-red-500/15 border border-red-500/30 text-[#ff6b70] text-[11px] font-extrabold flex items-center justify-center shrink-0 tabular">
+                        <span class="w-7 h-7 rounded-xl bg-red-500/15 border border-red-500/30 text-red-500 text-[11px] font-extrabold flex items-center justify-center shrink-0 tabular">
                             ${idx + 1}
                         </span>
                         <div class="min-w-0">
@@ -1755,7 +1880,7 @@
                             <span class="font-bn block text-[9.5px] text-theme-muted">মাসিক ফি বকেয়া (Due)</span>
                         </div>
                     </div>
-                    <span class="px-2.5 py-1 rounded-lg bg-red-500/15 text-[#ff6b70] text-[9.5px] font-extrabold uppercase tracking-wider shrink-0">
+                    <span class="px-2.5 py-1 rounded-lg bg-red-500/15 text-red-500 text-[9.5px] font-extrabold uppercase tracking-wider shrink-0">
                         DUE
                     </span>
                 </div>
@@ -1843,7 +1968,7 @@
                         syncUserProfilePhotoUI();
                         showToast('প্রোফাইল ফটো সেভ হয়েছে!');
                     } catch (err) {
-                        showToast('ছবি সেভ করতে সমস্যা হয়েছে');
+                        showToast('ছবি সেভ করতে সমস্যা হয়েছে', true);
                     }
                 };
                 img.src = e.target.result;
@@ -1862,7 +1987,7 @@
         }
 
         /* =====================================================================
-           CORS-SAFE POST API COMMUNICATION (NEVER LEAKS PASSWORDS/PINS IN URL)
+           CORS-SAFE POST API COMMUNICATION (GITHUB PAGES SAFE)
            ===================================================================== */
         async function callBackendPost(payload) {
             if (typeof google !== 'undefined' && google.script && google.script.run) {
@@ -1884,7 +2009,6 @@
                 });
             }
 
-            // Use text/plain to avoid CORS preflight on GitHub Pages while sending sensitive credentials safely in POST body
             const response = await fetch(APPS_SCRIPT_EXEC_URL, {
                 method: 'POST',
                 headers: {
@@ -1956,13 +2080,13 @@
             const text = document.getElementById('auth-alert-msg');
             if (!box) return;
 
-            box.classList.remove('hidden', 'bg-red-500/15', 'border-red-500/40', 'text-red-300', 'bg-[#5fa000]/20', 'border-[#5fa000]', 'text-[#5fa000]');
+            box.classList.remove('hidden', 'error-alert-style', 'bg-[#5fa000]/20', 'border-[#5fa000]', 'text-[#5fa000]');
             if (isSuccess) {
                 box.classList.add('bg-[#5fa000]/20', 'border-[#5fa000]', 'text-[#5fa000]');
-                icon.className = 'fa-solid fa-circle-check mt-0.5 shrink-0';
+                icon.className = 'fa-solid fa-circle-check mt-0.5 shrink-0 text-[#5fa000]';
             } else {
-                box.classList.add('bg-red-500/15', 'border-red-500/40', 'text-red-300');
-                icon.className = 'fa-solid fa-circle-exclamation mt-0.5 shrink-0';
+                box.classList.add('error-alert-style');
+                icon.className = 'fa-solid fa-circle-exclamation mt-0.5 shrink-0 text-red-500';
             }
             text.textContent = msg;
         }
@@ -2094,10 +2218,9 @@
         }
 
         /* =====================================================================
-           SESSION MANAGEMENT & ROLE-BASED DASHBOARD
+           SESSION MANAGEMENT & ROLE-BASED DASHBOARD (DATA PERSISTS ON GITHUB LIVE)
            ===================================================================== */
         function saveUserSession(userObj) {
-            // Never store raw PIN in localStorage; only store token & non-sensitive metadata
             const safeSession = {
                 email: userObj.email,
                 mobile: userObj.mobile,
@@ -2140,6 +2263,7 @@
             document.getElementById('auth-screen').classList.remove('hidden');
             switchAuthTab('login');
             startMonthlyFeeCountdown();
+            scheduleNoticeMarqueeStart(1500);
             showAuthAlert('আপনার সেশনের মেয়াদ শেষ হয়েছে। অনুগ্রহ করে পুনরায় লগইন করুন।');
         }
 
@@ -2159,6 +2283,7 @@
             document.getElementById('auth-screen').classList.remove('hidden');
             switchAuthTab('login');
             startMonthlyFeeCountdown();
+            scheduleNoticeMarqueeStart(1500);
             showToast('সফলভাবে লগআউট হয়েছে');
         }
 
@@ -2180,7 +2305,7 @@
             renderSensitiveInfo();
 
             if (!isPinLocked) {
-                scheduleNoticeMarqueeStart(3000);
+                scheduleNoticeMarqueeStart(2500);
             }
 
             preloadAllAppData(true);
@@ -2254,10 +2379,25 @@
         }
 
         /* =====================================================================
-           PIN LOCK SCREEN LOGIC (SERVER-VERIFIED)
+           PIN LOCK SCREEN LOGIC (SERVER-VERIFIED WITH RED ERROR ICON)
            ===================================================================== */
         let enteredPinBuffer = '';
         let isVerifyingPin = false;
+
+        function setPinError(msg) {
+            const box = document.getElementById('pin-error-box');
+            const text = document.getElementById('pin-error-text');
+            if (!box || !text) return;
+            if (msg) {
+                text.textContent = msg;
+                box.classList.remove('hidden');
+                box.classList.add('flex');
+            } else {
+                text.textContent = '';
+                box.classList.add('hidden');
+                box.classList.remove('flex');
+            }
+        }
 
         function openPinLockScreen(user) {
             enteredPinBuffer = '';
@@ -2273,7 +2413,7 @@
             if (pinLockRole) pinLockRole.textContent = user.role === 'admin' ? 'Admin Account' : 'Member Account';
             if (pinLockEmail) pinLockEmail.textContent = user.email || 'Account';
 
-            document.getElementById('pin-error-text').textContent = '';
+            setPinError('');
             document.getElementById('pin-lock-user-label').textContent = 'প্রবেশ করতে আপনার ৪-সংখ্যার PIN দিন';
             document.getElementById('pin-lock-screen').classList.remove('hidden');
         }
@@ -2281,7 +2421,7 @@
         function enterPinDigit(digit) {
             if (isVerifyingPin || enteredPinBuffer.length >= 4) return;
             enteredPinBuffer += digit;
-            document.getElementById('pin-error-text').textContent = '';
+            setPinError('');
             updatePinDotsUI();
 
             if (enteredPinBuffer.length === 4) {
@@ -2298,7 +2438,7 @@
         function clearPinEntry() {
             if (isVerifyingPin) return;
             enteredPinBuffer = '';
-            document.getElementById('pin-error-text').textContent = '';
+            setPinError('');
             updatePinDotsUI();
         }
 
@@ -2334,19 +2474,19 @@
                 if (res && res.ok) {
                     document.getElementById('pin-lock-screen').classList.add('hidden');
                     enteredPinBuffer = '';
-                    scheduleNoticeMarqueeStart(3000);
+                    scheduleNoticeMarqueeStart(2500);
                     showToast('অ্যাপ আনলক হয়েছে');
                 } else {
                     const dotsContainer = document.getElementById('pin-dots-container');
                     dotsContainer.classList.remove('shake-anim');
                     void dotsContainer.offsetWidth;
                     dotsContainer.classList.add('shake-anim');
-                    document.getElementById('pin-error-text').textContent = (res && res.message) ? res.message : 'ভুল PIN! আবার চেষ্টা করুন।';
+                    setPinError((res && res.message) ? res.message : 'ভুল PIN! আবার চেষ্টা করুন।');
                     enteredPinBuffer = '';
                     updatePinDotsUI();
                 }
             } catch (err) {
-                document.getElementById('pin-error-text').textContent = 'সার্ভার ত্রুটি! আবার চেষ্টা করুন।';
+                setPinError('সার্ভার ত্রুটি! আবার চেষ্টা করুন।');
                 enteredPinBuffer = '';
                 updatePinDotsUI();
             } finally {
@@ -2402,7 +2542,7 @@
 
             const pinVal = document.getElementById('acc-new-pin').value.trim();
             if (!/^\d{4}$/.test(pinVal)) {
-                showToast('অবশ্যই ৪ সংখ্যার PIN দিন');
+                showToast('অবশ্যই ৪ সংখ্যার PIN দিন', true);
                 return;
             }
 
@@ -2429,10 +2569,10 @@
                     showToast(res.message || 'PIN সেট হয়েছে!');
                     openAccountModal();
                 } else {
-                    showToast(res && res.message ? res.message : 'PIN সেভ হয়নি');
+                    showToast(res && res.message ? res.message : 'PIN সেভ হয়নি', true);
                 }
             } catch (err) {
-                showToast('সার্ভার ত্রুটি!');
+                showToast('সার্ভার ত্রুটি! আবার চেষ্টা করুন', true);
             } finally {
                 btn.disabled = false;
                 btn.textContent = origText;
@@ -2458,9 +2598,11 @@
                     saveUserSession(currentUser);
                     showToast(res.message || 'PIN বন্ধ করা হয়েছে');
                     openAccountModal();
+                } else {
+                    showToast(res && res.message ? res.message : 'PIN বন্ধ করা যায়নি', true);
                 }
             } catch (err) {
-                showToast('PIN বন্ধ করতে সমস্যা হয়েছে');
+                showToast('PIN বন্ধ করতে সমস্যা হয়েছে', true);
             } finally {
                 btn.disabled = false;
             }
@@ -2496,10 +2638,10 @@
                     document.getElementById('acc-old-pass').value = '';
                     document.getElementById('acc-new-pass').value = '';
                 } else {
-                    showToast(res && res.message ? res.message : 'Password পরিবর্তন ব্যর্থ');
+                    showToast(res && res.message ? res.message : 'Password পরিবর্তন ব্যর্থ', true);
                 }
             } catch (err) {
-                showToast('সার্ভার সংযোগ ত্রুটি!');
+                showToast('সার্ভার সংযোগ ত্রুটি!', true);
             } finally {
                 btn.disabled = false;
                 btn.textContent = origText;
@@ -2507,7 +2649,7 @@
         }
 
         /* =====================================================================
-           THEME, TOAST, MODAL, DRAWER & BALANCE FUNCTIONS
+           THEME, TOAST (WITH ERROR RED + ICON), MODAL, DRAWER & BALANCE
            ===================================================================== */
         let isLightMode = false;
         function applyThemeMode(light) {
@@ -2533,19 +2675,33 @@
         }
 
         let toastTimeout = null;
-        function showToast(message) {
+        function showToast(message, isError = false) {
             try {
                 const toast = document.getElementById('app-toast');
                 const toastText = document.getElementById('app-toast-text');
+                const iconWrap = document.getElementById('app-toast-icon-wrap');
+                const iconEl = document.getElementById('app-toast-icon');
                 if (!toast || !toastText) return;
 
                 toastText.textContent = message;
+                if (isError) {
+                    toast.classList.add('toast-error');
+                    toastText.style.color = '#ef4444';
+                    if (iconWrap) iconWrap.className = 'w-5 h-5 rounded-full bg-red-500 flex items-center justify-center text-white shrink-0';
+                    if (iconEl) iconEl.className = 'fa-solid fa-circle-exclamation text-[10px]';
+                } else {
+                    toast.classList.remove('toast-error');
+                    toastText.style.color = 'var(--text)';
+                    if (iconWrap) iconWrap.className = 'w-5 h-5 rounded-full bg-[#5fa000] flex items-center justify-center text-white shrink-0';
+                    if (iconEl) iconEl.className = 'fa-solid fa-check text-[10px]';
+                }
+
                 toast.classList.remove('hidden');
 
                 if (toastTimeout) clearTimeout(toastTimeout);
                 toastTimeout = setTimeout(() => {
                     toast.classList.add('hidden');
-                }, 2500);
+                }, 2800);
             } catch (e) {}
         }
 
@@ -2806,10 +2962,9 @@
         }
 
         function navigateToView(viewName) {
-            // Prevent non-admin users from opening admin-only views
             const adminOnlyViews = ['app2', 'app3', 'app5'];
             if (adminOnlyViews.includes(viewName) && (!currentUser || currentUser.role !== 'admin')) {
-                showToast('শুধুমাত্র Admin এই অপশনটি ব্যবহার করতে পারবেন');
+                showToast('শুধুমাত্র Admin এই অপশনটি ব্যবহার করতে পারবেন', true);
                 return;
             }
             if (viewName !== 'home' && currentActiveView === 'home' && !isPopStateHandling) {
@@ -2838,7 +2993,7 @@
                 if (backBar) backBar.classList.add('hidden');
                 if (mainContainer) mainContainer.classList.add('pb-2');
                 if (wasInAppView) {
-                    scheduleNoticeMarqueeStart(3000);
+                    scheduleNoticeMarqueeStart(2500);
                 }
             } else {
                 if (backBar) backBar.classList.remove('hidden');
@@ -2879,6 +3034,7 @@
                 enterDashboardForUser(savedUser, true);
             } else {
                 fetchNoticeBoard(false);
+                scheduleNoticeMarqueeStart(1500);
                 document.getElementById('auth-screen').classList.remove('hidden');
                 switchAuthTab('login');
             }
