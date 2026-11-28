@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#0a1020">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <title>As-Suffah Welfare Association</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -77,7 +78,6 @@
         button { cursor: pointer; }
         ::selection { background: rgba(142, 209, 47, .32); }
 
-        /* Page backdrop */
         .app-bg {
             background:
                 radial-gradient(1000px 700px at 12% -10%, rgba(95,160,0,.16), transparent 60%),
@@ -85,7 +85,6 @@
                 #05080f;
         }
 
-        /* Phone shell */
         .app-shell {
             background: var(--bg);
             box-shadow: var(--shadow), 0 0 0 1px rgba(255,255,255,.05);
@@ -95,7 +94,6 @@
             .app-shell { border: 1px solid var(--border); }
         }
 
-        /* Screen canvas */
         .clean-navy-canvas {
             background:
                 radial-gradient(520px 340px at 88% -6%, rgba(142,209,47,.13), transparent 70%),
@@ -111,7 +109,6 @@
         .orb-two { width: 220px; height: 220px; bottom: 80px; left: -110px; background: rgba(70,110,220,.15); }
         html.light-mode .ambient-orb { opacity: .35; }
 
-        /* Surfaces */
         .simple-glass {
             background: var(--surface);
             border: 1px solid var(--border);
@@ -128,7 +125,6 @@
         .text-theme-muted { color: var(--muted); }
         .text-theme-faint { color: var(--faint); }
 
-        /* Inputs */
         .theme-input {
             background: var(--surface);
             border: 1px solid var(--border);
@@ -156,7 +152,6 @@
         .has-icon { padding-left: 40px !important; }
         .has-trailing { padding-right: 42px !important; }
 
-        /* Buttons */
         .btn-primary {
             background: linear-gradient(135deg, #6fb318, #4d8a00);
             color: #fff; border-radius: 16px; font-weight: 800;
@@ -189,7 +184,6 @@
         .icon-btn:hover { background: var(--accent-soft); border-color: rgba(142,209,47,.35); color: var(--accent-2); }
         .icon-btn:active { transform: scale(.9); }
 
-        /* Compact App Tiles */
         .glass-tile {
             background: var(--surface);
             border: 1px solid var(--border);
@@ -220,7 +214,6 @@
             background: var(--accent-soft); color: var(--accent-2); font-size: 12px;
         }
 
-        /* Compact Vault card */
         .vault-card {
             position: relative; overflow: hidden;
             background:
@@ -286,7 +279,6 @@
         html.light-mode .copy-btn { background: rgba(16,26,44,.06); border-color: rgba(16,26,44,.10); }
         #account-number-display { letter-spacing: .12em; }
 
-        /* Countdown Panel on Login Screen */
         .countdown-panel {
             background: linear-gradient(135deg, rgba(142, 209, 47, 0.16), rgba(95, 160, 0, 0.06));
             border: 1px solid rgba(142, 209, 47, 0.35);
@@ -298,7 +290,6 @@
             border-radius: 12px;
         }
 
-        /* Compact Notice Board */
         .notice-board-card {
             background: linear-gradient(145deg, rgba(255, 193, 7, 0.12), rgba(142, 209, 47, 0.08));
             border: 1px solid rgba(255, 193, 7, 0.32);
@@ -311,14 +302,9 @@
             border: 1px solid rgba(251, 191, 36, 0.35);
             color: #fbbf24;
         }
-        .notice-title-text {
-            color: #fbbf24;
-        }
-        .notice-dot-ping {
-            background-color: #fbbf24;
-        }
+        .notice-title-text { color: #fbbf24; }
+        .notice-dot-ping { background-color: #fbbf24; }
 
-        /* Light Mode Notice Board Styling */
         html.light-mode .notice-board-card {
             background: linear-gradient(145deg, #ffffff, #edf6e2);
             border: 1.5px solid rgba(95, 160, 0, 0.38);
@@ -329,18 +315,10 @@
             border-color: rgba(95, 160, 0, 0.35);
             color: #4d8a00;
         }
-        html.light-mode .notice-title-text {
-            color: #0a1020;
-        }
-        html.light-mode .notice-dot-ping {
-            background-color: #5fa000;
-        }
-        html.light-mode #notice-marquee-track {
-            color: #0a1020;
-            font-weight: 700;
-        }
+        html.light-mode .notice-title-text { color: #0a1020; }
+        html.light-mode .notice-dot-ping { background-color: #5fa000; }
+        html.light-mode #notice-marquee-track { color: #0a1020; font-weight: 700; }
 
-        /* Seamless Continuous Marquee Animation for Notice Board (Starts 3s after dashboard entry) */
         .notice-marquee-wrapper {
             overflow: hidden;
             white-space: nowrap;
@@ -366,7 +344,6 @@
             100% { transform: translateX(-50%); }
         }
 
-        /* App UI Entrance & Micro-Animations */
         @keyframes fadeSlideUp {
             0% { opacity: 0; transform: translateY(14px) scale(.98); }
             100% { opacity: 1; transform: translateY(0) scale(1); }
@@ -414,7 +391,6 @@
         #bento-apps-grid > button:nth-child(6) { animation-delay: .36s; }
         .glass-tile:hover > div:first-child { transform: scale(1.08) rotate(-3deg); transition: transform .25s var(--ease); }
 
-        /* Auth tabs */
         #auth-tabs { border-radius: 18px; }
         #auth-tabs button { border-radius: 14px !important; font-size: 11.5px !important; letter-spacing: .01em; }
         #auth-tabs button[class*="bg-[#5fa000]"] {
@@ -422,7 +398,6 @@
             box-shadow: 0 8px 18px rgba(95,160,0,.28) !important;
         }
 
-        /* Drawer */
         .drawer-backdrop { background: rgba(4,8,18,.72); transition: opacity .28s ease; }
         html.light-mode .drawer-backdrop { background: rgba(16,26,44,.42); }
         .drawer-panel {
@@ -437,7 +412,6 @@
         }
         .drawer-grip { width: 38px; height: 4px; border-radius: 99px; background: var(--border-strong); margin: 0 auto; }
 
-        /* Modals */
         .modal-overlay { background: rgba(4,8,18,.76); transition: opacity .22s ease; }
         html.light-mode .modal-overlay { background: rgba(16,26,44,.46); }
         .modal-card {
@@ -470,7 +444,6 @@
         @keyframes pulseFade { 0%, 100% { opacity: .35; } 50% { opacity: 1; } }
         .balance-loading { animation: pulseFade 1.0s ease-in-out infinite; }
 
-        /* PIN dots */
         .pin-dot {
             width: 13px; height: 13px; border-radius: 999px;
             border: 2px solid rgba(142,209,47,.55);
@@ -478,7 +451,6 @@
             transition: all .2s var(--ease);
         }
 
-        /* Toast */
         #app-toast {
             background: rgba(12,19,36,.94); border: 1px solid rgba(142,209,47,.42);
             box-shadow: 0 18px 40px rgba(0,0,0,.5);
@@ -604,8 +576,7 @@
                             <label class="field-label block mb-1">Gmail ID অথবা Mobile No</label>
                             <div class="input-wrap">
                                 <span class="input-icon"><i class="fa-regular fa-user text-[13px]"></i></span>
-                                <input type="text" id="login-identifier" required
-                                       oninput="triggerLoginPreload()"
+                                <input type="text" id="login-identifier" required autocomplete="username"
                                        placeholder="example@gmail.com বা 01XXXXXXXXX"
                                        class="theme-input has-icon w-full px-3.5 py-2.5 text-xs font-semibold">
                             </div>
@@ -619,8 +590,7 @@
                             </div>
                             <div class="input-wrap">
                                 <span class="input-icon"><i class="fa-solid fa-lock text-[13px]"></i></span>
-                                <input type="password" id="login-password" required
-                                       onfocus="triggerLoginPreload()"
+                                <input type="password" id="login-password" required autocomplete="current-password"
                                        placeholder="আপনার পাসওয়ার্ড দিন"
                                        class="theme-input has-icon has-trailing w-full px-3.5 py-2.5 text-xs font-semibold">
                                 <button type="button" onclick="toggleInputPassword('login-password', this)" class="input-trailing">
@@ -663,7 +633,7 @@
                             <label class="field-label block mb-1">Gmail ID</label>
                             <div class="input-wrap">
                                 <span class="input-icon"><i class="fa-regular fa-envelope text-[13px]"></i></span>
-                                <input type="email" id="reg-email" required placeholder="yourname@gmail.com"
+                                <input type="email" id="reg-email" required autocomplete="email" placeholder="yourname@gmail.com"
                                        class="theme-input has-icon w-full px-3.5 py-2.5 text-xs font-semibold">
                             </div>
                         </div>
@@ -671,7 +641,7 @@
                             <label class="field-label block mb-1">Mobile No</label>
                             <div class="input-wrap">
                                 <span class="input-icon"><i class="fa-solid fa-phone text-[13px]"></i></span>
-                                <input type="tel" id="reg-mobile" required placeholder="01XXXXXXXXX"
+                                <input type="tel" id="reg-mobile" required autocomplete="tel" placeholder="01XXXXXXXXX"
                                        class="theme-input has-icon w-full px-3.5 py-2.5 text-xs font-semibold">
                             </div>
                         </div>
@@ -679,7 +649,7 @@
                             <label class="field-label block mb-1">Password</label>
                             <div class="input-wrap">
                                 <span class="input-icon"><i class="fa-solid fa-key text-[13px]"></i></span>
-                                <input type="password" id="reg-password" required minlength="4"
+                                <input type="password" id="reg-password" required minlength="4" autocomplete="new-password"
                                        placeholder="কমপক্ষে ৪ অক্ষর"
                                        class="theme-input has-icon has-trailing w-full px-3.5 py-2.5 text-xs font-semibold">
                                 <button type="button" onclick="toggleInputPassword('reg-password', this)" class="input-trailing">
@@ -729,11 +699,10 @@
         </section>
 
         <!-- =====================================================================
-             2. PIN LOCK (WITH ACCOUNT PROFILE PHOTO & DETAILS AT TOP)
+             2. PIN LOCK (SERVER-SIDE VERIFIED PIN)
              ===================================================================== -->
         <section id="pin-lock-screen" class="hidden absolute inset-0 z-[110] clean-navy-canvas flex flex-col px-7 pt-12 pb-8 overflow-y-auto no-scrollbar" style="padding-top: max(48px, env(safe-area-inset-top, 48px));">
             <div class="text-center shrink-0 fade-in">
-                <!-- Account Profile Avatar & Role Badge -->
                 <div class="relative w-[76px] h-[76px] mx-auto mb-3">
                     <div class="w-full h-full rounded-full p-[3px] brand-ring bg-[#5fa000] overflow-hidden shadow-lg">
                         <img id="pin-lock-profile-photo"
@@ -747,7 +716,6 @@
                     </span>
                 </div>
 
-                <!-- Account Role & Email Info -->
                 <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#5fa000]/20 border border-[#5fa000]/35 mb-1.5">
                     <span class="w-1.5 h-1.5 rounded-full bg-[#8ed12f]"></span>
                     <span id="pin-lock-role-badge" class="text-[9.5px] font-extrabold uppercase tracking-wider text-[#8ed12f]">Member Account</span>
@@ -825,7 +793,7 @@
                         <button type="button" onclick="navigateToView('home'); closeLeftDrawer(true);" class="nav-tile">
                             <span class="nav-icon"><i class="fa-solid fa-house"></i></span><span class="truncate">Dashboard</span>
                         </button>
-                        <button type="button" id="drawer-due-members-btn" onclick="openDueMembersModal()" class="nav-tile relative">
+                        <button type="button" id="drawer-due-members-btn" onclick="openDueMembersModal()" class="nav-tile relative hidden">
                             <span class="nav-icon" style="background:rgba(255,107,112,0.16);color:#ff6b70"><i class="fa-solid fa-user-clock"></i></span>
                             <span class="truncate">Due Members</span>
                         </button>
@@ -841,7 +809,7 @@
                         <button type="button" id="drawer-group-btn" onclick="openInfoModal('messenger')" class="nav-tile">
                             <span class="nav-icon"><i class="fa-brands fa-facebook-messenger"></i></span><span class="truncate">Messenger</span>
                         </button>
-                        <button type="button" id="drawer-member-add-btn" onclick="navigateToView('app5'); closeLeftDrawer(true);" class="nav-tile col-span-2">
+                        <button type="button" id="drawer-member-add-btn" onclick="navigateToView('app5'); closeLeftDrawer(true);" class="nav-tile col-span-2 hidden">
                             <span class="nav-icon"><i class="fa-solid fa-user-plus"></i></span><span class="truncate">Member Add (নতুন সদস্য যোগ)</span>
                         </button>
                     </div>
@@ -858,14 +826,13 @@
         </aside>
 
         <!-- =====================================================================
-             3B. DUE MEMBERS MODAL (PRE-LOADED INSTANT DISPLAY)
+             3B. DUE MEMBERS MODAL (ADMIN ONLY)
              ===================================================================== -->
         <div id="due-members-modal" onclick="closeDueMembersModal()"
              class="hidden modal-overlay absolute inset-0 z-[92] flex items-center justify-center p-4 backdrop-blur-md">
             <div onclick="event.stopPropagation()"
                  class="modal-pop modal-card w-full max-w-[365px] max-h-[84dvh] flex flex-col rounded-[28px] overflow-hidden">
 
-                <!-- Header -->
                 <div class="flex items-center justify-between p-4 border-b border-theme shrink-0">
                     <div class="flex items-center gap-2.5">
                         <span class="section-icon" style="width:36px;height:36px;border-radius:13px;background:rgba(255,107,112,0.18);color:#ff6b70">
@@ -886,7 +853,6 @@
                     </div>
                 </div>
 
-                <!-- Summary & Search -->
                 <div class="px-4 pt-3 pb-2 shrink-0 space-y-2.5">
                     <div class="flex items-center justify-between px-3 py-2 rounded-2xl simple-glass">
                         <span class="font-bn text-[11px] font-bold text-theme-muted">মোট বকেয়া সদস্য:</span>
@@ -902,7 +868,6 @@
                     </div>
                 </div>
 
-                <!-- List Body -->
                 <div id="due-members-list-container" class="flex-1 min-h-0 overflow-y-auto no-scrollbar px-4 pb-4 space-y-2">
                     <div class="py-10 text-center text-theme-muted">
                         <i class="fa-solid fa-spinner fa-spin text-xl text-[#5fa000] mb-2"></i>
@@ -1203,7 +1168,7 @@
                         </div>
                     </div>
 
-                    <!-- Compact Notice Board (Seamless Continuous Marquee, Starts 3s after dashboard entry) -->
+                    <!-- Compact Notice Board -->
                     <div id="dashboard-notice-board" class="notice-board-card px-3 py-2.5 relative overflow-hidden">
                         <div class="flex items-center gap-2.5">
                             <div class="w-8 h-8 rounded-[11px] notice-icon-box flex items-center justify-center shrink-0">
@@ -1230,7 +1195,7 @@
                     </div>
                 </div>
 
-                <!-- Compact Small App Launcher (Non-Scrolling Fit) -->
+                <!-- Compact Small App Launcher -->
                 <div class="my-auto py-1.5">
                     <div class="flex items-center justify-between px-1 mb-1.5">
                         <span class="text-[9px] font-extrabold uppercase tracking-[.16em] text-theme-faint">Quick Access</span>
@@ -1248,7 +1213,7 @@
                         </button>
 
                         <button type="button" id="tile-app2" onclick="navigateToView('app2')"
-                                class="glass-tile row1-tile min-h-[76px] p-2.5 flex flex-col items-start justify-between text-left">
+                                class="hidden glass-tile row1-tile min-h-[76px] p-2.5 flex flex-col items-start justify-between text-left">
                             <div class="w-8 h-8 rounded-[11px] bg-[#5fa000] text-white flex items-center justify-center shrink-0 shadow-sm"><i class="fa-solid fa-id-card text-[13px]"></i></div>
                             <div class="w-full mt-1">
                                 <span class="block text-[11.5px] font-bold text-theme-main leading-tight truncate">Member Details</span>
@@ -1257,7 +1222,7 @@
                         </button>
 
                         <button type="button" id="tile-app3" onclick="navigateToView('app3')"
-                                class="glass-tile row2-tile min-h-[76px] p-2.5 flex flex-col items-start justify-between text-left">
+                                class="hidden glass-tile row2-tile min-h-[76px] p-2.5 flex flex-col items-start justify-between text-left">
                             <div class="w-8 h-8 rounded-[11px] neutral-icon-box flex items-center justify-center shrink-0"><i class="fa-solid fa-calculator text-[13px]"></i></div>
                             <div class="w-full mt-1">
                                 <span class="block text-[11.5px] font-bold text-theme-main leading-tight truncate">Profit Calculator</span>
@@ -1318,11 +1283,11 @@
     <!-- JavaScript Logic -->
     <script>
         const APPS_SCRIPT_EXEC_URL = 'https://script.google.com/macros/s/AKfycby_p4p6_G40RA9suLZ5xCkCoPY4TVDx8NA54aKFcgHeBRm2SlsHR9CMy-xeyqDr2niv2Q/exec';
-        const SESSION_STORAGE_KEY = 'aswa_logged_in_user_v1';
+        const SESSION_STORAGE_KEY = 'aswa_logged_in_user_v2';
         const PHOTO_STORAGE_PREFIX = 'aswa_profile_photo_';
-        const DUE_CACHE_STORAGE_KEY = 'aswa_due_members_cache_v1';
-        const NOTICE_CACHE_STORAGE_KEY = 'aswa_notice_cache_v1';
-        const BALANCE_CACHE_STORAGE_KEY = 'aswa_balance_cache_v1';
+        const DUE_CACHE_STORAGE_KEY = 'aswa_due_members_cache_v2';
+        const NOTICE_CACHE_STORAGE_KEY = 'aswa_notice_cache_v2';
+        const BALANCE_CACHE_STORAGE_KEY = 'aswa_balance_cache_v2';
         const DEFAULT_AVATAR_URL = 'https://lh3.googleusercontent.com/d/1PXMzZMIOZbElnjIuOK2ew-FNMhuScYGx';
 
         const APP_CONFIG = {
@@ -1373,10 +1338,9 @@
         let dueMembersCache = [];
         let dueMembersLoaded = false;
         let dueMembersPromise = null;
-        let loginPreloadStarted = false;
 
         /* =====================================================================
-           HYDRATE CACHED DATA IMMEDIATELY ON STARTUP (INSTANT ZERO-DELAY RENDER)
+           HYDRATE CACHED DATA IMMEDIATELY ON STARTUP
            ===================================================================== */
         function hydrateInitialCaches() {
             try {
@@ -1413,23 +1377,17 @@
             } catch (e) {}
         }
 
-        /* =====================================================================
-           PRELOAD ALL DATA PARALLELLY ON APP OPEN & WHILE TYPING IN LOGIN
-           ===================================================================== */
         function preloadAllAppData(forceRefresh = false) {
-            fetchBalances();
             fetchNoticeBoard(false);
-            fetchDueMembers(forceRefresh);
-        }
-
-        function triggerLoginPreload() {
-            if (loginPreloadStarted) return;
-            loginPreloadStarted = true;
-            preloadAllAppData(true);
+            if (!currentUser || !currentUser.token) return;
+            fetchBalances();
+            if (currentUser.role === 'admin') {
+                fetchDueMembers(forceRefresh);
+            }
         }
 
         /* =====================================================================
-           MOBILE HARDWARE / GESTURE BACK BUTTON SUPPORT (HISTORY API)
+           MOBILE HARDWARE / GESTURE BACK BUTTON SUPPORT
            ===================================================================== */
         let isPopStateHandling = false;
 
@@ -1449,7 +1407,7 @@
             }
         }
 
-        window.addEventListener('popstate', function(event) {
+        window.addEventListener('popstate', function() {
             isPopStateHandling = true;
             try {
                 const dueModal = document.getElementById('due-members-modal');
@@ -1482,7 +1440,7 @@
         });
 
         /* =====================================================================
-           1st TO 5th MONTHLY FEE COUNTDOWN PANEL (LOGIN SCREEN)
+           1st TO 5th MONTHLY FEE COUNTDOWN PANEL
            ===================================================================== */
         let feeCountdownTimer = null;
 
@@ -1549,7 +1507,7 @@
         }
 
         /* =====================================================================
-           NOTICE BOARD (SEAMLESS CONTINUOUS MARQUEE - STARTS 3s AFTER DASHBOARD ENTRY)
+           NOTICE BOARD
            ===================================================================== */
         let noticeAnimationDelayTimer = null;
         let currentNoticeDurationSec = 18;
@@ -1564,7 +1522,6 @@
                 noticeAnimationDelayTimer = null;
             }
 
-            // Reset to stationary start position while waiting 3 seconds
             track.style.animation = 'none';
             track.style.transform = 'translateX(0%)';
             noticeStartAtTimestamp = Date.now() + delayMs;
@@ -1639,26 +1596,26 @@
                 ? noticesArray.map(n => String(n || '').trim()).filter(Boolean)
                 : ['আস-সুফফাহ কল্যাণ সমিতিতে স্বাগতম!'];
 
-            // Combine all rows sequentially with a clean separator; if only 1 row exists, it repeats immediately
             const singlePassText = list.join('   ★   ') + '   ★   ';
 
             noticeTextEl.textContent = singlePassText;
             noticeCloneEl.textContent = singlePassText;
             currentNoticeDurationSec = Math.max(10, Math.min(45, Math.round(singlePassText.length * 0.19)));
 
-            if (track) {
-                // Only run immediately if the 3-second dashboard delay has already elapsed
-                if (noticeStartAtTimestamp <= Date.now()) {
-                    startNoticeMarqueeAnimation();
-                }
+            if (track && noticeStartAtTimestamp <= Date.now()) {
+                startNoticeMarqueeAnimation();
             }
         }
 
         /* =====================================================================
-           DUE MEMBERS LIST (FAST PRE-LOADED & INSTANT DISPLAY)
+           DUE MEMBERS LIST (ADMIN ONLY - TOKEN PROTECTED)
            ===================================================================== */
         function openDueMembersModal() {
             closeLeftDrawer(true);
+            if (!currentUser || currentUser.role !== 'admin') {
+                showToast('শুধুমাত্র Admin এই তালিকা দেখতে পারবেন');
+                return;
+            }
             const modal = document.getElementById('due-members-modal');
             const searchInput = document.getElementById('due-search-input');
             if (!modal) return;
@@ -1669,7 +1626,6 @@
 
             if (dueMembersLoaded) {
                 renderDueMembersList(dueMembersCache);
-                // Silently sync fresh data in background without blocking UI
                 fetchDueMembers(true, true);
             } else {
                 fetchDueMembers(true, false);
@@ -1685,6 +1641,8 @@
         }
 
         async function fetchDueMembers(forceRefresh = false, silentBackground = false) {
+            if (!currentUser || !currentUser.token || currentUser.role !== 'admin') return [];
+
             const container = document.getElementById('due-members-list-container');
             const countBadge = document.getElementById('due-total-count-badge');
             const refreshIcon = document.getElementById('due-refresh-icon');
@@ -1694,11 +1652,7 @@
                 return dueMembersCache;
             }
 
-            // Deduplicate concurrent fetches so pre-fetch & modal open share the same fast request
-            if (dueMembersPromise) {
-                return dueMembersPromise;
-            }
-
+            if (dueMembersPromise) return dueMembersPromise;
             if (refreshIcon) refreshIcon.classList.add('fa-spin');
 
             if (!silentBackground && container && !dueMembersLoaded) {
@@ -1712,20 +1666,14 @@
 
             dueMembersPromise = (async () => {
                 try {
-                    let res;
-                    if (typeof google !== 'undefined' && google.script && google.script.run) {
-                        res = await new Promise((resolve, reject) => {
-                            google.script.run
-                                .withSuccessHandler(resolve)
-                                .withFailureHandler(reject)
-                                .getDueMembersList();
-                        });
-                    } else {
-                        const response = await fetch(APPS_SCRIPT_EXEC_URL + '?action=dueMembers&_t=' + Date.now(), {
-                            method: 'GET',
-                            redirect: 'follow'
-                        });
-                        res = await response.json();
+                    const res = await callBackendPost({
+                        action: 'dueMembers',
+                        token: currentUser.token
+                    });
+
+                    if (res && res.unauthorized) {
+                        handleSessionExpired();
+                        return [];
                     }
 
                     if (res && res.ok) {
@@ -1752,7 +1700,7 @@
                         container.innerHTML = `
                             <div class="py-8 text-center text-red-400">
                                 <i class="fa-solid fa-circle-exclamation text-xl mb-2"></i>
-                                <p class="font-bn text-xs">${res && res.message ? res.message : 'তথ্য লোড করা যায়নি।'}</p>
+                                <p class="font-bn text-xs">${escapeHtml(res && res.message ? res.message : 'তথ্য লোড করা যায়নি।')}</p>
                             </div>
                         `;
                     }
@@ -1781,9 +1729,7 @@
             const countBadge = document.getElementById('due-total-count-badge');
             if (!container) return;
 
-            if (countBadge) {
-                countBadge.textContent = list.length + ' জন';
-            }
+            if (countBadge) countBadge.textContent = list.length + ' জন';
 
             if (!list || list.length === 0) {
                 container.innerHTML = `
@@ -1836,7 +1782,7 @@
         }
 
         /* =====================================================================
-           PROFILE PHOTO MANAGEMENT (ADMIN & MEMBER & PIN LOCK)
+           PROFILE PHOTO MANAGEMENT
            ===================================================================== */
         function getUserPhotoKey(email) {
             return PHOTO_STORAGE_PREFIX + String(email || '').trim().toLowerCase();
@@ -1916,7 +1862,7 @@
         }
 
         /* =====================================================================
-           API COMMUNICATION HELPER
+           CORS-SAFE POST API COMMUNICATION (NEVER LEAKS PASSWORDS/PINS IN URL)
            ===================================================================== */
         async function callBackendPost(payload) {
             if (typeof google !== 'undefined' && google.script && google.script.run) {
@@ -1926,7 +1872,8 @@
                         login: 'loginUserAccount',
                         forgotPassword: 'resetForgottenPassword',
                         changePassword: 'changeUserPassword',
-                        updatePin: 'updateUserPinLock'
+                        updatePin: 'updateUserPinLock',
+                        verifyPin: 'verifyUserPinLock'
                     };
                     const fnName = methodMap[payload.action];
                     if (!fnName) return reject(new Error('Invalid action'));
@@ -1937,16 +1884,13 @@
                 });
             }
 
-            const queryParams = new URLSearchParams();
-            Object.keys(payload).forEach((key) => {
-                if (payload[key] !== undefined && payload[key] !== null) {
-                    queryParams.append(key, String(payload[key]));
-                }
-            });
-
-            const requestUrl = APPS_SCRIPT_EXEC_URL + '?' + queryParams.toString();
-            const response = await fetch(requestUrl, {
-                method: 'GET',
+            // Use text/plain to avoid CORS preflight on GitHub Pages while sending sensitive credentials safely in POST body
+            const response = await fetch(APPS_SCRIPT_EXEC_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'text/plain;charset=utf-8'
+                },
+                body: JSON.stringify(payload),
                 redirect: 'follow'
             });
 
@@ -2050,9 +1994,6 @@
             const btn = document.getElementById('btn-login-submit');
             const originalHtml = btn.innerHTML;
 
-            // Start loading all dashboard data simultaneously with login verification
-            preloadAllAppData(true);
-
             try {
                 btn.disabled = true;
                 btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>যাচাই করা হচ্ছে...</span>';
@@ -2063,7 +2004,7 @@
                     password: password
                 });
 
-                if (res && res.ok && res.user) {
+                if (res && res.ok && res.user && res.user.token) {
                     saveUserSession(res.user);
                     showToast(res.message || 'লগইন সফল হয়েছে!');
                     enterDashboardForUser(res.user, false);
@@ -2089,9 +2030,6 @@
             const btn = document.getElementById('btn-register-submit');
             const originalHtml = btn.innerHTML;
 
-            // Start loading all dashboard data in parallel
-            preloadAllAppData(true);
-
             try {
                 btn.disabled = true;
                 btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>একাউন্ট তৈরি হচ্ছে...</span>';
@@ -2104,7 +2042,7 @@
                     password: password
                 });
 
-                if (res && res.ok && res.user) {
+                if (res && res.ok && res.user && res.user.token) {
                     saveUserSession(res.user);
                     showToast(res.message || 'একাউন্ট তৈরি সফল!');
                     enterDashboardForUser(res.user, false);
@@ -2159,31 +2097,63 @@
            SESSION MANAGEMENT & ROLE-BASED DASHBOARD
            ===================================================================== */
         function saveUserSession(userObj) {
-            currentUser = userObj;
+            // Never store raw PIN in localStorage; only store token & non-sensitive metadata
+            const safeSession = {
+                email: userObj.email,
+                mobile: userObj.mobile,
+                role: userObj.role,
+                hasPin: !!userObj.hasPin,
+                token: userObj.token
+            };
+            currentUser = safeSession;
             try {
-                localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(userObj));
+                localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(safeSession));
             } catch (e) {}
         }
 
         function getSavedUserSession() {
             try {
                 const raw = localStorage.getItem(SESSION_STORAGE_KEY);
-                return raw ? JSON.parse(raw) : null;
+                const parsed = raw ? JSON.parse(raw) : null;
+                return (parsed && parsed.email && parsed.token) ? parsed : null;
             } catch (e) {
                 return null;
             }
         }
 
+        function clearAllSensitiveCaches() {
+            balanceData = { totalBalance: null, currentBalance: null, loaded: false, fetching: false };
+            dueMembersCache = [];
+            dueMembersLoaded = false;
+            try {
+                localStorage.removeItem(SESSION_STORAGE_KEY);
+                localStorage.removeItem(BALANCE_CACHE_STORAGE_KEY);
+                localStorage.removeItem(DUE_CACHE_STORAGE_KEY);
+            } catch (e) {}
+        }
+
+        function handleSessionExpired() {
+            clearAllSensitiveCaches();
+            currentUser = null;
+            hideSensitiveInfo();
+            document.getElementById('pin-lock-screen').classList.add('hidden');
+            document.getElementById('auth-screen').classList.remove('hidden');
+            switchAuthTab('login');
+            startMonthlyFeeCountdown();
+            showAuthAlert('আপনার সেশনের মেয়াদ শেষ হয়েছে। অনুগ্রহ করে পুনরায় লগইন করুন।');
+        }
+
         function logoutAccount() {
+            const tokenToInvalidate = currentUser ? currentUser.token : null;
             closeAccountModal(true);
             closeLeftDrawer(true);
             currentUser = null;
-            loginPreloadStarted = false;
             hideSensitiveInfo();
+            clearAllSensitiveCaches();
 
-            try {
-                localStorage.removeItem(SESSION_STORAGE_KEY);
-            } catch (e) {}
+            if (tokenToInvalidate) {
+                callBackendPost({ action: 'logout', token: tokenToInvalidate }).catch(() => {});
+            }
 
             document.getElementById('pin-lock-screen').classList.add('hidden');
             document.getElementById('auth-screen').classList.remove('hidden');
@@ -2198,7 +2168,7 @@
 
             syncUserProfilePhotoUI();
 
-            const isPinLocked = checkPinLockOnOpen && user.pin && user.pin.length === 4;
+            const isPinLocked = checkPinLockOnOpen && user.hasPin;
             if (isPinLocked) {
                 openPinLockScreen(user);
             } else {
@@ -2209,12 +2179,10 @@
             switchView('home');
             renderSensitiveInfo();
 
-            // Schedule notice board marquee animation 3 seconds after entering the visible dashboard
             if (!isPinLocked) {
                 scheduleNoticeMarqueeStart(3000);
             }
 
-            // Load/refresh all data immediately
             preloadAllAppData(true);
         }
 
@@ -2227,21 +2195,11 @@
             const drawerUserEmail = document.getElementById('drawer-user-email');
             const atmCardTitle = document.getElementById('atm-card-title');
 
-            if (headerEmailEl) {
-                headerEmailEl.textContent = user.email;
-            }
-            if (headerSubtitle) {
-                headerSubtitle.textContent = isAdmin ? 'Admin Account • AS-SUFFAH' : 'Member Account • AS-SUFFAH';
-            }
-            if (drawerUserEmail) {
-                drawerUserEmail.textContent = user.email;
-            }
-            if (drawerBadge) {
-                drawerBadge.textContent = isAdmin ? 'Admin Portal' : 'Member Portal';
-            }
-            if (atmCardTitle) {
-                atmCardTitle.textContent = isAdmin ? 'AS-SUFFAH ADMIN' : 'AS-SUFFAH MEMBER';
-            }
+            if (headerEmailEl) headerEmailEl.textContent = user.email;
+            if (headerSubtitle) headerSubtitle.textContent = isAdmin ? 'Admin Account • AS-SUFFAH' : 'Member Account • AS-SUFFAH';
+            if (drawerUserEmail) drawerUserEmail.textContent = user.email;
+            if (drawerBadge) drawerBadge.textContent = isAdmin ? 'Admin Portal' : 'Member Portal';
+            if (atmCardTitle) atmCardTitle.textContent = isAdmin ? 'AS-SUFFAH ADMIN' : 'AS-SUFFAH MEMBER';
 
             const tileApp2 = document.getElementById('tile-app2');
             const tileApp3 = document.getElementById('tile-app3');
@@ -2296,12 +2254,14 @@
         }
 
         /* =====================================================================
-           PIN LOCK SCREEN LOGIC (SHOWS ACCOUNT PROFILE PHOTO & EMAIL)
+           PIN LOCK SCREEN LOGIC (SERVER-VERIFIED)
            ===================================================================== */
         let enteredPinBuffer = '';
+        let isVerifyingPin = false;
 
         function openPinLockScreen(user) {
             enteredPinBuffer = '';
+            isVerifyingPin = false;
             updatePinDotsUI();
 
             const savedPhoto = getSavedProfilePhoto(user.email);
@@ -2319,22 +2279,24 @@
         }
 
         function enterPinDigit(digit) {
-            if (enteredPinBuffer.length >= 4) return;
+            if (isVerifyingPin || enteredPinBuffer.length >= 4) return;
             enteredPinBuffer += digit;
             document.getElementById('pin-error-text').textContent = '';
             updatePinDotsUI();
 
             if (enteredPinBuffer.length === 4) {
-                setTimeout(verifyPinCode, 150);
+                setTimeout(verifyPinCode, 120);
             }
         }
 
         function backspacePinDigit() {
+            if (isVerifyingPin) return;
             enteredPinBuffer = enteredPinBuffer.slice(0, -1);
             updatePinDotsUI();
         }
 
         function clearPinEntry() {
+            if (isVerifyingPin) return;
             enteredPinBuffer = '';
             document.getElementById('pin-error-text').textContent = '';
             updatePinDotsUI();
@@ -2351,21 +2313,45 @@
             });
         }
 
-        function verifyPinCode() {
-            if (!currentUser) return;
-            if (enteredPinBuffer === String(currentUser.pin)) {
-                document.getElementById('pin-lock-screen').classList.add('hidden');
-                enteredPinBuffer = '';
-                scheduleNoticeMarqueeStart(3000);
-                showToast('অ্যাপ আনলক হয়েছে');
-            } else {
-                const dotsContainer = document.getElementById('pin-dots-container');
-                dotsContainer.classList.remove('shake-anim');
-                void dotsContainer.offsetWidth;
-                dotsContainer.classList.add('shake-anim');
-                document.getElementById('pin-error-text').textContent = 'ভুল PIN! আবার চেষ্টা করুন।';
+        async function verifyPinCode() {
+            if (!currentUser || isVerifyingPin) return;
+            isVerifyingPin = true;
+            const labelEl = document.getElementById('pin-lock-user-label');
+            if (labelEl) labelEl.textContent = 'PIN যাচাই করা হচ্ছে...';
+
+            try {
+                const res = await callBackendPost({
+                    action: 'verifyPin',
+                    token: currentUser.token,
+                    pin: enteredPinBuffer
+                });
+
+                if (res && res.unauthorized) {
+                    handleSessionExpired();
+                    return;
+                }
+
+                if (res && res.ok) {
+                    document.getElementById('pin-lock-screen').classList.add('hidden');
+                    enteredPinBuffer = '';
+                    scheduleNoticeMarqueeStart(3000);
+                    showToast('অ্যাপ আনলক হয়েছে');
+                } else {
+                    const dotsContainer = document.getElementById('pin-dots-container');
+                    dotsContainer.classList.remove('shake-anim');
+                    void dotsContainer.offsetWidth;
+                    dotsContainer.classList.add('shake-anim');
+                    document.getElementById('pin-error-text').textContent = (res && res.message) ? res.message : 'ভুল PIN! আবার চেষ্টা করুন।';
+                    enteredPinBuffer = '';
+                    updatePinDotsUI();
+                }
+            } catch (err) {
+                document.getElementById('pin-error-text').textContent = 'সার্ভার ত্রুটি! আবার চেষ্টা করুন।';
                 enteredPinBuffer = '';
                 updatePinDotsUI();
+            } finally {
+                isVerifyingPin = false;
+                if (labelEl) labelEl.textContent = 'প্রবেশ করতে আপনার ৪-সংখ্যার PIN দিন';
             }
         }
 
@@ -2389,7 +2375,7 @@
             document.getElementById('acc-old-pass').value = '';
             document.getElementById('acc-new-pass').value = '';
 
-            if (currentUser.pin && currentUser.pin.length === 4) {
+            if (currentUser.hasPin) {
                 pinBadge.textContent = 'ACTIVE';
                 pinBadge.className = 'px-2 py-0.5 rounded-md text-[10px] font-bold bg-[#5fa000] text-white';
                 removePinBtn.classList.remove('hidden');
@@ -2428,12 +2414,17 @@
 
                 const res = await callBackendPost({
                     action: 'updatePin',
-                    email: currentUser.email,
+                    token: currentUser.token,
                     pin: pinVal
                 });
 
+                if (res && res.unauthorized) {
+                    handleSessionExpired();
+                    return;
+                }
+
                 if (res && res.ok) {
-                    currentUser.pin = pinVal;
+                    currentUser.hasPin = true;
                     saveUserSession(currentUser);
                     showToast(res.message || 'PIN সেট হয়েছে!');
                     openAccountModal();
@@ -2455,11 +2446,15 @@
             try {
                 const res = await callBackendPost({
                     action: 'updatePin',
-                    email: currentUser.email,
+                    token: currentUser.token,
                     pin: ''
                 });
+                if (res && res.unauthorized) {
+                    handleSessionExpired();
+                    return;
+                }
                 if (res && res.ok) {
-                    currentUser.pin = '';
+                    currentUser.hasPin = false;
                     saveUserSession(currentUser);
                     showToast(res.message || 'PIN বন্ধ করা হয়েছে');
                     openAccountModal();
@@ -2486,10 +2481,15 @@
 
                 const res = await callBackendPost({
                     action: 'changePassword',
-                    email: currentUser.email,
+                    token: currentUser.token,
                     oldPassword: oldPassword,
                     newPassword: newPassword
                 });
+
+                if (res && res.unauthorized) {
+                    handleSessionExpired();
+                    return;
+                }
 
                 if (res && res.ok) {
                     showToast(res.message || 'Password পরিবর্তিত হয়েছে!');
@@ -2559,6 +2559,10 @@
 
         function copyTextToClipboard(text, toastMsg) {
             try {
+                if (navigator.clipboard && window.isSecureContext) {
+                    navigator.clipboard.writeText(text).then(() => showToast(toastMsg || 'Copied!'));
+                    return;
+                }
                 const tempInput = document.createElement('input');
                 tempInput.value = text;
                 document.body.appendChild(tempInput);
@@ -2756,6 +2760,8 @@
         }
 
         async function fetchBalances() {
+            if (!currentUser || !currentUser.token) return;
+
             const totalEl = document.getElementById('total-balance-display');
             const currentEl = document.getElementById('current-balance-display');
 
@@ -2768,39 +2774,15 @@
                     currentEl.classList.add('balance-loading');
                 }
 
-                if (typeof google !== 'undefined' && google.script && google.script.run) {
-                    google.script.run
-                        .withSuccessHandler(function(res) {
-                            balanceData.fetching = false;
-                            if (res && res.ok) {
-                                balanceData.totalBalance = res.totalBalance;
-                                balanceData.currentBalance = res.currentBalance;
-                                balanceData.loaded = true;
-                                try {
-                                    localStorage.setItem(BALANCE_CACHE_STORAGE_KEY, JSON.stringify({
-                                        totalBalance: res.totalBalance,
-                                        currentBalance: res.currentBalance
-                                    }));
-                                } catch (e) {}
-                            }
-                            renderSensitiveInfo();
-                            stopBalanceLoading(totalEl, currentEl);
-                        })
-                        .withFailureHandler(function() {
-                            balanceData.fetching = false;
-                            renderSensitiveInfo();
-                            stopBalanceLoading(totalEl, currentEl);
-                        })
-                        .getDashboardBalances();
+                const res = await callBackendPost({
+                    action: 'balances',
+                    token: currentUser.token
+                });
+
+                if (res && res.unauthorized) {
+                    handleSessionExpired();
                     return;
                 }
-
-                const response = await fetch(APPS_SCRIPT_EXEC_URL + '?action=balances&_t=' + Date.now(), {
-                    method: 'GET',
-                    redirect: 'follow'
-                });
-                if (!response.ok) throw new Error('HTTP error');
-                const res = await response.json();
 
                 balanceData.fetching = false;
                 if (res && res.ok) {
@@ -2824,6 +2806,12 @@
         }
 
         function navigateToView(viewName) {
+            // Prevent non-admin users from opening admin-only views
+            const adminOnlyViews = ['app2', 'app3', 'app5'];
+            if (adminOnlyViews.includes(viewName) && (!currentUser || currentUser.role !== 'admin')) {
+                showToast('শুধুমাত্র Admin এই অপশনটি ব্যবহার করতে পারবেন');
+                return;
+            }
             if (viewName !== 'home' && currentActiveView === 'home' && !isPopStateHandling) {
                 pushAppHistoryState(viewName);
             }
@@ -2867,7 +2855,7 @@
         }
 
         /* =====================================================================
-           INITIALIZATION ON APP STARTUP (IMMEDIATE PARALLEL DATA PRELOAD)
+           INITIALIZATION ON APP STARTUP
            ===================================================================== */
         document.addEventListener('DOMContentLoaded', function() {
             try {
@@ -2883,23 +2871,21 @@
                 }
             } catch (e) {}
 
-            // Hydrate cached data instantly and immediately start fetching fresh data on app click/open
             hydrateInitialCaches();
-            preloadAllAppData(true);
-
             startMonthlyFeeCountdown();
 
             const savedUser = getSavedUserSession();
-            if (savedUser && savedUser.email) {
+            if (savedUser && savedUser.email && savedUser.token) {
                 enterDashboardForUser(savedUser, true);
             } else {
+                fetchNoticeBoard(false);
                 document.getElementById('auth-screen').classList.remove('hidden');
                 switchAuthTab('login');
             }
         });
 
         document.addEventListener('visibilitychange', function() {
-            if (!document.hidden && currentUser) {
+            if (!document.hidden && currentUser && currentUser.token) {
                 preloadAllAppData(true);
             }
         });
