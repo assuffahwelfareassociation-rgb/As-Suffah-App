@@ -297,11 +297,99 @@
             border: 1px solid rgba(255, 193, 7, 0.32);
             border-radius: 16px;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            animation: fadeSlideUp .55s var(--ease) both;
         }
         html.light-mode .notice-board-card {
             background: linear-gradient(145deg, #fffbeb, #f4fce8);
             border-color: rgba(217, 119, 6, 0.28);
         }
+
+        /* Combined Marquee + Typing Animation for Notice Board */
+        .notice-marquee-wrapper {
+            overflow: hidden;
+            white-space: nowrap;
+            min-height: 24px;
+            display: flex;
+            align-items: center;
+            mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+        }
+        .notice-marquee-track {
+            display: inline-flex;
+            align-items: center;
+            white-space: nowrap;
+            will-change: transform;
+            animation: noticeMarqueeScroll 18s linear infinite;
+        }
+        .notice-marquee-wrapper:hover .notice-marquee-track,
+        .notice-marquee-wrapper:active .notice-marquee-track {
+            animation-play-state: paused;
+        }
+        @keyframes noticeMarqueeScroll {
+            0% { transform: translateX(35%); }
+            100% { transform: translateX(-100%); }
+        }
+        .notice-typing-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 13px;
+            background-color: #fbbf24;
+            margin-left: 3px;
+            vertical-align: middle;
+            animation: blinkCursor 0.75s steps(2, start) infinite;
+        }
+        @keyframes blinkCursor {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* App UI Entrance & Micro-Animations */
+        @keyframes fadeSlideUp {
+            0% { opacity: 0; transform: translateY(14px) scale(.98); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-10px) scale(1.04); }
+        }
+        @keyframes vaultSheenSweep {
+            0% { transform: translateX(-120%) rotate(22deg); opacity: 0; }
+            25% { opacity: .45; }
+            55% { transform: translateX(220%) rotate(22deg); opacity: 0; }
+            100% { transform: translateX(220%) rotate(22deg); opacity: 0; }
+        }
+        @keyframes bellRing {
+            0%, 100% { transform: rotate(0deg); }
+            15% { transform: rotate(14deg); }
+            30% { transform: rotate(-12deg); }
+            45% { transform: rotate(8deg); }
+            60% { transform: rotate(-6deg); }
+            75% { transform: rotate(3deg); }
+        }
+
+        .ambient-orb { animation: floatSlow 7s ease-in-out infinite; }
+        .orb-two { animation-delay: 3.5s; }
+        .vault-card { animation: fadeSlideUp .45s var(--ease) both; }
+        .vault-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -40%;
+            width: 38%;
+            height: 200%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,.11), transparent);
+            animation: vaultSheenSweep 6.5s ease-in-out infinite;
+            pointer-events: none;
+        }
+        .notice-bell-anim { animation: bellRing 2.6s ease-in-out infinite; transform-origin: top center; }
+        #bento-apps-grid > button { animation: fadeSlideUp .5s var(--ease) both; }
+        #bento-apps-grid > button:nth-child(1) { animation-delay: .06s; }
+        #bento-apps-grid > button:nth-child(2) { animation-delay: .12s; }
+        #bento-apps-grid > button:nth-child(3) { animation-delay: .18s; }
+        #bento-apps-grid > button:nth-child(4) { animation-delay: .24s; }
+        #bento-apps-grid > button:nth-child(5) { animation-delay: .30s; }
+        #bento-apps-grid > button:nth-child(6) { animation-delay: .36s; }
+        .glass-tile:hover > div:first-child { transform: scale(1.08) rotate(-3deg); transition: transform .25s var(--ease); }
 
         /* Auth tabs */
         #auth-tabs { border-radius: 18px; }
@@ -1075,23 +1163,25 @@
 
                     <!-- Compact Notice Board -->
                     <div id="dashboard-notice-board" class="notice-board-card px-3 py-2.5 relative overflow-hidden">
-                        <div class="flex items-start gap-2.5">
-                            <div class="w-8 h-8 rounded-[11px] bg-amber-500/20 border border-amber-400/35 text-amber-400 flex items-center justify-center shrink-0 mt-0.5">
-                                <i class="fa-solid fa-bullhorn text-[12px]"></i>
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-8 h-8 rounded-[11px] bg-amber-500/20 border border-amber-400/35 text-amber-400 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-bullhorn text-[12px] notice-bell-anim"></i>
                             </div>
                             <div class="min-w-0 flex-1">
                                 <div class="flex items-center justify-between gap-2 mb-0.5">
                                     <span class="font-bn text-[10px] font-extrabold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
                                         <span>নোটিশ বোর্ড</span>
-                                        <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+                                        <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping"></span>
                                     </span>
                                     <button type="button" onclick="fetchNoticeBoard(true)" title="Refresh Notice" class="text-[10px] text-theme-muted hover:text-amber-400 transition">
                                         <i id="notice-refresh-icon" class="fa-solid fa-arrows-rotate"></i>
                                     </button>
                                 </div>
-                                <p id="notice-board-text" class="font-bn text-[10.5px] font-semibold text-theme-main leading-snug line-clamp-2">
-                                    নোটিশ লোড হচ্ছে...
-                                </p>
+                                <div class="notice-marquee-wrapper">
+                                    <div id="notice-marquee-track" class="notice-marquee-track font-bn text-[11px] font-semibold text-theme-main">
+                                        <span id="notice-board-text">নোটিশ লোড হচ্ছে...</span><span class="notice-typing-cursor"></span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1358,7 +1448,12 @@
 
         /* =====================================================================
            NOTICE BOARD (FETCHES FROM 'Notice' SHEET IN MAIN GOOGLE SPREADSHEET)
+           WITH SMOOTH TYPING ANIMATION
            ===================================================================== */
+        let noticeTypingTimer = null;
+        let activeNoticesList = [];
+        let currentNoticeIndex = 0;
+
         async function fetchNoticeBoard(showToastMsg = false) {
             const noticeTextEl = document.getElementById('notice-board-text');
             const refreshIcon = document.getElementById('notice-refresh-icon');
@@ -1384,15 +1479,68 @@
                 }
 
                 if (res && res.ok && res.notices && res.notices.length > 0) {
-                    noticeTextEl.textContent = res.notices.join('  •  ');
+                    startNoticeTypingLoop(res.notices);
                     if (showToastMsg) showToast('নোটিশ আপডেট হয়েছে');
                 } else {
-                    noticeTextEl.textContent = 'আস-সুফফাহ কল্যাণ সমিতিতে স্বাগতম! প্রতি মাসের ১-৫ তারিখের মধ্যে মাসিক ফি পরিশোধ করুন।';
+                    startNoticeTypingLoop([
+                        'আস-সুফফাহ কল্যাণ সমিতিতে স্বাগতম! প্রতি মাসের ১-৫ তারিখের মধ্যে মাসিক ফি পরিশোধ করুন।'
+                    ]);
                 }
             } catch (err) {
-                noticeTextEl.textContent = 'আস-সুফফাহ কল্যাণ সমিতিতে স্বাগতম! প্রতি মাসের ১-৫ তারিখের মধ্যে মাসিক ফি পরিশোধ করুন।';
+                startNoticeTypingLoop([
+                    'আস-সুফফাহ কল্যাণ সমিতিতে স্বাগতম! প্রতি মাসের ১-৫ তারিখের মধ্যে মাসিক ফি পরিশোধ করুন।'
+                ]);
             } finally {
                 if (refreshIcon) refreshIcon.classList.remove('fa-spin');
+            }
+        }
+
+        function startNoticeTypingLoop(noticesArray) {
+            if (noticeTypingTimer) {
+                clearTimeout(noticeTypingTimer);
+                noticeTypingTimer = null;
+            }
+            activeNoticesList = Array.isArray(noticesArray) && noticesArray.length > 0
+                ? noticesArray
+                : ['আস-সুফফাহ কল্যাণ সমিতিতে স্বাগতম!'];
+            currentNoticeIndex = 0;
+
+            const track = document.getElementById('notice-marquee-track');
+            if (track) {
+                const combinedLen = activeNoticesList.join(' • ').length;
+                const durationSec = Math.max(14, Math.min(34, Math.round(combinedLen * 0.22)));
+                track.style.animationDuration = durationSec + 's';
+            }
+
+            runNoticeTypingStep(0, false);
+        }
+
+        function runNoticeTypingStep(charPos, isDeleting) {
+            const noticeTextEl = document.getElementById('notice-board-text');
+            if (!noticeTextEl || activeNoticesList.length === 0) return;
+
+            const currentFullText = String(activeNoticesList[currentNoticeIndex] || '');
+
+            if (!isDeleting) {
+                const nextPos = charPos + 1;
+                noticeTextEl.textContent = currentFullText.slice(0, nextPos);
+
+                if (nextPos < currentFullText.length) {
+                    noticeTypingTimer = setTimeout(() => runNoticeTypingStep(nextPos, false), 42);
+                } else {
+                    // Pause at full text before erasing/cycling
+                    noticeTypingTimer = setTimeout(() => runNoticeTypingStep(nextPos, true), 3200);
+                }
+            } else {
+                const nextPos = charPos - 1;
+                noticeTextEl.textContent = currentFullText.slice(0, Math.max(0, nextPos));
+
+                if (nextPos > 0) {
+                    noticeTypingTimer = setTimeout(() => runNoticeTypingStep(nextPos, true), 18);
+                } else {
+                    currentNoticeIndex = (currentNoticeIndex + 1) % activeNoticesList.length;
+                    noticeTypingTimer = setTimeout(() => runNoticeTypingStep(0, false), 350);
+                }
             }
         }
 
